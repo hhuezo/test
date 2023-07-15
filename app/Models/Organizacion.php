@@ -22,4 +22,10 @@ class Organizacion extends Model
         // parametros : (ruta del modelo a relacionar, campo origen indice, campo otra tabla indice)
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
+
+    public function estado()
+    {
+        // parametros : (ruta del modelo a relacionar, campo origen indice, campo otra tabla indice)
+        return $this->belongsTo('App\Models\Estadoorganizacion', 'estado_organizacion_id', 'id');
+    }
 }
