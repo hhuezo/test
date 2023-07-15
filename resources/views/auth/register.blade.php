@@ -119,68 +119,79 @@
                                     <div class="card-title text-slate-900 dark:text-white">Registro</div>
                                 </div>
                             </header>
+                            
+                            @if (count($errors)>0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+
                             <form method="POST" action="{{ route('register') }}" class="space-y-4">
                                 @csrf
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Nombre</label>
-                                        <input type="text" name="name" required class="form-control">
+                                        <input type="text" name="name" required class="form-control" value="{{old('name')}}" autofocus="true">
                                     </div>
                                     
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Email</label>
-                                        <input type="email" name="email" required class="form-control">
+                                        <input type="email" name="email" required class="form-control" value="{{old('email')}}">
                                     </div>
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Password</label>
-                                        <input type="password" name="password" required class="form-control">
+                                        <input type="password" name="password" required class="form-control" >
                                     </div>
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Confirme password</label>
-                                        <input type="password" name="confirm" required class="form-control">
+                                        <input type="password" name="password_confirmation" required class="form-control" >
                                     </div>
                                    
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Nombre organizacion</label>
-                                        <input type="text" name="nombre_organizacion" required class="form-control">
+                                        <input type="text" name="nombre_organizacion" required class="form-control" value="{{old('nombre_organizacion')}}">
                                     </div>
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Telefono</label>
-                                        <input type="text" name="telefono_organizacion" required class="form-control">
+                                        <input type="text" name="telefono_organizacion" required class="form-control" data-inputmask="'mask': ['9999-99999']" value="{{old('telefono_organizacion')}}">
                                     </div>
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Nota</label>
-                                        <textarea name="nota" class="form-control" required rows="5"></textarea>
+                                        <textarea name="nota" class="form-control"  rows="5" >{{old('nota')}}</textarea>
                                     </div>
                                     <div class="input-area relative">&nbsp;
                                         
                                     </div>
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Contacto principal</label>
-                                        <input type="text" name="contacto_principal" required class="form-control">
+                                        <input type="text" name="contacto_principal" required class="form-control" value="{{old('contacto_principal')}}">
                                     </div>
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Cargo contacto principal</label>
-                                        <input type="text" name="cargo_contacto_principal" required class="form-control">
+                                        <input type="text" name="cargo_contacto_principal" required class="form-control" value="{{old('cargo_contacto_principal')}}" >
                                     </div>
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Telefono contacto principal</label>
-                                        <input type="text" name="telefono_contacto_principal" required class="form-control">
+                                        <input type="text" name="telefono_contacto_principal" required class="form-control" data-inputmask="'mask': ['9999-99999']" value="{{old('telefono_contacto_principal')}}">
                                     </div>
                                     <div class="input-area relative">&nbsp;
                                         
                                     </div>
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Contacto secundario</label>
-                                        <input type="text" name="contacto_secundrio" required class="form-control">
+                                        <input type="text" name="contacto_secundario" required class="form-control" value="{{old('contacto_secundrio')}}">
                                     </div>
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Cargo contacto secundario</label>
-                                        <input type="text" name="cargo_contacto_secundrio" required class="form-control">
+                                        <input type="text" name="cargo_contacto_secundario" required class="form-control" value="{{old('cargo_contacto_secundrio')}}">
                                     </div>
                                     <div class="input-area relative">
                                         <label for="largeInput" class="form-label">Telefono contacto secundario</label>
-                                        <input type="text" name="telefono_secundrio" required class="form-control">
+                                        <input type="text" name="telefono_secundario" required class="form-control" data-inputmask="'mask': ['9999-99999']" value="{{old('telefono_secundrio')}}">
                                     </div>
                                   
                                 </div>

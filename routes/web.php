@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrganizacionesController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
@@ -44,3 +45,5 @@ Route::resource('seguridad/usuario', UsuarioController::class);
 Route::resource('seguridad/role', RoleController::class);
 Route::post('seguridad/role/unlink_permission', [RoleController::class,'unlink_permission']);
 Route::post('seguridad/role/link_permission', [RoleController::class,'link_permission']);
+
+Route::resource('organizacion', OrganizacionesController::class);
