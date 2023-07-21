@@ -2,18 +2,18 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Pregunta;
-use App\Models\Respuesta;
+use App\Models\catalog\Answer;
+use App\Models\catalog\Question;
 use Livewire\Component;
 
 class Quiz extends Component
 {
-    public $question,$question_id, $preguntas,$respuestas,$response;
+    public $question, $question_id, $answer_id, $questions, $answers, $answer, $show_questions = 0;
 
     public function render()
     {
-        $this->preguntas = Pregunta::get();
-        $this->respuestas = Respuesta::get();
+        $this->questions = Question::get();
+        $this->answers = Answer::get();
         return view('livewire.quiz');
     }
 
@@ -26,42 +26,73 @@ class Quiz extends Component
             'question' => 'required',
         ], $messages);
 
-        $pregunta = new Pregunta();
-        $pregunta->descripcion = $this->question;
-        $pregunta->save();
+        $question = new Question();
+        $question->description = $this->question;
+        $question->save();
         $this->question = "";
+        $this->dispatchBrowserEvent('close-modal-answer');
     }
 
 
 
-    public function save_response()
+    public function save_answer()
     {
         $messages = [
-            'response.required' => 'La respuesta es requerida'
+            'answer.required' => 'La respuesta es requerida'
         ];
         $validatedData = $this->validate([
-            'response' => 'required',
+            'answer' => 'required',
         ], $messages);
 
-        $respuesta = new Respuesta();
-        $respuesta->descripcion = $this->response;
-        $respuesta->pregunta_id = $this->question_id;
-        $respuesta->save();
-        $this->response = "";
+        $answer = new Answer();
+        $answer->description = $this->answer;
+        $answer->catalog_questions_id = $this->question_id;
+        $answer->save();
+        $this->answer = "";
         $this->dispatchBrowserEvent('close-modal');
     }
 
 
 
+    public function show_questions($id)
+    {
+        $this->show_questions = $id;
+    }
 
-    public function modal_response($id)
+    public function modal_edit_question($id,$description)
+    {
+        $this->question_id = $id;
+        $this->question = $description;
+    }
+
+
+
+    public function edit_question()
+    {
+        $question = Question::findOrFail($this->question_id);
+        $question->description = $this->question;
+        $question->update();
+        $this->question = "";
+        $this->question_id = 0;
+        $this->dispatchBrowserEvent('close-modal-edit-question');
+    }
+
+    public function modal_answer($id)
     {
         $this->question_id = $id;
     }
 
-    public function delete_response($id)
+
+    public function modal_delete_answer($id)
     {
-        $respuesta = Respuesta::findOrFail($id);
-        $respuesta->delete();
+        $this->answer_id = $id;
+    }
+
+    public function delete_answer()
+    {
+        $answer = Answer::findOrFail($this->answer_id);
+        $answer->delete();
+        $this->answer_id = 0;
+        $this->dispatchBrowserEvent('close-modal-delete-answer');
     }
 }

@@ -1,5 +1,6 @@
 @extends ('menu')
 @section('contenido')
+    @livewireStyles
     <div class=" space-y-5">
         @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
         <div class="grid grid-cols-12 gap-5 mb-5">
@@ -24,6 +25,60 @@
                     <iconify-icon icon="fluent:edit-32-filled" style="color: white;" width="20"></iconify-icon>
                 </a>
                 </div> --}}
+
+
+
+                <div>&nbsp;</div>
+                <!-- BEGIN: File Dropzone -->
+                <div class="card rounded-md bg-white dark:bg-slate-800 lg:h-full shadow-base xl:col-span-2">
+                    <div class="card-body flex flex-col p-6">
+                        <header
+                            class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
+                            <div class="flex-1">
+                                <div class="card-title text-slate-900 dark:text-white">Subir material</div>
+
+                            </div>
+                        </header>
+                        <div class="card-text h-full space-y-6">
+                            <form method="POST" enctype="multipart/form-data" action="{{ url('course/upload_file') }}">
+                                @csrf
+                                <input type="file" id="fileInput" name="files">
+                                <div class="card rounded-md bg-white dark:bg-slate-800 lg:h-full shadow-base xl:col-span-2">
+                                    <div class="card-body flex flex-col p-6">
+
+                                        <div id="dropZone"
+                                            class="w-full text-center border-dashed border border-secondary-500 rounded-md py-[52px] flex justify-center items-center">
+                                            <div role="presentation" tabindex="0"
+                                                class="dropzone border-none dark:bg-slate-800" id="myUploader">
+                                                <div class="dz-default dz-message">
+                                                    <button class="dz-button" type="button">
+                                                        <img src="assets/images/svg/upload.svg" alt=""
+                                                            class="mx-auto mb-4">
+                                                        <p class="text-sm text-slate-500 dark:text-slate-300">Drop files
+                                                            here or click to upload.</p>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: File Dropzone -->
+
+
+
+
+
+
+
+
+
             </div>
 
             <div class="card 2xl:col-span-9 lg:col-span-9 col-span-12">
@@ -203,47 +258,30 @@
         </div>
 
 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                const dropZone = document.getElementById('dropZone');
+                const fileInput = document.getElementById('fileInput');
+
+                dropZone.addEventListener('dragover', (event) => {
+                    console.log(dropZone);
+                    event.preventDefault();
+                    event.dataTransfer.dropEffect = 'copy';
+                });
+
+                dropZone.addEventListener('drop', (event) => {
+
+                    event.preventDefault();
+
+                    const files = event.dataTransfer.files;
+                    fileInput.files = files;
+                });
+
+            });
+        </script>
 
 
 
-
-        <div class="grid grid-cols-12 gap-5 mb-5">
-
-
-            <div class="card 2xl:col-span-3 lg:col-span-4 col-span-12">
-                <div class="card-header">
-                    <h4 class="card-title">Materiales</h4>
-                    <div>
-                        <a href="{{ url('course') }}">
-                            <button class="btn btn-dark btn-sm">
-                                <iconify-icon icon="icon-park-solid:back" style="color: white;" width="20">
-                                </iconify-icon>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-success-500 mb-10 mt-7 p-4 relative text-center rounded-2xl text-white">
-                        <img src="{{ asset('images/svg/gift.svg') }}" alt="" class="mx-auto relative -mt-[40px]">
-                        <div class="max-w-[160px] mx-auto mt-6">
-                            <div class="widget-title">Unlimited Access</div>
-                            <div class="text-xs font-normal">
-                                Upgrade your system to business plan
-                            </div>
-                        </div>
-                        <div class="mt-6">
-                            <button class="btn bg-white hover:bg-opacity-80 text-slate-900 btn-sm w-full block">
-                                Upgrade
-                            </button>
-                        </div>
-                    </div>
-                    {{-- <center><img style="margin-top: 20px; max-width:300px"
-                            src="{{ asset('img') }}/{{ $course->image }}" class="card-img-top img-fluid"
-                            alt="Card image">
-                    </center> --}}
-                </div>
-            </div>
-
-
-        </div>
+        <livewire:quiz />
+        @livewireScripts
     @endsection

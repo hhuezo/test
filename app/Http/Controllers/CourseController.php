@@ -55,6 +55,11 @@ class CourseController extends Controller
         return view('course.edit', compact('course'));
     }
 
+    public function upload_file(Request $request)
+    {
+        dd($request->files);
+    }
+
     public function update(Request $request, $id)
     {
         //

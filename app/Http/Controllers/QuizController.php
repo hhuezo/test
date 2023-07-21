@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\catalog\Answer;
+use App\Models\catalog\Question;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -40,7 +42,9 @@ class QuizController extends Controller
      */
     public function show($id)
     {
-        //
+        $questions = Question::get();
+        $answers = Answer::get();
+        return view('quiz.show',compact('questions','answers'));
     }
 
     /**

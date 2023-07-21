@@ -55,7 +55,7 @@ Route::post('seguridad/role/link_permission', [RoleController::class,'link_permi
 
 
 
-
+Route::post('course/upload_file', [CourseController::class,'upload_file']);
 
 Route::post('organization/decline', [OrganizationController::class,'decline']);
 Route::post('organization/activate', [OrganizationController::class,'activate']);
@@ -65,6 +65,8 @@ Route::resource('organization', OrganizationController::class);
 Route::post('member/decline', [MemberController::class,'decline']);
 Route::post('member/activate', [MemberController::class,'activate']);
 Route::resource('member', MemberController::class);
+
+
 
 Route::resource('course', CourseController::class);
 
