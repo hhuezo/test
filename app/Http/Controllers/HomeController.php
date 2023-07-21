@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->status == 0) {
+            return view('home2');
+        }
+
+        //role members
+        $user = User::findOrFail(auth()->user()->id);
+        if ($user->hasRole('member')) {
+            return redirect('course');
+        }
         return view('home');
     }
 
@@ -30,6 +40,4 @@ class HomeController extends Controller
     {
         return view('test');
     }
-
-
 }

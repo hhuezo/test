@@ -1,4 +1,4 @@
-<?php /*@extends('layouts.app') 
+<?php /*@extends('layouts.app')
 @section('content')
 
     <div class="container">
@@ -101,143 +101,424 @@
     <!-- START : Theme Config js-->
     <script src="assets/js/settings.js" sync></script>
     <!-- END : Theme Config js-->
-  
+
 </head>
 
 <body class=" font-inter skin-default">
 
-    <div class="page-content">
-        <div class="transition-all duration-150 container-fluid" id="page_layout">
-            <div id="content_layout">
+    <main class="app-wrapper">
+        <div class="flex flex-col justify-between min-h-screen">
+            <div>
+                <!-- BEGIN: Header -->
+                <!-- BEGIN: Header -->
+                <div class="z-[12]" id="app_header">
+                    <div class="app-header   rtl:mr-[248px] bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-700">
+                        <div class="flex justify-between items-center h-full">
+                            <div
+                                class="flex items-center md:space-x-4 space-x-2 xl:space-x-0 rtl:space-x-reverse vertical-box">
+                                <a href="index.html" class="mobile-logo xl:hidden inline-block">
+                                    <img src="{{ asset('assets/images/logo/logo-c.svg') }}" class="black_logo"
+                                        alt="logo">
+                                    <img src="{{ asset('assets/images/logo/logo-c-white.svg') }}" class="white_logo"
+                                        alt="logo">
+                                </a>
+                                <button class="smallDeviceMenuController hidden md:inline-block xl:hidden">
+                                    <iconify-icon
+                                        class="leading-none bg-transparent relative text-xl top-[2px] text-slate-900 dark:text-white"
+                                        icon="heroicons-outline:menu-alt-3"></iconify-icon>
+                                </button>
 
-                <div class="grid grid-cols-12 gap-5 mb-5">
-                    <div class="2xl:col-span-3 lg:col-span-2 col-span-12">
-                        &nbsp;
-                    </div>
-                    <div class="2xl:col-span-9 lg:col-span-8 col-span-12">
-                        <div class="card">
-                            <div class="card-body flex flex-col p-6">
-                                <header
-                                    class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
-                                    <div class="flex-1">
-                                        <div class="card-title text-slate-900 dark:text-white">Registro</div>
-                                    </div>
-                                </header>
 
-                                @if (count($errors) > 0)
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
+                            </div>
+                            <!-- end vertcial -->
+
+
+
+
+
+                            <!-- end top menu -->
+                            <div
+                                class="nav-tools flex items-center lg:space-x-5 space-x-3 rtl:space-x-reverse leading-0">
+
+                                <!-- BEGIN: Language Dropdown  -->
+
+                                <div class="relative">
+                                    <button
+                                        class="text-slate-800 dark:text-white focus:ring-0 focus:outline-none font-medium rounded-lg text-sm text-center
+                                                    inline-flex items-center"
+                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{-- <iconify-icon icon="circle-flags:uk" class="mr-0 md:mr-2 rtl:ml-2 text-xl">
+                                        </iconify-icon> --}}
+
+                                        @if (App::getLocale() == 'en')
+                                            <img src="{{ asset('') }}/img/eng.png" style="width: 25px;">
+                                            <span
+                                                class="text-sm md:block hidden font-medium text-slate-600 dark:text-slate-300">
+                                                &nbsp;Eng</span>
+                                        @else
+                                            <img src="{{ asset('') }}/img/esp.png" style="width: 25px;">
+                                            <span
+                                                class="text-sm md:block hidden font-medium text-slate-600 dark:text-slate-300">
+                                                &nbsp;Esp</span>
+                                        @endif
+                                    </button>
+                                    <!-- Language Dropdown menu -->
+                                    <div
+                                        class="dropdown-menu z-10 hidden bg-white divide-y divide-slate-100 shadow w-44 dark:bg-slate-800 border dark:border-slate-900 !top-[25px] rounded-md
+                                        overflow-hidden">
+                                        <ul class="py-1 text-sm text-slate-800 dark:text-slate-200">
+
+                                            @if (config('locale.status') && count(config('locale.languages')) > 1)
+                                                @foreach (array_keys(config('locale.languages')) as $lang)
+                                                    <li>
+                                                        <a href="{!! route('lang.swap', $lang) !!}"
+                                                            class="flex items-center px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
+                                                            @if ($lang == 'es')
+                                                                <img src="{{ asset('img/esp.png') }}"
+                                                                    style="width: 25px;">
+                                                                <span class="font-medium">&nbsp;ESP</span>
+                                                            @else
+                                                                <img src="{{ asset('img/eng.png') }}"
+                                                                    style="width: 25px;">
+                                                                <span class="font-medium">&nbsp;ENG</span>
+                                                            @endif
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            @endif
                                         </ul>
                                     </div>
-                                @endif
+                                </div>
+                                <!-- Theme Changer -->
+                                <!-- END: Language Dropdown -->
 
-                                <form method="POST" action="{{ route('register') }}" class="space-y-4">
-                                    @csrf
-                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Nombre</label>
-                                            <input type="text" name="name" required class="form-control"
-                                                value="{{ old('name') }}" autofocus="true">
-                                        </div>
+                                <!-- BEGIN: Toggle Theme -->
 
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Email</label>
-                                            <input type="email" name="email" required class="form-control"
-                                                value="{{ old('email') }}">
-                                        </div>
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Password</label>
-                                            <input type="password" name="password" required class="form-control">
-                                        </div>
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Confirme password</label>
-                                            <input type="password" name="password_confirmation" required
-                                                class="form-control">
-                                        </div>
 
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Nombre organizacion</label>
-                                            <input type="text" name="nombre_organizacion" required
-                                                class="form-control" value="{{ old('nombre_organizacion') }}">
-                                        </div>
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Telefono</label>
-                                            <input type="text" name="telefono_organizacion" required
-                                                class="form-control" data-inputmask="'mask': ['9999-9999']"
-                                                value="{{ old('telefono_organizacion') }}">
-                                        </div>
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Nota</label>
-                                            <textarea name="nota" class="form-control" rows="5">{{ old('nota') }}</textarea>
-                                        </div>
-                                        <div class="input-area relative">&nbsp;
+
+
+
+
+
+
+
+                                <!-- END: Header -->
+                                <button class="smallDeviceMenuController md:hidden block leading-0">
+                                    <iconify-icon class="cursor-pointer text-slate-900 dark:text-white text-2xl"
+                                        icon="heroicons-outline:menu-alt-3"></iconify-icon>
+                                </button>
+                                <!-- end mobile menu -->
+                            </div>
+                            <!-- end nav tools -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BEGIN: Search Modal -->
+                <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+                    id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+                    <div class="modal-dialog relative w-auto pointer-events-none top-1/4">
+                        <div
+                            class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-900 bg-clip-padding rounded-md outline-none text-current">
+                            <form>
+                                <div class="relative">
+                                    <input type="text" class="form-control !py-3 !pr-12" placeholder="Search">
+                                    <button
+                                        class="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-full border-l text-xl border-l-slate-200 dark:border-l-slate-600 dark:text-slate-300 flex items-center justify-center">
+                                        <iconify-icon icon="heroicons-solid:search"></iconify-icon>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Search Modal -->
+                <!-- END: Header -->
+                <!-- END: Header -->
+                <div class="content-wrapper transition-all duration-150 ltr:ml-[248px] rtl:mr-[248px]"
+                    id="content_wrapper">
+                    <div class="page-content">
+                        <div class="transition-all duration-150 container-fluid" id="page_layout">
+                            <div id="content_layout">
+                                {{-- @yield('contenido') --}}
+
+
+
+
+
+
+
+                                <div class="page-content">
+                                    <div class="transition-all duration-150 container-fluid" id="page_layout">
+                                        <div id="content_layout">
+
+                                            <div class="grid grid-cols-12 gap-5 mb-5">
+                                                <div class="2xl:col-span-2 lg:col-span-2 col-span-12">
+                                                    &nbsp;
+                                                </div>
+                                                <div class="2xl:col-span-6 lg:col-span-8 col-span-12">
+                                                    <div class="card">
+                                                        <div class="card-body flex flex-col p-6">
+                                                            <header
+                                                                class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
+                                                                <div class="flex-1">
+                                                                    <div
+                                                                        class="card-title text-slate-900 dark:text-white">
+                                                                        {{ __('organization.Register') }} <h1>
+                                                                        </h1>
+                                                                    </div>
+                                                                </div>
+
+                                                                <a href="{{ URL('login') }}">
+                                                                    <button
+                                                                        class="btn btn-dark float-right">login</button>
+                                                                </a>
+                                                            </header>
+
+                                                            @if (count($errors) > 0)
+                                                                <div class="alert alert-danger">
+                                                                    <ul>
+                                                                        @foreach ($errors->all() as $error)
+                                                                            <li>{{ $error }}</li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+                                                            @endif
+
+                                                            <form method="POST" action="{{ route('register') }}"
+                                                                class="space-y-4">
+                                                                @csrf
+                                                                <div
+                                                                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.Name') }}</label>
+                                                                        <input type="text" name="name" required
+                                                                            class="form-control"
+                                                                            value="{{ old('name') }}"
+                                                                            autofocus="true">
+                                                                    </div>
+
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.Email') }}</label>
+                                                                        <input type="email" name="email" required
+                                                                            class="form-control"
+                                                                            value="{{ old('email') }}">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.Password') }}</label>
+                                                                        <input type="password" name="password"
+                                                                            required class="form-control">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.ConfirmePassword') }}</label>
+                                                                        <input type="password"
+                                                                            name="password_confirmation" required
+                                                                            class="form-control">
+                                                                    </div>
+
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.Organization') }}</label>
+                                                                        <input type="text" name="name_organization"
+                                                                            required class="form-control"
+                                                                            value="{{ old('name_organization') }}">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.Phone') }}</label>
+                                                                        <input type="text" name="phone_number"
+                                                                            required class="form-control"
+                                                                            data-inputmask="'mask': ['9999-9999']"
+                                                                            value="{{ old('phone_number') }}">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.Address') }}</label>
+                                                                        <textarea name="address" required class="form-control" rows="5">{{ old('address') }}</textarea>
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.Note') }}</label>
+                                                                        <textarea name="notes" class="form-control" rows="5">{{ old('notes') }}</textarea>
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.MainContact') }}</label>
+                                                                        <input type="text" name="contact_name"
+                                                                            required class="form-control"
+                                                                            value="{{ old('contact_name') }}">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.JobMainContact') }}</label>
+                                                                        <input type="text" name="contact_job_title"
+                                                                            class="form-control"
+                                                                            value="{{ old('contact_job_title') }}">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.MainContactPhone') }}</label>
+                                                                        <input type="text"
+                                                                            name="contact_phone_number"
+                                                                            class="form-control"
+                                                                            data-inputmask="'mask': ['9999-9999']"
+                                                                            value="{{ old('contact_phone_number') }}">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.MainContactPhone2') }}</label>
+                                                                        <input type="text"
+                                                                            name="contact_phone_number_2"
+                                                                            class="form-control"
+                                                                            data-inputmask="'mask': ['9999-9999']"
+                                                                            value="{{ old('contact_phone_number_2') }}">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.SecondaryContact') }}</label>
+                                                                        <input type="text"
+                                                                            name="secondary_contact_name"
+                                                                            class="form-control"
+                                                                            value="{{ old('secondary_contact_name') }}">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.JobSecondaryContact') }}</label>
+                                                                        <input type="text"
+                                                                            name="secondary_contact_job_title"
+                                                                            class="form-control"
+                                                                            value="{{ old('secondary_contact_job_title') }}">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.SecondaryContactPhone') }}</label>
+                                                                        <input type="text"
+                                                                            name="secondary_contact_phone_number"
+                                                                            class="form-control"
+                                                                            data-inputmask="'mask': ['9999-9999']"
+                                                                            value="{{ old('secondary_contact_phone_number') }}">
+                                                                    </div>
+
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">{{ __('organization.SecondaryContactPhone2') }}</label>
+                                                                        <input type="text"
+                                                                            name="secondary_contact_phone_number_2"
+                                                                            class="form-control"
+                                                                            data-inputmask="'mask': ['9999-9999']"
+                                                                            value="{{ old('secondary_contact_phone_number_2') }}">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div style="text-align: right;">
+                                                                    <button type="submit"
+                                                                        class="btn inline-flex justify-center btn-dark">{{ __('organization.Acept') }}</button>
+                                                                </div>
+
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid xl:grid-cols-1 grid-cols-1 gap-6">
+                                                <!-- Basic Inputs -->
+
+
+                                            </div>
+
 
                                         </div>
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Contacto principal</label>
-                                            <input type="text" name="contacto_principal" required
-                                                class="form-control" value="{{ old('contacto_principal') }}">
-                                        </div>
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Cargo contacto
-                                                principal</label>
-                                            <input type="text" name="cargo_contacto_principal" required
-                                                class="form-control" value="{{ old('cargo_contacto_principal') }}">
-                                        </div>
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Telefono contacto
-                                                principal</label>
-                                            <input type="text" name="telefono_contacto_principal" required
-                                                class="form-control" data-inputmask="'mask': ['9999-9999']"
-                                                value="{{ old('telefono_contacto_principal') }}">
-                                        </div>
-                                        <div class="input-area relative">&nbsp;
-
-                                        </div>
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Contacto secundario</label>
-                                            <input type="text" name="contacto_secundario" required
-                                                class="form-control" value="{{ old('contacto_secundrio') }}">
-                                        </div>
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Cargo contacto
-                                                secundario</label>
-                                            <input type="text" name="cargo_contacto_secundario" required
-                                                class="form-control" value="{{ old('cargo_contacto_secundrio') }}">
-                                        </div>
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Telefono contacto
-                                                secundario</label>
-                                            <input type="text" name="telefono_secundario" required
-                                                class="form-control" data-inputmask="'mask': ['9999-9999']"
-                                                value="{{ old('telefono_secundrio') }}">
-                                        </div>
-
                                     </div>
-                                    <div style="text-align: right;">
-                                        <button type="submit"
-                                            class="btn inline-flex justify-center btn-dark">Registrar</button>
-                                    </div>
+                                </div>
 
 
-                                </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="grid xl:grid-cols-1 grid-cols-1 gap-6">
-                    <!-- Basic Inputs -->
+            </div>
 
-
-                </div>
-
-
+            <div
+                class="bg-white bg-no-repeat custom-dropshadow footer-bg dark:bg-slate-700 flex justify-around items-center
+                backdrop-filter backdrop-blur-[40px] fixed left-0 bottom-0 w-full z-[9999] bothrefm-0 py-[12px] px-4 md:hidden">
+                <a href="chat.html">
+                    <div>
+                        <span
+                            class="relative cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center mb-1 dark:text-white
+          text-slate-900 ">
+                            <iconify-icon icon="heroicons-outline:mail"></iconify-icon>
+                            <span
+                                class="absolute right-[5px] lg:hrefp-0 -hrefp-2 h-4 w-4 bg-red-500 text-[8px] font-semibold flex flex-col items-center
+            justify-center rounded-full text-white z-[99]">
+                                10
+                            </span>
+                        </span>
+                        <span class="block text-[11px] text-slate-600 dark:text-slate-300">
+                            Messages
+                        </span>
+                    </div>
+                </a>
+                <a href="profile.html"
+                    class="relative bg-white bg-no-repeat backdrop-filter backdrop-blur-[40px] rounded-full footer-bg dark:bg-slate-700
+                h-[65px] w-[65px] z-[-1] -mt-[40px] flex justify-center items-center">
+                    <div class="h-[50px] w-[50px] rounded-full relative left-[0px] hrefp-[0px] custom-dropshadow">
+                        <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt=""
+                            class="w-full h-full rounded-full border-2 border-slate-100">
+                    </div>
+                </a>
+                <a href="#">
+                    <div>
+                        <span
+                            class=" relative cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center mb-1 dark:text-white
+          text-slate-900">
+                            <iconify-icon icon="heroicons-outline:bell"></iconify-icon>
+                            <span
+                                class="absolute right-[17px] lg:hrefp-0 -hrefp-2 h-4 w-4 bg-red-500 text-[8px] font-semibold flex flex-col items-center
+            justify-center rounded-full text-white z-[99]">
+                                2
+                            </span>
+                        </span>
+                        <span class=" block text-[11px] text-slate-600 dark:text-slate-300">
+                            Notifications
+                        </span>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
+
+
+    </main>
+
 
 
 

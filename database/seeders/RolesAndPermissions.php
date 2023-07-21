@@ -18,7 +18,7 @@ class RolesAndPermissions extends Seeder
      */
     public function run()
     {
-        
+
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
            // create permissions
        /* Permission::create( ['name' => 'create roles'] );
@@ -42,12 +42,13 @@ class RolesAndPermissions extends Seeder
         $role->givePermissionTo( Permission::all() );*/
 
         //$user = User::findOrFail(1);
-        $administrador = User::create( [
-            'name'=>'Administrador',
-            'email'=>'hhuezo@ista.gob.sv',
-            'password'=> bcrypt( '12345678' ),
-        ] );
+        // $administrador = User::create( [
+        //     'name'=>'Administrador',
+        //     'email'=>'hhuezo@ista.gob.sv',
+        //     'password'=> bcrypt( '12345678' ),
+        // ] );
 
-        $administrador->assignRole('administrador');
+        // $administrador->assignRole('administrador');
+        $role = Role::create( ['name' => 'member'] );
     }
 }

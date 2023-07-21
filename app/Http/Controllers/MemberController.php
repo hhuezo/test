@@ -1,0 +1,93 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Member;
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class MemberController extends Controller
+{
+
+    public function index()
+    {
+        $members = Member::where('status','=',1)->get();
+        return view('member.index', compact('members'));
+    }
+
+
+    public function create()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function show($id)
+    {
+        //
+    }
+
+
+    public function edit($id)
+    {
+        $member = Member::findOrFail($id);
+        return view('member.edit', compact('member'));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+
+    public function activate(Request $request)
+    {
+
+        $member = Member::findOrFail($request->id);
+        $member->status = 2;
+        $member->save();
+
+        $user = User::findOrFail($member->users_id);
+        $user->status = 1;
+        $user->save();
+
+        $objeto = new  MailController();
+        $email = $user->email;
+        $subject = "Notificación: Usuario aceptado";
+        $content = "Se le informa que su usuario ha sido activado, por tanto ya puede ingresar a la platafoma";
+        $result = $objeto->sendMail($email, $subject, $content);
+
+        alert()->success('Miembro activado correctamente');
+        return redirect('member');
+    }
+
+
+    public function decline(Request $request)
+    {
+        $member = Member::findOrFail($request->id);
+        $member->status = 3;
+        $member->save();
+
+
+
+        $objeto = new  MailController();
+        $email = $member->email;
+        $subject = "Notificación: Usuario rechazado";
+        $content = "Se le informa que su usuario ha sido rechazado, por tanto no podrá ingresar a la platafoma";
+        $result = $objeto->sendMail($email, $subject, $content);
+
+        alert()->info('Miembro rechazado correctamente');
+        return redirect('organization');
+    }
+
+
+    public function destroy($id)
+    {
+        //
+    }
+}

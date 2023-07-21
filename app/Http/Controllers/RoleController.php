@@ -37,7 +37,7 @@ class RoleController extends Controller
         $permissions = Permission::get();
         $permission_in_role = $role->role_has_permissions;
 
-        return view('seguridad.role.edit',compact('role','permissions','permission_in_role')  );
+        return view('seguridad.role.edit', compact('role', 'permissions', 'permission_in_role'));
     }
 
     public function link_permission(Request $request)

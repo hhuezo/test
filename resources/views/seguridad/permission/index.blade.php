@@ -4,7 +4,7 @@
     @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
 
 
-    <div class=" space-y-5">
+
         <div class="card">
             <header class=" card-header noborder">
                 <h4 class="card-title">Listado de permisos
@@ -12,7 +12,7 @@
                 <button class="btn btn-outline-primary" data-bs-toggle="modal"
                     data-bs-target="#usuario_create_modal">Nuevo</button>
             </header>
-            <div class="card">
+            <div class="card-body px-6 pb-6">
                 <div style=" margin-left:20px; margin-right:20px; ">
                     <span class=" col-span-8  hidden"></span>
                     <span class="  col-span-4 hidden"></span>
@@ -153,7 +153,7 @@
         </div>
     </div>
 
-  
+
     <script type="text/javascript">
         function modal_edit(id, name) {
             //alert(id);

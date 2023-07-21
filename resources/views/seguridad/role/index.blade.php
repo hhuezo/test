@@ -9,8 +9,8 @@
             <header class=" card-header noborder">
                 <h4 class="card-title">Listado de roles
                 </h4>
-                <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                    data-bs-target="#usuario_create_modal">Nuevo</button>
+                {{-- <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#usuario_create_modal">Nuevo</button> --}}
             </header>
             <div class="card">
                 <div style=" margin-left:20px; margin-right:20px; ">
@@ -35,19 +35,15 @@
                                                 <td align="center">
 
                                                     <a href="{{ url('seguridad/role') }}/{{ $obj->id }}/edit">
-                                                        <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;"
-                                                            width="40"></iconify-icon>
+                                                        <iconify-icon icon="healthicons:eye-negative" style="color: #1769aa;" width="40"></iconify-icon>
                                                     </a>
 
                                                     &nbsp;&nbsp;
 
 
-                                                    <iconify-icon data-bs-toggle="modal"
-                                                        data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
-                                                        style="color: #1769aa;" width="40"></iconify-icon>
+
                                                 </td>
                                             </tr>
-                                            @include('seguridad.role.modal')
                                         @endforeach
                                     @endif
 
