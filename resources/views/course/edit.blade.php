@@ -46,9 +46,9 @@
                                 <div class="card rounded-md bg-white dark:bg-slate-800 lg:h-full shadow-base xl:col-span-2">
                                     <div class="card-body flex flex-col p-6">
 
-                                        <div id="dropZone"
+                                        <div
                                             class="w-full text-center border-dashed border border-secondary-500 rounded-md py-[52px] flex justify-center items-center">
-                                            <div role="presentation" tabindex="0"
+                                            <div id="dropZone" role="presentation" tabindex="0"
                                                 class="dropzone border-none dark:bg-slate-800" id="myUploader">
                                                 <div class="dz-default dz-message">
                                                     <button class="dz-button" type="button">
