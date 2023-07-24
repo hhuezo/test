@@ -47,143 +47,54 @@
 
                         <ul class="divide-y divide-slate-100 dark:divide-slate-700">
 
-                            {{-- <li class="block py-[8px]">
-                                <div class="flex space-x-2 rtl:space-x-reverse">
-                                    <div class="flex-1 flex space-x-2 rtl:space-x-reverse">
-                                        <div class="flex-none">
-                                            <div class="h-8 w-8">
-                                                <img src="{{ asset('images/icon/file-1.svg') }}"  alt=""
-                                                    class="block w-full h-full object-cover rounded-full border hover:border-white border-transparent">
-                                            </div>
-                                        </div>
-                                        <div class="flex-1">
-                                            <span class="block text-slate-600 text-sm dark:text-slate-300">
-                                                Dashboard.fig
-                                            </span>
-                                            <span class="block font-normal text-xs text-slate-500 mt-1">
-                                                06 June 2021 / 155MB
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-none">
-                                        <button type="button" class="text-xs text-slate-900 dark:text-white">
-                                            Descargar
-                                        </button>
-                                    </div>
-                                </div>
-                            </li> --}}
-
+                            @foreach ($files as $file)
                             <li class="block py-[8px]">
                                 <div class="flex space-x-2 rtl:space-x-reverse">
                                     <div class="flex-1 flex space-x-2 rtl:space-x-reverse">
                                         <div class="flex-none">
                                             <div class="h-8 w-8">
-                                                <img src="{{ asset('images/icon/pdf-1.svg') }}" alt=""
-                                                    class="block w-full h-full object-cover rounded-full border hover:border-white border-transparent">
+                                                @if (substr($file->route, -4) == '.pdf')
+                                                    <iconify-icon icon="vscode-icons:file-type-pdf2"
+                                                        style="font-size: 32px;"></iconify-icon>
+                                                @elseif (substr($file->route, -4) == '.doc' || substr($file->route, -4) == 'docx')
+                                                    <iconify-icon icon="vscode-icons:file-type-word"
+                                                        style="font-size: 32px;"></iconify-icon>
+                                                @elseif (substr($file->route, -4) == '.xls' || substr($file->route, -4) == 'xlsx')
+                                                    <iconify-icon icon="vscode-icons:file-type-excel"
+                                                        style="font-size: 32px;"></iconify-icon>
+                                                @elseif (substr($file->route, -4) == '.jpg' || substr($file->route, -4) == '.png' || substr($file->route, -4) == 'jpge')
+                                                    <iconify-icon icon="bi:image-fill"
+                                                        style="color: #2a3f96; font-size: 32px;"></iconify-icon>
+                                                @elseif (substr($file->route, -4) == '.zip' || substr($file->route, -4) == '.rar')
+                                                    <iconify-icon icon="subway:zip"
+                                                        style="color: #2a3f96; font-size: 32px;"></iconify-icon>
+                                                @else
+                                                    <iconify-icon icon="mdi:file"
+                                                        style="color: #2a3f96; font-size: 32px;"></iconify-icon>
+                                                @endif
+
                                             </div>
                                         </div>
                                         <div class="flex-1">
                                             <span class="block text-slate-600 text-sm dark:text-slate-300">
-                                                Material1.pdf
+                                                {{ $file->name }}
                                             </span>
-                                            <span class="block font-normal text-xs text-slate-500 mt-1">
+                                            {{-- <span class="block font-normal text-xs text-slate-500 mt-1">
                                                 {{ date('d/m/Y') }} / 155MB
-                                            </span>
+                                            </span> --}}
                                         </div>
                                     </div>
                                     <div class="flex-none">
-                                        <a href="{{ asset('docs') }}/normativa.pdf" target="_blank">
+                                        <a href="{{ asset('files') }}/{{ $file->route }}" target="_blank">
                                             <button type="button" class="text-xs text-slate-900 dark:text-white">
-                                                Descargar
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
 
-                            <li class="block py-[8px]">
-                                <div class="flex space-x-2 rtl:space-x-reverse">
-                                    <div class="flex-1 flex space-x-2 rtl:space-x-reverse">
-                                        <div class="flex-none">
-                                            <div class="h-8 w-8">
-                                                <img src="{{ asset('images/icon/zip-1.svg') }}" alt=""
-                                                    class="block w-full h-full object-cover rounded-full border hover:border-white border-transparent">
-                                            </div>
-                                        </div>
-                                        <div class="flex-1">
-                                            <span class="block text-slate-600 text-sm dark:text-slate-300">
-                                                Material2.zip
-                                            </span>
-                                            <span class="block font-normal text-xs text-slate-500 mt-1">
-                                                {{ date('d/m/Y') }} / 155MB
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-none">
-                                        <a href="{{ asset('docs') }}/normativa.zip" target="_blank">
-                                            <button type="button" class="text-xs text-slate-900 dark:text-white">
                                                 Descargar
                                             </button>
                                         </a>
                                     </div>
                                 </div>
                             </li>
-
-                            <li class="block py-[8px]">
-                                <div class="flex space-x-2 rtl:space-x-reverse">
-                                    <div class="flex-1 flex space-x-2 rtl:space-x-reverse">
-                                        <div class="flex-none">
-                                            <div class="h-8 w-8">
-                                                <img src="{{ asset('images/icon/pdf-2.svg') }}" alt=""
-                                                    class="block w-full h-full object-cover rounded-full border hover:border-white border-transparent">
-                                            </div>
-                                        </div>
-                                        <div class="flex-1">
-                                            <span class="block text-slate-600 text-sm dark:text-slate-300">
-                                                Material.pdf
-                                            </span>
-                                            <span class="block font-normal text-xs text-slate-500 mt-1">
-                                                {{ date('d/m/Y') }} / 155MB
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-none">
-                                        <a href="{{ asset('docs') }}/normativa.pdf" target="_blank">
-                                            <button type="button" class="text-xs text-slate-900 dark:text-white">
-                                                Descargar
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="block py-[8px]">
-                                <div class="flex space-x-2 rtl:space-x-reverse">
-                                    <div class="flex-1 flex space-x-2 rtl:space-x-reverse">
-                                        <div class="flex-none">
-                                            <div class="h-8 w-8">
-                                                <img src="{{ asset('images/icon/scr-1.svg') }}" alt=""
-                                                    class="block w-full h-full object-cover rounded-full border hover:border-white border-transparent">
-                                            </div>
-                                        </div>
-                                        <div class="flex-1">
-                                            <span class="block text-slate-600 text-sm dark:text-slate-300">
-                                                Material4.jpg
-                                            </span>
-                                            <span class="block font-normal text-xs text-slate-500 mt-1">
-                                                {{ date('d/m/Y') }}/ 155MB
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-none">
-                                        <a href="{{ asset('img') }}/{{ $course->image }}" target="_blank">
-                                            <button type="button" class="text-xs text-slate-900 dark:text-white">
-                                                Descargar
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
+                        @endforeach
 
                         </ul>
                         <!-- END: FIles Card -->

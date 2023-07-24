@@ -46,7 +46,8 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::findOrFail($id);
-        return view('course.show', compact('course'));
+        $files = FileCourse::where('course_id','=',$id)->get();
+        return view('course.show', compact('course','files'));
     }
 
     public function edit($id)
