@@ -342,7 +342,8 @@
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Organización</label>
-                                                                        <select name="organization_id"  class="form-control">
+                                                                        <select name="organization_id"
+                                                                            class="form-control">
                                                                             @foreach ($organizations as $obj)
                                                                                 <option value="{{ $obj->id }}">
                                                                                     {{ $obj->name }}</option>
@@ -353,18 +354,18 @@
 
 
 
-                                                                    <div class="input-area relative">
+                                                                    {{--  <div class="input-area relative">
                                                                         &nbsp;
                                                                     </div>
 
-                                                                    <div class="input-area relative">
+                                                                 <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Número documento</label>
                                                                         <input type="text" name="document_number"
                                                                             data-inputmask="'mask': ['99999999-9']"
                                                                             required class="form-control"
                                                                             value="{{ old('document_number') }}">
-                                                                    </div>
+                                                                    </div> --}}
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">{{ __('organization.Phone') }}</label>
@@ -395,7 +396,8 @@
                                                                         <select id="Municipio" name="Municipio"
                                                                             class="form-control select2">
                                                                             @foreach ($municipios as $obj)
-                                                                                <option value="{{ $obj->id }}" {{ old('Municipio') == $obj->id ? 'selected' : '' }}>
+                                                                                <option value="{{ $obj->id }}"
+                                                                                    {{ old('Municipio') == $obj->id ? 'selected' : '' }}>
                                                                                     {{ $obj->nombre }}</option>
                                                                             @endforeach
                                                                         </select>

@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Quiz extends Component
 {
-    public $question, $question_id, $answer_id, $questions, $answers, $answer, $show_questions = 0;
+    public $question, $question_id, $answer_id, $questions, $answers, $answer, $show_questions = 1;
 
     public function render()
     {

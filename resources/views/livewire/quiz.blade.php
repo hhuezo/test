@@ -96,7 +96,7 @@
                                             </span>
                                         </button>
                                     @else
-                                        <button wire:click="show_questions(0)"
+                                        <button wire:click="show_questions(0)" style="display: none"
                                             class="btn inline-flex justify-center btn-white dark:bg-slate-700 dark:text-slate-300 m-1 active"
                                             id="pills-grid-tab" data-bs-toggle="pill" data-bs-target="#pills-grid"
                                             role="tab" aria-controls="pills-grid" aria-selected="true">

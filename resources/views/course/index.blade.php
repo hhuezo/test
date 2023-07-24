@@ -44,7 +44,7 @@
                         <input type="text" name="search" value="{{ $search }}" class="form-control !pr-12"
                             placeholder="Buscar">
                         <button type="submit"
-                            class="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-full border-l border-l-slate-200 dark:border-l-slate-700 flex items-center justify-center">
+                            class="btn-dark absolute right-0 top-1/2 -translate-y-1/2 w-9 h-full border-l border-l-slate-200 dark:border-l-slate-700 flex items-center justify-center">
                             <iconify-icon icon="heroicons-solid:search"></iconify-icon>
                         </button>
                     </div>

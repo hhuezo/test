@@ -49,6 +49,7 @@ class RolesAndPermissions extends Seeder
         // ] );
 
         // $administrador->assignRole('administrador');
+        $role = Role::create( ['name' => 'facilitator'] );
         $role = Role::create( ['name' => 'member'] );
     }
 }

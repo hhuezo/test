@@ -10,7 +10,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class WelcomeController extends Controller
 {
@@ -73,7 +72,7 @@ class WelcomeController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'document_number' => ['required', 'string', 'max:255'],
+            //'document_number' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'max:9'],
             'address' => ['required', 'string', 'max:255'],
             'organization_id' => ['required'],
@@ -95,7 +94,7 @@ class WelcomeController extends Controller
         $member->name_member = $request->name;
         $member->lastname_member = $request->last_name;
         $member->birthdate = $request->birthdate;
-        $member->document_number = $request->document_number;
+        //$member->document_number = $request->document_number;
         $member->email = $request->email;
         $member->cell_phone_number = $request->phone_number;
         $member->address = $request->address;

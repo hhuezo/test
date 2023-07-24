@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\FileCourse;
 use Illuminate\Http\Request;
-use Laravel\Ui\Presets\React;
 
 class CourseController extends Controller
 {
@@ -14,10 +14,10 @@ class CourseController extends Controller
         if ($request->search) {
             $search = $request->search;
         }
-        $courses = Course::where('name','like','%'.$search.'%')->orWhere('name_es','like','%'.$search.'%')
-        ->orWhere('description','like','%'.$search.'%')
-        ->orWhere('description_es','like','%'.$search.'%')->get();
-        return view('course.index', compact('courses','search'));
+        $courses = Course::where('name', 'like', '%' . $search . '%')->orWhere('name_es', 'like', '%' . $search . '%')
+            ->orWhere('description', 'like', '%' . $search . '%')
+            ->orWhere('description_es', 'like', '%' . $search . '%')->get();
+        return view('course.index', compact('courses', 'search'));
     }
 
 
@@ -52,12 +52,38 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::findOrFail($id);
-        return view('course.edit', compact('course'));
+        $files = FileCourse::where('course_id','=',$id)->get();
+        return view('course.edit', compact('course','files'));
     }
 
     public function upload_file(Request $request)
     {
-        dd($request->files);
+        $messages = [
+            'files.required' => 'Error, no se ha elegido ningun archivo',
+            'files.mimetypes' => 'Error, formato no válido',
+        ];
+
+        $request->validate([
+            'files'=> 'required',
+        ], $messages);
+
+
+        $files = $request->file('files');
+        foreach ($files as $file) {
+            $filename = $file->getClientOriginalName();
+            $path = uniqid() . $filename;
+            $destinationPath = public_path('/files');
+            $file->move($destinationPath, $path);
+
+            $file_course = new FileCourse();
+            $file_course->course_id = $request->course_id;
+            $file_course->name = $filename;
+            $file_course->route = $path;
+
+            $file_course->save();
+        }
+        alert()->success('Registro guardado correctamente');
+        return back();
     }
 
     public function update(Request $request, $id)
