@@ -216,7 +216,7 @@
                                                 </th>
 
                                                 <th scope="col" class=" table-th ">
-                                                    Fecha
+                                                    Status
                                                 </th>
                                                 <th scope="col" class=" table-th ">
                                                     Aciones
@@ -225,8 +225,23 @@
                                         </thead>
                                         <tbody
                                             class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
+                                            @php($i = 1)
+                                            @foreach ($quizes as $quiz)
+                                                <tr>
+                                                    <td class="table-td">{{$i}}</td>
+                                                    <td class="table-td">{{$quiz->name_es}}</td>
+                                                    <td class="table-td">{{$quiz->status}}</td>
 
-                                            <tr>
+                                                    <td class="table-td">
+                                                        <a href="{{ url('quiz') }}/{{$quiz->id}}/edit">
+                                                            <iconify-icon icon="mdi:eye"
+                                                                style="color: #1769aa; font-size: 35px;"></iconify-icon>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                @php($i++)
+                                            @endforeach
+                                            {{-- <tr>
                                                 <td class="table-td">1</td>
                                                 <td class="table-td">Examen 1</td>
                                                 <td class="table-td ">{{ date('d/m/Y') }}</td>
@@ -237,7 +252,7 @@
                                                             style="color: #1769aa; font-size: 35px;"></iconify-icon>
                                                     </a>
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -285,7 +300,7 @@
                         @csrf
                         <!-- Modal body -->
                         <div class="p-6 space-y-4">
-                            <input type="hidden" name="course_id" value="{{$course->id}}">
+                            <input type="hidden" name="course_id" value="{{ $course->id }}">
                             <textarea class="form-control" rows="5" placeholder="titulo....." required name="name"></textarea>
 
                         </div>

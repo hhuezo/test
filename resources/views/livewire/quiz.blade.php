@@ -59,11 +59,15 @@
         <div class=" md:flex justify-between items-center">
             <div>
                 <!-- BEGIN: Breadcrumb -->
-                <div class="mb-5">
+                <div class="mb-6">
+
                 </div>
                 <!-- END: BreadCrumb -->
             </div>
             <div class="flex flex-wrap ">
+                <div class="card h-full">
+
+                </div>
                 <ul class="nav nav-pills flex items-center flex-wrap list-none pl-0 mr-4" id="pills-tabVertical"
                     role="tablist">
                     <li class="nav-item flex-grow text-center" role="presentation">
@@ -119,6 +123,33 @@
 
                 <div class="space-y-5">
                     <div class="grid grid-cols-12 gap-5">
+
+                        <div class="xl:col-span-2 col-span-12 lg:col-span-5 ">
+                            &nbsp;
+                        </div>
+                        <div class="xl:col-span-8 col-span-12 lg:col-span-7">
+
+                            <div class="card">
+                                <header class="border-b px-4 pt-4 pb-3  items-center border-success-500">
+                                    <strong>{{ $quiz_name }}</strong>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modal_edit_quiz"
+                                        class="float-right right-0 top-1/2  border-l border-l-slate-200 dark:border-l-slate-700 flex items-center justify-center">
+                                        <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;" width="40">
+                                        </iconify-icon>
+                                    </button>
+                                </header>
+                                <div class="lg:col-span-2 col-span-12 space-y-5">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <div class="lg:col-span-2 col-span-12 space-y-5">
+                                &nbsp;
+                            </div>
+
+                        </div>
+                        <div class="xl:col-span-2 col-span-12 lg:col-span-5 ">
+                            &nbsp;
+                        </div>
                         @foreach ($questions as $question)
                             <div class="xl:col-span-2 col-span-12 lg:col-span-5 ">
                                 &nbsp;
@@ -144,9 +175,11 @@
 
                                     <div class="card-body p-6">
                                         <div>
-                                            <div class="h-full all-todos overflow-x-hidden" data-simplebar="data-simplebar">
+                                            <div class="h-full all-todos overflow-x-hidden"
+                                                data-simplebar="data-simplebar">
                                                 <strong>Indique una respuesta correcta.</strong>
-                                                <ul  class="divide-y divide-slate-100 dark:divide-slate-700 -mb-6 h-full todo-list">
+                                                <ul
+                                                    class="divide-y divide-slate-100 dark:divide-slate-700 -mb-6 h-full todo-list">
                                                     @foreach ($answers as $answer)
                                                         @if ($answer->catalog_questions_id == $question->id)
                                                             <li data-status="team" data-stared="false"
@@ -168,8 +201,12 @@
                                                                 </span>
 
 
-                                                                <label  class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer">
-                                                                    <input type="checkbox" {{$answer->correct_answer == 1 ? 'checked' : '' }} wire:click="answer_correct({{$answer->id}})" value="" class="sr-only peer">
+                                                                <label
+                                                                    class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer">
+                                                                    <input type="checkbox"
+                                                                        {{ $answer->correct_answer == 1 ? 'checked' : '' }}
+                                                                        wire:click="answer_correct({{ $answer->id }})"
+                                                                        value="" class="sr-only peer">
                                                                     <div
                                                                         class="w-14 h-6 bg-gray-200 peer-focus:outline-none ring-0 rounded-full peer dark:bg-gray-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:z-10 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-success-500">
                                                                     </div>
@@ -426,6 +463,56 @@
 
 
 
+    <!-- BEGIN: Settings Modal editar pregunta -->
+    <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+        wire:ignore.self id="modal_edit_quiz" tabindex="-1" aria-labelledby="basic_modal" aria-hidden="true">
+
+        <!-- BEGIN: Modal -->
+        <div class="modal-dialog relative w-auto pointer-events-none">
+            <div
+                class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
+                    <!-- Modal header -->
+                    <div
+                        class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-black-500">
+                        <h3 class="text-xl font-medium text-white dark:text-white">
+                            Modificar exámen {{$quiz_name}}
+                        </h3>
+                        <button type="button"
+                            class="text-slate-400 bg-transparent hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-slate-600 dark:hover:text-white"
+                            data-bs-dismiss="modal">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="#ffffff" viewbox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <form wire:submit.prevent="edit_quiz()">
+                        <!-- Modal body -->
+                        <div class="p-6 space-y-4">
+                            <textarea class="form-control" rows="5" required wire:model="quiz_name"></textarea>
+                            @error('question')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <!-- Modal footer -->
+                        <div
+                            class="flex items-center justify-end p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
+                            <button type="submit"
+                                class="btn inline-flex justify-center text-white bg-black-500">Aceptar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END: Modals -->
+    </div>
+    <!-- END: Settings Modal -->
+
+
 
 
 
@@ -445,6 +532,11 @@
         window.addEventListener('close-modal-edit-question', (e) => {
             $('#modal_edit_question').modal('hide')
         });
+
+        window.addEventListener('close-modal-edit-quiz', (e) => {
+            $('#modal_edit_quiz').modal('hide')
+        });
+        //modal_edit_quiz
     </script>
 
 

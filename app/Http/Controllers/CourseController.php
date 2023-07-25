@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\FileCourse;
+use App\Models\quiz\Quiz;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -47,14 +48,16 @@ class CourseController extends Controller
     {
         $course = Course::findOrFail($id);
         $files = FileCourse::where('course_id','=',$id)->get();
-        return view('course.show', compact('course','files'));
+        $quizes = Quiz::where('course_id','=',$id)->get();
+        return view('course.show', compact('course','files','quizes'));
     }
 
     public function edit($id)
     {
         $course = Course::findOrFail($id);
         $files = FileCourse::where('course_id','=',$id)->get();
-        return view('course.edit', compact('course','files'));
+        $quizes = Quiz::where('course_id','=',$id)->get();
+        return view('course.edit', compact('course','files','quizes'));
     }
 
     public function upload_file(Request $request)

@@ -37,7 +37,7 @@ class QuizController extends Controller
         $quiz->course_id = $request->course_id;
         $quiz->save();
 
-        return redirect('quiz/' . $quiz->id);
+        return redirect('quiz/' . $quiz->id.'/edit');
 
     }
 

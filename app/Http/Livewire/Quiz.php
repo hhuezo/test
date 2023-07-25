@@ -9,16 +9,17 @@ use Livewire\Component;
 
 class Quiz extends Component
 {
-    public $quiz_id, $quiz, $question, $question_id, $answer_id, $questions, $answers, $answer, $show_questions = 1;
+    public $quiz_id, $quiz,$quiz_name, $question, $question_id, $answer_id, $questions, $answers, $answer, $show_questions = 1;
 
     public function mount($id)
     {
         $this->quiz_id = $id;
+        $this->quiz = QuizModel::findOrFail($this->quiz_id);
+        $this->quiz_name = $this->quiz->name_es;
     }
 
     public function render()
     {
-
         $this->quiz = QuizModel::findOrFail($this->quiz_id);
         $this->questions = $this->quiz->quiz_has_question;
 
@@ -116,4 +117,15 @@ class Quiz extends Component
         $this->answer_id = 0;
         $this->dispatchBrowserEvent('close-modal-delete-answer');
     }
+    public function edit_quiz()
+    {
+        $quiz = QuizModel::findOrFail($this->quiz_id);
+
+        $quiz->name_es = $this->quiz_name;
+        $quiz->name_en = $this->quiz_name;
+        $quiz->save();
+        $this->dispatchBrowserEvent('close-modal-edit-quiz');
+    }
+
+
 }
