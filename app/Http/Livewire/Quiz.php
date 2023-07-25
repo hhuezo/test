@@ -2,17 +2,26 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\catalog\Answer;
-use App\Models\catalog\Question;
+use App\Models\quiz\Answer;
+use App\Models\quiz\Question;
+use App\Models\quiz\Quiz as QuizModel;
 use Livewire\Component;
 
 class Quiz extends Component
 {
-    public $question, $question_id, $answer_id, $questions, $answers, $answer, $show_questions = 1;
+    public $quiz_id, $quiz, $question, $question_id, $answer_id, $questions, $answers, $answer, $show_questions = 1;
+
+    public function mount($id)
+    {
+        $this->quiz_id = $id;
+    }
 
     public function render()
     {
-        $this->questions = Question::get();
+
+        $this->quiz = QuizModel::findOrFail($this->quiz_id);
+        $this->questions = $this->quiz->quiz_has_question;
+
         $this->answers = Answer::get();
         return view('livewire.quiz');
     }
@@ -30,6 +39,8 @@ class Quiz extends Component
         $question->description = $this->question;
         $question->save();
         $this->question = "";
+
+        $question->question_has_quiz()->attach($this->quiz_id);
         $this->dispatchBrowserEvent('close-modal-answer');
     }
 
@@ -59,7 +70,7 @@ class Quiz extends Component
         $this->show_questions = $id;
     }
 
-    public function modal_edit_question($id,$description)
+    public function modal_edit_question($id, $description)
     {
         $this->question_id = $id;
         $this->question = $description;
@@ -81,6 +92,16 @@ class Quiz extends Component
     {
         $this->question_id = $id;
     }
+
+    public function answer_correct($id)
+    {
+        $answer = Answer::findOrFail($id);
+        Answer::where('catalog_questions_id', '=', $answer->catalog_questions_id)->update(['correct_answer' => 0,]);
+
+        $answer->correct_answer = 1;
+        $answer->update();
+    }
+
 
 
     public function modal_delete_answer($id)

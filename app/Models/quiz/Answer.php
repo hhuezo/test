@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\quiz;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pregunta extends Model
+class Answer extends Model
 {
     use HasFactory;
-    protected $table = 'pregunta';
+    protected $table = 'catalog_answers';
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'descripcion'
+        'description',
+        'catalog_questions_id'
     ];
 }

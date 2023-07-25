@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\catalog\Answer;
-use App\Models\catalog\Question;
+use App\Models\quiz\Answer;
+use App\Models\quiz\Question;
+use App\Models\quiz\Quiz;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -13,33 +14,34 @@ class QuizController extends Controller
         return view('quiz.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $messages = [
+            'name.required' => 'Error, el titulo es requerido',
+        ];
+
+        $request->validate([
+            'name'=> 'required',
+        ], $messages);
+
+        $quiz = new Quiz();
+        $quiz->name_es = $request->name;
+        $quiz->name_en = $request->name;
+        $quiz->course_id = $request->course_id;
+        $quiz->save();
+
+        return redirect('quiz/' . $quiz->id);
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $questions = Question::get();
@@ -47,35 +49,18 @@ class QuizController extends Controller
         return view('quiz.show',compact('questions','answers'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
-        //
+        return view('quiz.edit', compact('id'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

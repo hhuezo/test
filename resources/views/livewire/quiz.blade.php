@@ -36,6 +36,10 @@
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
             transition: .3s;
         }
+
+        .form-control {
+            font-weight: bold;
+        }
     </style>
 
 
@@ -49,197 +53,158 @@
 
 
 
-    <div class="content-wrapper transition-all duration-150 " id="content_wrapper">
 
-        <div class="page-content">
-            <div class="transition-all duration-150 container-fluid" id="page_layout">
-                <div id="content_layout">
+    <div class="page-content">
 
-                    <div class=" md:flex justify-between items-center">
-                        <div>
-
-
-
-                            <!-- BEGIN: Breadcrumb -->
-                            <div class="mb-5">
-                                {{-- <ul class="m-0 p-0 list-none">
-                              <li class="inline-block relative top-[3px] text-base text-primary-500 font-Inter ">
-                                <a href="index.html">
-                                  <iconify-icon icon="heroicons-outline:home"></iconify-icon>
-                                  <iconify-icon icon="heroicons-outline:chevron-right" class="relative text-slate-500 text-sm rtl:rotate-180"></iconify-icon>
-                                </a>
-                              </li>
-                              <li class="inline-block relative text-sm text-primary-500 font-Inter ">
-                                Projects
-                                <iconify-icon icon="heroicons-outline:chevron-right" class="relative top-[3px] text-slate-500 rtl:rotate-180"></iconify-icon>
-                              </li>
-                              <li class="inline-block relative text-sm text-slate-500 font-Inter dark:text-white">
-                                Project</li>
-                            </ul> --}}
-                            </div>
-                            <!-- END: BreadCrumb -->
-                        </div>
-                        <div class="flex flex-wrap ">
-                            <ul class="nav nav-pills flex items-center flex-wrap list-none pl-0 mr-4"
-                                id="pills-tabVertical" role="tablist">
-                                <li class="nav-item flex-grow text-center" role="presentation">
-                                    @if ($show_questions == 0)
-                                        <button wire:click="show_questions(1)"
-                                            class="btn inline-flex justify-center btn-white dark:bg-slate-700 dark:text-slate-300 m-1 active"
-                                            id="pills-grid-tab" data-bs-toggle="pill" data-bs-target="#pills-grid"
-                                            role="tab" aria-controls="pills-grid" aria-selected="true">
-                                            <span class="flex items-center">
-
-                                                <iconify-icon class="text-xl ltr:mr-2 rtl:ml-2" icon="mdi:eye"
-                                                    style="color: white;"></iconify-icon>
-                                                <span>Ver Preguntas</span>
-                                            </span>
-                                        </button>
-                                    @else
-                                        <button wire:click="show_questions(0)" style="display: none"
-                                            class="btn inline-flex justify-center btn-white dark:bg-slate-700 dark:text-slate-300 m-1 active"
-                                            id="pills-grid-tab" data-bs-toggle="pill" data-bs-target="#pills-grid"
-                                            role="tab" aria-controls="pills-grid" aria-selected="true">
-                                            <span class="flex items-center">
-
-                                                <iconify-icon class="text-xl ltr:mr-2 rtl:ml-2" icon="mdi:eye-off"
-                                                    style="color: white;"></iconify-icon>
-                                                <span>Ocultar Preguntas</span>
-                                            </span>
-                                        </button>
-                                    @endif
-
-                                    <a href="{{ url('quiz') }}/10" target="_blank">
-                                        <button
-                                            class="btn inline-flex justify-center btn-white dark:bg-slate-700 dark:text-slate-300 m-1 "
-                                            id="pills-list-tab" data-bs-toggle="pill" data-bs-target="#pills-list"
-                                            role="tab" aria-controls="pills-list" aria-selected="false">
-                                            <span class="flex items-center">
-                                                <iconify-icon class="text-xl ltr:mr-2 rtl:ml-2"
-                                                    icon="heroicons-outline:clipboard-list"></iconify-icon>
-                                                <span>Ver examen</span>
-                                            </span>
-                                        </button>
-                                    </a>
-                                    {{-- <button
-                                        class="btn inline-flex justify-center btn-white dark:bg-slate-700 dark:text-slate-300 m-1 active"
-                                        id="pills-grid-tab" data-bs-toggle="pill" data-bs-target="#pills-grid"
-                                        role="tab" aria-controls="pills-grid" aria-selected="true">
-                                        <span class="flex items-center">
-                                            <iconify-icon class="text-xl ltr:mr-2 rtl:ml-2"
-                                                icon="heroicons-outline:view-grid"></iconify-icon>
-                                            <span>Grid View</span>
-                                        </span>
-                                    </button> --}}
-
-                                </li>
-                            </ul>
-                            {{-- <button
-                                class="btn inline-flex justify-center btn-white dark:bg-slate-700 dark:text-slate-300 m-1 ">
+        <div class=" md:flex justify-between items-center">
+            <div>
+                <!-- BEGIN: Breadcrumb -->
+                <div class="mb-5">
+                </div>
+                <!-- END: BreadCrumb -->
+            </div>
+            <div class="flex flex-wrap ">
+                <ul class="nav nav-pills flex items-center flex-wrap list-none pl-0 mr-4" id="pills-tabVertical"
+                    role="tablist">
+                    <li class="nav-item flex-grow text-center" role="presentation">
+                        @if ($show_questions == 0)
+                            <button wire:click="show_questions(1)"
+                                class="btn inline-flex justify-center btn-white dark:bg-slate-700 dark:text-slate-300 m-1 active"
+                                id="pills-grid-tab" data-bs-toggle="pill" data-bs-target="#pills-grid" role="tab"
+                                aria-controls="pills-grid" aria-selected="true">
                                 <span class="flex items-center">
-                                    <iconify-icon class="text-xl ltr:mr-2 rtl:ml-2" icon="heroicons-outline:filter">
-                                    </iconify-icon>
-                                    <span>On Going</span>
+
+                                    <iconify-icon class="text-xl ltr:mr-2 rtl:ml-2" icon="mdi:eye"
+                                        style="color: white;"></iconify-icon>
+                                    <span>Ver Preguntas</span>
                                 </span>
                             </button>
-                            <button
-                                class="btn inline-flex justify-center btn-dark dark:bg-slate-700 dark:text-slate-300 m-1 ">
+                        @else
+                            <button wire:click="show_questions(0)" style="display: none"
+                                class="btn inline-flex justify-center btn-white dark:bg-slate-700 dark:text-slate-300 m-1 active"
+                                id="pills-grid-tab" data-bs-toggle="pill" data-bs-target="#pills-grid" role="tab"
+                                aria-controls="pills-grid" aria-selected="true">
                                 <span class="flex items-center">
-                                    <iconify-icon class="text-xl ltr:mr-2 rtl:ml-2" icon="ph:plus-bold"></iconify-icon>
-                                    <span>Add Project</span>
+
+                                    <iconify-icon class="text-xl ltr:mr-2 rtl:ml-2" icon="mdi:eye-off"
+                                        style="color: white;"></iconify-icon>
+                                    <span>Ocultar Preguntas</span>
                                 </span>
-                            </button> --}}
-                        </div>
-                    </div>
-                    <div>&nbsp;</div>
+                            </button>
+                        @endif
 
-                    <div class="grid xl:grid-cols-2 grid-cols-1 gap-6">
+                        <a href="{{ url('quiz') }}/10" target="_blank">
+                            <button
+                                class="btn inline-flex justify-center btn-white dark:bg-slate-700 dark:text-slate-300 m-1 active"
+                                id="pills-list-tab" data-bs-toggle="pill" data-bs-target="#pills-list" role="tab"
+                                aria-controls="pills-list" aria-selected="false">
+                                <span class="flex items-center">
+                                    <iconify-icon class="text-xl ltr:mr-2 rtl:ml-2"
+                                        icon="heroicons-outline:clipboard-list"></iconify-icon>
+                                    <span>Ver examen</span>
+                                </span>
+                            </button>
+                        </a>
+
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div>&nbsp;</div>
+
+
+        <div class="transition-all duration-150 container-fluid" id="page_layout">
+            <div id="content_layout">
+
+                <div class="space-y-5">
+                    <div class="grid grid-cols-12 gap-5">
                         @foreach ($questions as $question)
-                            <div class="card" style="display: {{ $show_questions == 0 ? 'none' : 'block' }}">
-                                <div class="card-body flex flex-col p-6">
-                                    <div class="card-text h-full">
-                                        <header class="border-b px-4 pt-4 pb-3  items-center border-success-500">
-                                            <div class="relative">
-                                                <input type="text" value="{{ $question->description }}"
-                                                    class="form-control !pr-12">
-                                                {{-- aa --}}
-                                                <button type="button" data-bs-toggle="modal"
-                                                    data-bs-target="#modal_edit_question"
-                                                    wire:click="modal_edit_question({{ $question->id }},'{{ $question->description }}')"
-                                                    class="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-full border-l border-l-slate-200 dark:border-l-slate-700 flex items-center justify-center">
-                                                    <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;"
-                                                        width="40"></iconify-icon>
-                                                </button>
+                            <div class="xl:col-span-2 col-span-12 lg:col-span-5 ">
+                                &nbsp;
+                            </div>
+                            <div class="xl:col-span-8 col-span-12 lg:col-span-7">
+
+                                <div class="card h-full">
+                                    <header class="border-b px-4 pt-4 pb-3  items-center border-success-500">
+                                        <div class="relative">
+                                            <textarea class="form-control  !pr-12">{{ $question->description }}</textarea>
+                                            <button type="button" data-bs-toggle="modal"
+                                                data-bs-target="#modal_edit_question"
+                                                wire:click="modal_edit_question({{ $question->id }},'{{ $question->description }}')"
+                                                class="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-full border-l border-l-slate-200 dark:border-l-slate-700 flex items-center justify-center">
+                                                <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;"
+                                                    width="40"></iconify-icon>
+                                            </button>
+                                        </div>
+                                        @error('question')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </header>
+
+                                    <div class="card-body p-6">
+                                        <div>
+                                            <div class="h-full all-todos overflow-x-hidden" data-simplebar="data-simplebar">
+                                                <strong>Indique una respuesta correcta.</strong>
+                                                <ul  class="divide-y divide-slate-100 dark:divide-slate-700 -mb-6 h-full todo-list">
+                                                    @foreach ($answers as $answer)
+                                                        @if ($answer->catalog_questions_id == $question->id)
+                                                            <li data-status="team" data-stared="false"
+                                                                data-complete="false"
+                                                                class="flex items-center px-6 space-x-4 py-6 hover:-translate-y-1 hover:shadow-todo transition-all duration-200 rtl:space-x-reverse">
+                                                                <div class="todo-fav">
+                                                                    <button type="button" data-bs-toggle="modal"
+                                                                        data-bs-target="#modal_delete_answer"
+                                                                        wire:click="modal_delete_answer({{ $answer->id }})"
+                                                                        class="transition duration-150 hover:text-danger-500">
+                                                                        <iconify-icon icon="el:trash-alt"
+                                                                            style="color: #bb2424;" width="27">
+                                                                        </iconify-icon>
+                                                                    </button>
+                                                                </div>
+                                                                <span
+                                                                    class="flex-1 text-sm text-slate-600 dark:text-slate-300 truncate bar-active transition-all duration-150">
+                                                                    {{ $answer->description }}
+                                                                </span>
+
+
+                                                                <label  class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer">
+                                                                    <input type="checkbox" {{$answer->correct_answer == 1 ? 'checked' : '' }} wire:click="answer_correct({{$answer->id}})" value="" class="sr-only peer">
+                                                                    <div
+                                                                        class="w-14 h-6 bg-gray-200 peer-focus:outline-none ring-0 rounded-full peer dark:bg-gray-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:z-10 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-success-500">
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
                                             </div>
-                                            @error('question')
-                                                <span class="error">{{ $message }}</span>
-                                            @enderror
-                                        </header>
-
-                                    </div>
-
-                                    <div class="py-3 px-5">
-
-                                        <div class="h-full all-todos overflow-x-hidden" data-simplebar="data-simplebar">
-                                            <ul
-                                                class="divide-y divide-slate-100 dark:divide-slate-700 -mb-6 h-full todo-list">
-                                                @foreach ($answers as $answer)
-                                                    @if ($answer->catalog_questions_id == $question->id)
-                                                        <li data-status="team" data-stared="false" data-complete="false"
-                                                            class="flex items-center px-6 space-x-4 py-6 hover:-translate-y-1 hover:shadow-todo transition-all duration-200 rtl:space-x-reverse">
-                                                            <div class="todo-fav">
-                                                                <button type="button" data-bs-toggle="modal"
-                                                                    data-bs-target="#modal_delete_answer"
-                                                                    wire:click="modal_delete_answer({{ $answer->id }})"
-                                                                    class="transition duration-150 hover:text-danger-500">
-                                                                    <iconify-icon icon="el:trash-alt"
-                                                                        style="color: #bb2424;" width="27">
-                                                                    </iconify-icon>
-                                                                </button>
-                                                            </div>
-                                                            <span
-                                                                class="flex-1 text-sm text-slate-600 dark:text-slate-300 truncate bar-active transition-all duration-150">
-                                                                {{ $answer->description }}
-                                                            </span>
-
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
+                                        </div>
+                                        <div style="text-align: center">
+                                            <button data-bs-toggle="modal"
+                                                wire:click="modal_answer({{ $question->id }})"
+                                                data-bs-target="#basic_modal"
+                                                class="btn inline-flex justify-center btn-outline-dark capitalize">Agregar
+                                                respuesta</button>
                                         </div>
                                     </div>
-                                    <div style="text-align: center">
-                                        <button data-bs-toggle="modal" wire:click="modal_answer({{ $question->id }})"
-                                            data-bs-target="#basic_modal"
-                                            class="btn inline-flex justify-center btn-outline-dark capitalize">Agregar
-                                            respuesta</button>
-                                    </div>
-                                    <div>&nbsp;</div>
                                 </div>
+
+
+                            </div>
+                            <div class="lg:col-span-2 col-span-12 space-y-5">
+                                &nbsp;
                             </div>
                         @endforeach
-                        <!-- Themes Modal Area Start -->
-                        {{-- <div class="card">
-                            <div class="card-body flex flex-col p-6">
-                                <header
-                                    class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
-                                    <div class="flex-1">
-                                        <div class="card-title text-slate-900 dark:text-white">Basic Modal</div>
-                                    </div>
-                                </header>
-                                <div class="card-text h-full ">
-                                    <div class="flex items-center flex-wrap gap-5">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-
                     </div>
+
+
                 </div>
+
             </div>
         </div>
     </div>
+
 
 
 
