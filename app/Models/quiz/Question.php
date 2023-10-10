@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\quiz;
+namespace App\Models\Quiz;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +15,7 @@ class Question extends Model
         'description'
     ];
 
-    public function question_has_quiz(){
-        return $this->belongsToMany(Quiz::class, 'questions_per_quiz', 'catalog_questions_id', 'quiz_id');
+    public function question_has_Quiz(){
+        return $this->belongsToMany(Quiz::class, 'questions_per_Quiz', 'catalog_questions_id', 'Quiz_id');
     }
 }

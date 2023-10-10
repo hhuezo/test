@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\quiz;
+namespace App\Models\Quiz;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Quiz extends Model
 {
     use HasFactory;
-    protected $table = 'quiz';
+    protected $table = 'Quiz';
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
@@ -19,7 +19,7 @@ class Quiz extends Model
     ];
 
 
-    public function quiz_has_question(){
-        return $this->belongsToMany(Question::class, 'questions_per_quiz', 'quiz_id', 'catalog_questions_id');
+    public function Quiz_has_question(){
+        return $this->belongsToMany(Question::class, 'questions_per_Quiz', 'Quiz_id', 'catalog_questions_id');
     }
 }

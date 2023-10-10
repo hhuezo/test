@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\quiz\Answer;
-use App\Models\quiz\Question;
-use App\Models\quiz\Quiz;
+use App\Models\Quiz\Answer;
+use App\Models\Quiz\Question;
+use App\Models\Quiz\Quiz;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
 {
     public function index()
     {
-        return view('quiz.index');
+        return view('Quiz.index');
     }
 
 
@@ -31,13 +31,13 @@ class QuizController extends Controller
             'name'=> 'required',
         ], $messages);
 
-        $quiz = new Quiz();
-        $quiz->name_es = $request->name;
-        $quiz->name_en = $request->name;
-        $quiz->course_id = $request->course_id;
-        $quiz->save();
+        $Quiz = new Quiz();
+        $Quiz->name_es = $request->name;
+        $Quiz->name_en = $request->name;
+        $Quiz->course_id = $request->course_id;
+        $Quiz->save();
 
-        return redirect('quiz/' . $quiz->id.'/edit');
+        return redirect('Quiz/' . $Quiz->id.'/edit');
 
     }
 
@@ -46,13 +46,13 @@ class QuizController extends Controller
     {
         $questions = Question::get();
         $answers = Answer::get();
-        return view('quiz.show',compact('questions','answers'));
+        return view('Quiz.show',compact('questions','answers'));
     }
 
 
     public function edit($id)
     {
-        return view('quiz.edit', compact('id'));
+        return view('Quiz.edit', compact('id'));
     }
 
 

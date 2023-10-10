@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\catalog\Departamento;
+use App\Models\catalog\Municipio;
 use App\Models\Member;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,13 +37,15 @@ class MemberController extends Controller
     public function edit($id)
     {
         $member = Member::findOrFail($id);
-        return view('member.edit', compact('member'));
+        $departamentos = Departamento::get();
+        $municipios = Municipio::get();
+        return view('member.edit', compact('member','departamentos','municipios'));
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
 

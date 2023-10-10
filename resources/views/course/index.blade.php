@@ -38,7 +38,7 @@
     <div class=" space-y-5">
         @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
         <div class="card-text h-full space-y-4">
-            <form method="GET" action="{{ url('/course') }}">
+            <form method="GET" action="{{ url('/courses') }}">
                 <div class="input-area">
                     <div class="relative">
                         <input type="text" name="search" value="{{ $search }}" class="form-control !pr-12"
@@ -71,14 +71,14 @@
                         </div>
                         <div class="card-footer">
                             @can('edit course')
-                                <a href="{{ url('course/') }}/{{ $course->id }}/edit" class="btn btn-dark btn-sm float-right">
+                                <a href="{{ url('courses/') }}/{{ $course->id }}/edit" class="btn btn-dark btn-sm float-right">
                                     <iconify-icon icon="fluent:edit-32-filled" style="color: white;" width="20">
                                     </iconify-icon>
                                 </a>
                             @endcan
 
                             @can('read course')
-                                <a href="{{ url('course/') }}/{{ $course->id }}" class="btn btn-dark btn-sm float-right">
+                                <a href="{{ url('courses/') }}/{{ $course->id }}" class="btn btn-dark btn-sm float-right">
                                     <iconify-icon icon="mdi:eye" style="color: white;" width="20"></iconify-icon>
                                 </a>
                             @endcan

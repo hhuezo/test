@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\FileCourse;
-use App\Models\quiz\Quiz;
+use App\Models\Quiz\Quiz;
+use App\Models\SectionCourse;
 use Illuminate\Http\Request;
+
 
 class CourseController extends Controller
 {
@@ -37,6 +39,7 @@ class CourseController extends Controller
             $course->description_es = $request->description;
             $course->image = $path;
             $course->save();
+
             alert()->success('Registro guardado correctamente');
         } else {
             alert()->error('Registro erroneo');
@@ -47,17 +50,17 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::findOrFail($id);
-        $files = FileCourse::where('course_id','=',$id)->get();
-        $quizes = Quiz::where('course_id','=',$id)->get();
-        return view('course.show', compact('course','files','quizes'));
+        $files = FileCourse::where('course_id', '=', $id)->get();
+        $Quizes = Quiz::where('course_id', '=', $id)->get();
+        return view('course.show', compact('course', 'files', 'Quizes'));
     }
 
     public function edit($id)
     {
         $course = Course::findOrFail($id);
-        $files = FileCourse::where('course_id','=',$id)->get();
-        $quizes = Quiz::where('course_id','=',$id)->get();
-        return view('course.edit', compact('course','files','quizes'));
+        $files = FileCourse::where('course_id', '=', $id)->get();
+        $Quizes = Quiz::where('course_id', '=', $id)->get();
+        return view('course.edit', compact('course', 'files', 'Quizes'));
     }
 
     public function upload_file(Request $request)
@@ -68,7 +71,7 @@ class CourseController extends Controller
         ];
 
         $request->validate([
-            'files'=> 'required',
+            'files' => 'required',
         ], $messages);
 
 

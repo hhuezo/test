@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\catalog\Municipio;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,7 +31,8 @@ class Member extends Model
         'date_created',
         'status',
         'organization_id',
-        'users_id'
+        'users_id',
+        'municipio_id'
     ];
 
     protected $guarded = [];
@@ -38,6 +40,10 @@ class Member extends Model
     public function organization()
     {
         return $this->belongsTo(Organization::class, 'organization_id','id');
+    }
+
+    public function municipio(){
+        return $this->belongsTo(Municipio::class,'municipio_id','id');
     }
 
 }

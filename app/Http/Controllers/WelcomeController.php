@@ -102,6 +102,7 @@ class WelcomeController extends Controller
         $member->organization_id = $request->organization_id;
         $member->status = 1;
         $member->users_id = $user->id;
+        $member->municipio_id = $user->Municipio;
         $member->save();
 
         //Envio de correo usando metodo sendMail de MailController

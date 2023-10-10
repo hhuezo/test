@@ -83,7 +83,7 @@
                     @can('approve organization')
                     <li class="sidebar-menu-title">ACTIVAR</li>
                     <li class="">
-                        <a href="{{url('member')}}" class="navItem">
+                        <a href="{{url('members')}}" class="navItem">
                             <span class="flex items-center">
                                 <iconify-icon class=" nav-icon" icon="heroicons-outline:clipboard-check">
                                 </iconify-icon>
@@ -93,7 +93,7 @@
                     </li>
 
                     <li class="">
-                        <a href="{{url('organization')}}" class="navItem">
+                        <a href="{{url('organizations')}}" class="navItem">
                             <span class="flex items-center">
                                 <iconify-icon class=" nav-icon" icon="heroicons-outline:clipboard-check">
                                 </iconify-icon>
@@ -126,7 +126,7 @@
                     @endcan
                     @can('read course')
                     <li>
-                        <a href="{{url('course')}}" class="navItem">
+                        <a href="{{url('courses')}}" class="navItem">
                             <span class="flex items-center">
                                 <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
                                 <span>Cursos</span>
@@ -134,6 +134,50 @@
                         </a>
                     </li>
                     @endcan
+                    <li class="">
+                        <a href="#" class="navItem">
+                            <span class="flex items-center">
+                                <iconify-icon class=" nav-icon" icon="heroicons-outline:user"></iconify-icon>
+                                <span>Catalogos</span>
+                            </span>
+                            <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ url('catalog/question') }}">Preguntas</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/answer') }}">Respuesta</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/organization') }}">Organizacion</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/organization_status') }}">Organizacion Estado</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/Quiz') }}">Examen</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/MemberStatus') }}">Estatus del miembro</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/course') }}">Cursos</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/member') }}">Miembros</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/FilePerCourse') }}">Documento por curso</a>
+                            </li>
+
+
+
+
+
+
+                        </ul>
+                    </li>
                     <!-- Apps Area -->
                     {{-- <li class="sidebar-menu-title">APPS</li>
 
@@ -2252,7 +2296,7 @@
                                                 </a>
                                             </li> --}}
                                             <li>
-                                                <a href="{{url('course')}}"
+                                                <a href="{{url('courses')}}"
                                                     class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white font-inter text-sm text-slate-600
                                                     dark:text-white font-normal">
                                                     <iconify-icon icon="heroicons-outline:clipboard-check"

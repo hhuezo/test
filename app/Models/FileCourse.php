@@ -18,8 +18,15 @@ class FileCourse extends Model
     protected $fillable = [
         'route',
         'name',
-        'course_id'
+        'course_id',
+        'section_id'
     ];
 
     protected $guarded = [];
+
+    public function sections(){
+        return $this->belongsTo(SectionCourse::class,'section_id','id');
+    }
+
+
 }

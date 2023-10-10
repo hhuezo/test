@@ -2,7 +2,7 @@
 @section('contenido')
 @livewireStyles
 
-<livewire:quiz />
+<livewire:Quiz />
 
 @livewireScripts
 @endsection

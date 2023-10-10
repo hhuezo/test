@@ -10,7 +10,7 @@ class OrganizationController extends Controller
     public function index()
     {
         $organizations = Organization::with('user')->where('status','=',1)->get();
-
+        
         foreach($organizations as $organization)
         {
             $user = $organization->user->first();

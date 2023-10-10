@@ -2,29 +2,29 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\quiz\Answer;
-use App\Models\quiz\Question;
-use App\Models\quiz\Quiz as QuizModel;
+use App\Models\Quiz\Answer;
+use App\Models\Quiz\Question;
+use App\Models\Quiz\Quiz as QuizModel;
 use Livewire\Component;
 
 class Quiz extends Component
 {
-    public $quiz_id, $quiz,$quiz_name, $question, $question_id, $answer_id, $questions, $answers, $answer, $show_questions = 1;
+    public $Quiz_id, $Quiz,$Quiz_name, $question, $question_id, $answer_id, $questions, $answers, $answer, $show_questions = 1;
 
     public function mount($id)
     {
-        $this->quiz_id = $id;
-        $this->quiz = QuizModel::findOrFail($this->quiz_id);
-        $this->quiz_name = $this->quiz->name_es;
+        $this->Quiz_id = $id;
+        $this->Quiz = QuizModel::findOrFail($this->Quiz_id);
+        $this->Quiz_name = $this->Quiz->name_es;
     }
 
     public function render()
     {
-        $this->quiz = QuizModel::findOrFail($this->quiz_id);
-        $this->questions = $this->quiz->quiz_has_question;
+        $this->Quiz = QuizModel::findOrFail($this->Quiz_id);
+        $this->questions = $this->Quiz->Quiz_has_question;
 
         $this->answers = Answer::get();
-        return view('livewire.quiz');
+        return view('livewire.Quiz');
     }
 
     public function save_question()
@@ -41,7 +41,7 @@ class Quiz extends Component
         $question->save();
         $this->question = "";
 
-        $question->question_has_quiz()->attach($this->quiz_id);
+        $question->question_has_Quiz()->attach($this->Quiz_id);
         $this->dispatchBrowserEvent('close-modal-answer');
     }
 
@@ -117,14 +117,14 @@ class Quiz extends Component
         $this->answer_id = 0;
         $this->dispatchBrowserEvent('close-modal-delete-answer');
     }
-    public function edit_quiz()
+    public function edit_Quiz()
     {
-        $quiz = QuizModel::findOrFail($this->quiz_id);
+        $Quiz = QuizModel::findOrFail($this->Quiz_id);
 
-        $quiz->name_es = $this->quiz_name;
-        $quiz->name_en = $this->quiz_name;
-        $quiz->save();
-        $this->dispatchBrowserEvent('close-modal-edit-quiz');
+        $Quiz->name_es = $this->Quiz_name;
+        $Quiz->name_en = $this->Quiz_name;
+        $Quiz->save();
+        $this->dispatchBrowserEvent('close-modal-edit-Quiz');
     }
 
 

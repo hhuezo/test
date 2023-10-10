@@ -97,7 +97,7 @@
                             </button>
                         @endif
 
-                        <a href="{{ url('quiz') }}/10" target="_blank">
+                        <a href="{{ url('Quiz') }}/10" target="_blank">
                             <button
                                 class="btn inline-flex justify-center btn-white dark:bg-slate-700 dark:text-slate-300 m-1 active"
                                 id="pills-list-tab" data-bs-toggle="pill" data-bs-target="#pills-list" role="tab"
@@ -131,8 +131,8 @@
 
                             <div class="card">
                                 <header class="border-b px-4 pt-4 pb-3  items-center border-success-500">
-                                    <strong>{{ $quiz_name }}</strong>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modal_edit_quiz"
+                                    <strong>{{ $Quiz_name }}</strong>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modal_edit_Quiz"
                                         class="float-right right-0 top-1/2  border-l border-l-slate-200 dark:border-l-slate-700 flex items-center justify-center">
                                         <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;" width="40">
                                         </iconify-icon>
@@ -465,7 +465,7 @@
 
     <!-- BEGIN: Settings Modal editar pregunta -->
     <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-        wire:ignore.self id="modal_edit_quiz" tabindex="-1" aria-labelledby="basic_modal" aria-hidden="true">
+        wire:ignore.self id="modal_edit_Quiz" tabindex="-1" aria-labelledby="basic_modal" aria-hidden="true">
 
         <!-- BEGIN: Modal -->
         <div class="modal-dialog relative w-auto pointer-events-none">
@@ -476,7 +476,7 @@
                     <div
                         class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-black-500">
                         <h3 class="text-xl font-medium text-white dark:text-white">
-                            Modificar exámen {{$quiz_name}}
+                            Modificar exámen {{$Quiz_name}}
                         </h3>
                         <button type="button"
                             class="text-slate-400 bg-transparent hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-slate-600 dark:hover:text-white"
@@ -490,10 +490,10 @@
                             <span class="sr-only">Close modal</span>
                         </button>
                     </div>
-                    <form wire:submit.prevent="edit_quiz()">
+                    <form wire:submit.prevent="edit_Quiz()">
                         <!-- Modal body -->
                         <div class="p-6 space-y-4">
-                            <textarea class="form-control" rows="5" required wire:model="quiz_name"></textarea>
+                            <textarea class="form-control" rows="5" required wire:model="Quiz_name"></textarea>
                             @error('question')
                                 <span class="error">{{ $message }}</span>
                             @enderror
@@ -533,10 +533,10 @@
             $('#modal_edit_question').modal('hide')
         });
 
-        window.addEventListener('close-modal-edit-quiz', (e) => {
-            $('#modal_edit_quiz').modal('hide')
+        window.addEventListener('close-modal-edit-Quiz', (e) => {
+            $('#modal_edit_Quiz').modal('hide')
         });
-        //modal_edit_quiz
+        //modal_edit_Quiz
     </script>
 
 

@@ -2,7 +2,7 @@
 @section('contenido')
 @livewireStyles
 
-@livewire('quiz', ['id' => $id])
+@livewire('Quiz', ['id' => $id])
 
 
 @livewireScripts
