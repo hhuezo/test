@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return view('map');
         if (auth()->user()->status == 0) {
             return view('home2');
         }
