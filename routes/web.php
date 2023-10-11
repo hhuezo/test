@@ -20,7 +20,7 @@ use App\Http\Controllers\catalog\FilePerCourseController;
 use App\Http\Controllers\catalog\MemberController as CatalogMemberController;
 use App\Http\Controllers\catalog\OrganizationController as CatalogOrganizationController;
 use App\Http\Controllers\catalog\QuizController as CatalogQuizController;
-use App\Models\Quiz\Answer;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +48,8 @@ Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap'
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/get_map/{id}', [HomeController::class, 'get_map']);
+
 
 Route::get('/test', [HomeController::class, 'test'])->name('test');
 Route::get('/register_member', [WelcomeController::class, 'register_member'])->name('register_member');
@@ -95,7 +97,7 @@ Route::resource('catalog/answer', AnswersController::class);
 
 Route::resource('catalog/organization', CatalogOrganizationController::class);
 
-Route::resource('catalog/Quiz', CatalogQuizController::class);
+//Route::resource('catalog/Quiz', CatalogQuizController::class);
 
 Route::resource('catalog/course', CatalogCourseController::class);
 

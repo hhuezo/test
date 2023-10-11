@@ -34,8 +34,8 @@
         function drawRegionsMap() {
             var data = google.visualization.arrayToDataTable([
                 ['Country', 'Workers'],
-                ['SV-SS', 2], // San salvador
-                ['HN', 0], //honduras
+                ['{{$dep}}', 1], // San salvador
+                //['HN', 0], //honduras
                // ['SV-SM',2]// Add more countries and worker data as needed
             ]);
 
@@ -46,23 +46,24 @@
                 displayMode: 'regions',
                 resolution: 'provinces',
                 colorAxis: {
-                   colors: ['#8598AD', '#2763FF']   //escala del color de los datos 
+                   colors: ['#8598AD', '#2763FF']   //escala del color de los datos
                 },
                 chartArea: {
                     fontFamily: 'Roboto'
                 }
             };
-            
+
 
             google.visualization.events.addListener(geoChart, 'regionClick', function (event) {
-                event.style.background = '#fff';
-                console.log(event);
+               //event.style.background = '#fff';
+                //console.log(event);
                 var provinceID = event.region;
-               alert('Province ID: ' + provinceID);
+                get_map(provinceID);
+               //console.log('Province ID: ' + provinceID);
                 // Puedes hacer lo que quieras con el ID de la provincia aquí
             });
 
-            
+
 
             geoChart.draw(data, options);
         };
