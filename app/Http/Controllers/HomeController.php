@@ -42,9 +42,6 @@ class HomeController extends Controller
         return view('test');
     }
 
-    public function get_map($dep)
-    {
-        return view('map', compact('dep'));
-    }
+
 
 }

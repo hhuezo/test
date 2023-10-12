@@ -122,7 +122,10 @@ class WelcomeController extends Controller
     }
 
 
-
+    public function get_map($dep)
+    {
+        return view('map', compact('dep'));
+    }
 
 
     public function edit($id)

@@ -48,7 +48,7 @@ Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap'
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/get_map/{id}', [HomeController::class, 'get_map']);
+Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
 
 
 Route::get('/test', [HomeController::class, 'test'])->name('test');
