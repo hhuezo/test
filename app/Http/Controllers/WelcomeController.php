@@ -21,7 +21,7 @@ class WelcomeController extends Controller
     public function index()
     {
         return view('auth.login');
-        return view('welcome');
+       // return view('welcome');
     }
 
 
@@ -122,7 +122,10 @@ class WelcomeController extends Controller
     }
 
 
-
+    public function get_map($dep)
+    {
+        return view('map', compact('dep'));
+    }
 
 
     public function edit($id)

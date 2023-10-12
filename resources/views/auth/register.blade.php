@@ -1,85 +1,3 @@
-<?php /*@extends('layouts.app')
-@section('content')
-
-    <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-@endsection
-*/
-?>
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr" class="light">
 
@@ -102,152 +20,375 @@
     <script src="assets/js/settings.js" sync></script>
     <!-- END : Theme Config js-->
 
+    <style>
+        .card-title,
+        .form-label {
+            text-transform: none;
+        }
+    </style>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </head>
 
 <body class=" font-inter skin-default">
 
+
+
+    <div class="content-wrapper transition-all duration-150" id="content_wrapper">
+        <div class="page-content">
+            <div class="transition-all duration-150 container-fluid" id="page_layout">
+                <div id="content_layout">
+
+                    <div class="space-y-5">
+                        <div class="grid grid-cols-12 gap-5">
+                            <div class="xl:col-span-2 col-span-12 lg:col-span-5 ">
+                                &nbsp;
+                            </div>
+                            <div class="xl:col-span-8 col-span-12 lg:col-span-7">
+                                <div class="card h-full">
+                                    <div class="wizard card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Registro de iglesia</h4>
+                                        </div>
+
+                                        <div class="card-body p-6">
+                                            <div class="grid gap-5 grid-cols-12">
+                                                <div class="lg:col-span-3 col-span-12">
+                                                    <div
+                                                        class="flex z-[5] items-start relative flex-col lg:min-h-full md:min-h-[300px] min-h-[250px] wizard-steps">
+
+                                                        <div
+                                                            class="relative z-[1] flex-1 last:flex-none wizard-step active">
+                                                            <div
+                                                                class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
+                                                                bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
+                                                                <div class="number-box">
+                                                                    <span class="number"> 1</span>
+
+                                                                    <span class="text-3xl no-icon">
+                                                                        <iconify-icon icon="bx:check-double">
+                                                                        </iconify-icon>
+                                                                    </span>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="bar-line2"></div>
+                                                            <div
+                                                                class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
+                                                            text-slate-500 dark:text-slate-300 dark:text-opacity-40">
+                                                                <span class="w-max block">Datos de cuenta</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step">
+                                                            <div
+                                                                class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
+                                                                bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
+                                                                <div class="number-box">
+                                                                    <span class="number"> 2</span>
+
+                                                                    <span class="text-3xl no-icon">
+                                                                        <iconify-icon icon="bx:check-double">
+                                                                        </iconify-icon>
+                                                                    </span>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="bar-line2"></div>
+                                                            <div
+                                                                class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
+                                                        text-slate-500 dark:text-slate-300 dark:text-opacity-40">
+                                                                <span class="w-max block">Personal info</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step">
+                                                            <div
+                                                                class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
+                                                            bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
+                                                                <div class="number-box">
+                                                                    <span class="number"> 3</span>
+
+                                                                    <span class="text-3xl no-icon">
+                                                                        <iconify-icon icon="bx:check-double">
+                                                                        </iconify-icon>
+                                                                    </span>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="bar-line2"></div>
+                                                            <div
+                                                                class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
+                                                            text-slate-500 dark:text-slate-300 dark:text-opacity-40">
+                                                                <span class="w-max block">Address</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step">
+                                                            <div
+                                                                class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
+                                                                bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
+                                                                <div class="number-box">
+                                                                    <span class="number"> 4</span>
+
+                                                                    <span class="text-3xl no-icon">
+                                                                        <iconify-icon icon="bx:check-double">
+                                                                        </iconify-icon>
+                                                                    </span>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="bar-line2"></div>
+                                                            <div
+                                                                class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
+                                                            text-slate-500 dark:text-slate-300 dark:text-opacity-40">
+                                                                <span class="w-max block">Address</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="conten-box lg:col-span-9 col-span-12 h-full">
+                                                    <form>
+                                                        <div class="wizard-form-step active" data-step="1">
+                                                            <div
+                                                                class="grid lg:grid-cols-12 md:grid-cols-1 grid-cols-1 gap-5">
+
+                                                                <div class="input-area">
+                                                                    <label for="username" class="form-label">Nombre de
+                                                                        inglesia</label>
+                                                                    <input id="nombre" name="nombre" type="text"
+                                                                        class="form-control">
+                                                                        <input id="departamento" name="departamento" type="hidden"
+                                                                        class="form-control">
+                                                                </div>
+
+
+
+                                                                <div id="div_result">
+
+
+                                                                </div>
+
+                                                                <div class="mt-6 space-x-3 text-right">
+
+                                                                    <button class="btn btn-dark"
+                                                                        type="button">Siguiente</button>
+                                                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                {{-- <div
+                                                                    class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                                    <h4
+                                                                        class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                        Ingrese los datos</h4>
+                                                                </div> --}}
+                                                                {{-- <div class="input-area">
+                                                                    <label for="username" class="form-label">Nombre</label>
+                                                                    <input id="username" type="text"
+                                                                        class="form-control">
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="fullname" class="form-label">Apellido</label>
+                                                                    <input id="fullname" type="text"
+                                                                        class="form-control">
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="email"
+                                                                        class="form-label">Email*</label>
+                                                                    <input id="email" type="text"
+                                                                        class="form-control">
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="phonenumber"
+                                                                        class="form-label">Número telefónico</label>
+                                                                    <input id="phonenumber" type="text"
+                                                                        class="form-control">
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="password"
+                                                                        class="form-label">Contraseña*</label>
+                                                                    <input id="password" type="password"
+                                                                        class="form-control">
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="confirmPassword"
+                                                                        class="form-label">Confirme contraseña</label>
+                                                                    <input id="confirmPassword" type="password"
+                                                                        class="form-control">
+                                                                </div> --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="wizard-form-step" data-step="2">
+                                                            <div
+                                                                class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                                                                <div class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                                    <h4
+                                                                        class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                        Personal Information</h4>
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="firstname" class="form-label">First
+                                                                        Name*</label>
+                                                                    <input id="firstname" type="text"
+                                                                        class="form-control" placeholder="First">
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="lastname" class="form-label">Last
+                                                                        Name*</label>
+                                                                    <input id="lastname" type="text"
+                                                                        class="form-control" placeholder="Last Name">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="wizard-form-step" data-step="3">
+                                                            <div
+                                                                class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                                                                <div class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                                    <h4
+                                                                        class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                        Address</h4>
+                                                                </div>
+                                                                <div
+                                                                    class="input-area lg:col-span-3 md:col-span-2 col-span-1">
+                                                                    <label for="address"
+                                                                        class="form-label">Address*</label>
+                                                                    <textarea name="address" id="address" rows="3" class="form-control" placeholder="Your Address"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="wizard-form-step" data-step="4">
+                                                            <div
+                                                                class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                                                                <div class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                                    <h4
+                                                                        class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                        Social Links</h4>
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="fblink" class="form-label">Facebook
+                                                                        Link*</label>
+                                                                    <input id="fblink" type="url"
+                                                                        class="form-control"
+                                                                        placeholder="Facebook Link">
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="youtubelink"
+                                                                        class="form-label">Youtube
+                                                                        Link*</label>
+                                                                    <input id="youtubelink" type="url"
+                                                                        class="form-control"
+                                                                        placeholder="Youtube Link">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {{-- <div class="mt-6 space-x-3 text-right">
+                                                            <button class="btn btn-dark prev-button" type="button"
+                                                                style="display: none;">prev</button>
+                                                            <button class="btn btn-dark next-button"
+                                                                type="button">Siguiente</button>
+                                                        </div> --}}
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-2 col-span-12 space-y-5">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <main class="app-wrapper">
         <div class="flex flex-col justify-between min-h-screen">
             <div>
-                <!-- BEGIN: Header -->
-                <!-- BEGIN: Header -->
-                <div class="z-[12]" id="app_header">
-                    <div class="app-header   rtl:mr-[248px] bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-700">
-                        <div class="flex justify-between items-center h-full">
-                            <div
-                                class="flex items-center md:space-x-4 space-x-2 xl:space-x-0 rtl:space-x-reverse vertical-box">
-                                <a href="index.html" class="mobile-logo xl:hidden inline-block">
-                                    <img src="{{ asset('assets/images/logo/logo-c.svg') }}" class="black_logo"
-                                        alt="logo">
-                                    <img src="{{ asset('assets/images/logo/logo-c-white.svg') }}" class="white_logo"
-                                        alt="logo">
-                                </a>
-                                <button class="smallDeviceMenuController hidden md:inline-block xl:hidden">
-                                    <iconify-icon
-                                        class="leading-none bg-transparent relative text-xl top-[2px] text-slate-900 dark:text-white"
-                                        icon="heroicons-outline:menu-alt-3"></iconify-icon>
-                                </button>
 
-
-                            </div>
-                            <!-- end vertcial -->
+                <div class="space-y-5">
+                    <div class="grid grid-cols-12 gap-5">
 
 
 
-
-
-                            <!-- end top menu -->
-                            <div
-                                class="nav-tools flex items-center lg:space-x-5 space-x-3 rtl:space-x-reverse leading-0">
-
-                                <!-- BEGIN: Language Dropdown  -->
-
-                                <div class="relative">
-                                    <button
-                                        class="text-slate-800 dark:text-white focus:ring-0 focus:outline-none font-medium rounded-lg text-sm text-center
-                                                    inline-flex items-center"
-                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{-- <iconify-icon icon="circle-flags:uk" class="mr-0 md:mr-2 rtl:ml-2 text-xl">
-                                        </iconify-icon> --}}
-
-                                        @if (App::getLocale() == 'en')
-                                            <img src="{{ asset('') }}/img/eng.png" style="width: 25px;">
-                                            <span
-                                                class="text-sm md:block hidden font-medium text-slate-600 dark:text-slate-300">
-                                                &nbsp;Eng</span>
-                                        @else
-                                            <img src="{{ asset('') }}/img/esp.png" style="width: 25px;">
-                                            <span
-                                                class="text-sm md:block hidden font-medium text-slate-600 dark:text-slate-300">
-                                                &nbsp;Esp</span>
-                                        @endif
-                                    </button>
-                                    <!-- Language Dropdown menu -->
-                                    <div
-                                        class="dropdown-menu z-10 hidden bg-white divide-y divide-slate-100 shadow w-44 dark:bg-slate-800 border dark:border-slate-900 !top-[25px] rounded-md
-                                        overflow-hidden">
-                                        <ul class="py-1 text-sm text-slate-800 dark:text-slate-200">
-
-                                            @if (config('locale.status') && count(config('locale.languages')) > 1)
-                                                @foreach (array_keys(config('locale.languages')) as $lang)
-                                                    <li>
-                                                        <a href="{!! route('lang.swap', $lang) !!}"
-                                                            class="flex items-center px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                                            @if ($lang == 'es')
-                                                                <img src="{{ asset('img/esp.png') }}"
-                                                                    style="width: 25px;">
-                                                                <span class="font-medium">&nbsp;ESP</span>
-                                                            @else
-                                                                <img src="{{ asset('img/eng.png') }}"
-                                                                    style="width: 25px;">
-                                                                <span class="font-medium">&nbsp;ENG</span>
-                                                            @endif
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            @endif
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Theme Changer -->
-                                <!-- END: Language Dropdown -->
-
-                                <!-- BEGIN: Toggle Theme -->
-
-
-
-
-
-
-
-
-
-                                <!-- END: Header -->
-                                <button class="smallDeviceMenuController md:hidden block leading-0">
-                                    <iconify-icon class="cursor-pointer text-slate-900 dark:text-white text-2xl"
-                                        icon="heroicons-outline:menu-alt-3"></iconify-icon>
-                                </button>
-                                <!-- end mobile menu -->
-                            </div>
-                            <!-- end nav tools -->
-                        </div>
                     </div>
                 </div>
 
-                <!-- BEGIN: Search Modal -->
-                <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-                    id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-                    <div class="modal-dialog relative w-auto pointer-events-none top-1/4">
-                        <div
-                            class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-900 bg-clip-padding rounded-md outline-none text-current">
-                            <form>
-                                <div class="relative">
-                                    <input type="text" class="form-control !py-3 !pr-12" placeholder="Search">
-                                    <button
-                                        class="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-full border-l text-xl border-l-slate-200 dark:border-l-slate-600 dark:text-slate-300 flex items-center justify-center">
-                                        <iconify-icon icon="heroicons-solid:search"></iconify-icon>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- END: Search Modal -->
-                <!-- END: Header -->
-                <!-- END: Header -->
-                <div class="content-wrapper transition-all duration-150 ltr:ml-[248px] rtl:mr-[248px]"
-                    id="content_wrapper">
+
+
+                <div class="content-wrapper transition-all duration-150" id="content_wrapper">
                     <div class="page-content">
                         <div class="transition-all duration-150 container-fluid" id="page_layout">
                             <div id="content_layout">
                                 {{-- @yield('contenido') --}}
 
+                                <div class="grid gap-5 grid-cols-12">
+
+                                    <div class="lg:col-span-6 col-span-12">
 
 
-
-
-
-
+                                    </div>
+                                </div>
+                                {{--
                                 <div class="page-content">
                                     <div class="transition-all duration-150 container-fluid" id="page_layout">
                                         <div id="content_layout">
@@ -434,7 +575,7 @@
 
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
 
 
@@ -533,6 +674,41 @@
         $(document).ready(function() {
             $(":input").inputmask();
         });
+    </script>
+
+
+
+    <script>
+        google.charts.load('current', {
+            'packages': ['geochart']
+        });
+
+        $(document).ready(function() {
+            get_map('A');
+        });
+
+
+        function get_map(dep) {
+            //console.log(dep);
+            // Realizar la solicitud AJAX
+            $.ajax({
+                url: "{{ url('get_map') }}/" + dep, // La URL de la solicitud
+                type: "GET", // Método de la solicitud (GET en este caso)
+                //dataType: "json", // Tipo de datos esperados en la respuesta (puedes ajustarlo según tus necesidades)
+
+                // Función que se ejecuta cuando la solicitud es exitosa
+                success: function(data) {
+                    //console.log(data);
+                    // Pintar la respuesta en el div_result
+                    $("#div_result").html(data);
+                },
+
+                // Función que se ejecuta si la solicitud falla
+                error: function(xhr, status, error) {
+                    console.error("Error en la solicitud AJAX:", status, error);
+                }
+            });
+        }
     </script>
 </body>
 

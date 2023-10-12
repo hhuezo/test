@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return view('test');
         if (auth()->user()->status == 0) {
             return view('home2');
         }
@@ -40,4 +41,7 @@ class HomeController extends Controller
     {
         return view('test');
     }
+
+
+
 }
