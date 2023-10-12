@@ -12,6 +12,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\catalog\AnswersController;
+use App\Http\Controllers\catalog\CohorteController;
 use App\Http\Controllers\catalog\CourseController as CatalogCourseController;
 use App\Http\Controllers\catalog\OrganizationStatusController;
 use App\Http\Controllers\catalog\QuestionController;
@@ -20,6 +21,9 @@ use App\Http\Controllers\catalog\FilePerCourseController;
 use App\Http\Controllers\catalog\MemberController as CatalogMemberController;
 use App\Http\Controllers\catalog\OrganizationController as CatalogOrganizationController;
 use App\Http\Controllers\catalog\QuizController as CatalogQuizController;
+use App\Http\Controllers\catalog\RegionController;
+use App\Http\Controllers\catalog\SedeController;
+
 use App\Models\Quiz\Answer;
 
 /*
@@ -98,6 +102,12 @@ Route::resource('catalog/organization', CatalogOrganizationController::class);
 Route::resource('catalog/Quiz', CatalogQuizController::class);
 
 Route::resource('catalog/course', CatalogCourseController::class);
+
+Route::resource('catalog/cohorte', CohorteController::class);
+
+Route::resource('catalog/region', RegionController::class);
+
+Route::resource('catalog/sede', SedeController::class);
 
 Route::resource('catalog/MemberStatus', MemberStatusController::class);
 
