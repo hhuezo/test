@@ -165,6 +165,23 @@
                                 <a href="{{ url('catalog/course') }}">Cursos</a>
                             </li>
                             <li>
+                                <a href="{{ url('catalog/iglesia') }}">Iglesias</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ url('catalog/wizard_church_questions') }}">Preguntas para la iglesia</a>
+                            </li>
+                           <li>
+                                <a href="{{ url('catalog/region') }}">Region</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/cohorte') }}">Cohorte</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ url('catalog/sede') }}">sede</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('catalog/member') }}">Miembros</a>
                             </li>
                             <li>

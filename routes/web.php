@@ -18,13 +18,13 @@ use App\Http\Controllers\catalog\OrganizationStatusController;
 use App\Http\Controllers\catalog\QuestionController;
 use App\Http\Controllers\catalog\MemberStatusController;
 use App\Http\Controllers\catalog\FilePerCourseController;
+use App\Http\Controllers\catalog\IglesiaController;
 use App\Http\Controllers\catalog\MemberController as CatalogMemberController;
 use App\Http\Controllers\catalog\OrganizationController as CatalogOrganizationController;
 use App\Http\Controllers\catalog\QuizController as CatalogQuizController;
 use App\Http\Controllers\catalog\RegionController;
 use App\Http\Controllers\catalog\SedeController;
-
-
+use App\Http\Controllers\catalog\WizardQuestionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,6 +107,12 @@ Route::resource('catalog/course', CatalogCourseController::class);
 
 Route::resource('catalog/cohorte', CohorteController::class);
 
+Route::post('/images', [IglesiaController::class,'copiarImagen']);
+
+Route::resource('catalog/iglesia', IglesiaController::class);
+
+Route::resource('catalog/wizard_church_questions', WizardQuestionsController::class);
+
 Route::resource('catalog/region', RegionController::class);
 
 Route::resource('catalog/sede', SedeController::class);
@@ -117,3 +123,4 @@ Route::resource('catalog/MemberStatus', MemberStatusController::class);
 Route::resource('catalog/member', CatalogMemberController::class);
 
 Route::resource('catalog/FilePerCourse', FilePerCourseController::class);
+

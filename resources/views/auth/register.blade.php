@@ -25,6 +25,10 @@
         .form-label {
             text-transform: none;
         }
+
+        .altura {
+            height: 600px;
+        }
     </style>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -58,8 +62,8 @@
                                                     <div
                                                         class="flex z-[5] items-start relative flex-col lg:min-h-full md:min-h-[300px] min-h-[250px] wizard-steps">
 
-                                                        <div
-                                                            class="relative z-[1] flex-1 last:flex-none wizard-step active">
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step active"
+                                                            id="active1">
                                                             <div
                                                                 class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
                                                                 bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
@@ -79,11 +83,12 @@
                                                             <div
                                                                 class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
                                                             text-slate-500 dark:text-slate-300 dark:text-opacity-40">
-                                                                <span class="w-max block">Datos de cuenta</span>
+                                                                <span class="w-max block">Datos de la iglesia</span>
                                                             </div>
                                                         </div>
 
-                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step">
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step"
+                                                            id="active2">
                                                             <div
                                                                 class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
                                                                 bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
@@ -103,11 +108,12 @@
                                                             <div
                                                                 class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
                                                         text-slate-500 dark:text-slate-300 dark:text-opacity-40">
-                                                                <span class="w-max block">Personal info</span>
+                                                                <span class="w-max block">Numero de jovenes</span>
                                                             </div>
                                                         </div>
 
-                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step">
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step"
+                                                            id="active3">
                                                             <div
                                                                 class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
                                                             bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
@@ -127,11 +133,12 @@
                                                             <div
                                                                 class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
                                                             text-slate-500 dark:text-slate-300 dark:text-opacity-40">
-                                                                <span class="w-max block">Address</span>
+                                                                <span class="w-max block">Numero de mujeres </span>
                                                             </div>
                                                         </div>
 
-                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step">
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step"
+                                                            id="active4">
                                                             <div
                                                                 class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
                                                                 bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
@@ -151,28 +158,133 @@
                                                             <div
                                                                 class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
                                                             text-slate-500 dark:text-slate-300 dark:text-opacity-40">
-                                                                <span class="w-max block">Address</span>
+                                                                <span class="w-max block">Numero de Hombres</span>
                                                             </div>
                                                         </div>
 
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step"
+                                                            id="active5">
+                                                            <div
+                                                                class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
+                                                                bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
+                                                                <div class="number-box">
+                                                                    <span class="number"> 5</span>
+
+                                                                    <span class="text-3xl no-icon">
+                                                                        <iconify-icon icon="bx:check-double">
+                                                                        </iconify-icon>
+                                                                    </span>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="bar-line2"></div>
+                                                            <div
+                                                                class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
+                                                            text-slate-500 dark:text-slate-300 dark:text-opacity-40">
+                                                                <span class="w-max block">Numero de lideres</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step"
+                                                            id="active6">
+                                                            <div
+                                                                class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
+                                                                bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
+                                                                <div class="number-box">
+                                                                    <span class="number"> 6</span>
+
+                                                                    <span class="text-3xl no-icon">
+                                                                        <iconify-icon icon="bx:check-double">
+                                                                        </iconify-icon>
+                                                                    </span>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="bar-line2"></div>
+                                                            <div
+                                                                class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
+                                                            text-slate-500 dark:text-slate-300 dark:text-opacity-40">
+                                                                <span class="w-max block">Formulario</span>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step"
+                                                            id="active7">
+                                                            <div
+                                                                class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
+                                                                bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
+                                                                <div class="number-box">
+                                                                    <span class="number"> 7</span>
+
+                                                                    <span class="text-3xl no-icon">
+                                                                        <iconify-icon icon="bx:check-double">
+                                                                        </iconify-icon>
+                                                                    </span>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="bar-line2"></div>
+                                                            <div
+                                                                class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
+                                                            text-slate-500 dark:text-slate-300 dark:text-opacity-40">
+                                                                <span class="w-max block">pagina web / facebook</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative z-[1] flex-1 last:flex-none wizard-step"
+                                                            id="active8">
+                                                            <div
+                                                                class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
+                                                                bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
+                                                                <div class="number-box">
+                                                                    <span class="number"> 8</span>
+
+                                                                    <span class="text-3xl no-icon">
+                                                                        <iconify-icon icon="bx:check-double">
+                                                                        </iconify-icon>
+                                                                    </span>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="bar-line2"></div>
+                                                            <div
+                                                                class="absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full
+                                                            text-slate-500 dark:text-slate-300 dark:text-opacity-40">
+                                                                <span class="w-max block">logo</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                 </div>
 
                                                 <div class="conten-box lg:col-span-9 col-span-12 h-full">
                                                     <form>
-                                                        <div class="wizard-form-step active" data-step="1">
+
+                                                        <div class="wizard-form-step active" data-step="1"
+                                                            id="div1">
                                                             <div
                                                                 class="grid lg:grid-cols-12 md:grid-cols-1 grid-cols-1 gap-5">
 
                                                                 <div class="input-area">
-                                                                    <label for="username" class="form-label">Nombre de
-                                                                        inglesia</label>
-                                                                    <input id="nombre" name="nombre" type="text"
-                                                                        class="form-control">
-                                                                        <input id="departamento" name="departamento" type="hidden"
-                                                                        class="form-control">
+                                                                    <h4 class="card-title"> <label for="username"
+                                                                            class="form-label">
+                                                                            Nombre de iglesia</label></h4>
+                                                                    <input id="nombre" name="nombre"
+                                                                        type="text" class="form-control">
+                                                                    <input id="departamento" name="departamento"
+                                                                        type="hidden" class="form-control">
                                                                 </div>
+
+
 
 
 
@@ -183,166 +295,392 @@
 
                                                                 <div class="mt-6 space-x-3 text-right">
 
-                                                                    <button class="btn btn-dark"
-                                                                        type="button">Siguiente</button>
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionnext()">Siguiente</button>
                                                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                {{-- <div
-                                                                    class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                                    <h4
-                                                                        class="text-base text-slate-800 dark:text-slate-300 my-6">
-                                                                        Ingrese los datos</h4>
-                                                                </div> --}}
-                                                                {{-- <div class="input-area">
-                                                                    <label for="username" class="form-label">Nombre</label>
-                                                                    <input id="username" type="text"
-                                                                        class="form-control">
-                                                                </div>
-                                                                <div class="input-area">
-                                                                    <label for="fullname" class="form-label">Apellido</label>
-                                                                    <input id="fullname" type="text"
-                                                                        class="form-control">
-                                                                </div>
-                                                                <div class="input-area">
-                                                                    <label for="email"
-                                                                        class="form-label">Email*</label>
-                                                                    <input id="email" type="text"
-                                                                        class="form-control">
-                                                                </div>
-                                                                <div class="input-area">
-                                                                    <label for="phonenumber"
-                                                                        class="form-label">Número telefónico</label>
-                                                                    <input id="phonenumber" type="text"
-                                                                        class="form-control">
-                                                                </div>
-                                                                <div class="input-area">
-                                                                    <label for="password"
-                                                                        class="form-label">Contraseña*</label>
-                                                                    <input id="password" type="password"
-                                                                        class="form-control">
-                                                                </div>
-                                                                <div class="input-area">
-                                                                    <label for="confirmPassword"
-                                                                        class="form-label">Confirme contraseña</label>
-                                                                    <input id="confirmPassword" type="password"
-                                                                        class="form-control">
-                                                                </div> --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                                                             </div>
                                                         </div>
-                                                        <div class="wizard-form-step" data-step="2">
-                                                            <div
-                                                                class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                                                                <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                                    <h4
-                                                                        class="text-base text-slate-800 dark:text-slate-300 my-6">
-                                                                        Personal Information</h4>
-                                                                </div>
+                                                        <h4 class="card-title">
+                                                            <div class="wizard-form-step" data-step="2"
+                                                                id="div2">
                                                                 <div class="input-area">
-                                                                    <label for="firstname" class="form-label">First
-                                                                        Name*</label>
-                                                                    <input id="firstname" type="text"
-                                                                        class="form-control" placeholder="First">
-                                                                </div>
-                                                                <div class="input-area">
-                                                                    <label for="lastname" class="form-label">Last
-                                                                        Name*</label>
-                                                                    <input id="lastname" type="text"
-                                                                        class="form-control" placeholder="Last Name">
+                                                                    <fieldset class="altura">
+                                                                        <legend>¿A su iglesia pertenecen al menos 10
+                                                                            jovenes
+                                                                            entre 12 -18 años ?</legend>
+                                                                        <div class="basicRadio">
+                                                                            <label>
+                                                                                <label>
+                                                                                    <div class="primary-radio">
+                                                                                        <label
+                                                                                            class="flex items-center cursor-pointer">
+                                                                                            <input type="radio"
+                                                                                                class="hidden"
+                                                                                                name="groupjuven"
+                                                                                                value="Si"
+                                                                                                checked="checked">
+                                                                                            <span
+                                                                                                class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                                    duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                            <span
+                                                                                                class="text-primary-500 text-sm leading-6 capitalize">Si</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </label>
+                                                                                <label>
+
+                                                                                    <div class="primary-radio">
+                                                                                        <label
+                                                                                            class="flex items-center cursor-pointer">
+                                                                                            <input type="radio"
+                                                                                                class="hidden"
+                                                                                                name="groupjuven"
+                                                                                                value="No">
+                                                                                            <span
+                                                                                                class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                                    duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                            <span
+                                                                                                class="text-primary-500 text-sm leading-6 capitalize">No</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </label>
+                                                                            </label>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                    <div class="mt-6 space-x-3 text-right">
+                                                                        <button class="btn btn-dark" type="button"
+                                                                            onclick="myFunctionbackt6()">Anterior</button>
+                                                                        <button class="btn btn-dark" type="button"
+                                                                            onclick="myFunctionnext2()">Siguiente</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="wizard-form-step" data-step="3">
-                                                            <div
-                                                                class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                                                                <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                                    <h4
-                                                                        class="text-base text-slate-800 dark:text-slate-300 my-6">
-                                                                        Address</h4>
+                                                        </h4>
+                                                        <h4 class="card-title">
+                                                            <div class="wizard-form-step" data-step="3"
+                                                                id="div3">
+                                                                <div class="input-area">
+                                                                    <fieldset class="altura">
+                                                                        <legend>¿A su iglesia pertenecen al menos 5
+                                                                            mujeres?
+                                                                        </legend>
+                                                                        <div class="basicRadio">
+                                                                            <label>
+                                                                                <label>
+                                                                                    <div class="primary-radio">
+                                                                                        <label
+                                                                                            class="flex items-center cursor-pointer">
+                                                                                            <input type="radio"
+                                                                                                class="hidden"
+                                                                                                name="groupwoman"
+                                                                                                value="Si"
+                                                                                                checked="checked">
+                                                                                            <span
+                                                                                                class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                                    duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                            <span
+                                                                                                class="text-primary-500 text-sm leading-6 capitalize">Si</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </label>
+                                                                                <label>
+
+                                                                                    <div class="primary-radio">
+                                                                                        <label
+                                                                                            class="flex items-center cursor-pointer">
+                                                                                            <input type="radio"
+                                                                                                class="hidden"
+                                                                                                name="groupwoman"
+                                                                                                value="No">
+                                                                                            <span
+                                                                                                class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                                    duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                            <span
+                                                                                                class="text-primary-500 text-sm leading-6 capitalize">No</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </label>
+                                                                            </label>
+                                                                        </div>
+                                                                    </fieldset>
                                                                 </div>
+                                                                <div class="mt-6 space-x-3 text-right">
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionbackt5()">Anterior</button>
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionnext3()">Siguiente</button>
+                                                                </div>
+                                                            </div>
+                                                        </h4>
+                                                        <h4 class="card-title">
+                                                            <div class="wizard-form-step" data-step="4"
+                                                                id="div4">
+                                                                <div class="input-area">
+                                                                    <fieldset class="altura">
+                                                                        <legend> ¿A su iglesia pertenecen al menos 5
+                                                                            hombres?
+                                                                        </legend>
+                                                                        <div class="basicRadio">
+                                                                            <label>
+                                                                                <label>
+                                                                                    <div class="primary-radio">
+                                                                                        <label
+                                                                                            class="flex items-center cursor-pointer">
+                                                                                            <input type="radio"
+                                                                                                class="hidden"
+                                                                                                name="groupman"
+                                                                                                value="Si"
+                                                                                                checked="checked">
+                                                                                            <span
+                                                                                                class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                                    duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                            <span
+                                                                                                class="text-primary-500 text-sm leading-6 capitalize">Si</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </label>
+                                                                                <label>
+
+                                                                                    <div class="primary-radio">
+                                                                                        <label
+                                                                                            class="flex items-center cursor-pointer">
+                                                                                            <input type="radio"
+                                                                                                class="hidden"
+                                                                                                name="groupman"
+                                                                                                value="No">
+                                                                                            <span
+                                                                                                class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                                    duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                            <span
+                                                                                                class="text-primary-500 text-sm leading-6 capitalize">No</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </label>
+                                                                            </label>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="mt-6 space-x-3 text-right">
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionbackt4()">Anterior</button>
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionnext4()">Siguiente</button>
+                                                                </div>
+                                                            </div>
+                                                        </h4>
+                                                        <h4 class="card-title">
+                                                            <div class="wizard-form-step" data-step="5"
+                                                                id="div5">
+                                                                <div class="input-area">
+                                                                    <fieldset fieldset class="altura">
+                                                                        <legend> ¿Su iglesia cuenta con al menos 5
+                                                                            lideres?
+                                                                        </legend>
+                                                                        <div class="basicRadio">
+                                                                            <label>
+                                                                                <label>
+                                                                                    <div class="primary-radio">
+                                                                                        <label
+                                                                                            class="flex items-center cursor-pointer">
+                                                                                            <input type="radio"
+                                                                                                class="hidden"
+                                                                                                name="groupleader"
+                                                                                                value="Si"
+                                                                                                checked="checked">
+                                                                                            <span
+                                                                                                class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                                    duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700" ></span>
+                                                                                            <span
+                                                                                                class="text-primary-500 text-sm leading-6 capitalize">Si</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </label>
+                                                                                <label>
+
+                                                                                    <div class="primary-radio">
+                                                                                        <label
+                                                                                            class="flex items-center cursor-pointer">
+                                                                                            <input type="radio"
+                                                                                                class="hidden"
+                                                                                                name="groupleader"
+                                                                                                value="No">
+                                                                                            <span
+                                                                                                class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                                    duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                            <span
+                                                                                                class="text-primary-500 text-sm leading-6 capitalize">No</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </label>
+                                                                            </label>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="mt-6 space-x-3 text-right">
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionbackt3()">Anterior</button>
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionnext5()">Siguiente</button>
+                                                                </div>
+                                                            </div>
+                                                        </h4>
+                                                        <h4 class="card-title">
+                                                            <div class="wizard-form-step" data-step="6"
+                                                                id="div6">
                                                                 <div
-                                                                    class="input-area lg:col-span-3 md:col-span-2 col-span-1">
-                                                                    <label for="address"
-                                                                        class="form-label">Address*</label>
-                                                                    <textarea name="address" id="address" rows="3" class="form-control" placeholder="Your Address"></textarea>
+                                                                    class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                                                                    <div
+                                                                        class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                                        <h4
+                                                                            class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                            Personal Information</h4>
+                                                                    </div>
+                                                                    <div class="input-area">
+                                                                        <label for="firstname"
+                                                                            class="form-label">First
+                                                                            Name*</label>
+                                                                        <input id="firstname" type="text"
+                                                                            class="form-control" placeholder="First">
+                                                                    </div>
+                                                                    <div class="input-area">
+                                                                        <label for="lastname" class="form-label">Last
+                                                                            Name*</label>
+                                                                        <input id="lastname" type="text"
+                                                                            class="form-control"
+                                                                            placeholder="Last Name">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="wizard-form-step" data-step="4">
-                                                            <div
-                                                                class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                                                                <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                                    <h4
-                                                                        class="text-base text-slate-800 dark:text-slate-300 my-6">
-                                                                        Social Links</h4>
-                                                                </div>
-                                                                <div class="input-area">
-                                                                    <label for="fblink" class="form-label">Facebook
-                                                                        Link*</label>
-                                                                    <input id="fblink" type="url"
-                                                                        class="form-control"
-                                                                        placeholder="Facebook Link">
-                                                                </div>
-                                                                <div class="input-area">
-                                                                    <label for="youtubelink"
-                                                                        class="form-label">Youtube
-                                                                        Link*</label>
-                                                                    <input id="youtubelink" type="url"
-                                                                        class="form-control"
-                                                                        placeholder="Youtube Link">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                <!--</div>                                                        <div class="wizard-form-step" data-step="">-->
 
-                                                        {{-- <div class="mt-6 space-x-3 text-right">
+                                                                <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5"
+                                                                    style="height: 700px">
+                                                                    <div
+                                                                        class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                                        <h4
+                                                                            class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                            Address</h4>
+                                                                    </div>
+                                                                    <div
+                                                                        class="input-area lg:col-span-3 md:col-span-2 col-span-1">
+                                                                        <label for="address"
+                                                                            class="form-label">Address*</label>
+                                                                        <textarea name="address" id="address" rows="3" class="form-control" placeholder="Your Address"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-6 space-x-3 text-right">
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionbackt2()">Anterior</button>
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionnext6()">Siguiente</button>
+                                                                </div>
+                                                            </div>
+                                                        </h4>
+                                                        <h4 class="card-title">
+                                                            <div class="wizard-form-step" data-step="7"
+                                                                id="div7">
+                                                                <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5"
+                                                                    style="height: 700px">
+                                                                    <div
+                                                                        class="lg:col-span-3 md:col-span-2 col-span-1">
+
+                                                                        Social Links
+                                                                    </div>
+                                                                    <h4 class="card-title">
+                                                                        <div class="input-area">
+                                                                            <label for="fblink"
+                                                                                class="form-label">Facebook
+                                                                                Link*</label>
+                                                                            <input id="fblink" type="url"
+                                                                                class="form-control"
+                                                                                placeholder="Facebook Link">
+                                                                        </div>
+                                                                    </h4>
+                                                                    <h4 class="card-title">
+                                                                        <div class="input-area">
+                                                                            <label for="youtubelink"
+                                                                                class="form-label">Youtube
+                                                                                Link*</label>
+                                                                            <input id="youtubelink" type="url"
+                                                                                class="form-control"
+                                                                                placeholder="Youtube Link">
+                                                                        </div>
+                                                                    </h4>
+                                                                </div>
+                                                                <div class="mt-6 space-x-3 text-right">
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionbackt1()">Anterior</button>
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionnext7()">Siguiente</button>
+                                                                </div>
+                                                            </div>
+                                                        </h4>
+                                                        <h4 class="card-title">
+                                                            <div class="wizard-form-step" data-step="8"
+                                                                id="div8">
+                                                                <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5"
+                                                                    style="height: 700px">
+                                                                    <div
+                                                                        class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                                        <h4
+                                                                            class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                            Logo</h4>
+                                                                    </div>
+                                                                    <form id="uploadForm"
+                                                                        enctype="multipart/form-data">
+                                                                        <input type="file" name="image"
+                                                                            id="imageInput">
+                                                                        <button type="submit">Subir Imagen</button>
+                                                                    </form>
+
+                                                                    <div id="destinationPath"></div>
+
+
+
+                                                                </div>
+                                                                <div class="mt-6 space-x-3 text-right">
+
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionbackt0()">Anterior</button>
+
+                                                                    <button class="btn btn-dark" type="button"
+                                                                        onclick="myFunctionnext8()">Siguiente</button>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </h4>
+                                                </div>
+                                                {{-- <div class="mt-6 space-x-3 text-right">
                                                             <button class="btn btn-dark prev-button" type="button"
                                                                 style="display: none;">prev</button>
                                                             <button class="btn btn-dark next-button"
                                                                 type="button">Siguiente</button>
                                                         </div> --}}
+                                                <script>
+                                                    function myFunction() {
+                                                        location.replace("https://www.w3schools.com")
+                                                    }
+                                                </script>
 
-                                                    </form>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="lg:col-span-2 col-span-12 space-y-5">
-                                &nbsp;
-                            </div>
                         </div>
-
+                        <div class="lg:col-span-2 col-span-12 space-y-5">
+                            &nbsp;
+                        </div>
                     </div>
 
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -388,219 +726,6 @@
 
                                     </div>
                                 </div>
-                                {{--
-                                <div class="page-content">
-                                    <div class="transition-all duration-150 container-fluid" id="page_layout">
-                                        <div id="content_layout">
-
-                                            <div class="grid grid-cols-12 gap-5 mb-5">
-                                                <div class="2xl:col-span-2 lg:col-span-2 col-span-12">
-                                                    &nbsp;
-                                                </div>
-                                                <div class="2xl:col-span-6 lg:col-span-8 col-span-12">
-                                                    <div class="card">
-                                                        <div class="card-body flex flex-col p-6">
-                                                            <header
-                                                                class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
-                                                                <div class="flex-1">
-                                                                    <div
-                                                                        class="card-title text-slate-900 dark:text-white">
-                                                                        {{ __('organization.Register') }} <h1>
-                                                                        </h1>
-                                                                    </div>
-                                                                </div>
-
-                                                                <a href="{{ URL('login') }}">
-                                                                    <button
-                                                                        class="btn btn-dark float-right">login</button>
-                                                                </a>
-                                                            </header>
-
-                                                            @if (count($errors) > 0)
-                                                                <div class="alert alert-danger">
-                                                                    <ul>
-                                                                        @foreach ($errors->all() as $error)
-                                                                            <li>{{ $error }}</li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                </div>
-                                                            @endif
-
-                                                            <form method="POST" action="{{ route('register') }}"
-                                                                class="space-y-4">
-                                                                @csrf
-                                                                <div
-                                                                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Name') }}</label>
-                                                                        <input type="text" name="name" required
-                                                                            class="form-control"
-                                                                            value="{{ old('name') }}"
-                                                                            autofocus="true">
-                                                                    </div>
-
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Email') }}</label>
-                                                                        <input type="email" name="email" required
-                                                                            class="form-control"
-                                                                            value="{{ old('email') }}">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Password') }}</label>
-                                                                        <input type="password" name="password"
-                                                                            required class="form-control">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.ConfirmePassword') }}</label>
-                                                                        <input type="password"
-                                                                            name="password_confirmation" required
-                                                                            class="form-control">
-                                                                    </div>
-
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Organization') }}</label>
-                                                                        <input type="text" name="name_organization"
-                                                                            required class="form-control"
-                                                                            value="{{ old('name_organization') }}">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Phone') }}</label>
-                                                                        <input type="text" name="phone_number"
-                                                                            required class="form-control"
-                                                                            data-inputmask="'mask': ['9999-9999']"
-                                                                            value="{{ old('phone_number') }}">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Address') }}</label>
-                                                                        <textarea name="address" required class="form-control" rows="5">{{ old('address') }}</textarea>
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Note') }}</label>
-                                                                        <textarea name="notes" class="form-control" rows="5">{{ old('notes') }}</textarea>
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.MainContact') }}</label>
-                                                                        <input type="text" name="contact_name"
-                                                                            required class="form-control"
-                                                                            value="{{ old('contact_name') }}">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.JobMainContact') }}</label>
-                                                                        <input type="text" name="contact_job_title"
-                                                                            class="form-control"
-                                                                            value="{{ old('contact_job_title') }}">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.MainContactPhone') }}</label>
-                                                                        <input type="text"
-                                                                            name="contact_phone_number"
-                                                                            class="form-control"
-                                                                            data-inputmask="'mask': ['9999-9999']"
-                                                                            value="{{ old('contact_phone_number') }}">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.MainContactPhone2') }}</label>
-                                                                        <input type="text"
-                                                                            name="contact_phone_number_2"
-                                                                            class="form-control"
-                                                                            data-inputmask="'mask': ['9999-9999']"
-                                                                            value="{{ old('contact_phone_number_2') }}">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.SecondaryContact') }}</label>
-                                                                        <input type="text"
-                                                                            name="secondary_contact_name"
-                                                                            class="form-control"
-                                                                            value="{{ old('secondary_contact_name') }}">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.JobSecondaryContact') }}</label>
-                                                                        <input type="text"
-                                                                            name="secondary_contact_job_title"
-                                                                            class="form-control"
-                                                                            value="{{ old('secondary_contact_job_title') }}">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.SecondaryContactPhone') }}</label>
-                                                                        <input type="text"
-                                                                            name="secondary_contact_phone_number"
-                                                                            class="form-control"
-                                                                            data-inputmask="'mask': ['9999-9999']"
-                                                                            value="{{ old('secondary_contact_phone_number') }}">
-                                                                    </div>
-
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.SecondaryContactPhone2') }}</label>
-                                                                        <input type="text"
-                                                                            name="secondary_contact_phone_number_2"
-                                                                            class="form-control"
-                                                                            data-inputmask="'mask': ['9999-9999']"
-                                                                            value="{{ old('secondary_contact_phone_number_2') }}">
-                                                                    </div>
-
-                                                                </div>
-                                                                <div style="text-align: right;">
-                                                                    <button type="submit"
-                                                                        class="btn inline-flex justify-center btn-dark">{{ __('organization.Acept') }}</button>
-                                                                </div>
-
-
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="grid xl:grid-cols-1 grid-cols-1 gap-6">
-                                                <!-- Basic Inputs -->
-
-
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div> --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                             </div>
@@ -676,6 +801,403 @@
         });
     </script>
 
+ <script>
+    document.getElementById('uploadForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    fetch('/images', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Imagen subida con éxito');
+        } else {
+            alert('Error al subir la imagen');
+        }
+    })
+    .catch(error => {
+        alert('Error en la solicitud');
+    });
+});
+
+    </script>
+
+
+    <script>
+        function myFunctionbackt0() {
+
+
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'block';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active1").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active7").classList.add('active');
+            document.getElementById("active8").classList.remove('active');
+            // var x = document.getElementById("div1");
+            // if (x.style.display === "none") {
+            //     x.style.display = "block";
+            // } else {
+            //     x.style.display = "none";
+
+            // }
+            // var y= document.getElementById("div2");
+            // if (y.style.display === "none") {
+            //     y.style.display = "block";
+            // } else {
+            //     y.style.display = "none";
+
+            // }
+
+
+        }
+
+        function myFunctionbackt1() {
+
+
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'block';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active1").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active6").classList.add('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+            // var x = document.getElementById("div1");
+            // if (x.style.display === "none") {
+            //     x.style.display = "block";
+            // } else {
+            //     x.style.display = "none";
+
+            // }
+            // var y= document.getElementById("div2");
+            // if (y.style.display === "none") {
+            //     y.style.display = "block";
+            // } else {
+            //     y.style.display = "none";
+
+            // }
+
+
+        }
+
+
+        function myFunctionbackt2() {
+
+
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div5").style.display = 'block';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active1").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active5").classList.add('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+
+
+        }
+
+        function myFunctionbackt3() {
+
+
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'block';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active1").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active4").classList.add('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+
+
+        }
+
+        function myFunctionbackt4() {
+
+
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div3").style.display = 'block';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active1").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active3").classList.add('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+
+
+        }
+
+        function myFunctionbackt5() {
+
+
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'block';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active1").classList.remove('active');
+            document.getElementById("active2").classList.add('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+
+
+        }
+
+        function myFunctionbackt6() {
+
+
+            document.getElementById("div1").style.display = 'block';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active1").classList.add('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+
+
+        }
+
+        function myFunctionnext() {
+
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'block';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active2").classList.add('active');
+            document.getElementById("active1").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+            // var x = document.getElementById("div1");
+            // if (x.style.display === "none") {
+            //     x.style.display = "block";
+            // } else {
+            //     x.style.display = "none";
+
+            // }
+            // var y= document.getElementById("div2");
+            // if (y.style.display === "none") {
+            //     y.style.display = "block";
+            // } else {
+            //     y.style.display = "none";
+
+            // }
+
+
+        }
+
+        function myFunctionnext2() {
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'block';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active3").classList.add('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active").classList.remove('active');
+            document.getElementById("active1").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+        }
+
+        function myFunctionnext3() {
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'block';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active4").classList.add('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active").classList.remove('active');
+            document.getElementById("active1").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+        }
+
+        function myFunctionnext4() {
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div5").style.display = 'block';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active5").classList.add('active');
+            document.getElementById("active").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+        }
+
+        function myFunctionnext5() {
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'block';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active6").classList.add('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+        }
+
+        function myFunctionnext6() {
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'block';
+            document.getElementById("div8").style.display = 'none';
+            document.getElementById("active7").classList.add('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active8").classList.remove('active');
+        }
+
+        function myFunctionnext7() {
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div8").style.display = 'block';
+            document.getElementById("active8").classList.add('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active").classList.remove('active');
+        }
+
+        function myFunctionnext8() {
+            document.getElementById("div7").style.display = 'none';
+            document.getElementById("div2").style.display = 'none';
+            document.getElementById("div3").style.display = 'none';
+            document.getElementById("div4").style.display = 'none';
+            document.getElementById("div5").style.display = 'none';
+            document.getElementById("div6").style.display = 'none';
+            document.getElementById("div8").style.display = 'block';
+            document.getElementById("active8").classList.add('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active7").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active5").classList.remove('active');
+            document.getElementById("active").classList.remove('active');
+            document.getElementById("active2").classList.remove('active');
+            document.getElementById("active4").classList.remove('active');
+            document.getElementById("active3").classList.remove('active');
+            document.getElementById("active6").classList.remove('active');
+            document.getElementById("active").classList.remove('active');
+        }
+    </script>
 
 
     <script>
