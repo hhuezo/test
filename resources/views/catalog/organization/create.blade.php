@@ -52,18 +52,13 @@
                                             </div>
 
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">{{ __('Pais') }}</label>
-                                                <select name="country_id" class="form-control select2">
-                                                    @foreach($countrys as $obj)
-                                                    <option value="{{$obj->id}}">{{$obj->description}}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">{{ __('ciudad') }}</label>
+                                                <label for="largeInput" class="form-label">{{ __('departamento') }}</label>
                                                 <input type="text" name="city_id" required class="form-control" value="{{ old('city_id') }}">
                                             </div>
+                                        
+                                        </div>
+                                        <br><br>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">{{ __('numero telefonico') }}</label>
                                                 <input type="text" name="phone_mumber" required class="form-control" value="{{ old('course_id') }}">

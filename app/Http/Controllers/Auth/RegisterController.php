@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MailController;
+use App\Models\catalog\WizardQuestions;
 use App\Models\Organization;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -50,6 +52,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+     public function index(){
+
+        $questions = WizardQuestions::where('active', 1)->get();        
+        return view('auth.register', compact('questions'));
+     }
+    
+
     protected function validator(array $data)
     {
 

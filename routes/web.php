@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -53,6 +54,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
+Route::get('/registrar',[RegisterController::class,'index']);
 
 
 Route::get('/test', [HomeController::class, 'test'])->name('test');
