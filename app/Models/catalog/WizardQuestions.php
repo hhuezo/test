@@ -16,7 +16,6 @@ class WizardQuestions extends Model
         'answer',
         'active',
         'date_add'
-   ];
-protected $guarded = [];
-
+    ];
+    protected $guarded = [];
 }

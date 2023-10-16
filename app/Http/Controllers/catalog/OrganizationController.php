@@ -33,8 +33,8 @@ class OrganizationController extends Controller
 
         //$questions =Question::get();
         $estatuorg = OrganizationStatus::get();
-        $countrys = Country::get();
-        return view('catalog.organization.create', compact('estatuorg','countrys'));
+   //     $countrys = Country::get();
+        return view('catalog.organization.create', compact('estatuorg'));
     }
 
 

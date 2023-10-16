@@ -7,7 +7,7 @@
 
         <div class="card">
             <header class=" card-header noborder">
-                <h4 class="card-title">Estado de los Miembros
+                <h4 class="card-title">Estado de los Participantes
                 </h4>
                 <a href="{{url('catalog/MemberStatus/create')}}">
                 <button class="btn btn-outline-primary" >Nuevo</button>
