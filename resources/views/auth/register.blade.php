@@ -9,10 +9,12 @@
     <link rel="icon" type="image/png" href="assets/images/logo/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/css/rt-plugins.css">
     <link href="https://unpkg.com/aos@2.3.0/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
     <link rel="stylesheet" href="assets/css/app.css">
     <!-- START : Theme Config js-->
     <script src="assets/js/settings.js" sync></script>
@@ -26,6 +28,32 @@
 
         .altura {
             height: 600px;
+        }
+
+        .tamano {
+            font-size: 22px;
+
+        }
+
+        .content-input input[type=radio]+i:before {
+            content: '';
+            display: block;
+            height: 18px;
+            width: 18px;
+            background: red;
+            border-radius: 100%;
+            position: absolute;
+            z-index: 1;
+            top: 4px;
+            left: 4px;
+            background: #2AC176;
+            transition: all 0.25s ease;
+            /* Todas las propiedades | tiempo | tipo movimiento */
+            transform: scale(0)
+                /* Lo reducimos a 0*/
+            ;
+            opacity: 0;
+            /* Lo ocultamos*/
         }
     </style>
 
@@ -53,10 +81,13 @@
                                         <div class="card-header">
                                             <h4 class="card-title">form wizard</h4>
                                         </div>
+                                        @php($contador = 1)
                                         <div class="card-body p-6">
-                                            <div class="wizard-steps flex z-[5] items-center relative justify-center md:mx-8">
+                                            <div
+                                                class="wizard-steps flex z-[5] items-center relative justify-center md:mx-8">
 
-                                                <div class="  active pass  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="1">
+                                                <div class="  active pass  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step"
+                                                    data-step="1">
                                                     <div class="number-box">
                                                         <span class="number">
                                                             1
@@ -71,29 +102,31 @@
                                                     </div>
                                                 </div>
                                                 @php($i = 2)
-                                                @foreach($questions as $obj)
-                                                <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="1" id="div{{$i}}">
-                                                    <div class="number-box">
-                                                        <span class="number">
-                                                           {{$i}} 
-                                                        </span>
-                                                        <span class="no-icon text-3xl">
-                                                            <iconify-icon icon="bx:check-double"></iconify-icon>
-                                                        </span>
-                                                    </div>
-                                                    <div class="bar-line"></div>
-                                                    <div class="circle-box">
+                                                @foreach ($questions as $obj)
+                                                    <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step"
+                                                        data-step="2" id="div{{ $i }}">
+                                                        <div class="number-box">
+                                                            <span class="number">
+                                                                {{ $i }}
+                                                            </span>
+                                                            <span class="no-icon text-3xl">
+                                                                <iconify-icon icon="bx:check-double"></iconify-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div class="bar-line"></div>
+                                                        <div class="circle-box">
 
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                @php($i++)
-                                                @php($num = $i)
+                                                    @php($i++)
+                                                    @php($num = $i)
                                                 @endforeach
 
-                                                <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="1">
+                                                <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step"
+                                                    data-step={{ $num }}>
                                                     <div class="number-box">
                                                         <span class="number">
-                                                            {{$num +1 }}
+                                                            {{ $num }}
                                                         </span>
                                                         <span class="no-icon text-3xl">
                                                             <iconify-icon icon="bx:check-double"></iconify-icon>
@@ -101,14 +134,15 @@
                                                     </div>
                                                     <div class="bar-line"></div>
                                                     <div class="circle-box">
-                                                        <span class="w-max">Address</span>
+                                                        <span class="w-max">Formulario</span>
                                                     </div>
                                                 </div>
 
-                                                <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="1">
+                                                <div class="relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step"
+                                                    data-step={{ $num + 1 }}>
                                                     <div class="number-box">
                                                         <span class="number">
-                                                            {{$num + 1 + 1}}
+                                                            {{ $num + 1 }}
                                                         </span>
                                                         <span class="no-icon text-3xl">
                                                             <iconify-icon icon="bx:check-double"></iconify-icon>
@@ -116,133 +150,271 @@
                                                     </div>
                                                     <div class="bar-line"></div>
                                                     <div class="circle-box">
-                                                        <span class="w-max">Address</span>
+                                                        <span class="w-max">Redes sociales</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step"
+                                                    data-step={{ $num + 2 }}>
+                                                    <div class="number-box">
+                                                        <span class="number">
+                                                            {{ $num + 2 }}
+                                                        </span>
+                                                        <span class="no-icon text-3xl">
+                                                            <iconify-icon icon="bx:check-double"></iconify-icon>
+                                                        </span>
+                                                    </div>
+                                                    <div class="bar-line"></div>
+                                                    <div class="circle-box">
+                                                        <span class="w-max">Logo</span>
+                                                    </div>
+                                                </div>
+                                                <div class="relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step"
+                                                    data-step={{ $num + 3 }}>
+                                                    <div class="number-box">
+                                                        <span class="number">
+                                                            {{ $num + 3 }}
+                                                        </span>
+                                                        <span class="no-icon text-3xl">
+                                                            <iconify-icon icon="bx:check-double"></iconify-icon>
+                                                        </span>
+                                                    </div>
+                                                    <div class="bar-line"></div>
+                                                    <div class="circle-box">
+                                                        <span class="w-max">Guardar</span>
                                                     </div>
                                                 </div>
 
                                             </div>
                                             <!-- inicio del form -->
-                                            <form class="wizard-form mt-10" action="#" >
+                                            {{-- <form class="wizard-form mt-10" action="{{route('register')}}" method="POST">
+                                                     @csrf --}}
+                                            <form action="">
+
                                                 <div class="wizard-form-step active" data-step="1">
-                                                    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                                                        <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                            <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">Enter Your Account Details</h4>
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="username" class="form-label">User Name*</label>
-                                                            <input id="username" type="text" class="form-control" placeholder="Username">
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="fullname" class="form-label">Full Name*</label>
-                                                            <input id="fullname" type="text" class="form-control" placeholder="Full Name">
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="email" class="form-label">Email*</label>
-                                                            <input id="email" type="text" class="form-control" placeholder="Enter Your Email">
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="phonenumber" class="form-label">Phone number*</label>
-                                                            <input id="phonenumber" type="text" class="form-control" placeholder="Phone Number">
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="password" class="form-label">Password*</label>
-                                                            <input id="password" type="password" class="form-control" placeholder="Password">
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="confirmPassword" class="form-label">Confirm Password*</label>
-                                                            <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm Password">
-                                                        </div>
+                                                    <div class="input-area">
+                                                        <br>
+                                                        <label for="username" class="form-label tamano">
+                                                            Nombre de iglesia</label>
+                                                        <br>
+                                                        <input id="nombre" name="nombre" type="text"
+                                                            class="form-control">
+                                                        <input id="departamento" name="departamento" type="hidden"
+                                                            class="form-control">
                                                     </div>
-                                                </div>
-                                                @php($j=2)
-                                                @foreach($questions as $obj)
-                                                <div class="wizard-form-step" data-step="{{$j}}">
-                                                    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                                                        <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                            <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">Personal Information</h4>
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="firstname" class="form-label">First Name*</label>
-                                                            <input id="firstname" type="text" class="form-control" placeholder="First">
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="lastname" class="form-label">Last Name*</label>
-                                                            <input id="lastname" type="text" class="form-control" placeholder="Last Name">
-                                                        </div>
+
+                                                    <div id="div_result">
+
+
                                                     </div>
-                                                </div>
-                                                @php($j++)
-                                                @php($numm = $j)
-                                                @endforeach
-                                                <div class="wizard-form-step" data-step="{{$numm+1}}">
-                                                    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                                                        <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                            <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">Address</h4>
-                                                        </div>
-                                                        <div class="input-area lg:col-span-3 md:col-span-2 col-span-1">
-                                                            <label for="address" class="form-label">Address*</label>
-                                                            <textarea name="address" id="address" rows="3" class="form-control" placeholder="Your Address"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="wizard-form-step" data-step="{{$numm+1+1}}">
-                                                    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                                                        <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                            <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">Social Links</h4>
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="fblink" class="form-label">Facebook Link*</label>
-                                                            <input id="fblink" type="url" class="form-control" placeholder="Facebook Link">
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="youtubelink" class="form-label">Youtube Link*</label>
-                                                            <input id="youtubelink" type="url" class="form-control" placeholder="Youtube Link">
-                                                        </div>
-                                                    </div>
+
+
                                                 </div>
                                                 <div class="mt-6   space-x-3">
-                                                    <button class="btn btn-dark prev-button" type="button">prev</button>
-                                                    <button class="btn btn-dark next-button" type="button">next</button>
-                                                </div>
-                                            </form>
-                                            <!-- fin de formulario -->
-                                        </div>
-                                    </div>
-                                    <!-- END: Step Form Horizontal -->
 
+                                                    {{-- <button class="btn btn-dark next-button"
+                                                        type="submit">submit</button> --}}
+                                                </div>
+
+                                            </form>
+                                            <form action="">
+
+                                                @php($j = 2)
+                                                @foreach ($questions as $obj)
+                                                    <div class="wizard-form-step" data-step="{{ $j }}">
+                                                        <div
+                                                            class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                                                            {{-- <div class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                                <h4
+                                                                    class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                    Set de Preguntas Generales</h4> </div>
+                                                                    --}}
+
+                                                        </div>
+
+                                                        <div class="input-area">
+                                                            <br>
+                                                            <label for="questions"
+                                                                class="form-label  tamano">{{ $obj->question }}</label>
+
+                                                            <fieldset class="altura">
+                                                                <div class="basicRadio tamano">
+                                                                    <label>
+                                                                        <label>
+                                                                            <div class="primary-radio">
+                                                                                <label
+                                                                                    class="flex items-center cursor-pointer">
+                                                                                    <input type="radio"
+                                                                                        class="hidden" name="answer"
+                                                                                        value="1"
+                                                                                        checked="checked">
+                                                                                    <span
+                                                                                        class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                                duration-150 h-[30px] w-[30px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                    <span
+                                                                                        class="text-primary-500 text-sm leading-6 capitalize">Si</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </label>
+                                                                        <br>
+
+                                                                        <div class="primary-radio">
+                                                                            <label
+                                                                                class="flex items-center cursor-pointer">
+                                                                                <input type="radio" class="hidden"
+                                                                                    name="answer" value="0">
+                                                                                <span
+                                                                                    class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                                duration-150 h-[30px] w-[30px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"
+                                                                                    style="width: 300% height: 300%"></span>
+                                                                                <span
+                                                                                    class="text-primary-500 text-sm leading-6 capitalize">No</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </label>
+                                                                    </label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+
+                                                    </div>
+                                                    @php($j++)
+                                                    @php($numm = $j)
+                                                @endforeach
+                                                <div class="wizard-form-step" data-step="{{ $numm }}">
+                                                    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                                                        <div class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                            <h4
+                                                                class="text-base text-slate-800 dark:text-slate-300 my-6 tamano">
+                                                                formulario</h4>
+                                                        </div>
+                                                        <div class="input-area lg:col-span-3 md:col-span-2 col-span-1">
+                                                            <label for="address"
+                                                                class="form-label tamano">formulario*</label>
+                                                            <div
+                                                                class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                                                                <div class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                                    <h4
+                                                                        class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                        Personal Information</h4>
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="firstname" class="form-label">First
+                                                                        Name*</label>
+                                                                    <input id="firstname" type="text"
+                                                                        class="form-control" placeholder="First">
+                                                                </div>
+                                                                <div class="input-area">
+                                                                    <label for="lastname" class="form-label">Last
+                                                                        Name*</label>
+                                                                    <input id="lastname" type="text"
+                                                                        class="form-control" placeholder="Last Name">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wizard-form-step" data-step="{{ $numm + 1 }}">
+                                                    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                                                        <div class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                            <h4
+                                                                class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                Social Links</h4>
+                                                        </div>
+                                                        <div class="input-area">
+                                                            <label for="fblink" class="form-label tamano">Facebook
+                                                                Link*</label>
+                                                            <input id="fblink" type="url" class="form-control"
+                                                                placeholder="Facebook Link">
+                                                        </div>
+                                                        <div class="input-area">
+                                                            <label for="youtubelink" class="form-label tamano">Youtube
+                                                                Link</label>
+                                                            <input id="youtubelink" type="url"
+                                                                class="form-control" placeholder="Youtube Link">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wizard-form-step" data-step="{{ $numm + 2 }}">
+                                                    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                                                        <div class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                            <h4
+                                                                class="text-base text-slate-800 dark:text-slate-300 my-6 tamano">
+                                                                <!-- fin de formulario -->
+                                                                logo
+                                                            </h4>
+                                                            <form id="uploadForm"
+                                                            enctype="multipart/form-data">
+                                                            <input type="file" name="image"
+                                                                id="imageInput">
+                                                            <button type="submit">Subir Imagen</button>
+                                                        </form>
+
+                                                        <div id="destinationPath"></div>
+
+                                                        </div>
+                                                        <div class="wizard-form-step" data-step="{{ $numm + 3 }}"
+                                                            id="div8">
+                                                            <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5"
+                                                                style="height: 700px">
+                                                                <div class="lg:col-span-3 md:col-span-2 col-span-1">
+                                                                    <h4
+                                                                        class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                       Guardar Datos de Iglesia</h4>
+                                                                </div>
+
+                                                            <!--    <button class="btn btn-dark" type="button"
+                                                                    onclick="myFunctionbackt0()">Anterior</button>
+
+                                                                <button class="btn btn-dark" type="button">Siguiente</button>-->
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+
+<!--
+                                        @php($anterior = $num -1)
+                                        @php($siguiente = $num +1)
+                                        {{$anterior}}  {{$siguiente}}
+                                          <div class="mt-6 space-x-3 text-right">
+
+                                            <button class="btn btn-dark" type="button"
+                                                onclick="myFunctionbackt({{ $anterior }})">Anterior</button>
+
+                                            <button class="btn btn-dark" type="button"
+                                                onclick="myFunctionnext({{ $siguiente  }})">Siguiente</button>
+
+
+                                        </div>-->
+                                           <div class="mt-6   space-x-3">
+                                                    <button class="btn btn-dark prev-button"
+                                                        type="button">prev</button>
+                                                    <button class="btn btn-dark next-button"
+                                                        type="button">next</button>
+                                                </div>
+                                        </form>
+                                        <!-- fin de formulario -->
+                                    </div>
                                 </div>
+                                <!-- END: Step Form Horizontal -->
+
                             </div>
                         </div>
-                        <div class="lg:col-span-2 col-span-12 space-y-5">
-                            &nbsp;
-                        </div>
                     </div>
-
+                    <div class="lg:col-span-2 col-span-12 space-y-5">
+                        &nbsp;
+                    </div>
                 </div>
 
             </div>
-        </div>
 
+        </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </div>
 
 
 
@@ -282,376 +454,44 @@
 
 
     <script>
+        function myFunctionbackt(i) {
+            alert(i);
+            var num = Number(i);
+            alert(num);
+            var str = (num).toString()
+            var divmostrar="div" + str;
+           var divactivar="active" + str;
+
+            document.getElementById("div" + str).style.display = 'block';
+            document.getElementById(divactivar).classList.add('active');
+
+        }
+
+        function myFunctionnext(i) {
+            alert(i);
+            var num = Number(i);
+            alert(num);
+            var str = (num).toString()
+            var divmostrar="div" + str;
+           var divactivar="active" + str;
+           alert(str);
+            document.getElementById("div" + str).style.display = 'block';
+            document.getElementById(divactivar).classList.add('active');
+
+
+
+        }
+
+
+
         function myFunctionbackt0() {
 
+document.getElementById("div1").style.display = 'block';
 
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'block';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active1").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active7").classList.add('active');
-            document.getElementById("active8").classList.remove('active');
-            // var x = document.getElementById("div1");
-            // if (x.style.display === "none") {
-            //     x.style.display = "block";
-            // } else {
-            //     x.style.display = "none";
-
-            // }
-            // var y= document.getElementById("div2");
-            // if (y.style.display === "none") {
-            //     y.style.display = "block";
-            // } else {
-            //     y.style.display = "none";
-
-            // }
+document.getElementById("active1").classList.add('active');
 
 
-        }
-
-        function myFunctionbackt1() {
-
-
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'block';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active1").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active6").classList.add('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-            // var x = document.getElementById("div1");
-            // if (x.style.display === "none") {
-            //     x.style.display = "block";
-            // } else {
-            //     x.style.display = "none";
-
-            // }
-            // var y= document.getElementById("div2");
-            // if (y.style.display === "none") {
-            //     y.style.display = "block";
-            // } else {
-            //     y.style.display = "none";
-
-            // }
-
-
-        }
-
-
-        function myFunctionbackt2() {
-
-
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div5").style.display = 'block';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active1").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active5").classList.add('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-
-
-        }
-
-        function myFunctionbackt3() {
-
-
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'block';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active1").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active4").classList.add('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-
-
-        }
-
-        function myFunctionbackt4() {
-
-
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div3").style.display = 'block';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active1").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active3").classList.add('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-
-
-        }
-
-        function myFunctionbackt5() {
-
-
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'block';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active1").classList.remove('active');
-            document.getElementById("active2").classList.add('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-
-
-        }
-
-        function myFunctionbackt6() {
-
-
-            document.getElementById("div1").style.display = 'block';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active1").classList.add('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-
-
-        }
-
-        function myFunctionnext() {
-
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'block';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active2").classList.add('active');
-            document.getElementById("active1").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-            // var x = document.getElementById("div1");
-            // if (x.style.display === "none") {
-            //     x.style.display = "block";
-            // } else {
-            //     x.style.display = "none";
-
-            // }
-            // var y= document.getElementById("div2");
-            // if (y.style.display === "none") {
-            //     y.style.display = "block";
-            // } else {
-            //     y.style.display = "none";
-
-            // }
-
-
-        }
-
-        function myFunctionnext2() {
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'block';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active3").classList.add('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active").classList.remove('active');
-            document.getElementById("active1").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-        }
-
-        function myFunctionnext3() {
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'block';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active4").classList.add('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active").classList.remove('active');
-            document.getElementById("active1").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-        }
-
-        function myFunctionnext4() {
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div5").style.display = 'block';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active5").classList.add('active');
-            document.getElementById("active").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-        }
-
-        function myFunctionnext5() {
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'block';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active6").classList.add('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-        }
-
-        function myFunctionnext6() {
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'block';
-            document.getElementById("div8").style.display = 'none';
-            document.getElementById("active7").classList.add('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active8").classList.remove('active');
-        }
-
-        function myFunctionnext7() {
-            document.getElementById("div1").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div8").style.display = 'block';
-            document.getElementById("active8").classList.add('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active").classList.remove('active');
-        }
-
-        function myFunctionnext8() {
-            document.getElementById("div7").style.display = 'none';
-            document.getElementById("div2").style.display = 'none';
-            document.getElementById("div3").style.display = 'none';
-            document.getElementById("div4").style.display = 'none';
-            document.getElementById("div5").style.display = 'none';
-            document.getElementById("div6").style.display = 'none';
-            document.getElementById("div8").style.display = 'block';
-            document.getElementById("active8").classList.add('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active7").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active5").classList.remove('active');
-            document.getElementById("active").classList.remove('active');
-            document.getElementById("active2").classList.remove('active');
-            document.getElementById("active4").classList.remove('active');
-            document.getElementById("active3").classList.remove('active');
-            document.getElementById("active6").classList.remove('active');
-            document.getElementById("active").classList.remove('active');
-        }
+}
     </script>
 
 
