@@ -9,6 +9,7 @@ use App\Models\Organization;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -55,10 +56,10 @@ class RegisterController extends Controller
 
      public function index(){
 
-        $questions = WizardQuestions::where('active', 1)->get();        
+        $questions = WizardQuestions::where('active', 1)->get();
         return view('auth.register', compact('questions'));
      }
-    
+
 
     protected function validator(array $data)
     {
@@ -114,50 +115,57 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // try {
-        //     DB::beginTransaction();
-            $user = new User();
-            $user->name = $data['name'];
-            $user->email = $data['email'];
-            $user->password = Hash::make($data['password']);
-            $user->status = 0;
-            $user->save();
+        dd('holi');
+        // // try {
+        // //     DB::beginTransaction();
+        //     $user = new User();
+        //     $user->name = $data['name'];
+        //     $user->email = $data['email'];
+        //     $user->password = Hash::make($data['password']);
+        //     $user->status = 0;
+        //     $user->save();
 
-            //asign role
-            $user->assignRole('facilitator');
+        //     //asign role
+        //     $user->assignRole('facilitator');
 
-            $organization = new Organization();
-            //$organization->user_id = $user->id;
-            $organization->name = $data['name_organization'];
-            $organization->address = $data['address'];
-            $organization->phone_number = $data['phone_number'];
-            $organization->notes = $data['notes'];
-            $organization->contact_name = $data['contact_name'];
-            $organization->contact_job_title = $data['contact_job_title'];
-            $organization->contact_phone_number = $data['contact_phone_number'];
-            $organization->contact_phone_number_2 = $data['contact_phone_number_2'];
-            $organization->secondary_contact_name = $data['secondary_contact_name'];
-            $organization->secondary_contact_job_title = $data['secondary_contact_job_title'];
-            $organization->secondary_contact_phone_number = $data['secondary_contact_phone_number'];
-            $organization->secondary_contact_phone_number_2 = $data['secondary_contact_phone_number_2'];
-            $organization->status = 1;
-            $organization->save();
+        //     $organization = new Organization();
+        //     //$organization->user_id = $user->id;
+        //     $organization->name = $data['name_organization'];
+        //     $organization->address = $data['address'];
+        //     $organization->phone_number = $data['phone_number'];
+        //     $organization->notes = $data['notes'];
+        //     $organization->contact_name = $data['contact_name'];
+        //     $organization->contact_job_title = $data['contact_job_title'];
+        //     $organization->contact_phone_number = $data['contact_phone_number'];
+        //     $organization->contact_phone_number_2 = $data['contact_phone_number_2'];
+        //     $organization->secondary_contact_name = $data['secondary_contact_name'];
+        //     $organization->secondary_contact_job_title = $data['secondary_contact_job_title'];
+        //     $organization->secondary_contact_phone_number = $data['secondary_contact_phone_number'];
+        //     $organization->secondary_contact_phone_number_2 = $data['secondary_contact_phone_number_2'];
+        //     $organization->status = 1;
+        //     $organization->save();
 
-            $user->organization()->attach($organization->id);
+        //     $user->organization()->attach($organization->id);
 
-            //Envio de correo usando metodo sendMail de MailController
-            $objeto = new  MailController();
-            $email = $data['email'];
-            //$email = $request->get('email');
-            $subject = "Notificación: Datos registrados correctamente";
-            $content = "Sus datos han sido registrados, nuestro equipo revisará la información y le notificará cuando sean aprobados";
-            $result = $objeto->sendMail($email, $subject, $content);
+        //     //Envio de correo usando metodo sendMail de MailController
+        //     $objeto = new  MailController();
+        //     $email = $data['email'];
+        //     //$email = $request->get('email');
+        //     $subject = "Notificación: Datos registrados correctamente";
+        //     $content = "Sus datos han sido registrados, nuestro equipo revisará la información y le notificará cuando sean aprobados";
+        //     $result = $objeto->sendMail($email, $subject, $content);
 
-            return $user;
-        //     DB::commit();
-        // } catch (\Exception $e) {
-        //     DB::rollback();
-        //     return redirect()->back()->withErrors(collect($e->getMessage()));
-        // }
+        //     return $user;
+        // //     DB::commit();
+        // // } catch (\Exception $e) {
+        // //     DB::rollback();
+        // //     return redirect()->back()->withErrors(collect($e->getMessage()));
+        // // }
+    }
+
+    public function register(Request $request)
+    {
+        dd('holi');
+     //  return redirect('register_edit/')
     }
 }
