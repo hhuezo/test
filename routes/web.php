@@ -54,7 +54,9 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
+Route::get('/get_dep/{id}', [WelcomeController::class, 'get_dep']);
 Route::get('/registrar',[RegisterController::class,'index']);
+Route::get('/register_edit/{id}',[IglesiaController::class, 'register_edit']);
 
 
 Route::get('/test', [HomeController::class, 'test'])->name('test');

@@ -59,13 +59,11 @@
                                         <div class="card-body p-6">
                                             <div class="grid gap-5 grid-cols-12">
                                                 <div class="lg:col-span-3 col-span-12">
-                                                    <div
-                                                        class="flex z-[5] items-start relative flex-col lg:min-h-full md:min-h-[300px] min-h-[250px] wizard-steps">
+                                                    <div class="flex z-[5] items-start relative flex-col lg:min-h-full md:min-h-[300px] min-h-[250px] wizard-steps">
 
                                                         <div class="relative z-[1] flex-1 last:flex-none wizard-step active"
                                                             id="active1">
-                                                            <div
-                                                                class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
+                                                            <div class=" transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
                                                                 bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700">
                                                                 <div class="number-box">
                                                                     <span class="number"> 1</span>

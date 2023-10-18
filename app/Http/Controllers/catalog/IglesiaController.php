@@ -8,6 +8,7 @@ use App\Models\catalog\Departamento;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Municipio;
 use App\Models\catalog\Sede;
+use App\Models\catalog\WizardQuestions;
 use Illuminate\Http\Request;
 
 class IglesiaController extends Controller
@@ -119,6 +120,13 @@ class IglesiaController extends Controller
         } else {
             return response()->json(['success' => false]);
         }
+    }
+
+    public function register_edit($id){
+        $iglesia = Iglesia::findOrFail($id);
+        $questions = WizardQuestions::where('active','=',1)->get();
+        $tab =2;
+        return view('catalog.iglesia.register_edit', compact('iglesia','questions','tab'));
     }
 
 

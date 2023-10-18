@@ -127,6 +127,21 @@ class WelcomeController extends Controller
         return view('map', compact('dep'));
     }
 
+    public function get_dep($id)
+    {
+        $dep = Departamento::where('abbrev', '=', $id)->first();
+    
+        if ($dep) {
+            // Si encontramos un departamento, devolvemos la respuesta en formato JSON
+            return response()->json($dep);
+        } else {
+            // Si no se encuentra el departamento, puedes devolver un mensaje o lo que sea necesario
+            return response()->json(['error' => 'Departamento no encontrado'], 404);
+        }
+        // Si también necesitas la vista, puedes descomentar la línea siguiente
+        // return view('map', compact('dep'));
+    }
+
 
     public function edit($id)
     {
