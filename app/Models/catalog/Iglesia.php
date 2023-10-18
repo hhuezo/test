@@ -14,7 +14,7 @@ class Iglesia extends Model
     protected $fillable = [
         'name',
         'address',
-        'catalog_departameto_id',
+        'catalog_departamento_id',
         'catalog_municipio_id',
         'phone_number',
         'notes',
@@ -44,6 +44,9 @@ class Iglesia extends Model
        {
            return $this->belongsTo('use App\Models\catalog\Sede','id','sede_id');
            //return $this->belongsTo('App\Models\LugarOrigen', 'tck_lor_codigo', 'lor_codigo');
+       }
+       public function departamentos(){
+        return $this->belongsTo(Departamento::class,'catalog_departamento_id','id');
        }
 
 
