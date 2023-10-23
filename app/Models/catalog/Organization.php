@@ -25,11 +25,13 @@ class Organization extends Model
         'contact_job_title',
         'contact_phone_number',
         'contact_phone_number_2',
-        'secondary_contact_name',
-        'secondary_contact_job_title',
-        'secondary_contact_phone_number',
-        'secondary_contact_phone_number_2',
+        'facebook',
+        'website',
+        'personeria_juridica',
+        'organization_type',
+        'depedent',
         'status'
+
     ];
 
 

@@ -38,7 +38,7 @@
                                                 </ul>
                                             </div>
                                         @endif
-                                        <form method="POST" action="{{ url('catalog/iglesia') }}">
+                                        <form method="POST" action="{{ url('catalog/iglesia') }}"  enctype="multipart/form-data">
                                             @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
@@ -57,16 +57,25 @@
                                                 </div>
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Pais') }}</label>
-                                                    <input type="text" name="country_id" value="{{$iglesia->contry_id }}" required class="form-control">
+                                                    <label for="largeInput" class="form-label">{{ __('departamento') }}</label>
+                                                    <select name="catalog_departamento_id" class="form-control select2">
+                                                        @foreach($depto as $obj1)
+                                                        <option value="{{$obj1->id}}">{{$obj1->nombre}}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('ciudad') }}</label>
-                                                    <input type="text" name="city_id" value="{{$iglesia->city_id }}" required class="form-control"
-                                                        value="{{ old('city_id') }}">
+                                                    <label for="largeInput" class="form-label">{{ __('municipio') }}</label>
+                                                    <select name="catalog_municipio_id" class="form-control select2">
+                                                        @foreach($municipio as $obj2)
+                                                        @if ($obj2->departamento_id == $obj1->id )
+                                                        <option value="{{ $obj2->id }}">{{ $obj2->nombre }}</option>
+                                                          @endif
+                                                       @endforeach
+                                                    </select>
+                                                </div>
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
@@ -104,37 +113,80 @@
                                                     <input type="text" name="contact_phone_number_2" value="{{$iglesia->contact_phone_number_2 }}"  required class="form-control"
                                                         value="{{ old('contact_phone_number_2') }}">
                                                 </div>
+
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('titulo de contacto secundario en el trabajo') }}</label>
-                                                    <input type="text" name="secondary_contact_job_title" value="{{$iglesia->secondary_contact_job_title }}"  required class="form-control"
-                                                        value="{{ old('secondary_contact_job_title') }}">
+                                                    <label for="largeInput" class="form-label">{{ __('Lider Religioso') }}</label>
+                                                    <input type="text" name="pastor_name"  value="{{$iglesia->pastor_name }}"  required class="form-control" value="{{ old('pastor_name') }}">
                                                 </div>
+
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Numero secundario de contacto') }}</label>
-                                                    <input type="text" name="secondary_contact_number" value="{{$iglesia->secondary_contact_number }}"  required class="form-control"
-                                                        value="{{ old('secondary_contact_number') }}">
+                                                    <label for="largeInput" class="form-label">{{ __('Telefono de Pastor') }}</label>
+                                                    <input type="text" name="pastor_phone_number"  value="{{$iglesia->pastor_phone_number }}"  required class="form-control" value="{{ old('pastor_phone_number') }}">
                                                 </div>
+
+
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Numero secundario de contacto 2') }}</label>
-                                                    <input type="text" name="secondary_contact_number_2" value="{{$iglesia->secondary_contact_number_2 }}"  required class="form-control"
-                                                        value="{{ old('secondary_contact_number_2') }}">
+                                                    <label for="largeInput" class="form-label">{{ __('Red social') }}</label>
+                                                    <input type="text" name="facebook"  value="{{$iglesia->facebook }}"  required class="form-control" value="{{ old('facebook') }}">
                                                 </div>
-                                                <div class="input-area relative pl-28">
-                                                    <label for="largeInput" class="inline-inputLabel">estado</label>
-                                                    <select name="catalog_status_id" class="form-control select2">
-                                                        @foreach ($estatuorg as $obj)
-                                                            @if ($obj->id ==$iglesia->status )
-                                                                <option value="{{ $obj->id }}" selected> {{ $obj->description }}
-                                                                </option>
-                                                            @else
-                                                                <option value="{{ $obj->id }}">{{ $obj->description }}</option>
-                                                            @endif
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">{{ __('sitio web') }}</label>
+                                                    <input type="text" name="website"  value="{{$iglesia->website }}"  required class="form-control" value="{{ old('website') }}">
+                                                </div>
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">{{ __('Personeria Juridica') }}</label>
+                                                    <input type="text" name="Personeria_Juridica"  value="{{$iglesia->Personeria_Juridica }}"  required class="form-control" value="{{ old('Personeria_Juridica') }}">
+                                                </div>
+
+
+                                                    <div class="input-area relative">
+                                                        <label for="largeInput" class="form-label">{{ __('tipo de organizacion') }}</label>tipo de organizacion
+                                                        <select name="organization_type" class="form-control">
+                                                            @foreach ($organizacion as $obj)
+                                                            <option value="{{ $obj->id }}">{{ $obj->name }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                       <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Estatus</label>
+                                                    <select name="Status" class="form-control">
+                                                        @foreach ($estatuorg as $obj2)
+                                                        <option value="{{ $obj2->id }}">{{ $obj2->description }}
+                                                        </option>
                                                         @endforeach
                                                     </select>
-                                                </div>&nbsp;
+                                                </div>
+
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">{{ __('Sede') }}</label>
+                                                    <select name="sede_id" class="form-control select2">
+                                                    @foreach($sede as $obj3)
+                                                    <option value="{{ $obj3->id }}">{{ $obj3->nombre }}</option>
+                                                   @endforeach
+                                                </select>
+                                                </div>
+
+
+
+                                                <div class="card h-full">
+                                                    <div class="grid pt-4 pb-3 px-4">
+                                                        <div class="input-area relative">
+
+                                                            <label for="largeInput" class="form-label">Imagen logo</label>
+                                                            <input type="file" name="logo_name"
+                                                                value="{{ old('logo_name') }}" required class="form-control">
+
+                                                            </div>
+                                                        <p>
+                                                </div><p>
+
+
+
                                             </div>
                                             <div style="text-align: right;">
                                                 <button type="submit"

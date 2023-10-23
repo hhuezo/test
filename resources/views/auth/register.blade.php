@@ -71,7 +71,21 @@
 
                                                     </div>
                                                 </div>
-                                                @php($i = 2)
+                                                <div class="active relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="2" id="div2">
+                                                    <div class="number-box">
+                                                        <span class="number">
+                                                            2
+                                                        </span>
+                                                        <span class="no-icon text-3xl">
+                                                            <iconify-icon icon="bx:check-double"></iconify-icon>
+                                                        </span>
+                                                    </div>
+                                                    <div class="bar-line"></div>
+                                                    <div class="circle-box">
+
+                                                    </div>
+                                                </div>
+                                                @php($i = 3)
                                                 @foreach($questions as $obj)
                                                 <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="{{$i}}" id="div{{$i}}">
                                                     <div class="number-box">
@@ -106,7 +120,8 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="{{$num+1}}" id="{{$num+1}}">
+                                                <!--<div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="{{$num+1}}" id="{{$num+1}}">-->
+                                                    <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="4" id="div4">
                                                     <div class="number-box">
                                                         <span class="number">
                                                             {{$num + 1}}
@@ -141,26 +156,7 @@
                                                         <div class="input-area">
                                                             &nbsp;
                                                         </div>
-                                                        <div class="input-area">
-                                                            <label class="form-label">Departamento</label>
-                                                            <input id="departamento" name="departamento" type="hidden" class="form-control"  required>
-                                                            <input id="departamento_show" type="text" class="form-control" readonly required>
-                                                        </div>
-                                                        <div class="input-area">
-                                                            &nbsp;
-                                                        </div>
-                                                        <div class="input-area">
-                                                            &nbsp;
-                                                        </div>
 
-                                                        <div class="input-area">
-                                                            <label for="fullname" class="form-label">Seleccione en el mapa</label>
-                                                            <div id="div_result">
-
-
-
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                     <div class="mt-6 space-x-3" align="right">
                                                         <button class="btn btn-dark" type="submit">Siguiente</button>
@@ -168,7 +164,7 @@
                                                 </div>
 
                                             </form>
-                                        
+
                                             <!-- fin de formulario -->
                                         </div>
                                     </div>
@@ -196,70 +192,14 @@
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/rt-plugins.js"></script>
     <script src="assets/js/app.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js'></script>
-    <script>
-        $(document).ready(function() {
-            $(":input").inputmask();
-        });
-    </script>
-
-    <script>
-        document.getElementById('uploadForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-
-            fetch('/images', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Imagen subida con éxito');
-                    } else {
-                        alert('Error al subir la imagen');
-                    }
-                })
-                .catch(error => {
-                    alert('Error en la solicitud');
-                });
-        });
-    </script>
 
 
 
-    <script>
-        google.charts.load('current', {
-            'packages': ['geochart']
-        });
-
-        $(document).ready(function() {
-            get_map('A');
-        });
 
 
-        function get_map(dep) {
-            //console.log(dep);
-            // Realizar la solicitud AJAX
-            $.ajax({
-                url: "{{ url('get_map') }}/" + dep, // La URL de la solicitud
-                type: "GET", // Método de la solicitud (GET en este caso)
-                //dataType: "json", // Tipo de datos esperados en la respuesta (puedes ajustarlo según tus necesidades)
 
-                // Función que se ejecuta cuando la solicitud es exitosa
-                success: function(data) {
-                    //console.log(data);
-                    // Pintar la respuesta en el div_result
-                    $("#div_result").html(data);
-                },
 
-                // Función que se ejecuta si la solicitud falla
-                error: function(xhr, status, error) {
-                    console.error("Error en la solicitud AJAX:", status, error);
-                }
-            });
-        }
-    </script>
+
 </body>
 
 </html>

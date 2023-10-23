@@ -35,9 +35,9 @@
                                         @foreach ($iglesia as $obj)
                                             <tr>
                                                 <td align="center">{{ $obj->id }}</td>
-                                                <td>{{ $obj->name }}</td>
-                                                <td>{{ $obj->address }}</td>
-                                                <td>{{ $obj->contact_name }}</td>
+                                                <td  align="center">{{ $obj->name }}</td>
+                                                <td  align="center">{{ $obj->address }}</td>
+                                                <td  align="center">{{ $obj->contact_name }}</td>
 
                                                 <td align="center">
                                                     <a href="{{url('catalog/iglesia')}}/{{$obj->id}}/edit">

@@ -9,13 +9,15 @@
     <link rel="icon" type="image/png" href="assets/images/logo/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets/css/rt-plugins.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/rt-plugins.css') }}">
     <link href="https://unpkg.com/aos@2.3.0/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
-    <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     <!-- START : Theme Config js-->
-    <script src="{{asset('assets/js/settings.js')}}" sync></script>
+    <script src="{{ asset('assets/js/settings.js') }}" sync></script>
     <!-- END : Theme Config js-->
 
     <style>
@@ -62,9 +64,11 @@
                                         </div>
                                         <div class="card-body p-6">
                                             <!-- inicio de step -->
-                                            <div class="wizard-steps flex z-[5] items-center relative justify-center md:mx-8">
+                                            <div
+                                                class="wizard-steps flex z-[5] items-center relative justify-center md:mx-8">
 
-                                                <div class="relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step passed" data-step="1" id="div1">
+                                                <div class="relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step passed"
+                                                    data-step="1" id="div1">
                                                     <div class="number-box">
                                                         <span class="number">
                                                             1
@@ -79,29 +83,31 @@
                                                     </div>
                                                 </div>
                                                 @php($i = 2)
-                                                @foreach($questions as $obj)
-                                                <div class="relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step active" data-step="{{$i}}" id="div{{$i}}">
-                                                    <div class="number-box">
-                                                        <span class="number">
-                                                            {{$i}}
-                                                        </span>
-                                                        <span class="no-icon text-3xl">
-                                                            <iconify-icon icon="bx:check-double"></iconify-icon>
-                                                        </span>
-                                                    </div>
-                                                    <div class="bar-line"></div>
-                                                    <div class="circle-box">
+                                                @foreach ($questions as $obj)
+                                                    <div class="relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step active"
+                                                        data-step="{{ $i }}" id="div{{ $i }}">
+                                                        <div class="number-box">
+                                                            <span class="number">
+                                                                {{ $i }}
+                                                            </span>
+                                                            <span class="no-icon text-3xl">
+                                                                <iconify-icon icon="bx:check-double"></iconify-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div class="bar-line"></div>
+                                                        <div class="circle-box">
 
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                @php($i++)
-                                                @php($num = $i)
+                                                    @php($i++)
+                                                    @php($num = $i)
                                                 @endforeach
 
-                                                <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="{{$num}}" id="div{{$num}}">
+                                                <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step"
+                                                    data-step="{{ $num }}" id="div{{ $num }}">
                                                     <div class="number-box">
                                                         <span class="number">
-                                                            {{$num}}
+                                                            {{ $num }}
                                                         </span>
                                                         <span class="no-icon text-3xl">
                                                             <iconify-icon icon="bx:check-double"></iconify-icon>
@@ -117,105 +123,46 @@
                                             <!-- fin of step -->
                                             <!-- inicio del form -->
 
-                                            <form action="{{url('iglesia_actualizar')}}" class="wizard-form mt-10" method="post">
-                                                <input type="hidden" name="id" value="{{$iglesia->id}}">
-                                                <div class="wizard-form-step" data-step="1" id="div1">
+                                            <form action="{{ url('iglesia_actualizar') }}" class="wizard-form mt-10"
+                                                method="post">
+                                                <input type="hidden" name="id" value="{{ $iglesia->id }}">
+                                                <div>
                                                     <div class="grid lg:grid-cols-1 md:grid-cols-1 grid-cols-1 gap-5">
-                                                        <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                            <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">Nombre y Ubicacion de la Iglesia</h4>
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="username" class="form-label">Nombre de Iglesia</label>
-                                                            <input id="nombre" name="nombre" type="text" class="form-control" value="{{$iglesia->name}}" readonly>
-                                                        </div>
-                                                        <div class="input-area">
-                                                            &nbsp;
-                                                        </div>
-                                                        <div class="input-area">
-                                                            &nbsp;
-                                                        </div>
+
                                                         <div class="input-area">
                                                             <label class="form-label">Departamento</label>
-                                                            <input id="departamento" type="hidden" class="form-control" value="{{$iglesia->departamentos->abbrev}}" required>
+                                                            <input id="departamento" type="hidden" class="form-control"
+                                                                required>
 
-                                                            <input id="departamento_show" type="text" class="form-control" value="{{$iglesia->departamentos->nombre}}" readonly>
-                                                        </div>
-                                                        <div class="input-area">
-                                                            &nbsp;
-                                                        </div>
-                                                        <div class="input-area">
-                                                            &nbsp;
+                                                            <input id="departamento_show" type="text"
+                                                                class="form-control" readonly>
                                                         </div>
 
+
                                                         <div class="input-area">
-                                                            <label for="fullname" class="form-label">Seleccione en el mapa</label>
+                                                            <label for="fullname" class="form-label">Seleccione en el
+                                                                mapa</label>
                                                             <div id="div_result">
 
 
 
                                                             </div>
                                                         </div>
+                                                        <div class="input-area">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="input-area">
+                                                            &nbsp;
+                                                        </div>
                                                     </div>
 
                                                 </div>
 
-                                                @php($j=2)
-                                                @foreach($questions as $obj)
-                                                <div class="wizard-form-step active" data-step="{{$j}}">
-                                                    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                                                        <div class="lg:col-span-3 md:col-span-2 col-span-1" style="margin-left: 25%;">
-                                                            <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">{{$obj->question}}</h4>
-                                                        </div>
 
-                                                        <div class="input-area" style="margin-left:75%">
-                                                            <label for="firstname" class="form-label">Si</label>
-                                                            <input id="firstname" type="radio" name="Answer{{$j}}" class="form-check-input" placeholder="First">
-                                                        </div>
-                                                        <div class="input-area" style="margin-left:75%">
-                                                            <label for="lastname" class="form-label">No</label>
-                                                            <input id="lastname" type="radio" name="Answer{{$j}}" class="form-check-input" placeholder="Last Name">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @php($j++)
-                                                @php($numm = $j)
-                                                @endforeach
-                                                <div class="wizard-form-step" data-step="{{$numm}}">
-                                                    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-
-
-
-                                                        <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                            <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">Formulario</h4>
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="username" class="form-label">User Name*</label>
-                                                            <input id="username" type="text" class="form-control" placeholder="Username">
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="fullname" class="form-label">Full Name*</label>
-                                                            <input id="fullname" type="text" class="form-control" placeholder="Full Name">
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="email" class="form-label">Email*</label>
-                                                            <input id="email" type="text" class="form-control" placeholder="Enter Your Email">
-                                                        </div>
-
-                                                        <div class="input-area">
-                                                            <label for="password" class="form-label">Password*</label>
-                                                            <input id="password" type="password" class="form-control" placeholder="Password">
-                                                        </div>
-                                                        <div class="input-area">
-                                                            <label for="confirmPassword" class="form-label">Confirm Password*</label>
-                                                            <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm Password">
-                                                        </div>
-
-                                                    </div>
-                                                </div>
 
                                                 <div class="mt-6 space-x-3">
-                                                    <button class="btn btn-dark prev-button" type="button">prev</button>
-                                                    <button class="btn btn-dark next-button" type="button">next</button>
+                                                    <button class="btn btn-dark" type="button">prev</button>
+                                                    <button class="btn btn-dark" type="button">next</button>
                                                 </div>
                                             </form>
                                             <!-- fin de formulario -->
@@ -242,9 +189,9 @@
 
 
     <!-- scripts -->
-    <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{asset('assets/js/rt-plugins.js')}}"></script>
-    <script src="{{asset('assets/js/app.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js'></script>
     <script>
         $(document).ready(function() {
@@ -283,7 +230,7 @@
         });
 
         $(document).ready(function() {
-            get_map(document.getElementById('departamento').value);
+            get_map('A');
 
         });
 

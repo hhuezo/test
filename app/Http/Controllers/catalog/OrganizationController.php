@@ -70,10 +70,11 @@ class OrganizationController extends Controller
         $organizations->contact_job_title = $request->contact_job_title;
         $organizations->contact_phone_number = $request->contact_phone_number;
         $organizations->contact_phone_number_2 = $request->contact_phone_number_2;
-        $organizations->secondary_contact_name = $request->secondary_contact_name;
-        $organizations->secondary_contact_job_title = $request->secondary_contact_job_title;
-        $organizations->secondary_contact_phone_number = $request->secondary_contact_phone_number;
-        $organizations->secondary_contact_phone_number_2 = $request->secondary_contact_phone_number_2;
+        $organizations->facebook = $request->facebook;
+        $organizations->website = $request->website;
+        $organizations->personeria_juridica = $request->personeria_juridica;
+        $organizations->organization_type = $request->organization_type;
+        $organizations->depedent = $request->depedent;
         $organizations->status = $request->status;
         $organizations->save();
 
@@ -128,14 +129,13 @@ class OrganizationController extends Controller
         $organizations->contact_job_title = $request->contact_job_title;
         $organizations->contact_phone_number = $request->contact_phone_number;
         $organizations->contact_phone_number_2 = $request->contact_phone_number_2;
-        $organizations->secondary_contact_name = $request->secondary_contact_name;
-        $organizations->secondary_contact_job_title = $request->secondary_contact_job_title;
-        $organizations->secondary_contact_phone_number = $request->secondary_contact_phone_number;
-        $organizations->secondary_contact_phone_number_2 = $request->secondary_contact_phone_number_2;
+        $organizations->facebook = $request->facebook;
+        $organizations->website = $request->website;
+        $organizations->personeria_juridica = $request->personeria_juridica;
+        $organizations->organization_type = $request->organization_type;
+        $organizations->depedent = $request->depedent;
         $organizations->status = $request->status;
-
         $organizations->save();
-
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
     }

@@ -122,6 +122,40 @@
                                                     <input type="text" name="secondary_contact_number_2" value="{{ $organizations->secondary_contact_number_2 }}"  required class="form-control"
                                                         value="{{ old('secondary_contact_number_2') }}">
                                                 </div>
+
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('Facebook') }}</label>
+                                                    <input type="text" name="facebook" value="{{ $organizations->facebook }}"  required class="form-control"
+                                                        value="{{ old('facebook') }}">
+                                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('website') }}</label>
+                                                    <input type="text" name="website" value="{{ $organizations->website}}"  required class="form-control"
+                                                        value="{{ old('website') }}">
+                                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('personeria juridica') }}</label>
+                                                    <input type="text" name="personeria_juridica" value="{{ $organizations->personeria_juridica}}"  required class="form-control"
+                                                        value="{{ old('personeria_juridica') }}">
+                                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('tipo de organizacion') }}</label>
+                                                    <input type="text" name="organization_type" value="{{ $organizations->organization_type}}"  required class="form-control"
+                                                        value="{{ old('organization_type') }}">
+                                                </div>
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('dependiente') }}</label>
+                                                    <input type="text" name="dependent" value="{{ $organizations->dependent}}"  required class="form-control"
+                                                        value="{{ old('organization_type') }}">
+                                                </div>
+
                                                 <div class="input-area relative pl-28">
                                                     <label for="largeInput" class="inline-inputLabel">estado</label>
                                                     <select name="catalog_status_id" class="form-control select2">

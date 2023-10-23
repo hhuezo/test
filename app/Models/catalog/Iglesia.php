@@ -26,6 +26,8 @@ class Iglesia extends Model
         'secondary_contact_job_title',
         'secondary_contact_phone_number',
         'secondary_contact_phone_number_2',
+        'pastor_name varchar',
+        'pastor_phone_number',
         'facebook',
         'website',
         'personeria_juridica',

@@ -49,12 +49,18 @@ Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap'
 
 
 //Route::get('/', [HomeController::class, 'index']);
+Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
+Route::get('/get_dep/{id}', [WelcomeController::class, 'get_dep']);
+Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_registro']);
+Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_registro3']);
+Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_registro4']);
+
+
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
-Route::get('/get_dep/{id}', [WelcomeController::class, 'get_dep']);
+
 Route::get('/registrar',[RegisterController::class,'index']);
 Route::get('/register_edit/{id}',[IglesiaController::class, 'register_edit']);
 

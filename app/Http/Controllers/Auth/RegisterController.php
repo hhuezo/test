@@ -166,11 +166,17 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $iglesia  = new Iglesia();
+       
         $iglesia->name = $request->nombre;
-        $iglesia->catalog_departamento_id = $request->departamento;
+      //  $iglesia->catalog_departamento_id = $request->departamento;
         $iglesia->save();
+
 
         return redirect('register_edit/'.$iglesia->id);
      //  return redirect('register_edit/')
     }
+
+
+
+
 }

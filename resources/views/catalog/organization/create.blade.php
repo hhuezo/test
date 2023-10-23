@@ -51,11 +51,8 @@
                                                 <input type="text" name="address" required class="form-control" value="{{ old('address') }}">
                                             </div>
 
-                                            <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">{{ __('departamento') }}</label>
-                                                <input type="text" name="city_id" required class="form-control" value="{{ old('city_id') }}">
-                                            </div>
-                                        
+
+
                                         </div>
                                         <br><br>
                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
@@ -84,24 +81,40 @@
                                                 <input type="text" name="contact_phone_number_2" required class="form-control" value="{{ old('contact_phone_number_2') }}">
                                             </div>
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">{{ __('nombre contacto secundario') }}</label>
-                                                <input type="text" name="secondary_contact_name" required class="form-control" value="{{ old('contact_name') }}">
+                                                <label for="largeInput"
+                                                    class="form-label">{{ __('Facebook') }}</label>
+                                                <input type="text" name="facebook"  required class="form-control"
+                                                    value="{{ old('facebook') }}">
                                             </div>
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">{{ __('titulo de contacto secundario en el trabajo') }}</label>
-                                                <input type="text" name="secondary_contact_job_title" required class="form-control" value="{{ old('secondary_contact_job_title') }}">
+                                                <label for="largeInput"
+                                                    class="form-label">{{ __('website') }}</label>
+                                                <input type="text" name="website"  required class="form-control"
+                                                    value="{{ old('website') }}">
                                             </div>
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">{{ __('Numero secundario de contacto') }}</label>
-                                                <input type="text" name="secondary_contact_number" required class="form-control" value="{{ old('secondary_contact_number') }}">
+                                                <label for="largeInput"
+                                                    class="form-label">{{ __('personeria juridica') }}</label>
+                                                <input type="text" name="personeria_juridica"  required class="form-control"
+                                                    value="{{ old('personeria_juridica') }}">
                                             </div>
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">{{ __('Numero secundario de contacto 2') }}</label>
-                                                <input type="text" name="secondary_contact_number_2" required class="form-control" value="{{ old('secondary_contact_number_2') }}">
+                                                <label for="largeInput"
+                                                    class="form-label">{{ __('tipo de organizacion') }}</label>
+                                                <input type="text" name="organization_type" required class="form-control"
+                                                    value="{{ old('organization_type') }}">
                                             </div>
+
+                                            <div class="input-area relative">
+                                                <label for="largeInput"
+                                                    class="form-label">{{ __('dependiente') }}</label>
+                                                <input type="text" name="dependent" required class="form-control"
+                                                    value="{{ old('dependent') }}">
+                                            </div>
+
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Estatus</label>
-                                                <select name="catalog_estatus_id" class="form-control">
+                                                <select name="estatus" class="form-control">
                                                     @foreach ($estatuorg as $obj)
                                                     <option value="{{ $obj->id }}">{{ $obj->description }}
                                                     </option>

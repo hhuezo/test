@@ -7,7 +7,7 @@
 
         <div class="card">
             <header class=" card-header noborder">
-                <h4 class="card-title"> Participantes       </h4>
+                <h4 class="card-title"> Participantes </h4>
                 <a href="{{url('catalog/member/create')}}">
                 <button class="btn btn-outline-primary" >Nuevo</button>
             </a>

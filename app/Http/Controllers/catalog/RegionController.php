@@ -54,6 +54,7 @@ class RegionController extends Controller
         $region->nombre = $request->nombre;
         $region->save();
         alert()->success('El registro ha sido agregado correctamente');
+        return redirect('catalog/region');
 
     }
 
@@ -106,7 +107,7 @@ class RegionController extends Controller
         $region->nombre = $request->nombre;
         $region->save();
         alert()->success('El registro ha sido Modificado correctamente');
-        return back();
+        return redirect('catalog/region');
     }
 
     /**
@@ -121,7 +122,7 @@ class RegionController extends Controller
         //dd($question);
         $region->delete();
         alert()->info('El registro ha sido eliminado correctamente');
-        return back();
+        return redirect('catalog/region');
 
     }
 }
