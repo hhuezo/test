@@ -52,8 +52,6 @@ Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap'
 Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
 Route::get('/get_dep/{id}', [WelcomeController::class, 'get_dep']);
 Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_registro']);
-Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_registro3']);
-Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_registro4']);
 
 
 

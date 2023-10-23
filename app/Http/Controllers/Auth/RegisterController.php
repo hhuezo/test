@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MailController;
 use App\Models\catalog\Iglesia;
+use App\Models\catalog\Question;
 use App\Models\catalog\WizardQuestions;
 use App\Models\Organization;
 use App\Providers\RouteServiceProvider;
@@ -166,11 +167,11 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $iglesia  = new Iglesia();
-       
+        $questions=new WizardQuestions();
         $iglesia->name = $request->nombre;
       //  $iglesia->catalog_departamento_id = $request->departamento;
         $iglesia->save();
-
+        session(['tab' => 2]);
 
         return redirect('register_edit/'.$iglesia->id);
      //  return redirect('register_edit/')

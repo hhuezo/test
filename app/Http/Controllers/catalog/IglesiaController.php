@@ -172,9 +172,10 @@ class IglesiaController extends Controller
     public function actualizar_registro(Request $request)
     {
 
+     session(['tab' => 3]);
         $count = WizardQuestions::get()->Count();
 
-        //  dd($request->username, $request->email);
+
         $questions = WizardQuestions::where('active', '=', 1)->get();
 
 
@@ -182,6 +183,8 @@ class IglesiaController extends Controller
        // if ($request->valor == 2) {
             $iglesia->catalog_departamento_id = $request->departamento;
             $iglesia->update();
+            alert()->success('El registro ha sido Modificado correctamente');
+            return back();
          //   return view('catalog.iglesia.register_edit', compact('iglesia', 'tab', 'questions'));
 
        // }
@@ -296,8 +299,8 @@ class IglesiaController extends Controller
 
         $iglesia = Iglesia::findOrFail($id);
         $questions = WizardQuestions::where('active', '=', 1)->get();
-        $tab = 2;
-        return view('catalog.iglesia.register_edit', compact('iglesia', 'questions', 'tab'));
+
+        return view('catalog.iglesia.register_edit', compact('iglesia', 'questions'));
     }
 
 

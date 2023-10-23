@@ -19,7 +19,7 @@
     <!-- START : Theme Config js-->
     <script src="{{ asset('assets/js/settings.js') }}" sync></script>
     <!-- END : Theme Config js-->
-
+    @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
     <style>
         .card-title,
         .form-label {
@@ -122,141 +122,208 @@
                                             </div>
                                             <!-- fin of step -->
                                             <!-- inicio del form -->
+                                            <div  style="display:{{session('tab')!=2 ? 'none':'block'}}" id='div1'>
+                                                <form action="{{ url('iglesia_actualizar') }}" class="wizard-form mt-10"
+                                                    method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $iglesia->id }}">
+                                                    <div>
+                                                        <div
+                                                            class="grid lg:grid-cols-1 md:grid-cols-1 grid-cols-1 gap-5">
 
-                                            <form action="{{ url('iglesia_actualizar') }}" class="wizard-form mt-10"
-                                                method="post">
-                                                <input type="hidden" name="id" value="{{ $iglesia->id }}">
-                                                <div>
-                                                    <div class="grid lg:grid-cols-1 md:grid-cols-1 grid-cols-1 gap-5">
+                                                            <div class="input-area">
+                                                                <label class="form-label">Departamento {{session('tab')}}</label>
+                                                                <input id="departamento" type="text"
+                                                                    name="departamento" class="form-control" required>
 
-                                                        <div class="input-area">
-                                                            <label class="form-label">Departamento</label>
-                                                            <input id="departamento" type="hidden" class="form-control"
-                                                                required>
-
-                                                            <input id="departamento_show" type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-
-
-                                                        <div class="input-area">
-                                                            <label for="fullname" class="form-label">Seleccione en el
-                                                                mapa</label>
-                                                            <div id="div_result">
+                                                                <input id="departamento_show" type="text"
+                                                                    class="form-control" readonly>
+                                                            </div>
 
 
+                                                            <div class="input-area">
+                                                                <label for="fullname" class="form-label">Seleccione en
+                                                                    el
+                                                                    mapa</label>
+                                                                <div id="div_result">
 
+
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-area">
+                                                                &nbsp;
+                                                            </div>
+                                                            <div class="input-area">
+                                                                &nbsp;
                                                             </div>
                                                         </div>
-                                                        <div class="input-area">
-                                                            &nbsp;
-                                                        </div>
-                                                        <div class="input-area">
-                                                            &nbsp;
-                                                        </div>
+
                                                     </div>
+                                                    <div class="mt-6 space-x-3">
+                                                        <button class="btn btn-dark" type="button">prev</button>
+                                                        <button class="btn btn-dark" type="submit">nextxx</button>
+                                                    </div>
+                                                </form>
+                                                <!-- fin de formulario -->
+                                            </div>
 
+
+                                            <h4 class="card-title">
+                                                <div  style="display:{{session('tab')!=3 ? 'none':'block'}}" id='div3'>
+                                                    <form action="{{ url('iglesia_actualizar') }}" class="wizard-form mt-10"
+                                                    method="post">
+                                                    @csrf
+                                                    @foreach($questions as $obj)
+                                                    <div class="input-area">{{$obj->question}}
+                                                        <fieldset class="altura">
+                                                            <legend>{{$obj->nombre}}</legend>
+                                                            <div class="basicRadio">
+                                                                <label>
+                                                                    <label>
+                                                                        <div class="primary-radio">
+                                                                            <label
+                                                                                class="flex items-center cursor-pointer">
+                                                                                <input type="radio"
+                                                                                    class="hidden"
+                                                                                    name="answer"
+                                                                                    value="Si"
+                                                                                    checked="checked">
+                                                                                <span
+                                                                                    class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                        duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                <span
+                                                                                    class="text-primary-500 text-sm leading-6 capitalize">Si</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </label>
+                                                                    <label>
+
+                                                                        <div class="primary-radio">
+                                                                            <label
+                                                                                class="flex items-center cursor-pointer">
+                                                                                <input type="radio"
+                                                                                    class="hidden"
+                                                                                    name="answer"
+                                                                                    value="No">
+                                                                                <span
+                                                                                    class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                        duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                <span
+                                                                                    class="text-primary-500 text-sm leading-6 capitalize">No</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </label>
+                                                                </label>
+                                                            </div>
+                                                        </fieldset>
+
+                                                    </div>
+                                                    @endforeach
+                                                    <div class="mt-6 space-x-3 text-right">
+                                                        <button class="btn btn-dark" type="submit" >Anterior</button>
+                                                        <button class="btn btn-dark" type="submit">Siguiente</button>
+                                                    </div>
+                                                </form>
                                                 </div>
+                                            </h4>
 
 
 
-                                                <div class="mt-6 space-x-3">
-                                                    <button class="btn btn-dark" type="button">prev</button>
-                                                    <button class="btn btn-dark" type="button">next</button>
-                                                </div>
-                                            </form>
-                                            <!-- fin de formulario -->
+
+
                                         </div>
-                                    </div>
-                                    <!-- END: Step Form Horizontal -->
+                                        <!-- END: Step Form Horizontal -->
 
+                                    </div>
                                 </div>
                             </div>
+                            <div class="lg:col-span-2 col-span-12 space-y-5">
+                                &nbsp;
+                            </div>
                         </div>
-                        <div class="lg:col-span-2 col-span-12 space-y-5">
-                            &nbsp;
-                        </div>
+
                     </div>
 
                 </div>
-
             </div>
+
         </div>
 
-    </div>
 
 
 
-
-    <!-- scripts -->
-    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js'></script>
-    <script>
-        $(document).ready(function() {
-            $(":input").inputmask();
-        });
-    </script>
-
-    <script>
-        document.getElementById('uploadForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-
-            fetch('/images', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Imagen subida con éxito');
-                    } else {
-                        alert('Error al subir la imagen');
-                    }
-                })
-                .catch(error => {
-                    alert('Error en la solicitud');
-                });
-        });
-    </script>
-
-
-
-    <script>
-        google.charts.load('current', {
-            'packages': ['geochart']
-        });
-
-        $(document).ready(function() {
-            get_map('A');
-
-        });
-
-
-        function get_map(dep) {
-            //console.log(dep);
-            // Realizar la solicitud AJAX
-            $.ajax({
-                url: "{{ url('get_map') }}/" + dep, // La URL de la solicitud
-                type: "GET", // Método de la solicitud (GET en este caso)
-                //dataType: "json", // Tipo de datos esperados en la respuesta (puedes ajustarlo según tus necesidades)
-
-                // Función que se ejecuta cuando la solicitud es exitosa
-                success: function(data) {
-                    //console.log(data);
-                    // Pintar la respuesta en el div_result
-                    $("#div_result").html(data);
-                },
-
-                // Función que se ejecuta si la solicitud falla
-                error: function(xhr, status, error) {
-                    console.error("Error en la solicitud AJAX:", status, error);
-                }
+        <!-- scripts -->
+        <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+        <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
+        <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js'></script>
+        <script>
+            $(document).ready(function() {
+                $(":input").inputmask();
             });
-        }
-    </script>
+        </script>
+
+
+
+        <script>
+            document.getElementById('uploadForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+
+                fetch('/images', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Imagen subida con éxito');
+                        } else {
+                            alert('Error al subir la imagen');
+                        }
+                    })
+                    .catch(error => {
+                        alert('Error en la solicitud');
+                    });
+            });
+        </script>
+
+
+
+        <script>
+            google.charts.load('current', {
+                'packages': ['geochart']
+            });
+
+            $(document).ready(function() {
+                get_map('A');
+
+            });
+
+
+            function get_map(dep) {
+                //console.log(dep);
+                // Realizar la solicitud AJAX
+                $.ajax({
+                    url: "{{ url('get_map') }}/" + dep, // La URL de la solicitud
+                    type: "GET", // Método de la solicitud (GET en este caso)
+                    //dataType: "json", // Tipo de datos esperados en la respuesta (puedes ajustarlo según tus necesidades)
+
+                    // Función que se ejecuta cuando la solicitud es exitosa
+                    success: function(data) {
+                        //console.log(data);
+                        // Pintar la respuesta en el div_result
+                        $("#div_result").html(data);
+                    },
+
+                    // Función que se ejecuta si la solicitud falla
+                    error: function(xhr, status, error) {
+                        console.error("Error en la solicitud AJAX:", status, error);
+                    }
+                });
+            }
+        </script>
 </body>
 
 </html>
