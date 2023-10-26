@@ -13,12 +13,12 @@ class Sede extends Model
     public $timestamps = false;
     protected $fillable = [
         'nombre',
-        'cohorte',
+        'cohorte_id',
    ];
 protected $guarded = [];
 public function cohorte()
     {
-        return $this->belongsTo('App\Models\catalog\Cohorte', 'cohorte','id' );
+        return $this->belongsTo('App\Models\catalog\Cohorte', 'cohorte_id','id' );
 
     }
 

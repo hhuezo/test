@@ -60,22 +60,31 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('departamento') }}</label>
-                                                    <select name="catalog_departamento_id" class="form-control select2">
-                                                        @foreach ($depto as $obj1)
-                                                            <option value="{{ $obj1->id }}">{{ $obj1->nombre }}
+                                                    <select name="catalog_departamento_id" class="form-control select">
+                                                        @foreach ($deptos as $obj1)
+                                                            @if ($obj1->id == $iglesia->catalog_departamento_id)
+                                                                <option value="{{ $obj1->id }}" selected>
+                                                                    {{ $obj1->nombre }}
+                                                                @else
+                                                                <option value="{{ $obj1->id }}">{{ $obj1->nombre }}
+                                                            @endif
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
 
+
+
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">{{ __('municipio') }}</label>
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('municipio') }}</label>
                                                     <select name="catalog_municipio_id" class="form-control select">
-                                                        @foreach($municipio as $obj2)
-                                                        @if ($obj2->departamento_id == $obj1->id )
-                                                        <option value="{{ $obj2->id }}">{{ $obj2->nombre }}</option>
-                                                          @endif
-                                                       @endforeach
+                                                        @foreach ($municipio as $obj2)
+                                                            @if ($obj2->departamento_id == $obj1->id)
+                                                                <option value="{{ $obj2->id }}">{{ $obj2->nombre }}
+                                                                </option>
+                                                            @endif
+                                                        @endforeach
                                                     </select>
                                                 </div>
 
@@ -139,7 +148,7 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Red social') }}</label>
+                                                        class="form-label">{{ __('Facebook') }}</label>
                                                     <input type="text" name="facebook"
                                                         value="{{ $iglesia->facebook }}" required class="form-control"
                                                         value="{{ old('facebook') }}">
@@ -166,9 +175,15 @@
                                                         class="form-label">{{ __('tipo de organizacion') }}</label>
                                                     <select name="organization_type" class="form-control">
                                                         @foreach ($organizacion as $obj)
-                                                            <option value="{{ $obj->id }}">{{ $obj->name }}
-                                                            </option>
-                                                        @endforeach
+                                                        @if ($obj->id== $iglesia->organization_type)
+                                                            <option value="{{ $obj->id }}" selected>
+                                                                {{ $obj->name }}
+                                                            @else
+                                                            <option value="{{ $obj->id }}">
+                                                                {{ $obj->name }}
+                                                        @endif
+                                                        </option>
+                                                    @endforeach
                                                     </select>
                                                 </div>
 
@@ -176,7 +191,13 @@
                                                     <label for="largeInput" class="form-label">Estatus</label>
                                                     <select name="Status" class="form-control">
                                                         @foreach ($estatuorg as $obj2)
-                                                            <option value="{{ $obj2->id }}">{{ $obj2->description }}
+                                                            @if ($obj2->Status == $iglesia->Status)
+                                                                <option value="{{ $obj2->id }}" selected>
+                                                                    {{ $obj2->description }}
+                                                                @else
+                                                                <option value="{{ $obj2->id }}">
+                                                                    {{ $obj2->description }}
+                                                            @endif
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -188,13 +209,18 @@
                                                         class="form-label">{{ __('Sede') }}</label>
                                                     <select name="sede_id" class="form-control select2">
                                                         @foreach ($sede as $obj3)
-                                                            <option value="{{ $obj3->id }}">{{ $obj3->nombre }}
+                                                            @if ($obj3->id == $iglesia->sede_id)
+                                                                <option value="{{ $obj3->id }}" selected>
+                                                                    {{ $obj3->nombre }}
+                                                                @else
+                                                                <option value="{{ $obj3->id }}">{{ $obj3->nombre }}
+                                                            @endif
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
 
-<div></div>
+                                                <div></div>
 
                                                 <div class="card h-full">
                                                     <div class="grid pt-4 pb-3 px-4">
@@ -202,8 +228,7 @@
 
                                                             <label for="largeInput" class="form-label">Imagen logo</label>
                                                             <input type="file" name="logo_name"
-                                                                value="{{ old('logo_name') }}" required
-                                                                class="form-control">
+                                                                value="{{ old('logo_name') }}" class="form-control">
 
                                                         </div>
                                                         <p>
@@ -220,12 +245,11 @@
 
                                         </form>
 
-   &nbsp;&nbsp;
+                                        &nbsp;&nbsp;
                                         <div class="btn btn-dark btn-sm float-right">
                                             <iconify-icon data-bs-toggle="modal"
-                                                data-bs-target="#modal-create-{{ $iglesia->id }}"
-                                                icon="mdi:plus-box" style="color: #ede9e9;"
-                                                width="20"></iconify-icon>
+                                                data-bs-target="#modal-create-{{ $iglesia->id }}" icon="mdi:plus-box"
+                                                style="color: #ede9e9;" width="20"></iconify-icon>
                                         </div>
 
                                         <div class="input-area relative">
