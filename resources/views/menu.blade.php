@@ -167,6 +167,9 @@
                             <li>
                                 <a href="{{ url('catalog/iglesia') }}">Iglesias</a>
                             </li>
+                            <li>
+                                <a href="{{ url('catalog/usuarioiglesia') }}">Usuario Iglesias</a>
+                            </li>
 
                             <li>
                                 <a href="{{ url('catalog/wizard_church_questions') }}">Preguntas para la iglesia</a>

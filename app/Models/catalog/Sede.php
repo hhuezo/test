@@ -13,7 +13,7 @@ class Sede extends Model
     public $timestamps = false;
     protected $fillable = [
         'nombre',
-        'cohorte',
+        'cohorte_id',
    ];
 protected $guarded = [];
 public function cohorte()

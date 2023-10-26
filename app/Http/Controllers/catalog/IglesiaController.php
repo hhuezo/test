@@ -71,7 +71,7 @@ class IglesiaController extends Controller
         $organizations->name = $request->name;
         $organizations->address = $request->address;
         $organizations->catalog_departamento_id = $request->catalog_departamento_id;
-        //$organizations->catalog_municipio_id = $request->catalog_municipio_id;
+        $organizations->catalog_municipio_id = $request->catalog_municipio_id;
         $organizations->phone_number = $request->phone_number;
         $organizations->notes = $request->notes;
         $organizations->contact_name = $request->contact_name;
@@ -119,7 +119,8 @@ class IglesiaController extends Controller
     {
         $iglesia = Iglesia::findOrFail($id);
         $cohorte = Cohorte::get();
-        $depto = Departamento::get();
+        $depto = Departamento::where('id', '=', $iglesia->catalog_departamento_id)->get();
+        $deptos = Departamento::get();
         $municipio = Municipio::get();
         $sede = Sede::get();
 
@@ -133,7 +134,7 @@ class IglesiaController extends Controller
         $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->get();
         //   dd($wizzarquestion);
         //where('id' ,'=', $wizzaranswer->question_id)->get();
-        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion'));
+        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos'));
     }
 
     public function update(Request $request, $id)
@@ -148,7 +149,7 @@ class IglesiaController extends Controller
         $organizations->address = $request->address;
 
         $organizations->catalog_departamento_id = $request->catalog_departamento_id;
-        //  $organizations->catalog_municipio_id = $request->catalog_municipio_id;
+        $organizations->catalog_municipio_id = $request->catalog_municipio_id;
         $organizations->phone_number = $request->phone_number;
         $organizations->notes = $request->notes;
         $organizations->contact_name = $request->contact_name;
