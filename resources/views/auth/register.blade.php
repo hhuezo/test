@@ -9,10 +9,12 @@
     <link rel="icon" type="image/png" href="assets/images/logo/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/css/rt-plugins.css">
     <link href="https://unpkg.com/aos@2.3.0/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
     <link rel="stylesheet" href="assets/css/app.css">
     <!-- START : Theme Config js-->
     <script src="assets/js/settings.js" sync></script>
@@ -55,9 +57,11 @@
                                         </div>
                                         <div class="card-body p-6">
                                             <!-- inicio de step -->
-                                            <div class="wizard-steps flex z-[5] items-center relative justify-center md:mx-8">
+                                            <div
+                                                class="wizard-steps flex z-[5] items-center relative justify-center md:mx-8">
 
-                                                <div class="active relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="1" id="div1">
+                                                <div class="active relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step"
+                                                    data-step="1" id="div1">
                                                     <div class="number-box">
                                                         <span class="number">
                                                             1
@@ -71,84 +75,45 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="active relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="2" id="div2">
-                                                    <div class="number-box">
-                                                        <span class="number">
-                                                            2
-                                                        </span>
-                                                        <span class="no-icon text-3xl">
-                                                            <iconify-icon icon="bx:check-double"></iconify-icon>
-                                                        </span>
+                                                @for ($i = 2; $i <= count($questions) + 3; $i++)
+                                                    <div
+                                                        class="relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step">
+                                                        <div class="number-box">
+                                                            <span class="number">
+                                                                {{ $i }}
+                                                            </span>
+                                                            <span class="no-icon text-3xl">
+                                                                <iconify-icon icon="bx:check-double"></iconify-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div class="bar-line"></div>
+                                                        <div class="circle-box">
+                                                            <span class="w-max"></span>
+                                                        </div>
                                                     </div>
-                                                    <div class="bar-line"></div>
-                                                    <div class="circle-box">
+                                                @endfor
 
-                                                    </div>
-                                                </div>
-                                                @php($i = 3)
-                                                @foreach($questions as $obj)
-                                                <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="{{$i}}" id="div{{$i}}">
-                                                    <div class="number-box">
-                                                        <span class="number">
-                                                            {{$i}}
-                                                        </span>
-                                                        <span class="no-icon text-3xl">
-                                                            <iconify-icon icon="bx:check-double"></iconify-icon>
-                                                        </span>
-                                                    </div>
-                                                    <div class="bar-line"></div>
-                                                    <div class="circle-box">
 
-                                                    </div>
-                                                </div>
-                                                @php($i++)
-                                                @php($num = $i)
-                                                @endforeach
 
-                                                <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="{{$num}}" id="div{{$num}}">
-                                                    <div class="number-box">
-                                                        <span class="number">
-                                                            {{$num}}
-                                                        </span>
-                                                        <span class="no-icon text-3xl">
-                                                            <iconify-icon icon="bx:check-double"></iconify-icon>
-                                                        </span>
-                                                    </div>
-                                                    <div class="bar-line"></div>
-                                                    <div class="circle-box">
-                                                        <span class="w-max">Address</span>
-                                                    </div>
-                                                </div>
-
-                                                <!--<div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="{{$num+1}}" id="{{$num+1}}">-->
-                                                    <div class="  relative z-[1] items-center item flex flex-start flex-1 last:flex-none group wizard-step" data-step="4" id="div4">
-                                                    <div class="number-box">
-                                                        <span class="number">
-                                                            {{$num + 1}}
-                                                        </span>
-                                                        <span class="no-icon text-3xl">
-                                                            <iconify-icon icon="bx:check-double"></iconify-icon>
-                                                        </span>
-                                                    </div>
-                                                    <div class="bar-line"></div>
-                                                    <div class="circle-box">
-                                                        <span class="w-max">Address</span>
-                                                    </div>
-                                                </div>
 
                                             </div>
                                             <!-- fin of step -->
                                             <!-- inicio del form -->
-                                            <form class="wizard-form mt-10" action="{{route('register')}}" method="POST">
+                                            <form class="wizard-form mt-10" action="{{ route('register') }}"  method="POST">
                                                 @csrf
-                                                <div class="wizard-form-step active" data-step="1" id="div1">
+                                                <div class="wizard-form-step active" style=" height: 622px;">
                                                     <div class="grid lg:grid-cols-1 md:grid-cols-1 grid-cols-1 gap-5">
                                                         <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                                            <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">Nombre y Ubicacion de la Iglesia</h4>
+                                                            <h4
+                                                                class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                Nombre y Ubicacion de la Iglesia</h4>
                                                         </div>
                                                         <div class="input-area">
-                                                            <label for="username" class="form-label">Nombre de Iglesia</label>
-                                                            <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre de Iglesia" required>
+                                                            <label for="username" class="form-label">Nombre de
+                                                                Iglesia</label>
+                                                            <input id="nombre" name="nombre" type="text"
+                                                                class="form-control" placeholder="Nombre de Iglesia"
+                                                                required>
                                                         </div>
                                                         <div class="input-area">
                                                             &nbsp;
@@ -158,9 +123,10 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="mt-6 space-x-3" align="right">
-                                                        <button class="btn btn-dark" type="submit">Siguiente</button>
-                                                    </div>
+
+                                                </div>
+                                                <div class="mt-6 space-x-3" align="right">
+                                                    <button class="btn btn-dark" type="submit">Siguiente</button>
                                                 </div>
 
                                             </form>

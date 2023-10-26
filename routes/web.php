@@ -52,8 +52,9 @@ Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap'
 Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
 Route::get('/get_dep/{id}', [WelcomeController::class, 'get_dep']);
 Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_registro']);
-
-
+Route::get('/iglesia/back_page', [IglesiaController::class, 'back_page'])->name('back_page');
+Route::post('/iglesia/registro_respuesta', [IglesiaController::class, 'registro_respuesta']);
+Route::post('/iglesia/registro_iglesia', [IglesiaController::class, 'registro_iglesia']);
 
 Auth::routes();
 
@@ -67,6 +68,7 @@ Route::get('/test', [HomeController::class, 'test'])->name('test');
 Route::get('/register_member', [WelcomeController::class, 'register_member'])->name('register_member');
 Route::post('/store_member', [WelcomeController::class, 'store_member'])->name('store_member');
 Route::get('/get_municipio/{id}', [WelcomeController::class, 'get_municipio'])->name('get_municipio');
+
 
 Route::resource('seguridad/permission', PermissionController::class);
 Route::post('seguridad/permission/update_permission', [PermissionController::class, 'update_permission']);

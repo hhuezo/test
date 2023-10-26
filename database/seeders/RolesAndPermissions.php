@@ -44,12 +44,12 @@ class RolesAndPermissions extends Seeder
         //$user = User::findOrFail(1);
         // $administrador = User::create( [
         //     'name'=>'Administrador',
-        //     'email'=>'hhuezo@ista.gob.sv',
+        //     'email'=>'admin@mail.com',
         //     'password'=> bcrypt( '12345678' ),
         // ] );
 
         // $administrador->assignRole('administrador');
-        $role = Role::create( ['name' => 'facilitator'] );
-        $role = Role::create( ['name' => 'member'] );
+        // $role = Role::create( ['name' => 'facilitator'] );
+        // $role = Role::create( ['name' => 'member'] );
     }
 }

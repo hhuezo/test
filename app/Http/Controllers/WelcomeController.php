@@ -57,7 +57,7 @@ class WelcomeController extends Controller
             'document_number.required' => 'El número de documento es un valor requerido',
             'phone_number.required' => 'El Numero de telefono es un valor requerido',
             'address.required' => 'La dirección es un valor requerido',
-            'organization_id.required' => 'La organización es requerida',
+            //'organization_id.required' => 'La organización es requerida',
             'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
             'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
             'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
@@ -75,7 +75,7 @@ class WelcomeController extends Controller
             //'document_number' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'max:9'],
             'address' => ['required', 'string', 'max:255'],
-            'organization_id' => ['required'],
+            //'organization_id' => ['required'],
         ], $messages);
 
 
@@ -130,7 +130,7 @@ class WelcomeController extends Controller
     public function get_dep($id)
     {
         $dep = Departamento::where('abbrev', '=', $id)->first();
-    
+
         if ($dep) {
             // Si encontramos un departamento, devolvemos la respuesta en formato JSON
             return response()->json($dep);

@@ -2,6 +2,7 @@
 
 namespace App\Models\catalog;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,16 +41,20 @@ class Iglesia extends Model
     ];
 
 
-        protected $guarded = [];
+    protected $guarded = [];
 
-   public function sedeiglesia()
-       {
-           return $this->belongsTo('use App\Models\catalog\Sede','id','sede_id');
-           //return $this->belongsTo('App\Models\LugarOrigen', 'tck_lor_codigo', 'lor_codigo');
-       }
-       public function departamentos(){
-        return $this->belongsTo(Departamento::class,'catalog_departamento_id','id');
-       }
+    public function sedeiglesia()
+    {
+        return $this->belongsTo('use App\Models\catalog\Sede', 'id', 'sede_id');
+        //return $this->belongsTo('App\Models\LugarOrigen', 'tck_lor_codigo', 'lor_codigo');
+    }
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class, 'catalog_departamento_id', 'id');
+    }
 
-
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_has_iglesia','iglesia_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\catalog\Iglesia;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,6 +48,6 @@ class User extends Authenticatable
 
     public function organization()
     {
-        return $this->belongsToMany(Organization::class,'users_has_orgs','users_id');
+        return $this->belongsToMany(Iglesia::class,'users_has_iglesia','user_id');
     }
 }

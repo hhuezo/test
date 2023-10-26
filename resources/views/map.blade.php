@@ -23,6 +23,8 @@
         var geoChart = new google.visualization.GeoChart(document.getElementById('chart2'));
 
         var options = {
+            //width: 600, // Ancho en píxeles
+            height: 500, // Alto en píxeles
             region: 'SV',
             displayMode: 'regions',
             resolution: 'provinces',
@@ -58,7 +60,7 @@
                     console.error("Error en la solicitud AJAX:", status, error);
                 }
             });
-           // document.getElementById('departamento').value = provinceID;
+            // document.getElementById('departamento').value = provinceID;
             //console.log('Province ID: ' + provinceID);
             // Puedes hacer lo que quieras con el ID de la provincia aquí
         });
