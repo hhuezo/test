@@ -58,6 +58,7 @@ class SedeController extends Controller
         $sede->cohorte_id = $request->cohorte_id;
         $sede->save();
         alert()->success('El registro ha sido agregado correctamente');
+        return back();
     }
 
     /**

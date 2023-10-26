@@ -16,6 +16,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class IglesiaController extends Controller
 {
@@ -436,7 +437,18 @@ class IglesiaController extends Controller
         $iglesia = Iglesia::findOrFail($request->iglesia_id);
 
 
-        dd($iglesia->departamento->region_id);
+
+
+        $sede = DB::table('sede as s')
+            ->join('cohorte as c', 'c.id', '=', 's.cohorte_id')
+            ->where('c.region_id', $iglesia->departamento->region_id)
+            ->select('s.id', DB::raw('(SELECT COUNT(*) FROM iglesia i WHERE i.sede_id = s.id) AS conteo'))
+            ->having('conteo','<',5)
+            ->first();
+        if( $sede)
+        {
+            $sede_id = $sede->id;
+        }
 
 
 
@@ -447,19 +459,11 @@ class IglesiaController extends Controller
             $iglesia->logo = $id_file . ' ' . $file->getClientOriginalName();
         }
 
+        $iglesia->sede_id = $sede_id;
         $iglesia->facebook = $request->facebook;
         $iglesia->website = $request->website;
         $iglesia->address = $request->address;
         $iglesia->save();
-
-
-
-
-
-
-
-
-
 
 
         $usuario = new User();

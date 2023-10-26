@@ -57,7 +57,7 @@ class CohorteController extends Controller
         $cohorte->region_id = $request->region_id;
         $cohorte->save();
         alert()->success('El registro ha sido agregado correctamente');
-
+        return back();
     }
 
     /**
