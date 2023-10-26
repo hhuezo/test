@@ -443,11 +443,34 @@ class IglesiaController extends Controller
             ->join('cohorte as c', 'c.id', '=', 's.cohorte_id')
             ->where('c.region_id', $iglesia->departamento->region_id)
             ->select('s.id', DB::raw('(SELECT COUNT(*) FROM iglesia i WHERE i.sede_id = s.id) AS conteo'))
-            ->having('conteo','<',5)
+            ->having('conteo', '<', 5)
             ->first();
-        if( $sede)
-        {
+
+        if ($sede) {
             $sede_id = $sede->id;
+        } else {
+            $cohort = Cohorte::where('region_id', '=', $iglesia->departamento->region_id)
+                ->select('id', DB::raw('(COUNT(*)) AS conteo'))
+                ->groupBy('id')
+                ->having('conteo', '<', 20)->first();
+
+            if ($cohort) {
+                $cohort_id = $cohort->id;
+            } else {
+                $cohort_new = new Cohorte();
+                $cohort_new->nombre = "congregación";
+                $cohort_new->region_id = $iglesia->departamento->region_id;
+                $cohort_new->save();
+
+                $cohort_id = $cohort_new->id;
+            }
+
+            $sede_new = new Sede();
+            $sede_new->nombre =  "Sede";
+            $sede_new->cohorte_id = $cohort_id;
+            $sede_new->save();
+
+           $sede_id = $sede_new->id;
         }
 
 
