@@ -18,7 +18,7 @@ class Sede extends Model
 protected $guarded = [];
 public function cohorte()
     {
-        return $this->belongsTo('App\Models\catalog\Cohorte', 'cohorte','id' );
+        return $this->belongsTo('App\Models\catalog\Cohorte', 'cohorte_id','id' );
 
     }
 
