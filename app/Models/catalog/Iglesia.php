@@ -52,4 +52,11 @@ class Iglesia extends Model
        }
 
 
+
+    public function churchanswer()
+        {
+            return $this->belongsTo('App\Models\catalog\wizardQuestions', 'iglesia_id','id' );
+
+        }
+
 }

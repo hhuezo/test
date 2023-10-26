@@ -171,6 +171,9 @@
                             <li>
                                 <a href="{{ url('catalog/wizard_church_questions') }}">Preguntas para la iglesia</a>
                             </li>
+                            <li>
+                                <a href="{{ url('catalog/answerreg') }}">Respuestas del Registro de la iglesia</a>
+                            </li>
                            <li>
                                 <a href="{{ url('catalog/region') }}">Region</a>
                             </li>

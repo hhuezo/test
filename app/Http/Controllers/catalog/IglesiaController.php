@@ -69,7 +69,7 @@ class IglesiaController extends Controller
         $organizations->name = $request->name;
         $organizations->address = $request->address;
         $organizations->catalog_departamento_id = $request->catalog_departamento_id;
-        $organizations->catalog_municipio_id = $request->catalog_municipio_id;
+        //$organizations->catalog_municipio_id = $request->catalog_municipio_id;
         $organizations->phone_number = $request->phone_number;
         $organizations->notes = $request->notes;
         $organizations->contact_name = $request->contact_name;
@@ -124,7 +124,15 @@ class IglesiaController extends Controller
 
         $estatuorg = OrganizationStatus::get();
         $organizacion = Organization::get();
-        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion'));
+        $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $iglesia->id)->get();
+        //plural
+
+        $questionArray = $wizzaranswer->pluck('question_id')->toArray();
+
+        $wizzarquestion = WizardQuestions::whereNotIn('id',$questionArray)->get();
+     //   dd($wizzarquestion);
+        //where('id' ,'=', $wizzaranswer->question_id)->get();
+        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion'));
     }
 
     /**
@@ -136,13 +144,17 @@ class IglesiaController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
+
+        // dd($wizzaranswer);
         $organizations = Iglesia::findOrFail($id);
 
         $organizations->name = $request->name;
         $organizations->address = $request->address;
 
         $organizations->catalog_departamento_id = $request->catalog_departamento_id;
-        $organizations->catalog_municipio_id = $request->catalog_municipio_id;
+        //  $organizations->catalog_municipio_id = $request->catalog_municipio_id;
         $organizations->phone_number = $request->phone_number;
         $organizations->notes = $request->notes;
         $organizations->contact_name = $request->contact_name;
@@ -164,15 +176,83 @@ class IglesiaController extends Controller
         $archivo->move($destinationPath, $path);
         $organizations->logo_url = $destinationPath;
         $organizations->logo_name = $filename;
-        $organizations->save();
+        $organizations->update();
+        //  dd($organizations->id);
+        //preguntas    if ( $wizzaranswer->question_id==$request->id) {        $wizzaranswer->answer=$request->answer;        $wizzaranswer->update();    }
+
+
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
     }
 
+
+    public function attach_preguntas(Request $request){
+       // $organizations = Iglesia::findOrFail($id);
+  //dd($request->answer);
+       $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $request->iglesia_id)->where('question_id', '=', $request->question_id)->first();
+   //    dd( $wizzaranswer, $wizzaranswer->first() );
+        if ($request->answer == 1) {
+            $wizzaranswer->answer = 1;
+        }
+        if ($request->answer == 0) {
+            $wizzaranswer->answer = 0;
+        }
+        $wizzaranswer->update();
+        alert()->success('El registro ha sido Modificado correctamente');
+        return back();
+
+
+    }
+
+
+
+    public function dettach_preguntas(Request $request){
+        // $organizations = Iglesia::findOrFail($id);
+   //dd($request->answer);
+        $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $request->iglesia_id)->where('question_id', '=', $request->question_id)->first();
+        $wizzarquestion = WizardQuestions::where('id' ,'=',  $request->question_id)->first();
+        $wizzaranswer->delete ();
+        $wizzarquestion->delete();
+        alert()->error('La Pregunta y Respuesta han sido eliminadas correctamente');
+        return back();
+
+
+     }
+
+    //  dd($organizations->id);
+    //preguntas    if ( $wizzaranswer->question_id==$request->id) {        $wizzaranswer->answer=$request->answer;        $wizzaranswer->update();    }
+
+
+    public function add_preguntaresp(Request $request){
+        // $organizations = Iglesia::findOrFail($id);
+   //dd($request);
+       // $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $request->iglesia_id)->where('question_id', '=', $request->question_id)->first();
+      //  $wizzarquestion = WizardQuestions::where('id' ,'=',  $request->question_id)->first();
+       // $time = Carbon::now('America/El_Salvador');
+        $wizzaranswer = new ChurchQuestionWizard();
+
+      //  $wizzarquestion->date_added = $time->toDateTimeString();
+
+        $wizzaranswer->question_id=$request->question_id;
+        $wizzaranswer->iglesia_id= $request->iglesia_id;
+        if ($request->answer == 1) {
+            $wizzaranswer->answer = 1;
+        }
+        if ($request->answer == 0) {
+            $wizzaranswer->answer = 0;
+        }
+        $wizzaranswer->save();
+        alert()->success('La Pregunta y Respuesta han sido agregado correctamente');
+        return back();
+
+
+     }
+
+
     public function actualizar_registro(Request $request)
     {
 
-     session(['tab' => 3]);
+        session(['tab' => 3]);
         $count = WizardQuestions::get()->Count();
 
 
@@ -180,14 +260,14 @@ class IglesiaController extends Controller
 
 
         $iglesia = Iglesia::findOrFail($request->id);
-       // if ($request->valor == 2) {
-            $iglesia->catalog_departamento_id = $request->departamento;
-            $iglesia->update();
-            alert()->success('El registro ha sido Modificado correctamente');
-            return back();
-         //   return view('catalog.iglesia.register_edit', compact('iglesia', 'tab', 'questions'));
+        // if ($request->valor == 2) {
+        $iglesia->catalog_departamento_id = $request->departamento;
+        $iglesia->update();
+        alert()->success('El registro ha sido Modificado correctamente');
+        return back();
+        //   return view('catalog.iglesia.register_edit', compact('iglesia', 'tab', 'questions'));
 
-       // }
+        // }
     }
 
     public function actualizar_registro3(Request $request)
@@ -200,69 +280,65 @@ class IglesiaController extends Controller
 
         $iglesia = Iglesia::findOrFail($request->id);
 
-            /**aqui va ir el codigo de las preguntas */
+        /**aqui va ir el codigo de las preguntas */
 
-                $respuestas = new ChurchQuestionWizard();
-                $respuestas->question_id = $request->question_id;
-                $respuestas->glesia_id = $request->$iglesia->id;
-                if ($request->Answer == 1) {
-                    $respuestas->answer = 1;
-                }
-                if ($request->Answer== 0) {
-                    $respuestas->answer = 0;
-                }
-
-                $respuestas->save();
-                alert()->success('El registro ha sido Ingresado satisfactoriamente');
-                return view('catalog.iglesia.register_edit', compact('iglesia', 'tab', 'questions'));
-
-
-
+        $respuestas = new ChurchQuestionWizard();
+        $respuestas->question_id = $request->question_id;
+        $respuestas->glesia_id = $request->$iglesia->id;
+        if ($request->Answer == 1) {
+            $respuestas->answer = 1;
+        }
+        if ($request->Answer == 0) {
+            $respuestas->answer = 0;
         }
 
+        $respuestas->save();
+        alert()->success('El registro ha sido Ingresado satisfactoriamente');
+        return view('catalog.iglesia.register_edit', compact('iglesia', 'tab', 'questions'));
+    }
 
-        public function actualizar_registro4(Request $request)
+
+    public function actualizar_registro4(Request $request)
     {
 
         $iglesia = Iglesia::findOrFail($request->id);
 
-            $iglesia->address = $request->address;
-            $iglesia->catalog_municipio_id = $request->catalog_municipio_id;
-            $iglesia->phone_number = $request->phone_number;
-            $iglesia->notes = $request->notes;
-            $iglesia->contact_name = $request->contact_name;
-            $iglesia->contact_job_title = $request->contact_job_title;
-            $iglesia->contact_phone_number = $request->contact_phone_number;
-            $iglesia->contact_phone_number_2 = $request->contact_phone_number_2;
-            $iglesia->pastor_name = $request->pastor_name;
-            $iglesia->pastor_phone_number = $request->pastor_phone_number;
+        $iglesia->address = $request->address;
+        $iglesia->catalog_municipio_id = $request->catalog_municipio_id;
+        $iglesia->phone_number = $request->phone_number;
+        $iglesia->notes = $request->notes;
+        $iglesia->contact_name = $request->contact_name;
+        $iglesia->contact_job_title = $request->contact_job_title;
+        $iglesia->contact_phone_number = $request->contact_phone_number;
+        $iglesia->contact_phone_number_2 = $request->contact_phone_number_2;
+        $iglesia->pastor_name = $request->pastor_name;
+        $iglesia->pastor_phone_number = $request->pastor_phone_number;
 
-            $iglesia->facebook = $request->facebook;
-            $iglesia->website = $request->website;
+        $iglesia->facebook = $request->facebook;
+        $iglesia->website = $request->website;
 
-            $iglesia->organization_type = $request->organization_type;
-            $iglesia->status = $request->status;
-            $iglesia->sede_id = $request->sede_id;
-            $archivo = $request->file('logo_name');
-            $filename = $archivo->getClientOriginalName();
-            $path = $filename;
-            $destinationPath = public_path('/images');
-            $archivo->move($destinationPath, $path);
-            $iglesia->logo_url = $destinationPath;
-            $iglesia->logo_name = $filename;
-            $iglesia->update();
+        $iglesia->organization_type = $request->organization_type;
+        $iglesia->status = $request->status;
+        $iglesia->sede_id = $request->sede_id;
+        $archivo = $request->file('logo_name');
+        $filename = $archivo->getClientOriginalName();
+        $path = $filename;
+        $destinationPath = public_path('/images');
+        $archivo->move($destinationPath, $path);
+        $iglesia->logo_url = $destinationPath;
+        $iglesia->logo_name = $filename;
+        $iglesia->update();
 
-            //guardar el usuario
+        //guardar el usuario
 
-            $usuarios = new user();
-            $usuarios->name = $request->username;
-            $usuarios->email = $request->email;
-            $usuarios->password = Hash::make($request->password);
-            $usuarios->save();
-            alert()->success('El registro ha sido Ingresado satisfactoriamente');
-            return redirect('/');
-            /**fin del formulario  */
-
+        $usuarios = new user();
+        $usuarios->name = $request->username;
+        $usuarios->email = $request->email;
+        $usuarios->password = Hash::make($request->password);
+        $usuarios->save();
+        alert()->success('El registro ha sido Ingresado satisfactoriamente');
+        return redirect('/');
+        /**fin del formulario  */
     }
 
     /**
@@ -302,8 +378,4 @@ class IglesiaController extends Controller
 
         return view('catalog.iglesia.register_edit', compact('iglesia', 'questions'));
     }
-
-
-
-
 }
