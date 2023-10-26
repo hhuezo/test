@@ -7,18 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChurchQuestionWizard extends Model
 {
-    use HasFactory;
+
 
     use HasFactory;
     protected $table = 'church_question_wizard';
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'id',
         'question_id',
         'iglesia_id',
         'answer',
         'date_added'
     ];
-    protected $guarded = [];
+
+
+    public function pregunta()
+    {
+        return $this->belongsTo('App\Models\catalog\WizardQuestions', 'question_id','id' );
+
+    }
+
+
 }

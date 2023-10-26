@@ -70,7 +70,7 @@ class IglesiaController extends Controller
         $organizations->name = $request->name;
         $organizations->address = $request->address;
         $organizations->catalog_departamento_id = $request->catalog_departamento_id;
-        $organizations->catalog_municipio_id = $request->catalog_municipio_id;
+        //$organizations->catalog_municipio_id = $request->catalog_municipio_id;
         $organizations->phone_number = $request->phone_number;
         $organizations->notes = $request->notes;
         $organizations->contact_name = $request->contact_name;
@@ -124,18 +124,30 @@ class IglesiaController extends Controller
 
         $estatuorg = OrganizationStatus::get();
         $organizacion = Organization::get();
-        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion'));
+        $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $iglesia->id)->get();
+        //plural
+
+        $questionArray = $wizzaranswer->pluck('question_id')->toArray();
+
+        $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->get();
+        //   dd($wizzarquestion);
+        //where('id' ,'=', $wizzaranswer->question_id)->get();
+        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion'));
     }
 
     public function update(Request $request, $id)
     {
+
+
+
+        // dd($wizzaranswer);
         $organizations = Iglesia::findOrFail($id);
 
         $organizations->name = $request->name;
         $organizations->address = $request->address;
 
         $organizations->catalog_departamento_id = $request->catalog_departamento_id;
-        $organizations->catalog_municipio_id = $request->catalog_municipio_id;
+        //  $organizations->catalog_municipio_id = $request->catalog_municipio_id;
         $organizations->phone_number = $request->phone_number;
         $organizations->notes = $request->notes;
         $organizations->contact_name = $request->contact_name;
@@ -157,10 +169,75 @@ class IglesiaController extends Controller
         $archivo->move($destinationPath, $path);
         $organizations->logo_url = $destinationPath;
         $organizations->logo_name = $filename;
-        $organizations->save();
+        $organizations->update();
+        //  dd($organizations->id);
+        //preguntas    if ( $wizzaranswer->question_id==$request->id) {        $wizzaranswer->answer=$request->answer;        $wizzaranswer->update();    }
+
+
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
     }
+
+
+    public function attach_preguntas(Request $request)
+    {
+        // $organizations = Iglesia::findOrFail($id);
+        //dd($request->answer);
+        $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $request->iglesia_id)->where('question_id', '=', $request->question_id)->first();
+        //    dd( $wizzaranswer, $wizzaranswer->first() );
+        if ($request->answer == 1) {
+            $wizzaranswer->answer = 1;
+        }
+        if ($request->answer == 0) {
+            $wizzaranswer->answer = 0;
+        }
+        $wizzaranswer->update();
+        alert()->success('El registro ha sido Modificado correctamente');
+        return back();
+    }
+
+
+
+    public function dettach_preguntas(Request $request)
+    {
+        // $organizations = Iglesia::findOrFail($id);
+        //dd($request->answer);
+        $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $request->iglesia_id)->where('question_id', '=', $request->question_id)->first();
+        $wizzarquestion = WizardQuestions::where('id', '=',  $request->question_id)->first();
+        $wizzaranswer->delete();
+        $wizzarquestion->delete();
+        alert()->error('La Pregunta y Respuesta han sido eliminadas correctamente');
+        return back();
+    }
+
+    //  dd($organizations->id);
+    //preguntas    if ( $wizzaranswer->question_id==$request->id) {        $wizzaranswer->answer=$request->answer;        $wizzaranswer->update();    }
+
+
+    public function add_preguntaresp(Request $request)
+    {
+        // $organizations = Iglesia::findOrFail($id);
+        //dd($request);
+        // $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $request->iglesia_id)->where('question_id', '=', $request->question_id)->first();
+        //  $wizzarquestion = WizardQuestions::where('id' ,'=',  $request->question_id)->first();
+        // $time = Carbon::now('America/El_Salvador');
+        $wizzaranswer = new ChurchQuestionWizard();
+
+        //  $wizzarquestion->date_added = $time->toDateTimeString();
+
+        $wizzaranswer->question_id = $request->question_id;
+        $wizzaranswer->iglesia_id = $request->iglesia_id;
+        if ($request->answer == 1) {
+            $wizzaranswer->answer = 1;
+        }
+        if ($request->answer == 0) {
+            $wizzaranswer->answer = 0;
+        }
+        $wizzaranswer->save();
+        alert()->success('La Pregunta y Respuesta han sido agregado correctamente');
+        return back();
+    }
+
 
     public function actualizar_registro(Request $request)
     {
@@ -170,7 +247,6 @@ class IglesiaController extends Controller
 
 
         $questions = WizardQuestions::where('active', '=', 1)->get();
-
 
         $iglesia = Iglesia::findOrFail($request->id);
 
@@ -182,6 +258,7 @@ class IglesiaController extends Controller
 
     public function back_page(Request $request)
     {
+
         session(['tab' => (session('tab') - 1)]);
         return back();
     }
@@ -311,6 +388,7 @@ class IglesiaController extends Controller
         return view('auth.register_edit', compact('iglesia', 'questions',  'departamento'));
     }
 
+
     public function registro_respuesta(Request $request)
     {
         $respuesta =  ChurchQuestionWizard::where('question_id', '=', $request->question_id)->where('iglesia_id', '=', $request->iglesia_id)->first();
@@ -324,8 +402,7 @@ class IglesiaController extends Controller
             $respuesta->answer = $request->answer;
             $respuesta->save();
         }
-        if($request->answer == 0)
-        {
+        if ($request->answer == 0) {
             return view('auth.message');
         }
 

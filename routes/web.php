@@ -13,6 +13,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\catalog\AnswersController;
+use App\Http\Controllers\catalog\ChurchQuestionController;
 use App\Http\Controllers\catalog\CohorteController;
 use App\Http\Controllers\catalog\CourseController as CatalogCourseController;
 use App\Http\Controllers\catalog\OrganizationStatusController;
@@ -22,7 +23,6 @@ use App\Http\Controllers\catalog\FilePerCourseController;
 use App\Http\Controllers\catalog\IglesiaController;
 use App\Http\Controllers\catalog\MemberController as CatalogMemberController;
 use App\Http\Controllers\catalog\OrganizationController as CatalogOrganizationController;
-use App\Http\Controllers\catalog\QuizController as CatalogQuizController;
 use App\Http\Controllers\catalog\RegionController;
 use App\Http\Controllers\catalog\SedeController;
 use App\Http\Controllers\catalog\WizardQuestionsController;
@@ -55,6 +55,12 @@ Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_regist
 Route::get('/iglesia/back_page', [IglesiaController::class, 'back_page'])->name('back_page');
 Route::post('/iglesia/registro_respuesta', [IglesiaController::class, 'registro_respuesta']);
 Route::post('/iglesia/registro_iglesia', [IglesiaController::class, 'registro_iglesia']);
+
+
+ Route::post('catalog/iglesia/add_preguntaresp', [IglesiaController::class, 'add_preguntaresp']);
+ Route::post('catalog/iglesia/attach_preguntas', [IglesiaController::class, 'attach_preguntas'] );
+ Route::post('catalog/iglesia/dettach_preguntas', [IglesiaController::class, 'dettach_preguntas']);
+
 
 Auth::routes();
 
@@ -122,6 +128,9 @@ Route::post('/images', [IglesiaController::class,'copiarImagen']);
 Route::resource('catalog/iglesia', IglesiaController::class);
 
 Route::resource('catalog/wizard_church_questions', WizardQuestionsController::class);
+
+Route::resource('catalog/answerreg', ChurchQuestionController::class);
+
 
 Route::resource('catalog/region', RegionController::class);
 

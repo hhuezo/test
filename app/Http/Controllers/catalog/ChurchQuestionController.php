@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\catalog;
 
 use App\Http\Controllers\Controller;
-use App\Models\catalog\Cohorte;
-use App\Models\catalog\Sede;
+use App\Models\catalog\ChurchQuestionWizard;
+use App\Models\catalog\Iglesia;
+use App\Models\catalog\WizardQuestions;
 use Illuminate\Http\Request;
 
-class SedeController extends Controller
+class ChurchQuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +17,12 @@ class SedeController extends Controller
      */
     public function index()
     {
-        $sede=Sede::get();
-        $cohorte =Cohorte::get();
+        $wizzaranswer = ChurchQuestionWizard::get();
+        $wizzarquestion = WizardQuestions::get();
+        $iglesia= Iglesia::get();
 
-        return view('catalog.sede.index', compact('sede','cohorte'));
+        return view('catalog.answerreg.index', compact('iglesia','wizzaranswer','wizzarquestion'));
+
     }
 
     /**
@@ -29,10 +32,13 @@ class SedeController extends Controller
      */
     public function create()
     {
-        $sede=Sede::get();
-        $cohorte =Cohorte::get();
 
-        return view('catalog.sede.create', compact('sede','cohorte'));
+        $wizzaranswer = ChurchQuestionWizard::get();
+        $wizzarquestion = WizardQuestions::get();
+        $iglesia= Iglesia::get();
+
+        return view('catalog.answerreg.create', compact('iglesia','wizzaranswer','wizzarquestion'));
+
     }
 
     /**
@@ -43,21 +49,7 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            'nombre.required' => 'ingresar nombre la sede de  congregacion',
-        ];
-
-        $request->validate([
-
-            'nombre' => 'required',
-
-        ], $messages);
-
-        $sede = new sede();
-        $sede->nombre = $request->nombre;
-        $sede->cohorte_id = $request->cohorte_id;
-        $sede->save();
-        alert()->success('El registro ha sido agregado correctamente');
+        //
     }
 
     /**
@@ -79,9 +71,14 @@ class SedeController extends Controller
      */
     public function edit($id)
     {
-        $sede = Sede::findOrFail($id);
-        $cohorte =Cohorte::get();
-        return view('catalog.sede.edit', compact('sede','cohorte'));
+       // dd( $id);
+
+        $iglesia= Iglesia::findorfail($id);
+       // dd($iglesia);
+        $wizzaranswer = ChurchQuestionWizard::where('iglesia_id' ,'=', $iglesia->id)->get();
+        $wizzarquestion =WizardQuestions::get();//where('id' ,'=', $wizzaranswer->question_id)->get();
+        return view('catalog.answerreg.edit', compact('iglesia','wizzaranswer','wizzarquestion'));
+
     }
 
     /**
@@ -93,22 +90,11 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $messages = [
-            'nombre.required' => 'ingresar nombre de sede de la congregacion',
-        ];
-
-
-
-        $request->validate([
-
-            'nombre' => 'required',
-
-        ], $messages);
-
-        $sede=  sede::findOrFail($id);
-        $sede->nombre = $request->nombre;
-        $sede->cohorte_id = $request->cohorte_id;
-        $sede->update();
+        $organizations = Iglesia::findOrFail($id);
+        $wizzaranswer=ChurchQuestionWizard::where('iglesia_id' ,'=', $organizations->id)->get();
+         $wizzaranswer->question_id=$request->question_id    ;
+         $wizzaranswer->answer=$request->answer;
+         $wizzaranswer->save();
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
     }
@@ -121,9 +107,9 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        $sede= sede::findOrFail($id);
-        //dd($question);
-        $sede->delete();
+
+        $wizzaranswer = ChurchQuestionWizard::findOrFail($id);
+        $wizzaranswer->delete();
         alert()->error('El registro ha sido eliminado correctamente');
         return back();
     }

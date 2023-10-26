@@ -61,7 +61,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="input-area relative">
+                                          <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">{{ __('municipio') }}</label>
                                                 <select name="catalog_municipio_id" class="form-control select2">
                                                     @foreach($municipio as $obj2)
@@ -198,12 +198,19 @@
 
 
                                         </div>
-
-
-                                        </div>&nbsp;
+                                        <div></div>
+                                        <div class="card h-full">
+                                         <div class="grid pt-4 pb-3 px-4">
+                                          <div class="input-area relative">
                                         <div style="text-align: right;">
-                                            <button type="submit" class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
+                                            <button type="submit" class="btn inline-flex justify-right btn-dark">{{ __('Aceptar') }}</button>
                                         </div>
+                                        </div>&nbsp;
+                                         </div>
+                                        </div>
+                                        </div>
+
+                                    </div>
                                     </form>
 
                                 </div>

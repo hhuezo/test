@@ -18,4 +18,11 @@ class WizardQuestions extends Model
         'date_add'
     ];
     protected $guarded = [];
+
+    public function respuesta()
+        {
+
+            return $this->belongsTo('App\Models\catalog\ChurchQuestionWizard', 'question_id','id' );
+
+        }
 }
