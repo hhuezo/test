@@ -12,7 +12,8 @@ class UsuarioController extends Controller
     {
         $usuarios = User::get();
 
-        return view('seguridad.user.index', compact('usuarios'));
+       return view('seguridad.user.index', compact('usuarios'));
+
     }
 
     public function create()

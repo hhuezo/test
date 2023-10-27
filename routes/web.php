@@ -25,6 +25,7 @@ use App\Http\Controllers\catalog\MemberController as CatalogMemberController;
 use App\Http\Controllers\catalog\OrganizationController as CatalogOrganizationController;
 use App\Http\Controllers\catalog\RegionController;
 use App\Http\Controllers\catalog\SedeController;
+use App\Http\Controllers\catalog\UserController;
 use App\Http\Controllers\catalog\WizardQuestionsController;
 
 /*
@@ -60,6 +61,12 @@ Route::post('/iglesia/registro_iglesia', [IglesiaController::class, 'registro_ig
  Route::post('catalog/iglesia/add_preguntaresp', [IglesiaController::class, 'add_preguntaresp']);
  Route::post('catalog/iglesia/attach_preguntas', [IglesiaController::class, 'attach_preguntas'] );
  Route::post('catalog/iglesia/dettach_preguntas', [IglesiaController::class, 'dettach_preguntas']);
+
+
+ Route::post('catalog/Iglesiauser/dettach_iglesiauser', [UserController::class, 'dettach_iglesiauser']);
+ Route::post('catalog/Iglesiauser/attach_iglesiauser', [UserController::class, 'attach_iglesiauser']);
+
+
 
 
 Auth::routes();
@@ -131,6 +138,7 @@ Route::resource('catalog/wizard_church_questions', WizardQuestionsController::cl
 
 Route::resource('catalog/answerreg', ChurchQuestionController::class);
 
+Route::resource('catalog/Iglesiauser', UserController::class);
 
 Route::resource('catalog/region', RegionController::class);
 

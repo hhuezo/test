@@ -58,6 +58,14 @@ class Iglesia extends Model
         return $this->belongsToMany(User::class, 'users_has_iglesia', 'iglesia_id');
     }
 
+    public function usuarioiglesia()
+    {
+        return $this->belongsToMany(Users::class, 'users_has_iglesia', 'iglesia_id','user_id');
+
+    }
+
+
+
     public function churchanswer()
     {
         return $this->belongsTo('App\Models\catalog\wizardQuestions', 'iglesia_id', 'id');

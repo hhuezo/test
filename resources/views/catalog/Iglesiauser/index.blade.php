@@ -25,7 +25,7 @@
                                         <th style="text-align: center">Id</th>
                                         <th>Email</th>
                                         <th>Nombre</th>
-                                        <th style="text-align: center">Opciones</th>
+                                        <th>opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -36,15 +36,11 @@
                                                 <td>{{ $obj->email }}</td>
                                                 <td>{{ $obj->name }}</td>
                                                 <td align="center">
-
-                                                    <a href="{{ url('seguridad/role') }}/{{ $obj->id }}/edit">
-                                                        <iconify-icon icon="healthicons:eye-negative" style="color: #1769aa;" width="40"></iconify-icon>
+                                                    <a href="{{ url('catalog/Iglesiauser') }}/{{ $obj->id }}/edit">
+                                                        <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;" width="40"></iconify-icon>
                                                     </a>
-
                                                     &nbsp;&nbsp;
-
-
-
+                                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
                                                 </td>
                                             </tr>
                                         @endforeach

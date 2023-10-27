@@ -168,7 +168,8 @@
                                 <a href="{{ url('catalog/iglesia') }}">Iglesias</a>
                             </li>
                             <li>
-                                <a href="{{ url('catalog/usuarioiglesia') }}">Usuario Iglesias</a>
+
+                                <a href="{{ url('catalog/Iglesiauser') }}">Usuario Iglesias</a>
                             </li>
 
                             <li>
