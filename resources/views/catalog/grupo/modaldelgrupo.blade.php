@@ -1,7 +1,8 @@
 
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-create-{{$usuario->id }}">
-    <form method="POST" action="{{url('catalog/grupo/dettach_iglesiauser') }}">
-     <input type="hidden" name='user_id' value="{{$usuario->id }}">
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{ $obj->id }}">
+    <form method="POST" action="{{url('catalog/grupo/dettach_iglesiagrupo') }}">
+     <input type="text" name='grupo_id' value="{{$grupos->id }}">
+     <input type="text" name='iglesia_id' value="{{$obj->id }}">
      @csrf
      <div class="modal-dialog relative w-auto pointer-events-none">
          <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding
@@ -24,23 +25,8 @@
              <!-- Modal body -->
              <div class="p-6 space-y-4">
                <h6 class="text-base text-slate-900 dark:text-white leading-6">
-                 Confirme si desea Agregar Relacion con la iglesia
+                 Confirme si desea Eliminar Relacion con la iglesia
                </h6>
-
-
-               <div class="input-area relative">
-                <label for="largeInput"
-                    class="form-label">{{ __('Iglesia a Agregar') }}</label>
-                <select name="iglesia_id" class="form-control select" required>
-                    @foreach ($iglesias_noasig as $obj)
-                            <option value="{{ $obj->id }}">{{ $obj->name }}
-
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-
              </div>
              <!-- Modal footer -->
              <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">

@@ -1,7 +1,7 @@
 
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-create-{{$usuario->id }}">
-    <form method="POST" action="{{url('catalog/grupo/dettach_iglesiauser') }}">
-     <input type="hidden" name='user_id' value="{{$usuario->id }}">
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-create-{{$grupos->id }}">
+    <form method="POST" action="{{url('catalog/grupo/attach_iglesiagrupo') }}">
+     <input type="hidden" name='grupo_id' value="{{$grupos->id }}">
      @csrf
      <div class="modal-dialog relative w-auto pointer-events-none">
          <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding
@@ -32,9 +32,8 @@
                 <label for="largeInput"
                     class="form-label">{{ __('Iglesia a Agregar') }}</label>
                 <select name="iglesia_id" class="form-control select" required>
-                    @foreach ($iglesias_noasig as $obj)
+                    @foreach ($grupos_noasignados as $obj)
                             <option value="{{ $obj->id }}">{{ $obj->name }}
-
                         </option>
                     @endforeach
                 </select>

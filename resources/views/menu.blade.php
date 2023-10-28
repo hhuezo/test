@@ -173,6 +173,10 @@
                             </li>
 
                             <li>
+
+                                <a href="{{ url('catalog/grupo') }}">Grupo Iglesias</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('catalog/wizard_church_questions') }}">Preguntas para la iglesia</a>
                             </li>
                             <li>

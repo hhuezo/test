@@ -64,6 +64,10 @@ class Iglesia extends Model
 
     }
 
+    public function iglesiagrupo()
+    {
+        return $this->belongsToMany(Grupo::class, 'iglesia_has_grupo', 'iglesia_id');
+    }
 
 
     public function churchanswer()

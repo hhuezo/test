@@ -20,6 +20,7 @@ use App\Http\Controllers\catalog\OrganizationStatusController;
 use App\Http\Controllers\catalog\QuestionController;
 use App\Http\Controllers\catalog\MemberStatusController;
 use App\Http\Controllers\catalog\FilePerCourseController;
+use App\Http\Controllers\catalog\GrupoController;
 use App\Http\Controllers\catalog\IglesiaController;
 use App\Http\Controllers\catalog\MemberController as CatalogMemberController;
 use App\Http\Controllers\catalog\OrganizationController as CatalogOrganizationController;
@@ -66,6 +67,8 @@ Route::post('/iglesia/registro_iglesia', [IglesiaController::class, 'registro_ig
  Route::post('catalog/Iglesiauser/dettach_iglesiauser', [UserController::class, 'dettach_iglesiauser']);
  Route::post('catalog/Iglesiauser/attach_iglesiauser', [UserController::class, 'attach_iglesiauser']);
 
+ Route::post('catalog/grupo/dettach_iglesiagrupo', [GrupoController::class, 'dettach_iglesiagrupo']);
+ Route::post('catalog/grupo/attach_iglesiagrupo', [GrupoController::class, 'attach_iglesiagrupo']);
 
 
 
@@ -144,6 +147,8 @@ Route::resource('catalog/region', RegionController::class);
 
 Route::resource('catalog/sede', SedeController::class);
 
+Route::resource('catalog/grupo', GrupoController::class);
+
 Route::resource('catalog/MemberStatus', MemberStatusController::class);
 
 
@@ -151,3 +156,4 @@ Route::resource('catalog/member', CatalogMemberController::class);
 
 Route::resource('catalog/FilePerCourse', FilePerCourseController::class);
 
+Route::resource('catalog/grupo', GrupoController::class);
