@@ -175,15 +175,15 @@
                                                         class="form-label">{{ __('tipo de organizacion') }}</label>
                                                     <select name="organization_type" class="form-control">
                                                         @foreach ($organizacion as $obj)
-                                                        @if ($obj->id== $iglesia->organization_type)
-                                                            <option value="{{ $obj->id }}" selected>
-                                                                {{ $obj->name }}
-                                                            @else
-                                                            <option value="{{ $obj->id }}">
-                                                                {{ $obj->name }}
-                                                        @endif
-                                                        </option>
-                                                    @endforeach
+                                                            @if ($obj->id == $iglesia->organization_type)
+                                                                <option value="{{ $obj->id }}" selected>
+                                                                    {{ $obj->name }}
+                                                                @else
+                                                                <option value="{{ $obj->id }}">
+                                                                    {{ $obj->name }}
+                                                            @endif
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
 
@@ -348,6 +348,40 @@
 
                                                     @endforeach --}}
 
+                                        </div>
+
+                                        &nbsp;&nbsp;
+
+                                        <div class="input-area relative">
+                                            <table id="myTable" class="display" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr class="td-table">
+                                                        <th style="text-align: center">Id</th>
+                                                        <th style="text-align: center">Nombre Grupo</th>
+                                                   </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($grupo_iglesias as $obj)
+                                                        <td align="center"> {{ $obj->id }} </td>
+                                                        <td align="center">{{ $obj->nombre }}</td>
+                                                        <td align="center">
+                                                            <iconify-icon data-bs-toggle="modal"
+                                                                data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
+                                                                style="color: #1769aa;" width="40"></iconify-icon>
+                                                        </td>
+                                                        @include('catalog.iglesia.modaldelgrupo')
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                            &nbsp;
+                                            <div class="btn btn-dark btn-sm float-right">
+                                                <iconify-icon data-bs-toggle="modal"
+                                                    data-bs-target="#modal-creategroup-{{$iglesia->id }}" icon="mdi:plus-box"
+                                                    style="color: #ede9e9;" width="20"></iconify-icon>
+                                            </div>
+                                            @include('catalog.iglesia.modaladdgrupo')
+                                            &nbsp;
                                         </div>
                                     </div>
                                 </div>

@@ -6,17 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\catalog\ChurchQuestionWizard;
 use App\Models\catalog\Cohorte;
 use App\Models\catalog\Departamento;
+use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Municipio;
 use App\Models\catalog\Organization;
 use App\Models\catalog\OrganizationStatus;
 use App\Models\catalog\Sede;
 use App\Models\catalog\WizardQuestions;
+use App\Models\Quiz\Question;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class IglesiaController extends Controller
 {
@@ -132,9 +135,24 @@ class IglesiaController extends Controller
         $questionArray = $wizzaranswer->pluck('question_id')->toArray();
 
         $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->get();
+
+
+        $grupo_iglesias=  $iglesia->iglesiagrupo;
+
+        //$grupos= Grupo::whereNotIn('id', $iglesiaArray)->get();
+  // dd(   $grupo_iglesias);
+
+        $grupoArray =  $grupo_iglesias->pluck('id')->toArray();
+
+        $grupos_noasignados = Grupo::whereNotIn('id', $grupoArray)->get();
+        $grupos_asignados = Grupo::where('id', $grupoArray)->get();
+
+
+       // return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias','grupos_noasignados'));
+
         //   dd($wizzarquestion);
         //where('id' ,'=', $wizzaranswer->question_id)->get();
-        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos'));
+        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'));
     }
 
     public function update(Request $request, $id)
@@ -211,6 +229,40 @@ class IglesiaController extends Controller
         alert()->error('La Pregunta y Respuesta han sido eliminadas correctamente');
         return back();
     }
+
+
+
+    public function attach_grupos(Request $request)
+    {
+
+
+        $grupoiglesia =iglesia::findOrFail($request->iglesia_id);
+        $grupoiglesia->iglesiagrupo()->attach($request->grupo_id);
+        alert()->success('El registro ha sido agregado correctamente');
+        return back();
+    }
+
+
+
+    public function dettach_grupos(Request $request)
+    {
+
+        $grupoiglesia =iglesia::findOrFail($request->iglesia_id);
+        $grupoiglesia->iglesiagrupo()->detach($request->grupo_id);
+        alert()->error('se han sido eliminadas correctamente');
+        return back();
+
+    }
+
+
+
+
+
+
+
+
+
+
 
     //  dd($organizations->id);
     //preguntas    if ( $wizzaranswer->question_id==$request->id) {        $wizzaranswer->answer=$request->answer;        $wizzaranswer->update();    }
@@ -497,6 +549,20 @@ class IglesiaController extends Controller
         $usuario->save();
 
         $iglesia->users()->attach($usuario->id);
+
+
+//agregando las respuestas de las preguntas del enrolamiento de la iglesia
+
+       $time = Carbon::now('America/El_Salvador');
+      $respuesta=new ChurchQuestionWizard();
+      $wizzarquestion= WizardQuestions::where('active', '=', 1)->get();
+      foreach ($wizzarquestion as $question) {
+          $respuesta->question_id=$question->id;
+          $respuesta->iglesia_id=$request->iglesia_id;
+          $respuesta->answer=1;
+          $respuesta->fecha= $time->toDateTimeString();
+        }
+//fin de  las respuestas de las preguntas del enrolamiento de la iglesia
 
         // Iniciar sesión con el nuevo usuario
         Auth::login($usuario);

@@ -70,6 +70,8 @@ Route::post('/iglesia/registro_iglesia', [IglesiaController::class, 'registro_ig
  Route::post('catalog/grupo/dettach_iglesiagrupo', [GrupoController::class, 'dettach_iglesiagrupo']);
  Route::post('catalog/grupo/attach_iglesiagrupo', [GrupoController::class, 'attach_iglesiagrupo']);
 
+ Route::post('catalog/iglesia/dettach_grupos', [IglesiaController::class, 'dettach_grupos']);
+ Route::post('catalog/iglesia/attach_grupos', [IglesiaController::class, 'attach_grupos']);
 
 
 Auth::routes();
