@@ -15,6 +15,7 @@ use App\Models\catalog\Sede;
 use App\Models\catalog\WizardQuestions;
 use App\Models\Quiz\Question;
 use App\Models\User;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -109,7 +110,49 @@ class IglesiaController extends Controller
      */
     public function show($id)
     {
-        //
+
+       // dd('imprimo aqui');
+
+
+
+
+        $iglesia = Iglesia::findOrFail($id);
+        $cohorte = Cohorte::get();
+        $depto = Departamento::where('id', '=', $iglesia->catalog_departamento_id)->get();
+        $deptos = Departamento::get();
+        $municipio = Municipio::get();
+        $sede = Sede::get();
+
+        $estatuorg = OrganizationStatus::get();
+        $organizacion = Organization::get();
+        $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $iglesia->id)->get();
+        //plural
+
+        $questionArray = $wizzaranswer->pluck('question_id')->toArray();
+
+        $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->get();
+
+
+        $grupo_iglesias=  $iglesia->iglesiagrupo;
+
+        //$grupos= Grupo::whereNotIn('id', $iglesiaArray)->get();
+  // dd(   $grupo_iglesias);
+
+        $grupoArray =  $grupo_iglesias->pluck('id')->toArray();
+
+        $grupos_noasignados = Grupo::whereNotIn('id', $grupoArray)->get();
+        $grupos_asignados = Grupo::where('id', $grupoArray)->get();
+
+
+       // return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias','grupos_noasignados'));
+
+        //   dd($wizzarquestion);
+        //where('id' ,'=', $wizzaranswer->question_id)->get();
+        //return view('catalog.iglesia.show', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'));
+
+        $pdf = \PDF::loadView('catalog.iglesia.show',compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'))->setWarnings(false)->setPaper('letter');
+        return $pdf->stream('Info.pdf');
+
     }
 
     /**

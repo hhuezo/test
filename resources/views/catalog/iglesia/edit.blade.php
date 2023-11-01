@@ -191,7 +191,7 @@
                                                     <label for="largeInput" class="form-label">Estatus</label>
                                                     <select name="Status" class="form-control">
                                                         @foreach ($estatuorg as $obj2)
-                                                            @if ($obj2->Status == $iglesia->Status)
+                                                            @if ($obj2->id == $iglesia->Status)
                                                                 <option value="{{ $obj2->id }}" selected>
                                                                     {{ $obj2->description }}
                                                                 @else

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\catalog\ChurchQuestionWizard;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\WizardQuestions;
+use DB;
 use Illuminate\Http\Request;
 
 class ChurchQuestionController extends Controller
@@ -77,7 +78,14 @@ class ChurchQuestionController extends Controller
        // dd($iglesia);
         $wizzaranswer = ChurchQuestionWizard::where('iglesia_id' ,'=', $iglesia->id)->get();
         $wizzarquestion =WizardQuestions::get();//where('id' ,'=', $wizzaranswer->question_id)->get();
-        return view('catalog.answerreg.edit', compact('iglesia','wizzaranswer','wizzarquestion'));
+        $resultados = DB::table('church_question_wizard as a')
+        ->join('wizard_church_questions as b', 'a.question_id', '=', 'b.id')
+        ->where('a.iglesia_id', $iglesia->id)
+        ->select('a.question_id','a.iglesia_id', 'b.question', 'a.answer')
+        ->get();
+
+
+        return view('catalog.answerreg.edit', compact('iglesia','wizzaranswer','wizzarquestion','resultados'));
 
     }
 

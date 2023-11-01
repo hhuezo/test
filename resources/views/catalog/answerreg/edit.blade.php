@@ -9,7 +9,8 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Modificar Respuestas iglesia  {{$iglesia->name}}
+                            <div class="card-title text-slate-900 dark:text-white">Modificar Respuestas iglesia
+                                {{ $iglesia->name }}
 
                                 <a href="{{ url('catalog/answerreg/') }}">
                                     <button class="btn btn-dark btn-sm float-right">
@@ -48,48 +49,55 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($wizzarquestion as $obj1)
-                                                    <tr>
-                                                        <td align="center">{{ $obj1->id }}</td>
-                                                        @foreach ( $wizzaranswer as $obj2)
-                                                        @if ($obj1->id==$obj2->question_id  )
-                                                        <td align="center">{{ $obj1->question }}</td>
-                                                        <td align="center">
-                                                            @if ($obj2->answer == 1)
-                                                            <input
-                                                            type="radio"
-                                                            id="answer"
-                                                            name="answer"
-                                                            value="answer"
-                                                            checked />
-                                                           @elseif ($obj2->answer == 0)
-                                                            <input
-                                                            type="radio"
-                                                            id="answer2"
-                                                            name="answer2"
-                                                            value="answer2" />
-                                                            @endif
-                                                        </td>
+                                                    @foreach ($resultados as $obj)
+                                                        <tr>
 
-                                                        @endif
-                                                        @endforeach
+                                                            <td align="center">{{$obj->question_id }}</td>
+                                                            <td align="center">{{$obj->question }}</td>
+                                                            <td align="center">
+                                                                         <div class="basicRadio">
+                                                                        <legend></legend>
+                                                                        <div class="primary-radio">
+                                                                            <label class="flex items-center cursor-pointer">
+                                                                                <input type="radio" class="hidden"
+                                                                                    name="answer" value={{ $obj->answer }}
+                                                                                    checked="checked">
+                                                                                <span
+                                                                                    class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                        duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                <span
+                                                                                    class="text-primary-500 text-sm leading-6 capitalize">Si</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    </label>
+                                                                    <label>
+                                                                    @else
+                                                                        <div class="primary-radio">
+                                                                            <label class="flex items-center cursor-pointer">
+                                                                                <input type="radio" class="hidden"
+                                                                                    name="answer" value={{ $obj->answer }}
+                                                                                    checked="checked">
+                                                                                <span
+                                                                                    class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                        duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                                <span
+                                                                                    class="text-primary-500 text-sm leading-6 capitalize">No</span>
+                                                                            </label>
+                                                                        </div>
+                                                                @endif
+                                                            </td>
 
-
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
 
                                             </table>
-                                            <div> &nbsp;&nbsp;</div>
-                                            &nbsp;&nbsp;
-                                            <div> &nbsp;&nbsp;</div>
-                                            <div style="text-align: right;">
-                                                <button type="submit"
-                                                    class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
-                                            </div>
-
-                                        </form>
-
+                                    </div>
+                                    </form>
+                                    <div style="text-align: right;">
+                                        <button type="submit"
+                                            class="btn inline-flex justify-right btn-dark">{{ __('Aceptar') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -98,6 +106,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 @endsection

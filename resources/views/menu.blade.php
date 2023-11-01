@@ -81,7 +81,7 @@
                 id="sidebar_menus">
                 <ul class="sidebar-menu">
                     @can('approve organization')
-                    <li class="sidebar-menu-title">ACTIVAR</li>
+                 <!--   <li class="sidebar-menu-title">ACTIVAR</li>
                     <li class="">
                         <a href="{{url('members')}}" class="navItem">
                             <span class="flex items-center">
@@ -100,7 +100,7 @@
                                 <span>Activar organización</span>
                             </span>
                         </a>
-                    </li>
+                    </li>-->
                     @endcan
                     @can('read users')
                     <li class="">
@@ -153,9 +153,9 @@
                             <li>
                                 <a href="{{ url('catalog/organization_status') }}">Organizacion Estado</a>
                             </li>
-                            <li>
+                           <!-- <li>
                                 <a href="{{ url('catalog/Quiz') }}">Examen</a>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="{{ url('catalog/MemberStatus') }}">Estatus del miembro</a>
                             </li>
@@ -191,7 +191,7 @@
                                 <a href="{{ url('catalog/sede') }}">sede</a>
                             </li>
                             <li>
-                                <a href="{{ url('catalog/member') }}">Miembros</a>
+                                <a href="{{ url('catalog/member') }}">Participantes</a>
                             </li>
                             <li>
                                 <a href="{{ url('catalog/FilePerCourse') }}">Documento por curso</a>
