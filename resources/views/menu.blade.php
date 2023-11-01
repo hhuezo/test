@@ -193,9 +193,9 @@
                             <li>
                                 <a href="{{ url('catalog/member') }}">Participantes</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ url('catalog/FilePerCourse') }}">Documento por curso</a>
-                            </li>
+                            </li> --}}
 
 
 
