@@ -149,9 +149,7 @@
                             <li>
                                 <a href="{{ url('catalog/answer') }}">Respuesta</a>
                             </li>
-                            <li>
-                                <a href="{{ url('catalog/organization') }}">Organizacion</a>
-                            </li>
+
                             <li>
                                 <a href="{{ url('catalog/organization_status') }}">Organizacion Estado</a>
                             </li>
