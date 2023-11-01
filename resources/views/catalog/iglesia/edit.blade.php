@@ -170,7 +170,7 @@
                                                 </div>
 
 
-                                                <div class="input-area relative">
+                                                {{-- <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('tipo de organizacion') }}</label>
                                                     <select name="organization_type" class="form-control">
@@ -185,7 +185,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Estatus</label>

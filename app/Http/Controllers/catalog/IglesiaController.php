@@ -47,8 +47,7 @@ class IglesiaController extends Controller
         $municipio = Municipio::get();
         $sede = Sede::get();
         $estatuorg = OrganizationStatus::get();
-        $organizacion = Organization::get();
-        return view('catalog.iglesia.create', compact('sede', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion'));
+        return view('catalog.iglesia.create', compact('sede', 'depto', 'municipio', 'sede', 'estatuorg', ));
     }
 
     /**
@@ -128,7 +127,7 @@ class IglesiaController extends Controller
         $sede = Sede::get();
 
         $estatuorg = OrganizationStatus::get();
-        $organizacion = Organization::get();
+        //$organizacion = Organization::get();
         $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $iglesia->id)->get();
         //plural
 
@@ -152,7 +151,7 @@ class IglesiaController extends Controller
 
         //   dd($wizzarquestion);
         //where('id' ,'=', $wizzaranswer->question_id)->get();
-        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'));
+        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg',  'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'));
     }
 
     public function update(Request $request, $id)
@@ -449,6 +448,8 @@ class IglesiaController extends Controller
 
         $pregunta = WizardQuestions::findOrFail($request->question_id);
 
+
+
         if ($respuesta) {
             $respuesta->answer = $request->answer;
             $respuesta->update();
@@ -460,6 +461,7 @@ class IglesiaController extends Controller
             $respuesta->save();
         }
         if ($request->answer != $pregunta->answer) {
+            //dd($request->answer , $pregunta->answer);
             return view('auth.message');
         }
 
