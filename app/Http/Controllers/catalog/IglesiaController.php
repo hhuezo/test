@@ -446,6 +446,9 @@ class IglesiaController extends Controller
     public function registro_respuesta(Request $request)
     {
         $respuesta =  ChurchQuestionWizard::where('question_id', '=', $request->question_id)->where('iglesia_id', '=', $request->iglesia_id)->first();
+
+        $pregunta = WizardQuestions::findOrFail($request->question_id);
+
         if ($respuesta) {
             $respuesta->answer = $request->answer;
             $respuesta->update();
@@ -456,7 +459,7 @@ class IglesiaController extends Controller
             $respuesta->answer = $request->answer;
             $respuesta->save();
         }
-        if ($request->answer == 0) {
+        if ($request->answer != $pregunta->answer) {
             return view('auth.message');
         }
 

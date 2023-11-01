@@ -126,7 +126,7 @@
                                 <div class="card h-full">
                                     <div class="wizard card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Registro de Iglesia {{session('tab')}}</h4>
+                                            <h4 class="card-title">Registro de Iglesia</h4>
                                         </div>
                                         <div class="card-body p-6">
                                             <!-- inicio de step -->
