@@ -43,5 +43,13 @@ class HomeController extends Controller
     }
 
 
+    public function confirmacion()
+    {
+        dd('redireccionado');
+        return view('confirma');
+    }
+
+
+
 
 }

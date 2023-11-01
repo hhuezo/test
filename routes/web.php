@@ -77,6 +77,7 @@ Route::post('/iglesia/registro_iglesia', [IglesiaController::class, 'registro_ig
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/confirma', [HomeController::class, 'confirmacion'])->name('confirma');
 
 Route::get('/registrar',[RegisterController::class,'index']);
 Route::get('/register_edit/{id}',[IglesiaController::class, 'register_edit']);

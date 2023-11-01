@@ -36,7 +36,7 @@ class Iglesia extends Model
         'status',
         'sede_id',
         'logo_url',
-        'logo_name'
+        'logo'
 
     ];
 

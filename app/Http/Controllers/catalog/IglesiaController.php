@@ -581,7 +581,8 @@ class IglesiaController extends Controller
             $id_file = uniqid();
             $file->move(public_path("img/"), $id_file . ' ' . $file->getClientOriginalName());
             $iglesia->logo = $id_file . ' ' . $file->getClientOriginalName();
-        }
+            $iglesia->logo_url= $iglesia->logo;
+                }
 
         $iglesia->sede_id = $sede_id;
         $iglesia->facebook = $request->facebook;
@@ -607,15 +608,20 @@ class IglesiaController extends Controller
       foreach ($wizzarquestion as $question) {
           $respuesta->question_id=$question->id;
           $respuesta->iglesia_id=$request->iglesia_id;
-          $respuesta->answer=1;
+          $respuesta->answer=$request->answer;
           $respuesta->fecha= $time->toDateTimeString();
         }
 //fin de  las respuestas de las preguntas del enrolamiento de la iglesia
 
         // Iniciar sesión con el nuevo usuario
-        Auth::login($usuario);
+      //  Auth::login($usuario);
 
         // Redirigir a la página de inicio o a donde desees después del registro e inicio de sesión
-        return redirect('/home');
+       // return redirect('/home');
+
+       return view('confirma');
+       return redirect('/confirma');
+
+
     }
 }
