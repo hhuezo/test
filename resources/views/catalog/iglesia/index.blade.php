@@ -48,6 +48,11 @@
                                                     <iconify-icon data-bs-toggle="modal"
                                                         data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
                                                         style="color: #1769aa;" width="40"></iconify-icon>
+                                                        &nbsp;&nbsp;
+                                                        <a href="{{url('catalog/iglesia')}}/{{$obj->id}}">
+                                                            <iconify-icon icon="mdi:printer"
+                                                                style="color: #1769aa;" width="40"></iconify-icon>
+                                                        </a>
                                                 </td>
                                             </tr>
                                             @include('catalog/iglesia/modal')

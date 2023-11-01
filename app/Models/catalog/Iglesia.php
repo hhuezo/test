@@ -45,9 +45,12 @@ class Iglesia extends Model
 
     public function sedeiglesia()
     {
-        return $this->belongsTo('use App\Models\catalog\Sede', 'id', 'sede_id');
-        //return $this->belongsTo('App\Models\LugarOrigen', 'tck_lor_codigo', 'lor_codigo');
+        //return $this->belongsTo('use App\Models\catalog\Sede', 'id', 'sede_id');
+        return $this->belongsTo(Sede::class, 'sede_id', 'id');
     }
+
+        //return $this->belongsTo('App\Models\LugarOrigen', 'tck_lor_codigo', 'lor_codigo');
+
     public function departamento()
     {
         return $this->belongsTo(Departamento::class, 'catalog_departamento_id', 'id');
