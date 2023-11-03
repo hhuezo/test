@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Baker Bootstrap Theme</title>
+  <meta http-equiv="refresh" content="10;URL=http://urban.emundialesdemos.com/home" />
+  <title>Gracias por Registrarse</title>
   <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
   <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
 
@@ -21,7 +22,12 @@
     Author URL: https://bootstrapmade.com
   ======================================================= -->
 </head>
-
+<style>
+    img {
+  height: 40%;
+  width: 40%;
+}
+</style>
 <body>
 
   <div class="loader"></div>
@@ -45,12 +51,20 @@
           <div class="container">
             <div class="row">
               <div class="banner-info text-center wow fadeIn delay-05s">
+                <p class="bnr-para"></p>
+                    <table>
+                        <tr><td>
+                            <div>
+                    <img src="/img/losentimos.png" ><p></td>
+                   </div>
                 <h1 class="bnr-sub-title">Gracias por Registrarse.<br>Se le notificara<br>por email su  enrrolamiento</h1>
                 <p class="bnr-para"></p>
-                <div class="brn-btn">
-                  <a href="http://urban.emundialesdemos.com/home" class="btn btn-more">Retornar</a>
+                </td></tr></table>
+
+                <!--<div class="brn-btn">
+                     <a href="http://urban.emundialesdemos.com/home" class="btn btn-more">Retornar</a>
                   <a href="https://google.com/" class="btn btn-more">Salir</a>
-                </div>
+                </div>-->
                 <div class="overlay-detail">
                   <a href="#feature"><i class="fa fa-angle-down"></i></a>
                 </div>
@@ -61,6 +75,7 @@
       </div>
     </div>
   </div>
+
   <script src="{{ asset('Baker/js/jquery.min.js') }}"></script>
   <script src="{{ asset('Baker/js/jquery.easing.min.js') }}"></script>
   <script src="{{ asset('Baker/js/bootstrap.min.js') }}"></script>

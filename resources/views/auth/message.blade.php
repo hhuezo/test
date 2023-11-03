@@ -1,47 +1,81 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="light">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <title>Dashcode - HTML Template</title>
-    <link rel="icon" type="image/png" href="assets/images/logo/favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/rt-plugins.css">
-    <script src="{{ asset('assets/js/iconify-icon.min.js') }}"></script>
-    <link rel="stylesheet" href="assets/css/app.css">
-    <!-- START : Theme Config js-->
-    <script src="assets/js/settings.js" sync></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Te invitamos a unirte mas adelante</title>
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+  <meta http-equiv="refresh" content="10;URL=http://urban.emundialesdemos.com/home" />
 
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
+  <link rel="stylesheet" type="text/css" href="{{ asset('Baker/css/jquery.bxslider.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('Baker/css/font-awesome.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('Baker/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('Baker/css/animate.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('Baker/css/style.css') }}">
+  <!-- =======================================================
+    Theme Name: Baker
+    Theme URL: https://bootstrapmade.com/baker-free-onepage-bootstrap-theme/
+    Author: BootstrapMade.com
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
 </head>
+<style>
+    img {
+  height: 40%;
+  width: 40%;
+}
+</style>
+<body>
 
-<body class=" font-inter skin-default">
-
-    <div class="card">
-        <div class="card-body flex flex-col p-6">
-            <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
-                <div class="flex-1">
-                    <div class="card-title text-slate-900 dark:text-white">Lo Sentimos , su iglesia aun no esta
-                        preparada para unirse al programa
-                        <a href="{{url('/')}}">
-                        <button class="btn btn-dark btn-sm float-right">
-                            <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
-                            </iconify-icon>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </header>
-            <div class="card-text h-full">
-                <p style="text-align: justify" class="text-sm font-Inter text-slate-600 dark:text-slate-300">
-                    Te invitamos a unirte mas adelante
+  <div class="loader"></div>
+  <div id="myDiv">
+    <!--HEADER-->
+    <div class="header">
+      <div class="bg-color">
+        <header id="main-header">
+          <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
             </div>
+          </nav>
+        </header>
+        <div class="wrapper">
+          <div class="container">
+            <div class="row">
+              <div class="banner-info text-center wow fadeIn delay-05s">
+                <table>
+                    <tr><td>
+                        <h1 class="bnr-sub-title">Lo Sentimos ,<br> su iglesia aun no esta<br>
+                            preparada para unirse al programa.</h1><p></p>
+                            <h4 class="bnr-sub-title">Te invitamos a unirte mas adelante.</h4>
+                </td><td>
+                  <p class="bnr-para"></p><div>
+                    <img src="/img/losentimos.png" ><p>
+                   </div>
+                </td>
+            </tr>
+              </div>
+            </table>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+  <script src="{{ asset('Baker/js/jquery.min.js') }}"></script>
+  <script src="{{ asset('Baker/js/jquery.easing.min.js') }}"></script>
+  <script src="{{ asset('Baker/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('Baker/js/wow.js') }}"></script>
+  <script src="{{ asset('Baker/js/jquery.bxslider.min.js') }}"></script>
+  <script src="{{ asset('Baker/js/custom.js') }}"></script>
+  <script src="{{ asset('Baker/contactform/contactform.js') }}"></script>
 </body>
-
 </html>

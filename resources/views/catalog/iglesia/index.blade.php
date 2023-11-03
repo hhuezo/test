@@ -26,7 +26,7 @@
                                         <th style="text-align: center">organizacion</th>
                                         <th style="text-align: center">direccion</th>
                                         <th style="text-align: center">contacto</th>
-
+                                        <th style="text-align: center">Estado</th>
                                         <th style="text-align: center">opciones</th>
                                     </tr>
                                 </thead>
@@ -38,7 +38,13 @@
                                                 <td  align="center">{{ $obj->name }}</td>
                                                 <td  align="center">{{ $obj->address }}</td>
                                                 <td  align="center">{{ $obj->contact_name }}</td>
-
+                                                <td  align="center">
+                                                    @foreach ($estatuorg as $obj2)
+                                                @if ($obj2->id == $obj->status)
+                                                    <option value="{{ $obj2->id }}" selected>
+                                                        {{ $obj2->description }}
+                                                @endif
+                                            @endforeach
                                                 <td align="center">
                                                     <a href="{{url('catalog/iglesia')}}/{{$obj->id}}/edit">
                                                     <iconify-icon icon="mdi:pencil-box"
@@ -49,6 +55,10 @@
                                                         data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
                                                         style="color: #1769aa;" width="40"></iconify-icon>
                                                         &nbsp;&nbsp;
+                                                        <iconify-icon data-bs-toggle="modal"
+                                                        data-bs-target="#modal-estado-{{ $obj->id }}" icon="mdi:check"
+                                                        style="color: #1769aa;" width="40"></iconify-icon>
+                                                        &nbsp;&nbsp;
                                                         <a href="{{url('catalog/iglesia')}}/{{$obj->id}}">
                                                             <iconify-icon icon="mdi:printer"
                                                                 style="color: #1769aa;" width="40"></iconify-icon>
@@ -56,6 +66,7 @@
                                                 </td>
                                             </tr>
                                             @include('catalog/iglesia/modal')
+                                            @include('catalog/iglesia/modalestado')
                                         @endforeach
                                     @endif
 

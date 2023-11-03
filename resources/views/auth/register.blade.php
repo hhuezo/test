@@ -53,7 +53,7 @@
                                 <div class="card h-full">
                                     <div class="wizard card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Registro de Iglesia</h4>
+                                            <h4 class="card-title"  align="center">Registro de Iglesia</h4>
                                         </div>
                                         <div class="card-body p-6">
                                             <!-- inicio de step -->
@@ -105,11 +105,11 @@
                                                     <div class="grid lg:grid-cols-1 md:grid-cols-1 grid-cols-1 gap-5">
                                                         <div class="lg:col-span-3 md:col-span-2 col-span-1">
                                                             <h4
-                                                                class="text-base text-slate-800 dark:text-slate-300 my-6">
+                                                                class="text-base text-slate-800 dark:text-slate-300 my-6" align="center">
                                                                 Nombre y Ubicacion de la Iglesia</h4>
                                                         </div>
                                                         <div class="input-area">
-                                                            <label for="username" class="form-label">Nombre de
+                                                            <label for="username" class="form-label" >Nombre de
                                                                 Iglesia</label>
                                                             <input id="nombre" name="nombre" type="text"
                                                                 class="form-control" placeholder="Nombre de Iglesia"

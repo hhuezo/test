@@ -25,6 +25,7 @@
         .form-label {
             text-transform: none;
         }
+
         .black_logo {
             width: 120px;
         }
@@ -168,11 +169,13 @@
                                                                 class="grid lg:grid-cols-1 md:grid-cols-1 grid-cols-1 gap-5">
 
                                                                 <div class="input-area">
-                                                                    <input id="nombre" name="nombre" value="{{ $iglesia->name }}" class="form-control"  readonly>
+                                                                    <input id="nombre" name="nombre"
+                                                                        value="{{ $iglesia->name }}"
+                                                                        class="form-control" readonly>
                                                                 </div>
 
                                                                 <div class="input-area">
-                                                                    <label class="form-label">Departamento</label>
+                                                                    <label class="form-label"  align="center">Departamento</label>
                                                                     <input id="departamento" type="hidden"
                                                                         value="{{ $departamento ? $departamento->id : '' }}"
                                                                         name="departamento" class="form-control"
@@ -189,8 +192,8 @@
 
 
                                                                 <div class="input-area">
-                                                                    <label for="fullname" class="form-label">Seleccione
-                                                                        en el mapa</label>
+                                                                    <label for="fullname" class="form-label"  align="center">Seleccione
+                                                                        en el mapa el Departamento en la que esta ubicado su Iglesia</label>
                                                                     <div id="div_result">
 
                                                                     </div>
@@ -226,26 +229,29 @@
                                             @endif
 
                                             @if (session('tab') > 2 && session('tab') < count($questions) + 3)
-                                                <div class="card-title"
-                                                    style="display:{{ session('tab') < 3 ? 'none' : 'block' }}">
-                                                    <form action="{{ url('iglesia/registro_respuesta') }}"
-                                                        class="wizard-form mt-10" method="post">
-                                                        @csrf
-                                                        <div class="form">
-                                                            <input type="hidden" name="iglesia_id"
-                                                                value="{{ $iglesia->id }}">
-                                                            @php($i = 3)
-                                                            @foreach ($questions as $obj)
-                                                                @if (session('tab') == $i)
-                                                                    <div class="input-area">{{ $obj->question }}
-                                                                        <fieldset>
+                                                <div class="wizard-steps   relative md:mx-8">
+                                                    <div class="card-title"
+                                                        style="display:{{ session('tab') < 3 ? 'none' : 'block' }}">
+                                                        <form action="{{ url('iglesia/registro_respuesta') }}"
+                                                            class="wizard-form mt-10" method="post">
+                                                            @csrf
+                                                            <div class="form ">
+                                                                <input type="hidden" name="iglesia_id"
+                                                                    value="{{ $iglesia->id }}">
+                                                                @php($i = 3)
+                                                                @foreach ($questions as $obj)
+                                                                    @if (session('tab') == $i)
+                                                                        <div
+                                                                            class="input-area " align="center">
+                                                                            {{ $obj->question }}
+
                                                                             <input type="hidden" name="question_id"
                                                                                 value="{{ $obj->id }}">
                                                                             <legend>{{ $obj->nombre }}</legend>
                                                                             <br>
                                                                             <div class="card-text h-full space-y-4">
                                                                                 <div
-                                                                                    class="flex items-center space-x-7 flex-wrap">
+                                                                                    class="flex items-center space-x-7 flex-wrap    items-center justify-center">
                                                                                     <div class="basicRadio">
                                                                                         <label
                                                                                             class="flex items-center cursor-pointer">
@@ -258,7 +264,8 @@
                                                                                                 class="flex-none bg-white dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
                                                                                         duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
                                                                                             <span
-                                                                                                class="text-secondary-500 text-sm leading-6 capitalize">Si</span>
+                                                                                                class="text-secondary-500 text-sm leading-6 capitalize">
+                                                                                                Si</span>
                                                                                         </label>
                                                                                     </div>
                                                                                     <div class="basicRadio">
@@ -278,87 +285,105 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </fieldset>
 
-                                                                    </div>
-                                                                @endif
-                                                                @php($i++)
-                                                            @endforeach
-                                                        </div>
-                                                        <div class="mt-6 space-x-3 text-right">
-                                                            <a href="{{ url('iglesia/back_page') }}">
-                                                                <button class="btn btn-secondary"
-                                                                    type="button">Anterior</button>
-                                                            </a>
-                                                            <button class="btn btn-dark"
-                                                                type="submit">Siguiente</button>
-                                                        </div>
-                                                    </form>
+                                                                        </div>
+                                                                    @endif
+                                                                    @php($i++)
+                                                                @endforeach
+                                                            </div>
+
+                                                            <div class="mt-6 space-x-3 text-right">
+                                                                <a href="{{ url('iglesia/back_page') }}">
+                                                                    <button class="btn btn-secondary"
+                                                                        type="button">Anterior</button>
+                                                                </a>
+                                                                <button class="btn btn-dark"
+                                                                    type="submit">Siguiente</button>
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
                                                 </div>
-
                                             @endif
 
-                                            @if (session('tab') ==  (count($questions) + 3))
-                                            <div class="card-text h-full "
+                                            @if (session('tab') == count($questions) + 3)
+                                                <div class="card-text h-full "
                                                     style="display:{{ session('tab') < 3 ? 'none' : 'block' }}">
-                                                    @if (count($errors)>0)
-                                                    <br>
-                                                    <div class="alert alert-danger">
-                                                        <ul>
-                                                            @foreach ($errors->all() as $error)
-                                                            <li>{{$error}}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
+                                                    @if (count($errors) > 0)
+                                                        <br>
+                                                        <div class="alert alert-danger">
+                                                            <ul>
+                                                                @foreach ($errors->all() as $error)
+                                                                    <li>{{ $error }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
                                                     @endif
-                                                    <form action="{{ url('iglesia/registro_iglesia') }}"  enctype="multipart/form-data" class="wizard-form mt-10" method="post">
+                                                    <form action="{{ url('iglesia/registro_iglesia') }}"
+                                                        enctype="multipart/form-data" class="wizard-form mt-10"
+                                                        method="post">
                                                         @csrf
                                                         <div class="form">
-                                                            <input type="hidden" name="iglesia_id"  value="{{ $iglesia->id }}">
+                                                            <input type="hidden" name="iglesia_id"
+                                                                value="{{ $iglesia->id }}">
 
-                                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
+                                                            <div
+                                                                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                                 <div class="input-area relative">
-                                                                    <label  class="form-label">Nombre</label>
-                                                                    <input id="firstname" name="name" value="{{old('name')}}" type="text" class="form-control" autofocus required>
+                                                                    <label class="form-label">Nombre</label>
+                                                                    <input id="firstname" name="name"
+                                                                        value="{{ old('name') }}" type="text"
+                                                                        class="form-control" autofocus required>
                                                                 </div>
                                                                 <div class="input-area relative">
                                                                     <label class="form-label">Correo</label>
-                                                                    <input type="email" name="email" value="{{old('email')}}" class="form-control">
+                                                                    <input type="email" name="email"
+                                                                        value="{{ old('email') }}"
+                                                                        class="form-control">
                                                                 </div>
                                                                 <div class="input-area relative">
-                                                                    <label  class="form-label">Contraseña</label>
-                                                                    <input type="password" name="password" class="form-control" required>
+                                                                    <label class="form-label">Contraseña</label>
+                                                                    <input type="password" name="password"
+                                                                        class="form-control" required>
                                                                 </div>
                                                                 <div class="input-area relative">
-                                                                    <label  class="form-label">Confirmar contraseña</label>
-                                                                    <input type="password" name="password_confirmation" class="form-control" required>
+                                                                    <label class="form-label">Confirmar
+                                                                        contraseña</label>
+                                                                    <input type="password"
+                                                                        name="password_confirmation"
+                                                                        class="form-control" required>
                                                                 </div>
 
 
                                                                 <div class="input-area">
                                                                     <label for="lastname" class="form-label">Facebook
                                                                         Link</label>
-                                                                    <input name="facebook" type="text" value="{{old('facebook')}}"
+                                                                    <input name="facebook" type="text"
+                                                                        value="{{ old('facebook') }}"
                                                                         class="form-control">
                                                                 </div>
 
                                                                 <div class="input-area">
                                                                     <label for="lastname" class="form-label">Youtube
                                                                         Link</label>
-                                                                    <input name="website" type="text" value="{{old('website')}}"
+                                                                    <input name="website" type="text"
+                                                                        value="{{ old('website') }}"
                                                                         class="form-control">
                                                                 </div>
 
                                                                 <div class="input-area relative">
-                                                                    <label for="address" class="form-label">Dirección</label>
-                                                                    <textarea name="address" class="form-control" required>{{old('address')}}</textarea>
+                                                                    <label for="address"
+                                                                        class="form-label">Dirección</label>
+                                                                    <textarea name="address" class="form-control" required>{{ old('address') }}</textarea>
                                                                 </div>
 
                                                                 <div class="input-area relative" id="FotoUrl">
-                                                                    <label for="Telefono" class="form-label">Logo</label>
-                                                                    <input type="file" name="logo" class="form-control">
+                                                                    <label for="Telefono"
+                                                                        class="form-label">Logo</label>
+                                                                    <input type="file" name="logo"
+                                                                        class="form-control">
                                                                 </div>
-                                                              </div>
+                                                            </div>
 
 
                                                         </div>
@@ -421,7 +446,8 @@
 
             function get_map(dep) {
                 $.ajax({
-                    url: "{{ url('get_map') }}/" + dep, type: "GET",
+                    url: "{{ url('get_map') }}/" + dep,
+                    type: "GET",
                     success: function(data) {
                         $("#div_result").html(data);
                     },

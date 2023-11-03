@@ -9,8 +9,8 @@
 </head>
 <style>
     img {
-  height: 10%;
-  width: 20%;
+  height: 20%;
+  width: 30%;
 }
 </style>
 <body>
@@ -18,6 +18,10 @@
     <form method="POST" action="{{ route('iglesia.update', $iglesia->id) }}">
         @method('PUT')
         @csrf
+        <div style="text-align: right;">
+            <img src=img/qrcode.png alt=""
+            class="w-full h-full rounded-[30%] object-cover">
+            </div>
         <table>
         <TR>
            <TD>
@@ -26,6 +30,7 @@
                 <label>Nombre de Iglesia</label>
                 <label> {{ $iglesia->name }}</label>
             </div>
+
             <p>
             <div class="input-area relative">
                 <label>Direccion</label>
@@ -74,37 +79,8 @@
                 <label>{{ $iglesia->website }}</label>
             </div>
             &nbsp; <p>
-            <div class="input-area relative">
-                <label>Personeria Juridica</label>
-             <label> {{ $iglesia->Personeria_Juridica }}</label>
-            </div>
-            &nbsp;
-            <p> </TD> <TD>
-            <div class="input-area relative">
-                <label>Tipo de organizacion</label>
+            &nbsp;  </TD><TD>
 
-                    @foreach ($organizacion as $obj)
-                        @if ($obj->id == $iglesia->organization_type)
-                                {{ $obj->name }}
-                            @else
-                        @endif
-                    @endforeach
-
-            </div>
-            &nbsp; <p>
-            <div class="input-area relative">
-                <label>Estatus</label>
-                    @foreach ($estatuorg as $obj2)
-                        @if ($obj2->id == $iglesia->Status)
-                                {{ $obj2->description }}
-                            @else
-
-                        @endif
-
-                    @endforeach
-
-            </div>
-            &nbsp;
             <p>
             <div class="input-area relative">
                 <label>Sede</label>
@@ -117,7 +93,7 @@
                 <div class="grid pt-4 pb-3 px-4">
                     <div class="input-area relative">
                         <label>Logo</label>
-                        <img src="{{$iglesia->logo_url}}{{$iglesia->logo_name}}" ><p>
+                        <img src="{{$iglesia->logo_url}}{{$iglesia->logo}}" ><p>
 
                     </div>
                 </div>

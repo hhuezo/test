@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class IglesiaController extends Controller
 {
@@ -32,8 +33,8 @@ class IglesiaController extends Controller
     public function index()
     {
         $iglesia = Iglesia::get();
-
-        return view('catalog.iglesia.index', compact('iglesia'));
+        $estatuorg= OrganizationStatus::get();
+        return view('catalog.iglesia.index', compact('iglesia','estatuorg'));
     }
 
     /**
@@ -87,15 +88,15 @@ class IglesiaController extends Controller
         $organizations->website = $request->website;
         $organizations->personeria_juridica = $request->personeria_juridica;
         $organizations->organization_type = $request->organization_type;
-        $organizations->status = $request->status;
+        $organizations->status = 1;
         $organizations->sede_id = $request->sede_id;
         $archivo = $request->file('logo_name');
         $filename = $archivo->getClientOriginalName();
         $path = $filename;
         $destinationPath = public_path('/images');
         $archivo->move($destinationPath, $path);
-        $organizations->logo_url = $destinationPath;
-        $organizations->logo_name = $filename;
+        $organizations->logo_url = "./images";
+        $organizations->logo = $filename;
         $organizations->save();
         alert()->success('El registro ha sido agregado correctamente');
         return back();
@@ -148,6 +149,12 @@ class IglesiaController extends Controller
         //   dd($wizzarquestion);
         //where('id' ,'=', $wizzaranswer->question_id)->get();
         //return view('catalog.iglesia.show', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'));
+
+
+        //generando QR
+        QrCode::format('png')->size(200)->generate( (string)$iglesia->id, public_path('img/qrcode.png'));
+
+
 
         $pdf = \PDF::loadView('catalog.iglesia.show',compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'))->setWarnings(false)->setPaper('letter');
         return $pdf->stream('Info.pdf');
@@ -229,8 +236,8 @@ class IglesiaController extends Controller
         $path = $filename;
         $destinationPath = public_path('/images');
         $archivo->move($destinationPath, $path);
-        $organizations->logo_url = $destinationPath;
-        $organizations->logo_name = $filename;
+        $organizations->logo_url ="./images";/// $destinationPath;
+        $organizations->logo = $filename;
         $organizations->update();
         //  dd($organizations->id);
         //preguntas    if ( $wizzaranswer->question_id==$request->id) {        $wizzaranswer->answer=$request->answer;        $wizzaranswer->update();    }
@@ -296,6 +303,17 @@ class IglesiaController extends Controller
 
     }
 
+
+    public function modificar_estado(Request $request)
+    {
+       // dd($request->status_id,$request->iglesia_id);
+
+        $iglesia =iglesia::findOrFail($request->iglesia_id);
+        $iglesia->status=$request->status_id;
+        $iglesia->update();
+        alert()->success('El Estado ha sido Modificado correctamente');
+        return back();
+    }
 
 
 
@@ -450,7 +468,7 @@ class IglesiaController extends Controller
         if ($request->hasFile('image')) {
             $imagen = $request->file('image');
             $nombreImagen = $imagen->getClientOriginalName();
-            $carpetaDestino = public_path('images'); // Ruta de la carpeta de destino en el servidor
+            $carpetaDestino = public_path('./images'); // Ruta de la carpeta de destino en el servidor
             $imagen->move($carpetaDestino, $nombreImagen);
 
             return response()->json(['success' => true]);
@@ -579,9 +597,9 @@ class IglesiaController extends Controller
         if ($request->file('logo')) {
             $file = $request->file('logo');
             $id_file = uniqid();
-            $file->move(public_path("img/"), $id_file . ' ' . $file->getClientOriginalName());
+            $file->move(public_path("images/"), $id_file . ' ' . $file->getClientOriginalName());
             $iglesia->logo = $id_file . ' ' . $file->getClientOriginalName();
-            $iglesia->logo_url= $iglesia->logo;
+            $iglesia->logo_url= "./images/";
                 }
 
         $iglesia->sede_id = $sede_id;
@@ -602,15 +620,14 @@ class IglesiaController extends Controller
 
 //agregando las respuestas de las preguntas del enrolamiento de la iglesia
 
-       $time = Carbon::now('America/El_Salvador');
-      $respuesta=new ChurchQuestionWizard();
-      $wizzarquestion= WizardQuestions::where('active', '=', 1)->get();
-      foreach ($wizzarquestion as $question) {
-          $respuesta->question_id=$question->id;
-          $respuesta->iglesia_id=$request->iglesia_id;
-          $respuesta->answer=$request->answer;
-          $respuesta->fecha= $time->toDateTimeString();
-        }
+
+        /*agregando el grupo desde el enrrolamiento */
+    //    $grupis=new iglesia_has_grupo ();
+
+     //       $grupis->save();
+
+
+
 //fin de  las respuestas de las preguntas del enrolamiento de la iglesia
 
         // Iniciar sesión con el nuevo usuario
@@ -620,7 +637,7 @@ class IglesiaController extends Controller
        // return redirect('/home');
 
        return view('confirma');
-       return redirect('/confirma');
+
 
 
     }

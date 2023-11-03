@@ -57,6 +57,7 @@ Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_regist
 Route::get('/iglesia/back_page', [IglesiaController::class, 'back_page'])->name('back_page');
 Route::post('/iglesia/registro_respuesta', [IglesiaController::class, 'registro_respuesta']);
 Route::post('/iglesia/registro_iglesia', [IglesiaController::class, 'registro_iglesia']);
+Route::post('/iglesia/modificar_estado', [IglesiaController::class, 'modificar_estado']);
 
 
  Route::post('catalog/iglesia/add_preguntaresp', [IglesiaController::class, 'add_preguntaresp']);

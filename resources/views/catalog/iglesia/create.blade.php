@@ -144,15 +144,12 @@
                                                 <input type="text" name="Personeria_Juridica" required class="form-control" value="{{ old('Personeria_Juridica') }}">
                                             </div>
 
-                                            <div class="input-area relative">
+                                           <!-- <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">{{ __('tipo de organizacion') }}</label>
                                                 <select name="organization_type" class="form-control">
-                                                    @foreach ($organizacion as $obj)
-                                                    <option value="{{ $obj->id }}">{{ $obj->name }}
-                                                    </option>
-                                                    @endforeach
+
                                                 </select>
-                                            </div>
+                                            </div>-->
 
                                    <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Estatus</label>
@@ -186,7 +183,8 @@
 
                                                         </div>
                                                     <p>
-                                            </div><p>
+                                            </div>
+                                        </div>
 
 
 
@@ -197,20 +195,19 @@
 
 
 
-                                        </div>
-                                        <div></div>
-                                        <div class="card h-full">
-                                         <div class="grid pt-4 pb-3 px-4">
-                                          <div class="input-area relative">
-                                        <div style="text-align: right;">
-                                            <button type="submit" class="btn inline-flex justify-right btn-dark">{{ __('Aceptar') }}</button>
-                                        </div>
-                                        </div>&nbsp;
+
+<div></div>
+
+<div class="input-area relative">
+                                            <div class="grid pt-4 pb-3 px-4">
+                                                <div class="input-area relative">
+                                            <button type="submit" class="btn btn-dark btn-sm float-right">{{ __('Aceptar') }}</button>
+                                       &nbsp;
                                          </div>
                                         </div>
                                         </div>
 
-                                    </div>
+
                                     </form>
 
                                 </div>

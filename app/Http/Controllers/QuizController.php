@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Quiz\Answer;
 use App\Models\Quiz\Question;
 use App\Models\Quiz\Quiz;
+use FontLib\Table\Type\cmap;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
 {
     public function index()
     {
+
         return view('Quiz.index');
     }
 
