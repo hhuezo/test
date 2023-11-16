@@ -302,14 +302,14 @@
 
                                                         </td>
                                                         </tr>
-                                                        @include('catalog.iglesia.modaleditanswer')
-                                                        @include('catalog.iglesia.modaldelquestion')
+                                                        @include('catalog.iglesia.modal_edit_answer')
+                                                        @include('catalog.iglesia.modal_del_question')
                                                     @endforeach
                                                 </tbody>
                                             </table>
                                             &nbsp;
 
-                                            @include('catalog.iglesia.modalcreatequestion')
+                                            @include('catalog.iglesia.modal_create_question')
                                             &nbsp;
 
                                             {{-- @foreach ($wizzarquestion as $obj1)
@@ -372,7 +372,7 @@
                                                                 data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
                                                                 style="color: #1769aa;" width="40"></iconify-icon>
                                                         </td>
-                                                        @include('catalog.iglesia.modaldelgrupo')
+                                                        @include('catalog.iglesia.modal_del_grupo')
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -383,7 +383,7 @@
                                                     data-bs-target="#modal-creategroup-{{$iglesia->id }}" icon="mdi:plus-box"
                                                     style="color: #ede9e9;" width="20"></iconify-icon>
                                             </div>
-                                            @include('catalog.iglesia.modaladdgrupo')
+                                            @include('catalog.iglesia.modal_add_grupo')
                                             &nbsp;
                                         </div>
                                     </div>

@@ -62,9 +62,7 @@
                                                                         <input type="radio"
                                                                             class="hidden"
                                                                             name="answer"
-                                                                            value="{{ $wizzarquestion->answer }}"   required class="form-control" value="{{ old('answer') }}"
-                                                                            autofocus="true"
-                                                                            checked="checked">
+                                                                            value="1"   required class="form-control">
                                                                         <span
                                                                             class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
                                                                                                 duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
@@ -81,7 +79,7 @@
                                                                         <input type="radio"
                                                                             class="hidden"
                                                                             name="answer"
-                                                                            value="{{ $wizzarquestion->answer }}"   required class="form-control" value="{{ old('answer') }}">
+                                                                            value="0"   required class="form-control" >
                                                                         <span
                                                                             class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
                                                                                                 duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
