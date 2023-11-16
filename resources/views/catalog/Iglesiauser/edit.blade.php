@@ -9,7 +9,7 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Agregar o Quitar Iglesias a Usuario
+                            <div class="card-title text-slate-900 dark:text-white">Modificar Datos de Usuario
 
                                 <a href="{{ url('catalog/Iglesiauser') }}">
                                     <button class="btn btn-dark btn-sm float-right">
@@ -37,8 +37,7 @@
                                             </div>
                                         @endif
 
-                                        <form method="POST" action="{{ url('iglesiauser.update', $usuario->id) }}"
-                                            enctype="multipart/form-data">
+                                        <form method="POST" action="{{ url('iglesiauser.update', $usuario->id) }}">
                                             @method('PUT')
                                             @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
@@ -58,13 +57,21 @@
                                                 </div>
 
 
-                                                <iconify-icon data-bs-toggle="modal"
-                                                data-bs-target="#modal-create-{{$usuario->id }}" icon="mdi:plus"
-                                                style="color: #1769aa;" width="40"></iconify-icon>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">{{ __('clave') }}</label>
+                                                    <input type="text" name="password"  required class="form-control">
+                                                </div>
+
+                                                <div class="input-area relative">
+                                                <div class="btn btn-dark btn-sm float-right">
+                                                    <button type="submit">{{ __('Aceptar') }}</button>
+                                                </div>
+                                             </div>
+
                                             &nbsp;
 
 
-                                                        </div>
+
                                                         <p>
                                                     </div>
 
@@ -78,86 +85,10 @@
                                         &nbsp;&nbsp;
 
 
-                                        <div class="input-area relative">
-                                            <table id="myTable" class="display" cellspacing="0" width="100%">
-                                                <thead>
-                                                    <tr class="td-table">
-                                                        <th style="text-align: center">Iglesia</th>
-                                                        <th style="text-align: center">Nombre</th>
-                                                        <th style="text-align: center">Responsable</th>
-                                                        <th style="text-align: center">Opciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ( $usuario_iglesias  as $obj)
-                                                        <td align="center"> {{ $obj->id }} </td>
-                                                        <td align="center">{{ $obj->name }}</td>
-                                                        <td align="center"> {{ $obj->pastor_name }}</td>
-                                                        <td align="center">
-                                                            <iconify-icon data-bs-toggle="modal"
-                                                                data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
-                                                                style="color: #1769aa;" width="40"></iconify-icon>
-                                                        </td>
-                                                        </tr>
-                                                        @include('catalog.Iglesiauser.modaldeliglesia')
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+
                                             &nbsp;
 
-                                            @include('catalog.Iglesiauser.modaladdiglesia')
-                                            &nbsp;
 
-                                            {{-- @foreach ($wizzarquestion as $obj1) @include('catalog.iglesia.modaleditanswer')  @include('catalog.iglesia.modalcreatequestion')
-                                                        @include('catalog.iglesia.modaldelquestion')
-                                                        <tr>  @include('catalog.iglesia.modaldelquestion')
-                                                            @foreach ($wizzaranswer as $obj2)
-                                                                @if ($obj1->id == $obj2->question_id)
-                                                                <td align="center"> {{ $obj2->iglesia_id }} </td>
-                                                                    <td align="center">{{ $obj2->question_id }}</td>
-                                                                    <td align="center">{{ $obj1->question }}</td>
-                                                                    <td align="center">
-                                                                        @if ($obj2->answer == 1)
-                                                                            <fieldset>
-                                                                                <legend></legend>
-                                                                                <div>
-                                                                                    <input type="checkbox" id="answer"
-                                                                                        name="answer" value="answer"
-                                                                                        checked />
-                                                                                    <label for="answer">Si</label>
-                                                                                </div>
-                                                                            @else
-                                                                             <td align="center">
-                                                            <iconify-icon data-bs-toggle="modal"
-                                                                data-bs-target="#modal-{{ $obj->id }}"
-                                                                icon="mdi:pencil-box" style="color: #1769aa;"
-                                                                width="40"></iconify-icon> &nbsp;&nbsp;
-                                                            <iconify-icon data-bs-toggle="modal"
-                                                                data-bs-target="#modal-preg-{{$obj->iglesia_id  }}"
-                                                                icon="mdi:trash" style="color: #1769aa;"
-                                                                width="40"></iconify-icon>
-
-                                                        </td>
-                                                                                <div>
-                                                                                    <input type="checkbox" id="answer"
-                                                                                        name="answer" value="answer" />
-                                                                                    <label for="answer">No</label>
-                                                                                </div>
-                                                                            </fieldset>
-                                                                        @endif
-                                                                    </td>
-                                                                    <td align="center">
-                                                                        <iconify-icon data-bs-toggle="modal"
-                                                                            data-bs-target="#modal3"
-                                                                            icon="mdi:pencil-box" style="color: #1769aa;"
-                                                                            width="40"></iconify-icon>
-                                                                    </td>
-                                                                @endif
-                                                                @include('catalog.iglesia.modaleditanswer')
-                                                            @endforeach
-                                                        </tr>
-
-                                                    @endforeach --}}
 
                                         </div>
                                     </div>

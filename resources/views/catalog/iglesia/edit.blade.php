@@ -233,19 +233,22 @@
                                                         </div>
                                                         <p>
                                                     </div>
-                                                    <p>
-                                                    <div style="text-align: right;">
-                                                        <button type="submit"
-                                                            class="btn inline-flex justify-right btn-dark">{{ __('Aceptar') }}</button>
-                                                    </div>
-                                                    &nbsp;
                                                 </div>
 
+
+                                                    &nbsp;
+
+
                                             </div>
-
+                                            <p>
+                                            <div class="btn btn-dark btn-sm float-right">
+                                            <button type="submit">{{ __('Aceptar') }}</button>
+                                        </div>
+                                        &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;
                                         </form>
-
-                                        &nbsp;&nbsp;
+                                        <div>
+                                        &nbsp;&nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;
+                                        &nbsp;&nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;</div>
                                         <div class="btn btn-dark btn-sm float-right">
                                             <iconify-icon data-bs-toggle="modal"
                                                 data-bs-target="#modal-create-{{ $iglesia->id }}" icon="mdi:plus-box"

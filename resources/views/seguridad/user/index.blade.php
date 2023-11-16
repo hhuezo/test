@@ -9,8 +9,9 @@
             <header class=" card-header noborder">
                 <h4 class="card-title">Listado de usuarios
                 </h4>
-                <button class="btn btn-dark" data-bs-toggle="modal"
-                    data-bs-target="#usuario_create_modal">Nuevo</button>
+                <a href="{{url('seguridad/user/create')}}">
+                    <button class="btn btn-outline-primary" >Nuevo</button>
+                </a>
             </header>
             <div class="card">
                 <div style=" margin-left:20px; margin-right:20px; ">
@@ -36,19 +37,14 @@
                                                 <td>{{ $obj->name }}</td>
                                                 <td align="center">
 
-                                                    <a href="{{ url('seguridad/role') }}/{{ $obj->id }}/edit">
+                                                    <a href="{{ url('seguridad/user') }}/{{ $obj->id }}/edit">
                                                         <iconify-icon icon="healthicons:eye-negative" style="color: #1769aa;" width="40"></iconify-icon>
                                                     </a>
-
                                                     &nbsp;&nbsp;
-
-
-
                                                 </td>
                                             </tr>
                                         @endforeach
                                     @endif
-
                                 </tbody>
                             </table>
                         </div>

@@ -11,13 +11,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/rt-plugins.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/rt-plugins.css') }}">
     <link href="https://unpkg.com/aos@2.3.0/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
         integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     <!-- START : Theme Config js-->
-    <script src="assets/js/settings.js" sync></script>
+    <script src="{{ asset('assets/js/settings.js') }}" sync></script>
     <!-- END : Theme Config js-->
 
 </head>
@@ -163,7 +163,7 @@
                                                                 <div class="flex-1">
                                                                     <div
                                                                         class="card-title text-slate-900 dark:text-white">
-                                                                        {{ __('organization.Register') }}
+                                                                        Registro de Nuevos Miembros
                                                                         <h1>
                                                                         </h1>
                                                                     </div>
@@ -171,7 +171,8 @@
 
                                                                 <a href="{{ URL('login') }}">
                                                                     <button class="btn btn-dark btn-sm float-right">
-                                                                        <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
+                                                                        <iconify-icon icon="icon-park-solid:back"
+                                                                            style="color: white;" width="18">
                                                                         </iconify-icon>
                                                                     </button>
                                                                 </a>
@@ -190,11 +191,19 @@
                                                             <form method="POST" action="{{ route('store_member') }}"
                                                                 class="space-y-4">
                                                                 @csrf
+                                                                <div class="input-area relative">
+
+                                                                    <input type="hidden" name="iglesia_id" required
+                                                                        class="form-control"
+                                                                        value=" {{ $iglesia->id }}">
+
+
+                                                                </div>
                                                                 <div
                                                                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Name') }}</label>
+                                                                            class="form-label">Nombre </label>
                                                                         <input type="text" name="name"
                                                                             onblur="this.value = this.value.toUpperCase()"
                                                                             required class="form-control"
@@ -213,8 +222,8 @@
                                                                     </div>
 
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">Fecha nacimiento</label>
+                                                                        <label for="largeInput" class="form-label">Fecha
+                                                                            nacimiento</label>
                                                                         <input type="date" id="birthdate"
                                                                             name="birthdate" required
                                                                             class="form-control"
@@ -225,20 +234,20 @@
 
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Email') }}</label>
+                                                                            class="form-label">Email</label>
                                                                         <input type="email" name="email" required
                                                                             class="form-control"
                                                                             value="{{ old('email') }}">
                                                                     </div>
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Password') }}</label>
+                                                                            class="form-label">Password</label>
                                                                         <input type="password" name="password"
                                                                             required class="form-control">
                                                                     </div>
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.ConfirmePassword') }}</label>
+                                                                            class="form-label">ConfirmePassword</label>
                                                                         <input type="password"
                                                                             name="password_confirmation" required
                                                                             class="form-control">
@@ -256,19 +265,40 @@
                                                                     </div>
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Phone') }}</label>
+                                                                            class="form-label">Telefono</label>
                                                                         <input type="text" name="phone_number"
                                                                             required class="form-control"
                                                                             data-inputmask="'mask': ['9999-9999']"
                                                                             value="{{ old('phone_number') }}">
                                                                     </div>
 
+
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Departamento</label>
-                                                                        <select id="Departamento" name="Departamento"
-                                                                            class="form-control">
-                                                                            @foreach ($departamentos as $obj)
+                                                                        <input type="text" name="state_id" required
+                                                                            class="form-control"
+                                                                            value="{{ $iglesia->departamento->nombre }}"
+                                                                            disabled>
+                                                                    </div>
+
+
+
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">Iglesia</label>
+                                                                        <input type="text" name="iglesia" required
+                                                                            class="form-control"
+                                                                            value=" {{ $iglesia->name }}" disabled>
+
+
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">grupo</label>
+                                                                        <select id="grupo_id" name="grupo_id"
+                                                                            class="form-control" required>
+                                                                            @foreach ($iglesia_grupo as $obj)
                                                                                 <option value="{{ $obj->id }}">
                                                                                     {{ $obj->nombre }}
                                                                                 </option>
@@ -277,26 +307,26 @@
 
                                                                     </div>
 
-                                                                    <div class="input-area relative">
+
+                                                                    <!--  <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Municipio</label>
                                                                         <select id="Municipio" name="Municipio"
                                                                             class="form-control select2">
-                                                                            @foreach ($municipios as $obj)
-                                                                                <option value="{{ $obj->id }}"
-                                                                                    {{ old('Municipio') == $obj->id ? 'selected' : '' }}>
-                                                                                    {{ $obj->nombre }}
+                                                                            foreach ($municipios as $obj)
+                                                                                <option value=" $obj->id }}"
+                                                                                     old('Municipio') == $obj->id ? 'selected' : '' }}>
+                                                                                     $obj->nombre }}
                                                                                 </option>
-                                                                            @endforeach
+                                                                            endforeach
                                                                         </select>
-
-                                                                    </div>
+                                                                    </div>-->
 
 
 
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
-                                                                            class="form-label">{{ __('organization.Address') }}</label>
+                                                                            class="form-label">Direccion</label>
                                                                         <textarea name="address" required class="form-control" rows="5">{{ old('address') }}</textarea>
                                                                     </div>
                                                                     <div class="input-area relative">
@@ -305,10 +335,11 @@
                                                                         <textarea name="about_me" class="form-control" rows="5">{{ old('about_me') }}</textarea>
                                                                     </div>
 
+
                                                                 </div>
                                                                 <div style="text-align: right;">
                                                                     <button type="submit"
-                                                                        class="btn inline-flex justify-center btn-dark">{{ __('organization.Acept') }}</button>
+                                                                        class="btn inline-flex justify-center btn-dark">Aceptar</button>
                                                                 </div>
 
 
@@ -327,32 +358,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                             </div>
                         </div>
@@ -417,9 +422,10 @@
 
 
     <!-- scripts -->
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/rt-plugins.js"></script>
-    <script src="assets/js/app.js"></script>
+    <!-- Core Js -->
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js'></script>
     <script>
         $(document).ready(function() {
@@ -469,8 +475,19 @@
                 $("#document_number").prop("required", false);
             }
 
+            $.get('/get_grupo/' + fechaNacimiento, function(data) {
+                // Manejar la respuesta aquí
+                var _select = ''
+                for (var i = 0; i < data.length; i++)
+                    _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
+                    '</option>';
+
+                $("#grupo_id").html(_select);
+            });
+
         }
     </script>
+
 </body>
 
 </html>

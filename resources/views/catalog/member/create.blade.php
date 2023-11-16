@@ -38,6 +38,7 @@
                                             </div>
                                         @endif
                                         <form method="POST" action="{{ url('catalog.member') }}">
+                                            @method('PUT')
                                             @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
@@ -58,18 +59,9 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('fecha') }}</label>
-                                                    <input type="text" name="birthday" required class="form-control">
+                                                    <input type="date" name="birthday" required class="form-control">
                                                 </div>
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                            class="form-label">{{ __('status') }}</label>
-                                                    <select name="status" class="form-control">
-                                                        @foreach ($MemberStatus as $obj)
-                                                            <option value="{{ $obj->id }}">{{ $obj->description_es }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+
                                             </div>&nbsp;
 
                                             <div style="text-align: right;">

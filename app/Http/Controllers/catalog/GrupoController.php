@@ -85,6 +85,7 @@ class GrupoController extends Controller
         $iglesiaArray =  $grupo_iglesias->pluck('id')->toArray();
         $grupos_noasignados = iglesia::whereNotIn('id', $iglesiaArray)->get();
         return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias','grupos_noasignados'));
+       //return view('catalog.grupo.edit', compact('grupos'));
     }
 
     /**

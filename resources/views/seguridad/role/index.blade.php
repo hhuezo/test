@@ -9,8 +9,9 @@
             <header class=" card-header noborder">
                 <h4 class="card-title">Listado de roles
                 </h4>
-                {{-- <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                    data-bs-target="#usuario_create_modal">Nuevo</button> --}}
+                <a href="{{url('seguridad/role/create')}}">
+                    <button class="btn btn-outline-primary" >Nuevo</button>
+                </a>
             </header>
             <div class="card">
                 <div style=" margin-left:20px; margin-right:20px; ">

@@ -1,4 +1,3 @@
-
 @extends ('menu')
 @section('contenido')
     @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
@@ -36,48 +35,63 @@
                                             </div>
                                         @endif
 
-                                        <form method="POST" action="{{ route('member.update', $member->id) }}" class="space-y-4">
+                                        <form method="POST" action="{{ route('member.update', $member->id) }}"
+                                            class="space-y-4">
+                                            @method('PUT')
                                             @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Nombre') }}</label>
-                                                    <input type="text" name="name_member" value="{{ $member->name_member }}"
-                                                        required class="form-control" value="{{ old('name_member') }}"
-                                                        autofocus="true">
+                                                    <label for="largeInput" class="form-label">{{ __('Nombre') }}</label>
+                                                    <input type="text" name="name_member"
+                                                        value="{{ $member->name_member }}" required class="form-control"
+                                                        value="{{ old('name_member') }}" autofocus="true">
                                                 </div>
 
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Apellido') }}</label>
-                                                    <input type="text" name="lastname_member" value="{{ $member->lastname_member}}"
-                                                        required class="form-control" value="{{ old('lastname_member') }}">
+                                                    <label for="largeInput" class="form-label">{{ __('Apellido') }}</label>
+                                                    <input type="text" name="lastname_member"
+                                                        value="{{ $member->lastname_member }}" required class="form-control"
+                                                        value="{{ old('lastname_member') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('fecha cumpleaños') }}</label>
-                                                    <input type="text" name="birthdate" value="{{ date('d/m/Y', strtotime($member->birthdate)) }}"
-                                                        required class="form-control">
+                                                    <input type="date" name="birthdate"
+                                                        value="{{ $member->birthdate }}" required
+                                                        class="form-control">
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('numero de documento') }}</label>
-                                                    <input type="text" name="description_es" value="{{ $member->document_number_type }}"
-                                                        required class="form-control">
+                                                    <input type="text" name="document_number_type"
+                                                        value="{{ $member->document_number_type }}" required
+                                                        class="form-control">
                                                 </div>
-                                                <div class="input-area relative pl-28">
-                                                    <label for="largeInput" class="inline-inputLabel">status</label>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                    class="form-label">Status</label>
                                                     <select name="status" class="form-control select2">
-                                                        @foreach ($MemberStatus as $obj)
-                                                            @if ($obj->id == $member->status )
-                                                                <option value="{{ $obj->id }}" selected> {{ $obj->description_es }}
+                                                        @foreach ($member_status as $obj)
+                                                            @if ($obj->id == $member->status)
+                                                                <option value="{{ $obj->id }}" selected>
+                                                                    {{ $obj->description_es }}
                                                                 </option>
                                                             @else
-                                                                <option value="{{ $obj->id }}">{{ $obj->description_es }}</option>
+                                                                <option value="{{ $obj->id }}">
+                                                                    {{ $obj->description_es }}</option>
                                                             @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                    class="form-label">Grupos</label>
+                                                    <select name="grupo_id" class="form-control select2">
+                                                        @foreach ($group_church as $obj)
+                                                         <option value="{{ $obj->grupo->id }}" {{  $obj->grupo->id == $group_id ? 'selected':''}}   >{{ $obj->grupo->nombre }}   </option>
                                                         @endforeach
                                                     </select>
                                                 </div>&nbsp;&nbsp;

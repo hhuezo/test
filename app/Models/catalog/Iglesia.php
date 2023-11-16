@@ -3,6 +3,7 @@
 namespace App\Models\catalog;
 
 use App\Models\User;
+use App\Models\catalog\catalog_organization_status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -61,17 +62,24 @@ class Iglesia extends Model
         return $this->belongsToMany(User::class, 'users_has_iglesia', 'iglesia_id');
     }
 
-    public function usuarioiglesia()
+    public function usuario_iglesia()
     {
         return $this->belongsToMany(Users::class, 'users_has_iglesia', 'iglesia_id','user_id');
 
     }
 
-    public function iglesiagrupo()
+    public function iglesia_grupo()
     {
-        return $this->belongsToMany(Grupo::class, 'iglesia_has_grupo', 'iglesia_id');
+        return $this->belongsToMany(Grupo::class, 'group_per_chuch_plan', 'iglesia_id', 'group_id');
     }
 
+
+
+    public function iglesiaestatus()
+    {
+        //return $this->belongsTo('use App\Models\catalog\Sede', 'id', 'sede_id');
+        return $this->belongsTo(OrganizationStatus::class, 'status', 'id');
+    }
 
     public function churchanswer()
     {

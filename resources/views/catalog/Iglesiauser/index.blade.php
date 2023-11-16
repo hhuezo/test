@@ -10,8 +10,8 @@
             <header class=" card-header noborder">
                 <h4 class="card-title">Listado de usuarios
                 </h4>
-                <button class="btn btn-dark" data-bs-toggle="modal"
-                    data-bs-target="#usuario_create_modal">Nuevo</button>
+                <!--<button class="btn btn-dark" data-bs-toggle="modal"
+                    data-bs-target="#usuario_create_modal">Nuevo</button>-->
             </header>
             <div class="card">
                 <div style=" margin-left:20px; margin-right:20px; ">
@@ -28,21 +28,26 @@
                                         <th>opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>  <tr>
                                     @if ($usuarios->count() > 0)
                                         @foreach ($usuarios as $obj)
-                                            <tr>
-                                                <td align="center">{{ $obj->id }}</td>
-                                                <td>{{ $obj->email }}</td>
-                                                <td>{{ $obj->name }}</td>
-                                                <td align="center">
-                                                    <a href="{{ url('catalog/Iglesiauser') }}/{{ $obj->id }}/edit">
-                                                        <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;" width="40"></iconify-icon>
-                                                    </a>
-                                                    &nbsp;&nbsp;
-                                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
-                                                </td>
-                                            </tr>
+                                        @foreach ($members as $obj2)
+                                         @if ($obj->id==$obj2->users_id)
+                                         <td align="center">{{ $obj->id }}</td>
+                                         <td>{{ $obj->email }}</td>
+                                         <td>{{ $obj->name }}</td>
+
+                                         <td align="center">
+                                             <a href="{{ url('catalog/Iglesiauser') }}/{{ $obj->id }}/edit">
+                                                 <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;" width="40"></iconify-icon>
+                                             </a>
+                                             &nbsp;&nbsp;
+                                             <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
+                                         </td>
+                                     </tr>
+                                          @endif
+
+                                            @endforeach
                                         @endforeach
                                     @endif
 

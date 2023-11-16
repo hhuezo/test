@@ -33,14 +33,15 @@
         });
     </script>
 
-<style>
-    .card-title {
-        text-transform: none;
-    }
-    .btn-dark {
-        background-color: #740816;
-    }
-</style>
+    <style>
+        .card-title {
+            text-transform: none;
+        }
+
+        .btn-dark {
+            background-color: #740816;
+        }
+    </style>
 </head>
 
 <body class=" font-inter dashcode-app" id="body_class">
@@ -52,12 +53,11 @@
             <div id="bodyOverlay"
                 class="w-screen h-screen fixed top-0 bg-slate-900 bg-opacity-50 backdrop-blur-sm z-10 hidden"></div>
             <div class="logo-segment">
-                <a class="flex items-center" href="{{url('/')}}">
+                <a class="flex items-center" href="{{ url('/') }}">
                     <img src="{{ asset('images/') }}/urban.png" class="black_logo" alt="logo">
                     {{-- <img src="{{ asset('assets/images/logo/logo-c.svg') }}" class="black_logo" alt="logo">
                     <img src="{{ asset('assets/images/logo/logo-c-white.svg') }}" class="white_logo" alt="logo"> --}}
-                    <span
-                        class="ltr:ml-3 rtl:mr-3 text-xl font-Inter font-bold text-slate-900 dark:text-white">
+                    <span class="ltr:ml-3 rtl:mr-3 text-xl font-Inter font-bold text-slate-900 dark:text-white">
                         Urban Strategies
                     </span>
                 </a>
@@ -81,59 +81,72 @@
                 id="sidebar_menus">
                 <ul class="sidebar-menu">
                     @can('approve organization')
-                 <!--   <li class="sidebar-menu-title">ACTIVAR</li>
-                    <li class="">
-                        <a href="{{url('members')}}" class="navItem">
-                            <span class="flex items-center">
-                                <iconify-icon class=" nav-icon" icon="heroicons-outline:clipboard-check">
-                                </iconify-icon>
-                                <span>Activar miembro</span>
-                            </span>
-                        </a>
-                    </li>
+                        <!--   <li class="sidebar-menu-title">ACTIVAR</li>
+                                <li class="">
+                                    <a href="{{ url('members') }}" class="navItem">
+                                        <span class="flex items-center">
+                                            <iconify-icon class=" nav-icon" icon="heroicons-outline:clipboard-check">
+                                            </iconify-icon>
+                                            <span>Activar miembro</span>
+                                        </span>
+                                    </a>
+                                </li>
 
-                    <li class="">
-                        <a href="{{url('organizations')}}" class="navItem">
-                            <span class="flex items-center">
-                                <iconify-icon class=" nav-icon" icon="heroicons-outline:clipboard-check">
-                                </iconify-icon>
-                                <span>Activar organización</span>
-                            </span>
-                        </a>
-                    </li>-->
+                                <li class="">
+                                    <a href="{{ url('organizations') }}" class="navItem">
+                                        <span class="flex items-center">
+                                            <iconify-icon class=" nav-icon" icon="heroicons-outline:clipboard-check">
+                                            </iconify-icon>
+                                            <span>Activar organización</span>
+                                        </span>
+                                    </a>
+                                </li>-->
                     @endcan
                     @can('read users')
-                    <li class="">
-                        <a href="#" class="navItem">
-                            <span class="flex items-center">
-                                <iconify-icon class=" nav-icon" icon="heroicons-outline:user"></iconify-icon>
-                                <span>Seguridad</span>
-                            </span>
-                            <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li>
-                                <a href="{{ url('seguridad/usuario') }}">Usuario</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('seguridad/role') }}">Rol</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('seguridad/permission') }}">Permisos</a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="">
+                            <a href="#" class="navItem">
+                                <span class="flex items-center">
+                                    <iconify-icon class=" nav-icon" icon="heroicons-outline:user"></iconify-icon>
+                                    <span>Seguridad</span>
+                                </span>
+                                <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
+                            </a>
+                            <ul class="sidebar-submenu">
+                                <li>
+                                    <a href="{{ url('seguridad/user') }}">Usuario</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('seguridad/role') }}">Rol</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('seguridad/permission') }}">Permisos</a>
+                                </li>
+                            </ul>
+                        </li>
                     @endcan
+
+                    @can('datos iglesia')
+                        <li>
+                            <a href="{{ url('datos_iglesia') }}" class="navItem">
+                                <span class="flex items-center">
+                                    <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
+                                    <span>Datos Generales Iglesia</span>
+                                </span>
+                            </a>
+                        </li>
+                    @endcan
+
                     @can('read course')
-                    <li>
-                        <a href="{{url('courses')}}" class="navItem">
-                            <span class="flex items-center">
-                                <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
-                                <span>Cursos</span>
-                            </span>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ url('courses') }}" class="navItem">
+                                <span class="flex items-center">
+                                    <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
+                                    <span>Cursos</span>
+                                </span>
+                            </a>
+                        </li>
                     @endcan
+                    @can('read catalogo')
                     <li class="">
                         <a href="#" class="navItem">
                             <span class="flex items-center">
@@ -153,7 +166,7 @@
                             <li>
                                 <a href="{{ url('catalog/organization_status') }}">Organizacion Estado</a>
                             </li>
-                           <!-- <li>
+                            <!-- <li>
                                 <a href="{{ url('catalog/Quiz') }}">Examen</a>
                             </li>-->
                             <li>
@@ -180,7 +193,7 @@
                             <li>
                                 <a href="{{ url('catalog/answerreg') }}">Respuestas del Registro de la iglesia</a>
                             </li>
-                           <li>
+                            <li>
                                 <a href="{{ url('catalog/region') }}">Region</a>
                             </li>
                             <li>
@@ -204,6 +217,7 @@
 
                         </ul>
                     </li>
+                    @endcan
                     <!-- Apps Area -->
                     {{-- <li class="sidebar-menu-title">APPS</li>
 
@@ -548,157 +562,157 @@
 
 
 
-         <!-- BEGIN: Settings Modal -->
-         <div class="offcanvas offcanvas-end fixed bottom-0 flex flex-col max-w-full bg-white dark:bg-slate-800 invisible bg-clip-padding shadow-sm outline-none transition duration-300 ease-in-out text-gray-700 top-0 ltr:right-0 rtl:left-0 border-none w-96"
-         tabindex="-1" id="offcanvas" aria-labelledby="offcanvas">
-         <div class="offcanvas-header flex items-center justify-between p-4 pt-3 border-b border-b-slate-300">
-             <div>
-                 <h3 class="block text-xl font-Inter text-slate-900 font-medium dark:text-[#eee]">
-                     Theme customizer
-                 </h3>
-                 <p class="block text-sm font-Inter font-light text-[#68768A] dark:text-[#eee]">Customize & Preview
-                     in Real Time</p>
-             </div>
-             <button type="button"
-                 class="box-content text-2xl w-4 h-4 p-2 pt-0 -my-5 -mr-2 text-black dark:text-white border-none rounded-none opacity-100 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                 data-bs-dismiss="offcanvas">
-                 <iconify-icon icon="line-md:close"></iconify-icon>
-             </button>
-         </div>
-         <div class="offcanvas-body flex-grow overflow-y-auto">
-             <div class="settings-modal">
-                 <div class="p-6">
+        <!-- BEGIN: Settings Modal -->
+        <div class="offcanvas offcanvas-end fixed bottom-0 flex flex-col max-w-full bg-white dark:bg-slate-800 invisible bg-clip-padding shadow-sm outline-none transition duration-300 ease-in-out text-gray-700 top-0 ltr:right-0 rtl:left-0 border-none w-96"
+            tabindex="-1" id="offcanvas" aria-labelledby="offcanvas">
+            <div class="offcanvas-header flex items-center justify-between p-4 pt-3 border-b border-b-slate-300">
+                <div>
+                    <h3 class="block text-xl font-Inter text-slate-900 font-medium dark:text-[#eee]">
+                        Theme customizer
+                    </h3>
+                    <p class="block text-sm font-Inter font-light text-[#68768A] dark:text-[#eee]">Customize & Preview
+                        in Real Time</p>
+                </div>
+                <button type="button"
+                    class="box-content text-2xl w-4 h-4 p-2 pt-0 -my-5 -mr-2 text-black dark:text-white border-none rounded-none opacity-100 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                    data-bs-dismiss="offcanvas">
+                    <iconify-icon icon="line-md:close"></iconify-icon>
+                </button>
+            </div>
+            <div class="offcanvas-body flex-grow overflow-y-auto">
+                <div class="settings-modal">
+                    <div class="p-6">
 
-                     <h3 class="mt-4">Theme</h3>
-                     <form class="input-area flex items-center space-x-8 rtl:space-x-reverse" id="themeChanger">
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="light" name="theme" value="light"
-                                 class="themeCustomization-checkInput">
-                             <label for="light" class="themeCustomization-checkInput-label">Light</label>
-                         </div>
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="dark" name="theme" value="dark"
-                                 class="themeCustomization-checkInput">
-                             <label for="dark" class="themeCustomization-checkInput-label">Dark</label>
-                         </div>
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="semiDark" name="theme" value="semiDark"
-                                 class="themeCustomization-checkInput">
-                             <label for="semiDark" class="themeCustomization-checkInput-label">Semi Dark</label>
-                         </div>
-                     </form>
-                 </div>
-                 <div class="divider"></div>
-                 <div class="p-6">
+                        <h3 class="mt-4">Theme</h3>
+                        <form class="input-area flex items-center space-x-8 rtl:space-x-reverse" id="themeChanger">
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="light" name="theme" value="light"
+                                    class="themeCustomization-checkInput">
+                                <label for="light" class="themeCustomization-checkInput-label">Light</label>
+                            </div>
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="dark" name="theme" value="dark"
+                                    class="themeCustomization-checkInput">
+                                <label for="dark" class="themeCustomization-checkInput-label">Dark</label>
+                            </div>
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="semiDark" name="theme" value="semiDark"
+                                    class="themeCustomization-checkInput">
+                                <label for="semiDark" class="themeCustomization-checkInput-label">Semi Dark</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="p-6">
 
-                     <div class="flex items-center justify-between mt-5">
-                         <h3 class="!mb-0">Rtl</h3>
-                         <label id="rtl_ltr"
-                             class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer">
-                             <input type="checkbox" value="" class="sr-only peer">
-                             <span
-                                 class="w-11 h-6 bg-gray-200 peer-focus:outline-none ring-0 rounded-full peer dark:bg-gray-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-black-600"></span>
-                         </label>
-                     </div>
-                 </div>
-                 <div class="divider"></div>
-                 <div class="p-6">
-                     <h3>Content Width</h3>
-                     <div class="input-area flex items-center space-x-8 rtl:space-x-reverse">
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="fullWidth" name="content-width" value="fullWidth"
-                                 class="themeCustomization-checkInput">
-                             <label for="fullWidth" class="themeCustomization-checkInput-label ">Full Width</label>
-                         </div>
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="boxed" name="content-width" value="boxed"
-                                 class="themeCustomization-checkInput">
-                             <label for="boxed" class="themeCustomization-checkInput-label ">Boxed</label>
-                         </div>
-                     </div>
-                     <h3 class="mt-4">Menu Layout</h3>
-                     <div class="input-area flex items-center space-x-8 rtl:space-x-reverse">
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="vertical_menu" name="menu_layout" value="vertical"
-                                 class="themeCustomization-checkInput">
-                             <label for="vertical_menu"
-                                 class="themeCustomization-checkInput-label ">Vertical</label>
-                         </div>
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="horizontal_menu" name="menu_layout" value="horizontal"
-                                 class="themeCustomization-checkInput">
-                             <label for="horizontal_menu"
-                                 class="themeCustomization-checkInput-label ">Horizontal</label>
-                         </div>
-                     </div>
-                     <div id="menuCollapse" class="flex items-center justify-between mt-5">
-                         <h3 class="!mb-0">Menu Collapsed</h3>
-                         <label
-                             class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer">
-                             <input type="checkbox" value="" class="sr-only peer">
-                             <span
-                                 class="w-11 h-6 bg-gray-200 peer-focus:outline-none ring-0 rounded-full peer dark:bg-gray-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-black-500"></span>
-                         </label>
-                     </div>
-                     <div id="menuHidden" class="!flex items-center justify-between mt-5">
-                         <h3 class="!mb-0">Menu Hidden</h3>
-                         <label id="menuHide"
-                             class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer">
-                             <input type="checkbox" value="" class="sr-only peer">
-                             <span
-                                 class="w-11 h-6 bg-gray-200 peer-focus:outline-none ring-0 rounded-full peer dark:bg-gray-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-black-500"></span>
-                         </label>
-                     </div>
-                 </div>
-                 <div class="divider"></div>
-                 <div class="p-6">
-                     <h3>Navbar Type</h3>
-                     <div class="input-area flex flex-wrap items-center space-x-4 rtl:space-x-reverse">
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="nav_floating" name="navbarType" value="floating"
-                                 class="themeCustomization-checkInput">
-                             <label for="nav_floating"
-                                 class="themeCustomization-checkInput-label ">Floating</label>
-                         </div>
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="nav_sticky" name="navbarType" value="sticky"
-                                 class="themeCustomization-checkInput">
-                             <label for="nav_sticky" class="themeCustomization-checkInput-label ">Sticky</label>
-                         </div>
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="nav_static" name="navbarType" value="static"
-                                 class="themeCustomization-checkInput">
-                             <label for="nav_static" class="themeCustomization-checkInput-label ">Static</label>
-                         </div>
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="nav_hidden" name="navbarType" value="hidden"
-                                 class="themeCustomization-checkInput">
-                             <label for="nav_hidden" class="themeCustomization-checkInput-label ">Hidden</label>
-                         </div>
-                     </div>
-                     <h3 class="mt-4">Footer Type</h3>
-                     <div class="input-area flex items-center space-x-4 rtl:space-x-reverse">
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="footer_sticky" name="footerType" value="sticky"
-                                 class="themeCustomization-checkInput">
-                             <label for="footer_sticky" class="themeCustomization-checkInput-label ">Sticky</label>
-                         </div>
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="footer_static" name="footerType" value="static"
-                                 class="themeCustomization-checkInput">
-                             <label for="footer_static" class="themeCustomization-checkInput-label ">Static</label>
-                         </div>
-                         <div class="input-group flex items-center">
-                             <input type="radio" id="footer_hidden" name="footerType" value="hidden"
-                                 class="themeCustomization-checkInput">
-                             <label for="footer_hidden" class="themeCustomization-checkInput-label ">Hidden</label>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
-     <!-- END: Settings Modal -->
+                        <div class="flex items-center justify-between mt-5">
+                            <h3 class="!mb-0">Rtl</h3>
+                            <label id="rtl_ltr"
+                                class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <span
+                                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none ring-0 rounded-full peer dark:bg-gray-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-black-600"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="p-6">
+                        <h3>Content Width</h3>
+                        <div class="input-area flex items-center space-x-8 rtl:space-x-reverse">
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="fullWidth" name="content-width" value="fullWidth"
+                                    class="themeCustomization-checkInput">
+                                <label for="fullWidth" class="themeCustomization-checkInput-label ">Full Width</label>
+                            </div>
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="boxed" name="content-width" value="boxed"
+                                    class="themeCustomization-checkInput">
+                                <label for="boxed" class="themeCustomization-checkInput-label ">Boxed</label>
+                            </div>
+                        </div>
+                        <h3 class="mt-4">Menu Layout</h3>
+                        <div class="input-area flex items-center space-x-8 rtl:space-x-reverse">
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="vertical_menu" name="menu_layout" value="vertical"
+                                    class="themeCustomization-checkInput">
+                                <label for="vertical_menu"
+                                    class="themeCustomization-checkInput-label ">Vertical</label>
+                            </div>
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="horizontal_menu" name="menu_layout" value="horizontal"
+                                    class="themeCustomization-checkInput">
+                                <label for="horizontal_menu"
+                                    class="themeCustomization-checkInput-label ">Horizontal</label>
+                            </div>
+                        </div>
+                        <div id="menuCollapse" class="flex items-center justify-between mt-5">
+                            <h3 class="!mb-0">Menu Collapsed</h3>
+                            <label
+                                class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <span
+                                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none ring-0 rounded-full peer dark:bg-gray-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-black-500"></span>
+                            </label>
+                        </div>
+                        <div id="menuHidden" class="!flex items-center justify-between mt-5">
+                            <h3 class="!mb-0">Menu Hidden</h3>
+                            <label id="menuHide"
+                                class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <span
+                                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none ring-0 rounded-full peer dark:bg-gray-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-black-500"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="p-6">
+                        <h3>Navbar Type</h3>
+                        <div class="input-area flex flex-wrap items-center space-x-4 rtl:space-x-reverse">
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="nav_floating" name="navbarType" value="floating"
+                                    class="themeCustomization-checkInput">
+                                <label for="nav_floating"
+                                    class="themeCustomization-checkInput-label ">Floating</label>
+                            </div>
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="nav_sticky" name="navbarType" value="sticky"
+                                    class="themeCustomization-checkInput">
+                                <label for="nav_sticky" class="themeCustomization-checkInput-label ">Sticky</label>
+                            </div>
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="nav_static" name="navbarType" value="static"
+                                    class="themeCustomization-checkInput">
+                                <label for="nav_static" class="themeCustomization-checkInput-label ">Static</label>
+                            </div>
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="nav_hidden" name="navbarType" value="hidden"
+                                    class="themeCustomization-checkInput">
+                                <label for="nav_hidden" class="themeCustomization-checkInput-label ">Hidden</label>
+                            </div>
+                        </div>
+                        <h3 class="mt-4">Footer Type</h3>
+                        <div class="input-area flex items-center space-x-4 rtl:space-x-reverse">
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="footer_sticky" name="footerType" value="sticky"
+                                    class="themeCustomization-checkInput">
+                                <label for="footer_sticky" class="themeCustomization-checkInput-label ">Sticky</label>
+                            </div>
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="footer_static" name="footerType" value="static"
+                                    class="themeCustomization-checkInput">
+                                <label for="footer_static" class="themeCustomization-checkInput-label ">Static</label>
+                            </div>
+                            <div class="input-group flex items-center">
+                                <input type="radio" id="footer_hidden" name="footerType" value="hidden"
+                                    class="themeCustomization-checkInput">
+                                <label for="footer_hidden" class="themeCustomization-checkInput-label ">Hidden</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Settings Modal -->
 
         <!-- END: Settings -->
 
@@ -765,7 +779,7 @@
                             <div class="main-menu">
                                 <ul>
 
-                                    <li class="         menu-item-has-children          ">                                        <!--  Single menu -->
+                                    <li class="         menu-item-has-children          "> <!--  Single menu -->
 
                                         <!-- has dropdown -->
 
@@ -2172,7 +2186,8 @@
                                                 <div class="flex ltr:text-left rtl:text-right">
                                                     <div class="flex-none ltr:mr-3 rtl:ml-3">
                                                         <div class="h-8 w-8 bg-white rounded-full">
-                                                            <img src="{{ asset('assets/images/all-img/user.png')}}" alt="user"
+                                                            <img src="{{ asset('assets/images/all-img/user.png') }}"
+                                                                alt="user"
                                                                 class="border-white block w-full h-full object-cover rounded-full border">
                                                         </div>
                                                     </div>
@@ -2196,7 +2211,8 @@
                                                 <div class="flex ltr:text-left rtl:text-right relative">
                                                     <div class="flex-none ltr:mr-3 rtl:ml-3">
                                                         <div class="h-8 w-8 bg-white rounded-full">
-                                                            <img src="{{ asset('assets/images/all-img/user2.png')}}" alt="user"
+                                                            <img src="{{ asset('assets/images/all-img/user2.png') }}"
+                                                                alt="user"
                                                                 class="border-transparent block w-full h-full object-cover rounded-full border">
                                                         </div>
                                                     </div>
@@ -2221,7 +2237,8 @@
                                             <div class="flex ltr:text-left rtl:text-right relative">
                                                 <div class="flex-none ltr:mr-3 rtl:ml-3">
                                                     <div class="h-8 w-8 bg-white rounded-full">
-                                                        <img src="{{ asset('assets/images/all-img/user3.png')}}" alt="user"
+                                                        <img src="{{ asset('assets/images/all-img/user3.png') }}"
+                                                            alt="user"
                                                             class="border-transparent block w-full h-full object-cover rounded-full border">
                                                     </div>
                                                 </div>
@@ -2241,7 +2258,8 @@
                                             <div class="flex ltr:text-left rtl:text-right relative">
                                                 <div class="flex-none ltr:mr-3 rtl:ml-3">
                                                     <div class="h-8 w-8 bg-white rounded-full">
-                                                        <img src="{{ asset('assets/images/all-img/user4.png')}}" alt="user"
+                                                        <img src="{{ asset('assets/images/all-img/user4.png') }}"
+                                                            alt="user"
                                                             class="border-transparent block w-full h-full object-cover rounded-full border">
                                                     </div>
                                                 </div>
@@ -2271,14 +2289,15 @@
                                         type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <div
                                             class="lg:h-8 lg:w-8 h-7 w-7 rounded-full flex-1 ltr:mr-[10px] rtl:ml-[10px]">
-                                            <img src="{{ asset('assets/images/all-img/user.png')}}" alt="user"
+                                            <img src="{{ asset('assets/images/all-img/user.png') }}" alt="user"
                                                 class="block w-full h-full object-cover rounded-full">
                                         </div>
                                         <span
                                             class="flex-none text-slate-600 dark:text-white text-sm font-normal items-center lg:flex hidden overflow-hidden text-ellipsis whitespace-nowrap">
-                                         @if (auth()->user())
-                                            {{auth()->user()->name }}
-                                         @endif   </span>
+                                            @if (auth()->user())
+                                                {{ auth()->user()->name }}
+                                            @endif
+                                        </span>
                                         <svg class="w-[16px] h-[16px] dark:text-white hidden lg:inline-block text-base inline-block ml-[10px] rtl:mr-[10px]"
                                             aria-hidden="true" fill="none" stroke="currentColor"
                                             viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -2292,7 +2311,7 @@
                                             overflow-hidden">
                                         <ul class="py-1 text-sm text-slate-800 dark:text-slate-200">
                                             <li>
-                                                <a href="{{url('/home')}}"
+                                                <a href="{{ url('/home') }}"
                                                     class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white font-inter text-sm text-slate-600
                                                     dark:text-white font-normal">
                                                     <iconify-icon icon="heroicons-outline:user"
@@ -2322,7 +2341,7 @@
                                                 </a>
                                             </li> --}}
                                             <li>
-                                                <a href="{{url('courses')}}"
+                                                <a href="{{ url('courses') }}"
                                                     class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white font-inter text-sm text-slate-600
                                                     dark:text-white font-normal">
                                                     <iconify-icon icon="heroicons-outline:clipboard-check"
@@ -2331,6 +2350,7 @@
                                                     <span class="font-Inter">Cursos</span>
                                                 </a>
                                             </li>
+
                                             {{-- <li>
                                                 <a href="settings.html"
                                                     class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white font-inter text-sm text-slate-600
@@ -2467,7 +2487,7 @@
                     class="relative bg-white bg-no-repeat backdrop-filter backdrop-blur-[40px] rounded-full footer-bg dark:bg-slate-700
       h-[65px] w-[65px] z-[-1] -mt-[40px] flex justify-center items-center">
                     <div class="h-[50px] w-[50px] rounded-full relative left-[0px] hrefp-[0px] custom-dropshadow">
-                        <img src="{{ asset('assets/images/users/user-1.jpg')}}" alt=""
+                        <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt=""
                             class="w-full h-full rounded-full border-2 border-slate-100">
                     </div>
                 </a>

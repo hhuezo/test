@@ -1,7 +1,7 @@
 
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-creategroup-{{$iglesia->id }}">
-    <form method="POST" action="{{url('catalog/iglesia/attach_grupos') }}">
-        <input type="hidden" name='iglesia_id' value="{{$iglesia->id }}">
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-add-{{$usuarios->id }}">
+    <form method="POST" action="{{url('seguridad/user/attach_roles') }}">
+     <input type="hidden" name='model_id' value="{{$usuarios->id }}">
      @csrf
      <div class="modal-dialog relative w-auto pointer-events-none">
          <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding
@@ -10,7 +10,7 @@
              <!-- Modal header -->
              <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-danger-500">
                <h3 class="text-base font-medium text-white dark:text-white capitalize">
-                 Eliminar Registro
+                Agregar Rol
                </h3>
                <button type="button" class="text-slate-400 bg-transparent hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center
                                    dark:hover:bg-slate-600 dark:hover:text-white" data-bs-dismiss="modal">
@@ -24,19 +24,21 @@
              <!-- Modal body -->
              <div class="p-6 space-y-4">
                <h6 class="text-base text-slate-900 dark:text-white leading-6">
-                 Confirme si desea Agregar Grupo con la iglesia
+                 Confirme si desea Agregar Rol al usuario
                </h6>
+
 
                <div class="input-area relative">
                 <label for="largeInput"
-                    class="form-label">{{ __('Grupo a Agregar') }}</label>
-                <select name="group_id" class="form-control select" required>
-                    @foreach ($grupos_noasignados as $obj)
-                            <option value="{{ $obj->id }}">{{ $obj->nombre }}
+                    class="form-label">Roles</label>
+                <select name="rol_id" class="form-control select" >
+                    @foreach ($rol_no_asignados as $obj)
+                            <option value="{{ $obj->id }}">{{ $obj->name }}
                         </option>
                     @endforeach
                 </select>
             </div>
+
 
              </div>
              <!-- Modal footer -->
@@ -49,3 +51,4 @@
  </form>
 
 </div>
+

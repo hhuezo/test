@@ -22,9 +22,8 @@
                                 <thead>
                                     <tr class="td-table">
                                         <th style="text-align: center">Id</th>
-                                        <th style="text-align: center">nombre</th>
-                                        <th style="text-align: center">apellido</th>
-                                        <th style="text-align: center">pais</th>
+                                        <th style="text-align: center">Nombre</th>
+                                        <th style="text-align: center">Apellido</th>
 
                                         <th style="text-align: center">opciones</th>
                                     </tr>
@@ -34,10 +33,8 @@
                                         @foreach ($member as $obj)
                                             <tr>
                                                 <td align="center">{{ $obj->id }}</td>
-                                                <td>{{ $obj->name_member}}</td>
-                                                <td>{{ $obj->lastname_member}}</td>                                        >
-
-                                                <td>{{ $obj->country_id}}</td>
+                                                <td align="center">{{ $obj->name_member}}</td>
+                                                <td align="center">{{ $obj->lastname_member}}</td>
 
                                                 <td align="center">
                                                     <a href="{{url('catalog/member')}}/{{$obj->id}}/edit">

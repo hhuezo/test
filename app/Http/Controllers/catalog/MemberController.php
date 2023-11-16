@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\catalog;
 
 use App\Http\Controllers\Controller;
+use App\Models\catalog\GroupPerchuchPlan;
+use App\Models\catalog\Grupo;
 use App\Models\catalog\Member;
 use App\Models\catalog\MemberStatus;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -14,12 +17,16 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $member=Member::get() ;
-        $MemberStatus =MemberStatus::get();
-        return view('catalog.member.index', compact('member','MemberStatus'));
-
+        $member = Member::get();
+        $MemberStatus = MemberStatus::get();
+        return view('catalog.member.index', compact('member', 'MemberStatus'));
     }
 
 
@@ -30,13 +37,13 @@ class MemberController extends Controller
      */
     public function create()
     {
-        $member=Member::get() ;
+        $member = Member::get();
 
-        $MemberStatus =MemberStatus::get();
+        $MemberStatus = MemberStatus::get();
 
+        $groupperchuchplan = GroupPerchuchPlan::get();
 
-
-        return view('catalog.member.create', compact('member','MemberStatus'));
+        return view('catalog.member.create', compact('member', 'MemberStatus', 'groupperchuchplan'));
     }
 
     /**
@@ -48,29 +55,28 @@ class MemberController extends Controller
     public function store(Request $request)
     {
 
-$messages = [
-    'name_member.required' => 'ingresar nombre',
-];
+        $messages = [
+            'name_member.required' => 'ingresar nombre',
+        ];
 
 
 
-$request->validate([
+        $request->validate([
 
-    'name_member.required' => 'ingresar nombre miembro',
+            'name_member.required' => 'ingresar nombre miembro',
 
-], $messages);
+        ], $messages);
 
-$member = new Member();
-$member->name_member = $request->name_member;
-$member->lastname_member = $request->lastname_member;
-$member->brithdate = $request->brithdate;
-$member->document_number_type = $request->document_number_type;
-$member->document_type_id = $request->document_type_id;
-$member->documet_number = $request->documet_number;
-$member->save();
+        $member = new Member();
+        $member->name_member = $request->name_member;
+        $member->lastname_member = $request->lastname_member;
+        $member->birthdate = $request->birthdate;
+        $member->document_number_type = $request->document_number_type;
+        $member->document_type_id = $request->document_type_id;
+        $member->save();
 
-alert()->success('El registro ha sido agregado correctamente');
-return back();
+        alert()->success('El registro ha sido agregado correctamente');
+        return back();
     }
 
     /**
@@ -93,10 +99,19 @@ return back();
     public function edit($id)
     {
 
-        $MemberStatus =MemberStatus::get();
 
-        $member= member::findOrFail($id);
-        return view('catalog.member.edit', compact('member','MemberStatus'));
+        $member_status = MemberStatus::get();
+
+        $member = member::findOrFail($id);
+
+        $group = $member->user_has_group->first();
+
+        $group_id = $group->group_id;
+
+        $grupos = Grupo::get();
+        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
+
+        return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'group_church', 'group_id'));
     }
 
     /**
@@ -124,14 +139,19 @@ return back();
         $member =  Member::findOrFail($id);
         $member->name_member = $request->name_member;
         $member->lastname_member = $request->lastname_member;
-        $member->brithdate = $request->brithdate;
+        $member->birthdate = $request->birthdate;
         $member->document_number_type = $request->document_number_type;
         $member->document_type_id = $request->document_type_id;
-        $member->documet_number = $request->documet_number;
-        $member->save();
+        $member->Update();
+        $group = $member->user_has_group->first();
+        $group_id = $group->group_id;
+     //  dd( $member->organization_id);
+        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id)->first();
+      //  dd(  $group_church);
+        $group_church->group_id = $request->grupo_id;
+        $group_church->update();
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
-
     }
 
     /**
@@ -142,7 +162,7 @@ return back();
      */
     public function destroy($id)
     {
-        $member= Member::findOrFail($id);
+        $member = Member::findOrFail($id);
         //dd($question);
         $member->delete();
         alert()->info('El registro ha sido eliminado correctamente');

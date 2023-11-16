@@ -45,9 +45,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function organization()
+    public $timestamps = false;
+    public function iglesia()
     {
-        return $this->belongsToMany(Iglesia::class,'users_has_iglesia','user_id');
+        return $this->belongsToMany(Iglesia::class,'users_has_iglesia');
     }
+    public function user_rol()
+    {
+        return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id');
+    }
+
+
 }

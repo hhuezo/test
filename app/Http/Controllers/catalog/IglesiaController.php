@@ -111,9 +111,9 @@ class IglesiaController extends Controller
     public function show($id)
     {
 
-       // dd('imprimo aqui');
 
 
+       $userfaclitator=User::get();
 
 
         $iglesia = Iglesia::findOrFail($id);
@@ -136,7 +136,7 @@ class IglesiaController extends Controller
         $grupo_iglesias=  $iglesia->iglesiagrupo;
 
         //$grupos= Grupo::whereNotIn('id', $iglesiaArray)->get();
-  // dd(   $grupo_iglesias);
+  //dd(   $grupo_iglesias);
 
         $grupoArray =  $grupo_iglesias->pluck('id')->toArray();
 
@@ -186,7 +186,7 @@ class IglesiaController extends Controller
         $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->get();
 
 
-        $grupo_iglesias=  $iglesia->iglesiagrupo;
+        $grupo_iglesias=  $iglesia->iglesia_grupo;
 
         //$grupos= Grupo::whereNotIn('id', $iglesiaArray)->get();
   // dd(   $grupo_iglesias);
@@ -274,8 +274,8 @@ class IglesiaController extends Controller
         $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $request->iglesia_id)->where('question_id', '=', $request->question_id)->first();
         $wizzarquestion = WizardQuestions::where('id', '=',  $request->question_id)->first();
         $wizzaranswer->delete();
-        $wizzarquestion->delete();
-        alert()->error('La Pregunta y Respuesta han sido eliminadas correctamente');
+       // $wizzarquestion->delete();
+        alert()->error('La  Respuesta han sido eliminadas correctamente');
         return back();
     }
 
@@ -284,9 +284,9 @@ class IglesiaController extends Controller
     public function attach_grupos(Request $request)
     {
 
-
+     // dd($request->group_id,$request->iglesia_id);
         $grupoiglesia =iglesia::findOrFail($request->iglesia_id);
-        $grupoiglesia->iglesiagrupo()->attach($request->grupo_id);
+        $grupoiglesia->iglesiagrupo()->attach($request->group_id);
         alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
@@ -297,7 +297,7 @@ class IglesiaController extends Controller
     {
 
         $grupoiglesia =iglesia::findOrFail($request->iglesia_id);
-        $grupoiglesia->iglesiagrupo()->detach($request->grupo_id);
+        $grupoiglesia->iglesiagrupo()->detach($request->group_id);
         alert()->error('se han sido eliminadas correctamente');
         return back();
 

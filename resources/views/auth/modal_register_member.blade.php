@@ -1,7 +1,9 @@
 
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-creategroup-{{$iglesia->id }}">
-    <form method="POST" action="{{url('catalog/iglesia/attach_grupos') }}">
+    <form method="POST" action="{{url(') }}">
         <input type="hidden" name='iglesia_id' value="{{$iglesia->id }}">
+        <input type="hidden" name='grupo_id' value="{{$grupo->id }}">
+        <input type="hidden" name='grupo_id' value="{{$member->id }}">
      @csrf
      <div class="modal-dialog relative w-auto pointer-events-none">
          <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding
@@ -18,7 +20,7 @@
                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10
                                            11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                  </svg>
-                 <span class="sr-only">Close modal</span>
+                 <span class="sr-only">consulta</span>
                </button>
              </div>
              <!-- Modal body -->

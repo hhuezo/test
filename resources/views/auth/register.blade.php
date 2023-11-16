@@ -106,11 +106,11 @@
                                                         <div class="lg:col-span-3 md:col-span-2 col-span-1">
                                                             <h4
                                                                 class="text-base text-slate-800 dark:text-slate-300 my-6" align="center">
-                                                                Nombre y Ubicacion de la Iglesia</h4>
+                                                                Nombre de la Iglesia</h4>
                                                         </div>
                                                         <div class="input-area">
-                                                            <label for="username" class="form-label" >Nombre de
-                                                                Iglesia</label>
+                                                          <center>  <label for="username" class="form-label" >Ingrese el Nombre de la
+                                                                Iglesia a la que pertence</label></center>
                                                             <input id="nombre" name="nombre" type="text"
                                                                 class="form-control" placeholder="Nombre de Iglesia"
                                                                 required>

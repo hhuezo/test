@@ -4,10 +4,11 @@ namespace App\Http\Controllers\catalog;
 
 use App\Http\Controllers\Controller;
 use App\Models\catalog\Iglesia;
+use App\Models\catalog\Member;
 use App\Models\catalog\Users;
-
+ use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,9 +21,11 @@ class UserController extends Controller
     {
 
 
-        $usuarios = Users::get();
+        $members = Member::where('status','=',1)->get();
+        $usuarios =  Users::get();
 
-       return view('catalog.Iglesiauser.index', compact('usuarios'));
+
+        return view('catalog.iglesiauser.index', compact('usuarios','members'));
 
     }
 
@@ -33,7 +36,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
+        $usuarios = Users::get();
+
+        return view('catalog.iglesiauser.create', compact('usuarios'));
     }
 
     /**
@@ -44,7 +50,32 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $messages = [
+            'nombre.required' => 'ingresar la pregunta',
+        ];
+
+
+
+        $request->validate([
+
+            'nombre' => 'required',
+
+        ], $messages);
+
+        $usuario = new Users();
+        $usuario->nombre = $request->nombre;
+        $usuario->email = $request->email;
+
+        $usuario->password =  Hash::make($request->password)    ;
+
+
+
+
+
+        $usuario->save();
+        alert()->success('El registro ha sido agregado correctamente');
+        //return redirect('catalog/region');
+
     }
 
     /**
@@ -66,14 +97,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
+
         $usuario = Users::findOrFail($id);
-        $usuario_iglesias=  $usuario->usuarioiglesia;
-        $iglesiaArray =  $usuario_iglesias->pluck('id')->toArray();
 
-        $iglesias_noasig = Iglesia::whereNotIn('id', $iglesiaArray)->get();
-
-
-        return view('catalog.Iglesiauser.edit', compact('usuario','usuario_iglesias','iglesias_noasig'));
+        return view('catalog.iglesiauser.edit', compact('usuario' ));
     }
 
     /**
@@ -85,17 +113,35 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $messages = [
+            'nombre.required' => 'ingresar la pregunta',
+        ];
+
+
+
+        $request->validate([
+
+            'nombre' => 'required',
+
+        ], $messages);
+
+        $usuario =  Users::findOrFail($id);
+        $usuario->nombre = $request->nombre;
+        $usuario->email = $request->email;
+        if($request->password !=""){
+            $usuario->password =  Hash::make($request->password)    ;
+        }
+
+
+      //  $usuario->password =  Hash::make($request->password);;
+        $usuario->update();
+        alert()->success('El registro ha sido modificado correctamente');
     }
 
     public function attach_iglesiauser(Request $request)
     {
 
-       // $useriglesia = Users::findOrFail($request->user_id);
-       // $useriglesia->usuarioiglesia;
-        //$iglesiauser=iglesia::where ('id','=' ,$useriglesia->usuarioiglesia);
-       // $iglesiauser->usuarioiglesia()->attach( $iglesiauser->id);
-        //dd( $iglesiauser);
+
 
 
        $useriglesia =Users::findOrFail($request->user_id);
@@ -129,6 +175,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+//
     }
 }

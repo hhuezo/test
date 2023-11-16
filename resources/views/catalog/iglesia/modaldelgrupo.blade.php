@@ -1,7 +1,7 @@
 
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{ $obj->id }}">
     <form method="POST" action="{{url('catalog/iglesia/dettach_grupos') }}">
-     <input type="hidden" name='grupo_id' value="{{$obj->id }}">
+     <input type="hidden" name='group_id' value="{{$obj->id }}">
      <input type="hidden" name='iglesia_id' value="{{$iglesia->id }}">
      @csrf
      <div class="modal-dialog relative w-auto pointer-events-none">

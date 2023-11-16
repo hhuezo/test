@@ -45,6 +45,15 @@ Route::get('/', function () {
 });*/
 
 Route::get('/', [WelcomeController::class, 'index']);
+Route::get('datos_iglesia', [WelcomeController::class, 'datos_iglesia']);
+Route::get('consulta_grupos/{iglesia}', [WelcomeController::class, 'consulta_grupos']);
+Route::get('reporte_grupos/{iglesia}', [WelcomeController::class, 'reporte_grupos']);
+
+
+Route::get('modal_register_member', [WelcomeController::class, 'modal_register_member']);
+Route::get('registro_participantes/{iglesia}', [WelcomeController::class, 'registro_participantes']);
+
+//Route::get('/', [WelcomeController::class, 'show']);
 
 Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap');
 
@@ -90,10 +99,19 @@ Route::post('/store_member', [WelcomeController::class, 'store_member'])->name('
 Route::get('/get_municipio/{id}', [WelcomeController::class, 'get_municipio'])->name('get_municipio');
 
 
+Route::get('/get_grupo/{fecha}', [WelcomeController::class, 'get_grupo'])->name('get_grupo');
+
 Route::resource('seguridad/permission', PermissionController::class);
 Route::post('seguridad/permission/update_permission', [PermissionController::class, 'update_permission']);
-Route::resource('seguridad/usuario', UsuarioController::class);
+Route::resource('seguridad/user', UsuarioController::class);
+
+Route::post('seguridad/user/attach_roles',[UsuarioController::class,'attach_roles']);
+Route::post('seguridad/user/dettach_roles',[UsuarioController::class,'dettach_roles']);
+
+
 Route::resource('seguridad/role', RoleController::class);
+
+
 Route::post('seguridad/role/unlink_permission', [RoleController::class, 'unlink_permission']);
 Route::post('seguridad/role/link_permission', [RoleController::class, 'link_permission']);
 
