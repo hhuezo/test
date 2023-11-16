@@ -1,5 +1,5 @@
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-    aria-hidden="true" role="dialog" tabindex="-1" id="modal-create-{{ $iglesia->id }}">
+    aria-hidden="true" role="dialog" tabindex="-1" id="modal-create-iglesia">
 
     <form id="basic-form" method="POST" action="{{ url('catalog/iglesia/add_preguntaresp') }}">
 
@@ -16,7 +16,7 @@
                     <div
                         class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-danger-500">
                         <h3 class="text-base font-medium text-white dark:text-white capitalize">
-                            Agregar preguntas y respuestas para iglesia
+                            Agregar Preguntas y Respuestas Para Iglesia
                         </h3>
                         <button type="button"
                             class="text-slate-400 bg-transparent hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center
@@ -35,14 +35,13 @@
                     <!-- Modal body -->
                     <div class="p-6 space-y-4">
                         <h6 class="text-base text-slate-900 dark:text-white leading-6">
-                            Confirme si desea adicionar la pregunta
+                            Confirme si Desea Adicionar la Pregunta
                         </h6>
 
                         <div class="input-area">
                             <label for="largeInput" class="form-label">{{ __('Pregunta') }}</label>
                             <select name="question_id" class="form-control ">
                                 @foreach ($wizzarquestion as $obj)
-
                                     <option value="{{ $obj->id }}">{{ $obj->question }}
                                     </option>
                                 @endforeach
@@ -51,13 +50,13 @@
 
                         <div class="p-6 space-y-4">
                             <h6 class="text-base text-slate-900 dark:text-white leading-6">
-                              Confirme si desea modificar la respuesta (S/N)
+                                Confirme si Desea Modificar la Respuesta (S/N)
                             </h6>
-                            <input                  type="radio"                   id="answer"                   name="answer"                   value="1"  />Si
-                            <input                  type="radio"                   id="answer"                   name="answer"                   value="0"  />No
+                            <input type="radio" id="answer" name="answer" value="1" />Si
+                            <input type="radio" id="answer" name="answer" value="0" />No
 
 
-                          </div>
+                        </div>
 
                     </div>
                     <!-- Modal footer -->

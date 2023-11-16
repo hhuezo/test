@@ -236,26 +236,38 @@
                                                 </div>
 
 
-                                                    &nbsp;
+                                                &nbsp;
 
 
                                             </div>
                                             <p>
                                             <div class="btn btn-dark btn-sm float-right">
-                                            <button type="submit">{{ __('Aceptar') }}</button>
-                                        </div>
-                                        &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;    &nbsp;  &nbsp;
+                                                <button type="submit">{{ __('Aceptar') }}</button>
+
+
+                                            </div>
+                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                         </form>
                                         <div>
-                                        &nbsp;&nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;
-                                        &nbsp;&nbsp;    &nbsp;  &nbsp; &nbsp;  &nbsp;</div>
-                                        <div class="btn btn-dark btn-sm float-right">
-                                            <iconify-icon data-bs-toggle="modal"
-                                                data-bs-target="#modal-create-{{ $iglesia->id }}" icon="mdi:plus-box"
-                                                style="color: #ede9e9;" width="20"></iconify-icon>
-                                        </div>
+                                            &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                            &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
+
+
+
+
+
+
+
+
+
 
                                         <div class="input-area relative">
+                                           <button type="button" class="btn btn-dark btn-sm float-right" data-bs-toggle="modal"
+                                            data-bs-target="#modal-create-iglesia">
+                                                <iconify-icon  icon="mdi:plus-box"
+                                                    style="color: #ede9e9;" width="20"></iconify-icon>
+                                            </button>
                                             <table id="myTable" class="display" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr class="td-table">
@@ -361,7 +373,7 @@
                                                     <tr class="td-table">
                                                         <th style="text-align: center">Id</th>
                                                         <th style="text-align: center">Nombre Grupo</th>
-                                                   </tr>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($grupo_iglesias as $obj)
@@ -369,8 +381,9 @@
                                                         <td align="center">{{ $obj->nombre }}</td>
                                                         <td align="center">
                                                             <iconify-icon data-bs-toggle="modal"
-                                                                data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
-                                                                style="color: #1769aa;" width="40"></iconify-icon>
+                                                                data-bs-target="#modal-delete-{{ $obj->id }}"
+                                                                icon="mdi:trash" style="color: #1769aa;"
+                                                                width="40"></iconify-icon>
                                                         </td>
                                                         @include('catalog.iglesia.modal_del_grupo')
                                                         </tr>
@@ -380,8 +393,9 @@
                                             &nbsp;
                                             <div class="btn btn-dark btn-sm float-right">
                                                 <iconify-icon data-bs-toggle="modal"
-                                                    data-bs-target="#modal-creategroup-{{$iglesia->id }}" icon="mdi:plus-box"
-                                                    style="color: #ede9e9;" width="20"></iconify-icon>
+                                                    data-bs-target="#modal-creategroup-{{ $iglesia->id }}"
+                                                    icon="mdi:plus-box" style="color: #ede9e9;"
+                                                    width="20"></iconify-icon>
                                             </div>
                                             @include('catalog.iglesia.modal_add_grupo')
                                             &nbsp;
