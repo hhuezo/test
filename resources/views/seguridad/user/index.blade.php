@@ -23,8 +23,9 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align: center">Id</th>
-                                        <th>Email</th>
-                                        <th>Nombre</th>
+                                        <th style="text-align: center">Email</th>
+                                        <th style="text-align: center">Nombre</th>
+
                                         <th style="text-align: center">Opciones</th>
                                     </tr>
                                 </thead>
@@ -33,8 +34,9 @@
                                         @foreach ($usuarios as $obj)
                                             <tr>
                                                 <td align="center">{{ $obj->id }}</td>
-                                                <td>{{ $obj->email }}</td>
-                                                <td>{{ $obj->name }}</td>
+                                                <td  align="center">{{ $obj->email }}</td>
+                                                <td  align="center">{{ $obj->name }}</td>
+
                                                 <td align="center">
 
                                                     <a href="{{ url('seguridad/user') }}/{{ $obj->id }}/edit">

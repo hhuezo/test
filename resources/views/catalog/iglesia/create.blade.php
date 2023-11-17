@@ -187,7 +187,7 @@
                                                     <label for="largeInput" class="form-label">Estatus</label>
                                                     <select name="Status" class="form-control">
                                                         @foreach ($estatuorg as $obj2)
-                                                            <option value="{{ $obj2->id }}">{{ $obj2->description }}
+                                                            <option value="{{ $obj2->id }}">{{ $obj2->description_es }}
                                                             </option>
                                                         @endforeach
                                                     </select>

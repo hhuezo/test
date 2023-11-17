@@ -11,7 +11,7 @@
                         <div class="flex-1">
                             <div class="card-title text-slate-900 dark:text-white">Nuevo estado del Participante
 
-                                <a href="{{ url('catalog/MemberStatus') }}">
+                                <a href="{{ url('catalog/member_status') }}">
                                     <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
@@ -41,7 +41,7 @@
                                                 </ul>
                                             </div>
                                         @endif
-                                        <form method="POST" action="{{ url('catalog/MemberStatus') }}">
+                                        <form method="POST" action="{{ url('catalog/member_status') }}">
                             @csrf
                             <div
                                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">

@@ -171,7 +171,7 @@ Route::resource('catalog/sede', SedeController::class);
 
 Route::resource('catalog/grupo', GrupoController::class);
 
-Route::resource('catalog/MemberStatus', MemberStatusController::class);
+Route::resource('catalog/member_status', MemberStatusController::class);
 
 
 Route::resource('catalog/member', CatalogMemberController::class);

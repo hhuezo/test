@@ -18,7 +18,7 @@ class MemberStatusController extends Controller
         $MemberStatus =MemberStatus::get();
 
 
-        return view('catalog.MemberStatus.index', compact('MemberStatus'));
+        return view('catalog.member_status.index', compact('MemberStatus'));
 
 
 
@@ -33,7 +33,7 @@ class MemberStatusController extends Controller
     {
         $MemberStatus = MemberStatus::get();
 
-        return view('catalog.MemberStatus.create', compact('MemberStatus'));
+        return view('catalog.member_status.create', compact('MemberStatus'));
     }
 
     /**
@@ -91,7 +91,7 @@ return back();
     {
         $MemberStatus= MemberStatus::findOrFail($id);
 
-        return view('catalog.MemberStatus.edit', compact('MemberStatus'));
+        return view('catalog.member_status.edit', compact('MemberStatus'));
     }
 
     /**

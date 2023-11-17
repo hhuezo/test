@@ -1,6 +1,6 @@
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{ $obj->id }}">
 
-    <form method="POST" action="{{ route('MemberStatus.destroy', $obj->id) }}">
+    <form method="POST" action="{{ route('member_status.destroy', $obj->id) }}">
         @method('delete')
         @csrf
 
@@ -10,7 +10,7 @@
                           rounded-md outline-none text-current">
               <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
                 <!-- Modal header -->
-                <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-danger-500">
+                <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-black-500">
                   <h3 class="text-base font-medium text-white dark:text-white capitalize">
                     Eliminar Registro
                   </h3>
@@ -32,7 +32,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
-                  <button type="submit" class="btn inline-flex justify-center text-white bg-danger-500 float-right" style="margin-bottom: 15px">Accept</button>
+                  <button type="submit" class="btn inline-flex justify-center text-white bg-black-500 float-right" style="margin-bottom: 15px">Aceptar</button>
                 </div>
               </div>
             </div>

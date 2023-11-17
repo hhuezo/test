@@ -9,7 +9,7 @@
             <header class=" card-header noborder">
                 <h4 class="card-title">Estado de los Participantes
                 </h4>
-                <a href="{{url('catalog/MemberStatus/create')}}">
+                <a href="{{url('catalog/member_status/create')}}">
                 <button class="btn btn-outline-primary" >Nuevo</button>
             </a>
             </header>
@@ -36,11 +36,11 @@
                                         @foreach ($MemberStatus as $obj)
                                             <tr>
                                                 <td align="center">{{ $obj->id }}</td>
-                                                <td>{{ $obj->description}}</td>
-                                                <td>{{ $obj->description_es}}</td>
-                                                <td> {{ date('d/m/Y', strtotime($obj->adding_date)) }}</td>
+                                                <td align="center">{{ $obj->description}}</td>
+                                                <td align="center">{{ $obj->description_es}}</td>
+                                                <td align="center"> {{ date('d/m/Y', strtotime($obj->adding_date)) }}</td>
 
-                                                <td>{{ $obj->status}}</td>
+                                                <td align="center">{{ $obj->status}}</td>
                                                 <td align="center">
                                                     <a href="{{url('catalog/MemberStatus')}}/{{$obj->id}}/edit">
                                                     <iconify-icon icon="mdi:pencil-box"
@@ -52,7 +52,7 @@
                                                         style="color: #1769aa;" width="40"></iconify-icon>
                                                 </td>
                                             </tr>
-                                            @include('catalog/MemberStatus/modal')
+                                            @include('catalog/member_status/modal')
                                         @endforeach
                                     @endif
 

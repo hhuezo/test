@@ -11,7 +11,7 @@
                 <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
                     <!-- Modal header -->
                     <div
-                        class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-danger-500">
+                        class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-black-500">
                         <h3 class="text-base font-medium text-white dark:text-white capitalize">
                             Eliminar Relacion Role Usuario
                         </h3>
@@ -38,7 +38,7 @@
                     <!-- Modal footer -->
                     <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
                         <button type="submit"
-                            class="btn inline-flex justify-center text-white bg-danger-500 float-right"
+                            class="btn inline-flex justify-center text-white bg-black-500 float-right"
                             style="margin-bottom: 15px">Aceptar</button>
                     </div>
                 </div>

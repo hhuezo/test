@@ -18,7 +18,7 @@
                                     <img src="img/qrcodeiglesia.png">
                                 </button>
                                 <button class="btn btn-dark btn-sm float-left">
-                                    <img src="{{ $iglesia->logo_url }}{{ $iglesia->logo }}">
+                                    <img src="{{ $iglesia->logo_url }}{{ $iglesia->logo }}" width="120" height="120" >
                                 </button>
 
                             </div>
@@ -51,7 +51,7 @@
                                                 <label for="largeInput"
                                                     class="form-label">{{ __('Estado de la Iglesia') }}</label>
                                                 <input type="text" name="estado"
-                                                    value=" {{ $iglesia->iglesiaestatus->description }}" required
+                                                    value=" {{ $iglesia->iglesia_estatus->description_es }}" required
                                                     class="form-control" autofocus="true" disabled>
                                             </div>
 
@@ -99,21 +99,37 @@
                                                 <iconify-icon icon="healthicons:eye-negative" style="color: #1769aa;" width="40"></iconify-icon>
                                                 </a>
                                                 &nbsp;&nbsp;
+                                        </div>
 
-                                            <table>
-                                                <tr>
-                                                <td>Grupo jovenes</td>
-                                                <td>Grupo mujeres</td>
-                                                <td>Grupo hombres</td>
-                                                <td>Grupo otros</td></tr>
-                                                <td><img src="img/qrcodegrupo1.png"></td>
-                                                <td><img src="img/qrcodegrupo2.png"></td>
-                                                <td> <img src="img/qrcodegrupo3.png"></td>
-                                                <td><img src="img/qrcodegrupo4.png"></td>
-                                            </table>
+<center>
 
+ <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
+                        <thead class="bg-slate-200 dark:bg-slate-700">
 
+                                    <tr class="td-table">
+                                        <th style="text-align: center">Iglesia</th>
+                                        <th style="text-align: center">Grupo</th>
+                                        <th style="text-align: center">Nombre</th>
+                                        <th style="text-align: center">Conteo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
+                                        @foreach ( $conteo_miembros as $obj)
+                                            <tr>
+
+                                                    <td  align="center">{{ $obj->nombre_iglesia }}</td>
+                                                    <td  align="center">{{ $obj->No_grupo }}</td>
+                                                    <td  align="center">{{ $obj->nombre_grupo }}</td>
+                                                    <td  align="center">{{ $obj->numero_participantes }}</td>
+
+                                            </tr>
+
+                                        @endforeach
+
+                                </tbody>
+                            </table>
+                        </center>
 
 
                                         </div>

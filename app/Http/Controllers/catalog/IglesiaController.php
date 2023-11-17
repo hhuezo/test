@@ -151,6 +151,8 @@ class IglesiaController extends Controller
         //return view('catalog.iglesia.show', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'));
 
 
+
+
         //generando QR
         QrCode::format('png')->size(200)->generate( (string)$iglesia->id, public_path('img/qrcode.png'));
 
@@ -606,6 +608,7 @@ class IglesiaController extends Controller
         $iglesia->facebook = $request->facebook;
         $iglesia->website = $request->website;
         $iglesia->address = $request->address;
+        $iglesia->status =1;
         $iglesia->save();
 
 

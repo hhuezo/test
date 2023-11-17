@@ -61,6 +61,21 @@ class WelcomeController extends Controller
         ->get();
 
       //  return view('auth.consulta_grupos', compact('miembros', 'iglesia', 'usuarios','grupo'));
+      $sql="select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
+      from iglesia i
+      join group_per_chuch_plan gpc
+      on gpc.iglesia_id = i.id
+      join grupo g on
+      g.id = gpc.group_id
+      join member p on
+      p.organization_id=i.id
+      join user_has_group q on
+      p.id=q.member_id
+      and q.group_per_church_id=gpc.id
+      where i.id=?";
+
+      $miembros = DB::select($sql, array($iglesia->id));
+
 
 
         $pdf =\Pdf::loadView('auth.reporte_grupos', compact('miembros', 'iglesia'));
@@ -92,17 +107,36 @@ class WelcomeController extends Controller
         $usuarios= Users::get();
         $grupo=Grupo::get();
 
-        $miembros = DB::table('member as a')
-        ->join('user_has_group as b', 'b.member_id', '=', 'a.id')
-        ->join('group_per_chuch_plan as c', function ($join) {
-            $join->on('c.iglesia_id', '=', 'a.organization_id')
-                ->on('c.id', '=', 'b.group_per_church_id');
-        })
-        ->join('grupo as d', 'c.group_id', '=', 'd.id')
-        ->select('a.id','a.name_member', 'a.lastname_member', 'd.nombre')
-        ->get();
+       // $miembros = DB::table('member as a')
+       // ->join('user_has_group as b', 'b.member_id', '=', 'a.id')
+        //->join('group_per_chuch_plan as c', function ($join) {
+        //    $join->on('c.iglesia_id', '=', 'a.organization_id')
+                //->on('c.id', '=', 'b.group_per_church_id')
+                //->on('a.organization_id =? ');
+        //})        ->join('grupo as d', 'c.group_id', '=', 'd.id')        ->select('a.id','a.name_member', 'a.lastname_member', 'd.nombre')        ->get();
 
-        return view('auth.consulta_grupos', compact('miembros', 'iglesia', 'usuarios','grupo'));
+
+        $sql="select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
+        from iglesia i
+        join group_per_chuch_plan gpc
+        on gpc.iglesia_id = i.id
+        join grupo g on
+        g.id = gpc.group_id
+        join member p on
+        p.organization_id=i.id
+        join user_has_group q on
+        p.id=q.member_id
+        and q.group_per_church_id=gpc.id
+        where i.id=?";
+
+        $miembros = DB::select($sql, array($iglesia->id));
+
+
+
+
+
+
+        return view('auth.consulta_grupos', compact('miembros', 'iglesia', 'usuarios','grupo' ));
         //return view('auth.register_member', compact('departamentos'));
 
     }
@@ -164,6 +198,7 @@ class WelcomeController extends Controller
         $user->password = Hash::make($request->password);
         $user->status = 0;
         $user->assignRole('participante');
+
         $user->save();
 
         //asign role
@@ -314,32 +349,61 @@ class WelcomeController extends Controller
         $iglesia = $user->iglesia->first();
         $departamentos = Departamento::get();
         $iglesia_grupo = $iglesia->iglesia_grupo;
+        // $conteomiembros = DB::table('iglesia as i')
+        // ->join('group_per_chuch_plan as gpc', 'gpc.iglesia_id', '=', 'i.id')
+        // ->join('grupo as g', 'g.id', '=', 'gpc.group_id')
+        // ->join('member as p', function ($join) {
+        //     $join->on('p.organization_id', '=', 'i.id')
+        //         ->on('p.id', '=', 'user_has_group.member_id');
+        // })
+        // ->join('user_has_group as q', function ($join) {
+        //     $join->on('p.id', '=', 'q.member_id')
+        //         ->on('q.group_per_church_id', '=', 'gpc.id');
+        // })
+        // ->where('i.id', 28)
+        // ->groupBy('i.id', 'i.name', 'g.id', 'g.nombre')
+        // ->select('i.id as iglesia_id', 'i.name as nombre_iglesia', 'g.id as No_grupo', 'g.nombre as nombre_grupo', DB::raw('count(*) as numero_participantes'))
+        // ->get();
+        ///dd($iglesia->id);
 
+        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo , count(*) as numero_participantes
+        from iglesia i
+        join group_per_chuch_plan gpc
+        on gpc.iglesia_id = i.id
+        join grupo g on
+        g.id = gpc.group_id
+        join member p on
+        p.organization_id=i.id
+        join user_has_group q on
+        p.id=q.member_id
+        and q.group_per_church_id=gpc.id
+        where i.id=?
+        group by i.id , i.name  , g.id , g.nombre ";
+
+        $conteo_miembros = DB::select($sql, array($iglesia->id));
+
+$sql2="select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
+from iglesia i
+join group_per_chuch_plan gpc
+on gpc.iglesia_id = i.id
+join grupo g on
+g.id = gpc.group_id
+join member p on
+p.organization_id=i.id
+join user_has_group q on
+p.id=q.member_id
+and q.group_per_church_id=gpc.id
+where i.id=?";
+
+$miembros_iglesia = DB::select($sql2, array($iglesia->id));
         // dd($iglesiagp,$iglesia_grupo);
 
         $url =  $request->root() . "/registro_participantes/" . $iglesia->id;
 
         QrCode::format('png')->size(200)->generate($url, public_path('img/qrcodeiglesia.png'));
 
-        foreach ($iglesia_grupo as $gp) {
-            if ($i = 1) {
-                QrCode::format('png')->size(200)->generate('http://urban.emundialesdemos.com/register_member?variable1=iglesia->id&variable2=gp->id', public_path('img/qrcodegrupo1.png'));
-            }
-            if ($i = 2) {
-                QrCode::format('png')->size(200)->generate('http://urban.emundialesdemos.com/register_member?variable1=iglesia->id&variable2=gp->id', public_path('img/qrcodegrupo2.png'));
-            }
-            if ($i = 3) {
-                QrCode::format('png')->size(200)->generate('http://urban.emundialesdemos.com/register_member?variable1=iglesia->id&variable2=gp->id', public_path('img/qrcodegrupo3.png'));
-            }
-            if ($i = 4) {
-                QrCode::format('png')->size(200)->generate('http://urban.emundialesdemos.com/register_member?variable1=iglesia->id&variable2=gp->id', public_path('img/qrcodegrupo4.png'));
-            }
 
-
-            $i++;
-        }
-
-        return view('auth.datos_iglesia', compact('departamentos',  'iglesia'));
+        return view('auth.datos_iglesia', compact('departamentos',  'iglesia','conteo_miembros','miembros_iglesia'));
         //return view('auth.register_member', compact('departamentos'));
     }
 }

@@ -29,25 +29,25 @@
                         <thead class="bg-slate-200 dark:bg-slate-700">
 
                                     <tr class="td-table">
-                                        <th style="text-align: center">Id</th>
+
                                         <th style="text-align: center">Nombre</th>
                                         <th style="text-align: center">Apellido</th>
                                         <th style="text-align: center">Grupo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($miembros->count() > 0)
+
                                         @foreach ($miembros as $obj)
                                             <tr>
-                                                <td align="center">{{ $obj->id }}</td>
+
                                                     <td  align="center">{{ $obj->name_member }}</td>
                                                     <td  align="center">{{ $obj->lastname_member }}</td>
-                                                    <td  align="center">{{ $obj->nombre }}</td>
+                                                    <td  align="center">{{ $obj->nombre_grupo }}</td>
 
                                             </tr>
 
                                         @endforeach
-                                    @endif
+
 
                                 </tbody>
                             </table>

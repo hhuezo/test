@@ -106,5 +106,41 @@
 </table>
     </form>
 
+    <table id="myTable" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr class="td-table">
+                <th style="text-align: center">Iglesia</th>
+                <th style="text-align: center">Nombre</th>
+                <th style="text-align: center">grupo</th>
+                <th style="text-align: center">Participantes</th>
+                <th style="text-align: center">opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if ($member->count() > 0)
+                @foreach ($member as $obj)
+                    <tr>
+                        <td align="center">{{ $obj->id }}</td>
+                        <td align="center">{{ $obj->name_member}}</td>
+                        <td align="center">{{ $obj->lastname_member}}</td>
+
+                        <td align="center">
+                            <a href="{{url('catalog/member')}}/{{$obj->id}}/edit">
+                            <iconify-icon icon="mdi:pencil-box"
+                                style="color: #1769aa;" width="40"></iconify-icon>
+                            </a>
+                            &nbsp;&nbsp;
+                            <iconify-icon data-bs-toggle="modal"
+                                data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
+                                style="color: #1769aa;" width="40"></iconify-icon>
+                        </td>
+                    </tr>
+                    @include('catalog/member/modal')
+                @endforeach
+            @endif
+
+        </tbody>
+    </table>
+    </div>
 </body>
 </html>
