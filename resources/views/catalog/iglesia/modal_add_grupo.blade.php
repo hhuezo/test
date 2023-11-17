@@ -10,7 +10,7 @@
              <!-- Modal header -->
              <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-danger-500">
                <h3 class="text-base font-medium text-white dark:text-white capitalize">
-                 Eliminar Registro
+                Agregar Grupo con la iglesia
                </h3>
                <button type="button" class="text-slate-400 bg-transparent hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center
                                    dark:hover:bg-slate-600 dark:hover:text-white" data-bs-dismiss="modal">

@@ -75,7 +75,7 @@ class Iglesia extends Model
 
 
 
-    public function iglesiaestatus()
+    public function iglesia_estatus()
     {
         //return $this->belongsTo('use App\Models\catalog\Sede', 'id', 'sede_id');
         return $this->belongsTo(OrganizationStatus::class, 'status', 'id');

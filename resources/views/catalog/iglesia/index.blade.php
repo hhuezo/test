@@ -66,7 +66,7 @@
                                                 </td>
                                             </tr>
                                             @include('catalog/iglesia/modal')
-                                            @include('catalog/iglesia/modalestado')
+                                            @include('catalog/iglesia/modal_estado')
                                         @endforeach
                                     @endif
 

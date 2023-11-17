@@ -80,7 +80,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    @include('seguridad/user/agregaroles')
+                    @include('seguridad/user/agrega_roles')
                 </div>
             </div>
         </div>

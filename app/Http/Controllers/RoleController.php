@@ -62,7 +62,7 @@ class RoleController extends Controller
         $time = Carbon::now('America/El_Salvador');
         $rol = new role();
         $rol->name = $request->name;
-        $rol->guard_name = $request->email;
+        $rol->guard_name ='web';
         $rol->created_at= $time->toDateTimeString();
         $rol->updated_at= $time->toDateTimeString();
         $rol->save();

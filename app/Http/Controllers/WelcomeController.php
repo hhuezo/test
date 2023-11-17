@@ -108,7 +108,8 @@ class WelcomeController extends Controller
     }
     public function register_member()
     {
-        //  dd('aqui estoy');
+       //  dd('aqui estoy');
+
         $departamentos = Departamento::get();
         //$municipios = Municipio::where('departamento_id', '=', 1)->get();
         //  //$organizations = Organization::get();
@@ -272,12 +273,16 @@ class WelcomeController extends Controller
 
     public function  modal_register_member($id)
     {
+
+
+
         $iglesia = Iglesia::findorfail($id);
         $iglesia_grupo = $iglesia->iglesia_grupo;
         $departamentos = Departamento::get();
         //$group_per_chuch_plan= group_per_chuch_plan::get();
         //$newmiembro =grupo::where('departamento_id', '=', 1)->get();
         return view('auth.modal_register_member', compact('iglesia', 'departamentos', 'iglesia_grupo'));
+
     }
 
 

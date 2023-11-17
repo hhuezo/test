@@ -133,7 +133,7 @@ class IglesiaController extends Controller
         $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->get();
 
 
-        $grupo_iglesias=  $iglesia->iglesiagrupo;
+        $grupo_iglesias=  $iglesia->iglesia_grupo;
 
         //$grupos= Grupo::whereNotIn('id', $iglesiaArray)->get();
   //dd(   $grupo_iglesias);
@@ -286,7 +286,7 @@ class IglesiaController extends Controller
 
      // dd($request->group_id,$request->iglesia_id);
         $grupoiglesia =iglesia::findOrFail($request->iglesia_id);
-        $grupoiglesia->iglesiagrupo()->attach($request->group_id);
+        $grupoiglesia->iglesia_grupo()->attach($request->group_id);
         alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
@@ -613,6 +613,7 @@ class IglesiaController extends Controller
         $usuario->name = $request->name;
         $usuario->email = $request->email;
         $usuario->password =  Hash::make($request->password);
+        $usuario->assignRole("encargado");
         $usuario->save();
 
         $iglesia->users()->attach($usuario->id);

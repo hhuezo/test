@@ -30,10 +30,6 @@
                             <label for="largeInput" class="inline-inputLabel">nombre</label>
                             <input type="text" name="name"  required class="form-control">
                         </div> &nbsp;
-                        <div class="input-area relative pl-28">
-                            <label for="largeInput" class="inline-inputLabel">tipo</label>
-                            <input type="text" name="guard_name" required class="form-control">
-                        </div> &nbsp;
 
                                                     <div></div>
                             &nbsp;
