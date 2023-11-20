@@ -1,6 +1,6 @@
 
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-creategroup-{{$iglesia->id }}">
-    <form method="POST" action="{{url(') }}">
+    <form method="POST" action="{{url('#') }}">
         <input type="hidden" name='iglesia_id' value="{{$iglesia->id }}">
         <input type="hidden" name='grupo_id' value="{{$grupo->id }}">
         <input type="hidden" name='grupo_id' value="{{$member->id }}">
@@ -31,7 +31,7 @@
 
                <div class="input-area relative">
                 <label for="largeInput"
-                    class="form-label">{{ __('Grupo a Agregar') }}</label>
+                    class="form-label"> Grupos  Agregar</label>
                 <select name="group_id" class="form-control select" required>
                     @foreach ($grupos_noasignados as $obj)
                             <option value="{{ $obj->id }}">{{ $obj->nombre }}

@@ -48,6 +48,8 @@ Route::get('/', [WelcomeController::class, 'index']);
 Route::get('datos_iglesia', [WelcomeController::class, 'datos_iglesia']);
 Route::get('consulta_grupos/{iglesia}', [WelcomeController::class, 'consulta_grupos']);
 Route::get('reporte_grupos/{iglesia}', [WelcomeController::class, 'reporte_grupos']);
+Route::get('reasigna_grupos/{idpersona}', [WelcomeController::class, 'reasigna_grupos']);
+Route::post('update_group_member/{idpersona}', [WelcomeController::class, 'update_member_group']);
 
 
 Route::get('modal_register_member', [WelcomeController::class, 'modal_register_member']);
@@ -58,13 +60,21 @@ Route::get('registro_participantes/{iglesia}', [WelcomeController::class, 'regis
 Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap');
 
 
-
 //Route::get('/', [HomeController::class, 'index']);
 Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
 Route::get('/get_dep/{id}', [WelcomeController::class, 'get_dep']);
 Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_registro']);
+
 Route::get('/iglesia/back_page', [IglesiaController::class, 'back_page'])->name('back_page');
+
 Route::post('/iglesia/registro_respuesta', [IglesiaController::class, 'registro_respuesta']);
+
+
+
+
+
+
+
 Route::post('/iglesia/registro_iglesia', [IglesiaController::class, 'registro_iglesia']);
 Route::post('/iglesia/modificar_estado', [IglesiaController::class, 'modificar_estado']);
 

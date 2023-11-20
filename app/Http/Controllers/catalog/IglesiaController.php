@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\catalog\ChurchQuestionWizard;
 use App\Models\catalog\Cohorte;
 use App\Models\catalog\Departamento;
+use App\Models\catalog\GroupPerchuchPlan;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Municipio;
@@ -618,6 +619,16 @@ class IglesiaController extends Controller
         $usuario->password =  Hash::make($request->password);
         $usuario->assignRole("encargado");
         $usuario->save();
+
+        $grupo =  Grupo::get();
+
+        foreach($grupo as $grupo){
+
+        $iglesia_asig_grupo= new GroupPerchuchPlan();
+        $iglesia_asig_grupo->iglesia_id=$iglesia->id;
+        $iglesia_asig_grupo->group_id=$grupo->id;
+        $iglesia_asig_grupo->save();
+         };
 
         $iglesia->users()->attach($usuario->id);
 

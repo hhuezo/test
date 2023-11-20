@@ -8,6 +8,7 @@ use App\Models\catalog\Departamento;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member; //as CatalogMember;
+use App\Models\catalog\MemberStatus;
 use App\Models\catalog\Municipio;
 use App\Models\catalog\OrganizationStatus;
 //use App\Models\Member;
@@ -61,7 +62,7 @@ class WelcomeController extends Controller
         ->get();
 
       //  return view('auth.consulta_grupos', compact('miembros', 'iglesia', 'usuarios','grupo'));
-      $sql="select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
+      $sql="select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
       from iglesia i
       join group_per_chuch_plan gpc
       on gpc.iglesia_id = i.id
@@ -90,6 +91,26 @@ class WelcomeController extends Controller
     {
     }
 
+    public function reasigna_grupos($id)
+    {
+        $member_status = MemberStatus::get();
+
+        $member = member::findOrFail($id);
+
+        $group = $member->user_has_group->first();
+
+        $group_id = $group->group_id;
+
+
+        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
+
+    $departamentos = Departamento::get();
+    $iglesia = iglesia::findOrFail($member->organization_id);
+    $grupos=Grupo::get();
+
+    return view('auth.reasigna_grupos', compact('member','departamentos','iglesia','member_status','group_church','grupos','group_id'));
+    }
+
 
 
     public function consulta_grupos($id_iglesia)
@@ -116,7 +137,7 @@ class WelcomeController extends Controller
         //})        ->join('grupo as d', 'c.group_id', '=', 'd.id')        ->select('a.id','a.name_member', 'a.lastname_member', 'd.nombre')        ->get();
 
 
-        $sql="select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
+        $sql="select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
         from iglesia i
         join group_per_chuch_plan gpc
         on gpc.iglesia_id = i.id
@@ -132,11 +153,11 @@ class WelcomeController extends Controller
         $miembros = DB::select($sql, array($iglesia->id));
 
 
+        $member_status= MemberStatus::get();
 
 
 
-
-        return view('auth.consulta_grupos', compact('miembros', 'iglesia', 'usuarios','grupo' ));
+        return view('auth.consulta_grupos', compact('miembros', 'iglesia', 'usuarios','grupo' ,'member_status'));
         //return view('auth.register_member', compact('departamentos'));
 
     }
@@ -293,9 +314,43 @@ class WelcomeController extends Controller
     }
 
 
+    public function update_member_group(Request $request, $id)
+    {
+
+        $messages = [
+            'name_member.required' => 'ingresar nombre',
+        ];
+
+
+
+        $request->validate([
+
+            'name_member.required' => 'ingresar nombre miembro',
+
+        ], $messages);
+
+
+        $member =  Member::findOrFail($id);
+        $member->name_member = $request->name_member;
+        $member->lastname_member = $request->lastname_member;
+       // $member->birthdate = $request->birthdate;
+        $member->document_number_type = $request->document_number_type;
+      //  $member->document_type_id = $request->document_type_id;
+        $member->Update();
+        $group = $member->user_has_group->first();
+        $group_id = $group->group_id;
+     //  dd( $member->organization_id);
+        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id)->first();
+      //  dd(  $group_church);
+        $group_church->group_id = $request->grupo_id;
+        $group_church->update();
+        alert()->success('El registro ha sido Modificado correctamente');
+        return back();
+    }
+
+
     public function update(Request $request, $id)
     {
-        //
     }
 
 

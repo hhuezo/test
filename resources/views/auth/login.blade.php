@@ -191,10 +191,13 @@
                         <!-- END: Social Log In Area -->
                     </div>  <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> --}}
                     <div
-                        class="mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm text-center">
+                        class="mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm text-center" onclick="participante_link()">
                         {{-- Already registered? --}}
-                        <a href="signup-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
-                            <a class="nav-link" href="{{ url('register_member') }}"> Registro miembro</a>
+                       {{-- <a href="signup-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
+                            <a class="nav-link" href="{{ url('register_member') }}"> Registro miembro</a>--}}
+                             <a href="signup-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
+                            <a class="nav-link" href="{{ url('http://urban.emundialesdemos.com/home') }}"> Registro miembro</a>
+
                         </a>
                     </div>
 
@@ -213,6 +216,11 @@
         </div>
     </div>
     <!-- Core Js -->
+    <script>
+    function participante_link(){
+       alert('El Nuevo participante debe registrarse con el link enviado de su iglesia');
+    }
+    </script>
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
