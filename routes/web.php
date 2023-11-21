@@ -46,13 +46,18 @@ Route::get('/', function () {
 
 Route::get('/', [WelcomeController::class, 'index']);
 Route::get('datos_iglesia', [WelcomeController::class, 'datos_iglesia']);
-Route::get('consulta_grupos/{iglesia}', [WelcomeController::class, 'consulta_grupos']);
-Route::get('reporte_grupos/{iglesia}', [WelcomeController::class, 'reporte_grupos']);
+Route::get('register_member_leader', [WelcomeController::class, 'register_member_leader']);
+Route::post('attach_new_member',[WelcomeController::class,'attach_new_member']);
+
+
+
+Route::get('consulta_grupos/{id_grupo_iglesia}', [WelcomeController::class, 'consulta_grupos']);
+Route::get('reporte_grupos/{id_grupo_iglesia}', [WelcomeController::class, 'reporte_grupos']);
 Route::get('reasigna_grupos/{idpersona}', [WelcomeController::class, 'reasigna_grupos']);
 Route::post('update_group_member/{idpersona}', [WelcomeController::class, 'update_member_group']);
 
 
-Route::get('modal_register_member', [WelcomeController::class, 'modal_register_member']);
+
 Route::get('registro_participantes/{iglesia}', [WelcomeController::class, 'registro_participantes']);
 
 //Route::get('/', [WelcomeController::class, 'show']);
@@ -63,6 +68,10 @@ Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap'
 //Route::get('/', [HomeController::class, 'index']);
 Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
 Route::get('/get_dep/{id}', [WelcomeController::class, 'get_dep']);
+Route::get('/get_departamento/{id}', [WelcomeController::class, 'get_departamento']);
+
+
+
 Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_registro']);
 
 Route::get('/iglesia/back_page', [IglesiaController::class, 'back_page'])->name('back_page');

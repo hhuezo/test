@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\catalog;
 
 use App\Http\Controllers\Controller;
+use App\Models\catalog\Departamento;
 use App\Models\catalog\GroupPerchuchPlan;
 use App\Models\catalog\Grupo;
+use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
 use App\Models\catalog\MemberStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
@@ -25,8 +28,8 @@ class MemberController extends Controller
     public function index()
     {
         $member = Member::get();
-        $MemberStatus = MemberStatus::get();
-        return view('catalog.member.index', compact('member', 'MemberStatus'));
+        $member_status = MemberStatus::get();
+        return view('catalog.member.index', compact('member', 'member_status'));
     }
 
 
@@ -39,11 +42,18 @@ class MemberController extends Controller
     {
         $member = Member::get();
 
-        $MemberStatus = MemberStatus::get();
+        $member_status = MemberStatus::get();
 
         $groupperchuchplan = GroupPerchuchPlan::get();
 
-        return view('catalog.member.create', compact('member', 'MemberStatus', 'groupperchuchplan'));
+        $departamentos = Departamento::get();
+        //$municipios = Municipio::where('departamento_id', '=', 1)->get();
+        //  //$organizations = Organization::get();
+        $iglesia = Iglesia::get();
+        $grupos = Grupo::get();
+
+
+        return view('catalog.member.create', compact('departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan'));
     }
 
     /**
@@ -67,13 +77,57 @@ class MemberController extends Controller
 
         ], $messages);
 
+        $user = new User();
+        $user->name = $request->name . ' ' . $request->last_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->status = 0;
+        $user->assignRole('participante');
+
+        $user->save();
+
+        //asign role
+        $iglesia = Iglesia::findorfail($request->iglesia_id);
+        $deptos = Departamento::findorfail( $iglesia->catalog_departamento_id);
+
         $member = new Member();
-        $member->name_member = $request->name_member;
-        $member->lastname_member = $request->lastname_member;
+        $member->name_member = $request->name;
+        $member->lastname_member = $request->last_name;
         $member->birthdate = $request->birthdate;
-        $member->document_number_type = $request->document_number_type;
-        $member->document_type_id = $request->document_type_id;
+        //$member->document_number = $request->document_number;
+        $member->email = $request->email;
+        $member->cell_phone_number = $request->phone_number;
+        $member->address = $request->address;
+        $member->about_me = $request->about_me;
+        $member->organization_id = (int)$request->iglesia_id;
+        $member->status = 1;
+        $member->users_id = $user->id;
+        $member->state_id=   $deptos->id;
+
+        //   $user->assignRole('Participante');
+        // $member->municipio_id = $user->Municipio;
         $member->save();
+
+
+        $GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
+        // dd( $GroupPerchuchPlan->id);
+        $GroupPerchuchPlan->miembro_grupo()->attach($member->id);
+        //$grupoiglesia =iglesia::where('id', '=',(int)$request->iglesia_id)->get();
+        //$grupoiglesia->iglesia_grupo()->attach($request->group_id);
+        // alert()->success('El registro ha sido agregado correctamente');
+
+
+
+
+
+        //Envio de correo usando metodo sendMail de MailController
+        // $objeto = new  MailController();
+        // $email = $request->email;
+        //$email = $request->get('email');
+        // $subject = "Notificación: Datos registrados correctamente";
+        // $content = "Sus datos han sido registrados, nuestro equipo revisará la información y le notificará cuando sean aprobados";
+        // $result = $objeto->sendMail($email, $subject, $content);
+
 
         alert()->success('El registro ha sido agregado correctamente');
         return back();
@@ -87,8 +141,25 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+       // dd($id);
+        $iglesia = Iglesia::findorfail($id);
+        $member = Member::get();
+
+        $member_status = MemberStatus::get();
+
+        $groupperchuchplan = GroupPerchuchPlan::get();
+
+        $departamentos = Departamento::get();
+        //$municipios = Municipio::where('departamento_id', '=', 1)->get();
+        //  //$organizations = Organization::get();
+
+        $grupos = Grupo::get();
+        $iglesia_grupo = $iglesia->iglesia_grupo;
+        return view('catalog.member.show', compact('iglesia_grupo','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan'));
+        alert()->success('El registro ha sido añadido correctamente');
+        return back();
     }
+
 
     /**
      * Show the form for editing the specified resource.

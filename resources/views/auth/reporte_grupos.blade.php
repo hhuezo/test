@@ -35,7 +35,7 @@
                     </thead>
                     <tbody>
 
-                            @foreach ($miembros as $obj)
+                            @foreach ($miembros  as $obj)
                                 <tr>
 
                                         <td  align="center">{{ $obj->name_member }}</td>

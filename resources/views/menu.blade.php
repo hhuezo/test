@@ -134,6 +134,7 @@
                                 </span>
                             </a>
                         </li>
+
                     @endcan
 
                     @can('read course')

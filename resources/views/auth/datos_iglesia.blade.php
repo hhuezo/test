@@ -18,7 +18,7 @@
                                     <img src="img/qrcodeiglesia.png">
                                 </button>
                                 <button class="btn btn-dark btn-sm float-left">
-                                    <img src="{{ $iglesia->logo_url }}{{ $iglesia->logo }}" width="120" height="120" >
+                                    <img src="{{ $iglesia->logo_url }}{{ $iglesia->logo }}" width="120" height="120">
                                 </button>
 
                             </div>
@@ -35,10 +35,10 @@
 
 
                                             <div class="input-area relative">
-                                                <input type="hidden" name="iglesia_id" value="{{ $iglesia->id }}"
-                                                    required class="form-control" autofocus="true" disabled>
+                                                <input type="hidden" name="iglesia_id" value="{{ $iglesia->id }}" required
+                                                    class="form-control" autofocus="true" disabled>
                                             </div>
-
+<div></div>
                                             <div class="input-area relative">
                                                 <label for="largeInput"
                                                     class="form-label">{{ __('Nombre de la Iglesia') }}</label>
@@ -94,45 +94,61 @@
                                                 <iconify-icon icon="logos:youtube"></iconify-icon>
                                                 <label> sitio {{ $iglesia->website }}</label>
                                             </div>
-
-                                            <a href="{{url('consulta_grupos')}}/{{$iglesia->id}}">
-                                                <iconify-icon icon="healthicons:eye-negative" style="color: #1769aa;" width="40"></iconify-icon>
-                                                </a>
-                                                &nbsp;&nbsp;
-                                        </div>
-
-<center>
-
- <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
-                        <thead class="bg-slate-200 dark:bg-slate-700">
-
-                                    <tr class="td-table">
-                                        <th style="text-align: center">Iglesia</th>
-                                        <th style="text-align: center">Grupo</th>
-                                        <th style="text-align: center">Nombre</th>
-                                        <th style="text-align: center">Conteo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                        @foreach ( $conteo_miembros as $obj)
-                                            <tr>
-
-                                                    <td  align="center">{{ $obj->nombre_iglesia }}</td>
-                                                    <td  align="center">{{ $obj->No_grupo }}</td>
-                                                    <td  align="center">{{ $obj->nombre_grupo }}</td>
-                                                    <td  align="center">{{ $obj->numero_participantes }}</td>
-
-                                            </tr>
-
-                                        @endforeach
-
-                                </tbody>
-                            </table>
-                        </center>
-
+                                            &nbsp;&nbsp;
 
                                         </div>
+                                        <div>
+
+                                        </div> &nbsp;
+                                        <div style="text-align: right;">
+                                        <a href="{{ url('catalog/member') }}/{{$iglesia->id }}">
+                                            <iconify-icon icon="mdi:person"
+                                                style="color: #1769aa;" width="40"></iconify-icon>
+                                                Crear Participantes
+                                        </a>
+                                       </div>
+                                        &nbsp; &nbsp;
+                                        <center>
+
+                                            <table
+                                                class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
+                                                <thead class="bg-slate-200 dark:bg-slate-700">
+
+                                                    <tr class="td-table">
+                                                        <th style="text-align: center">id</th>
+                                                        <th style="text-align: center">Grupo</th>
+                                                        <th style="text-align: center">Nombre</th>
+                                                        <th style="text-align: center">Opciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    @foreach ($grupos_iglesia as $obj)
+                                                        <tr>
+
+                                                            <td align="center">{{ $obj->iglesia_grupo }}</td>
+                                                            <td align="center">{{ $obj->No_grupo }}</td>
+                                                            <td align="center">{{ $obj->nombre_grupo }}</td>
+
+                                                            <td align="center"> <a
+                                                                    href="{{ url('consulta_grupos') }}/{{ $obj->iglesia_grupo }}">
+                                                                    <iconify-icon icon="healthicons:eye-negative"
+                                                                        style="color: #1769aa;"
+                                                                        width="40"></iconify-icon>
+                                                                </a>
+                                                                <a href="{{url('reporte_grupos/'. $obj->iglesia_grupo )}}">
+                                                                    <iconify-icon icon="mdi:printer"
+                                                                        style="color: #1769aa;" width="40"></iconify-icon>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+
+                                                </tbody>
+                                            </table>
+                                        </center>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -141,4 +157,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

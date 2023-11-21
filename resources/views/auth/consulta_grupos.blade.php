@@ -10,10 +10,7 @@
                 <h4 class="card-title">Listado de Participantes de Grupos de la iglesia : {{ $iglesia->name }}
                 </h4>
                 <div style="text-align: right;">
-                <a href="{{url('reporte_grupos/'.$iglesia->id )}}">
-                    <iconify-icon icon="mdi:printer"
-                        style="color: #1769aa;" width="40"></iconify-icon>
-                </a>
+
 
                 <a href="{{ url('datos_iglesia') }}">
                     <button class="btn btn-dark btn-sm float-right">

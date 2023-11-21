@@ -37,37 +37,111 @@
                                                 </ul>
                                             </div>
                                         @endif
-                                        <form method="POST" action="{{ url('catalog.member') }}">
-                                            @method('PUT')
+
+                                        <form method="POST" action="{{ url('catalog/member') }}">
                                             @csrf
+
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
+
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Nombre') }}</label>
-                                                    <input type="text" name="Name_member" required class="form-control"
-                                                        value="{{ old('Name_member') }}" autofocus="true">
+                                                    <label for="largeInput" class="form-label">Iglesia</label>
+                                                    <select id="iglesia_id" name="iglesia_id" class="form-control">
+                                                        @foreach ($iglesia as $obj)
+                                                            <option value="{{ $obj->id }}">{{ $obj->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+
+
+
+                                                </div>
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Grupos</label>
+                                                    <select name="grupo_id" class="form-control">
+                                                        @foreach ($grupos as $obj)
+                                                            <option value="{{ $obj->id }}">{{ $obj->nombre }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Nombre </label>
+                                                    <input type="text" name="name"
+                                                        onblur="this.value = this.value.toUpperCase()" required
+                                                        class="form-control" value="{{ old('name') }}" autofocus="true">
+                                                </div>
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Apellido</label>
+                                                    <input type="text" name="last_name"
+                                                        onblur="this.value = this.value.toUpperCase()" required
+                                                        class="form-control" value="{{ old('last_name') }}"
+                                                        autofocus="true">
+                                                </div>
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Fecha
+                                                        nacimiento</label>
+                                                    <input type="date" id="birthdate" name="birthdate" required
+                                                        class="form-control" onblur="calcularEdad(this.value)"
+                                                        value="{{ old('birthdate') }}" autofocus="true">
+                                                </div>
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Email</label>
+                                                    <input type="email" name="email" required class="form-control"
+                                                        value="{{ old('email') }}">
+                                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Password</label>
+                                                    <input type="password" name="password" required class="form-control">
+                                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">ConfirmePassword</label>
+                                                    <input type="password" name="password_confirmation" required
+                                                        class="form-control">
                                                 </div>
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('apellidos') }}</label>
-                                                    <input type="text" name="lastname_member" required class="form-control"
-                                                        value="{{ old('lastname_member') }}">
+                                                    <label for="largeInput" class="form-label">Número documento</label>
+                                                    <input type="text" name="document_number" id="document_number"
+                                                        data-inputmask="'mask': ['99999999-9']" class="form-control"
+                                                        value="{{ old('document_number') }}">
                                                 </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Telefono</label>
+                                                    <input type="text" name="phone_number" required class="form-control"
+                                                        data-inputmask="'mask': ['9999-9999']"
+                                                        value="{{ old('phone_number') }}">
+                                                </div>
+
+
+
+
+
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('fecha') }}</label>
-                                                    <input type="date" name="birthday" required class="form-control">
+                                                    <label for="largeInput" class="form-label">Direccion</label>
+                                                    <textarea name="address" required class="form-control" rows="5">{{ old('address') }}</textarea>
+                                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Acerca de mi</label>
+                                                    <textarea name="about_me" class="form-control" rows="5">{{ old('about_me') }}</textarea>
                                                 </div>
 
-                                            </div>&nbsp;
 
+                                            </div>
                                             <div style="text-align: right;">
                                                 <button type="submit"
-                                                    class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
+                                                    class="btn inline-flex justify-center btn-dark">Aceptar</button>
                                             </div>
+
+
                                         </form>
 
                                     </div>
@@ -79,5 +153,66 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js'></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //combo para Departamento
+
+            $("#iglesia_id").change(function() {
+
+                var iglesia = document.getElementById('iglesia_id').value;
+              //  alert(iglesia);
+                // var para la Departamento
+                //  var Departamento = $(this).val();
+                $.get('/get_departamento/' + iglesia, function(data) {
+                    // Manejar la respuesta aquí
+                   // console.log(data);
+                    var _select = ''
+                    for (var i = 0; i < data.length; i++)
+                        _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
+                        '</option>';
+                        //document.getElementById('Departamento').html= _select;                        alert(_select);
+                   // $("#Departamento").html(_select)=;
+                });
+
+
+            });
+
+        });
+
+        function calcularEdad(fechaNacimiento) {
+            var fechaNac = new Date(fechaNacimiento);
+            var fechaActual = new Date();
+
+            var edad = fechaActual.getFullYear() - fechaNac.getFullYear();
+            var mes = fechaActual.getMonth() - fechaNac.getMonth();
+
+            if (mes < 0 || (mes === 0 && fechaActual.getDate() < fechaNac.getDate())) {
+                edad--;
+            }
+
+            if (edad >= 18) {
+                $("#document_number").prop("required", true);
+            } else {
+                $("#document_number").prop("required", false);
+            }
+
+            $.get('/get_grupo/' + fechaNacimiento, function(data) {
+                // Manejar la respuesta aquí
+                var _select = ''
+                for (var i = 0; i < data.length; i++)
+                    _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
+                    '</option>';
+
+                $("#grupo_id").html(_select);
+            });
+
+        }
+    </script>
 
 @endsection
