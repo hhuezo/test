@@ -13,6 +13,7 @@ use App\Models\catalog\Municipio;
 use App\Models\catalog\OrganizationStatus;
 //use App\Models\Member;
 use App\Models\catalog\Sede;
+use App\Models\catalog\user_has_grupo;
 use App\Models\catalog\WizardQuestions;
 use App\Models\Organization;
 use App\Models\User;
@@ -349,6 +350,7 @@ class WelcomeController extends Controller
     public function update_member_group(Request $request, $id)
     {
 
+       // dd($request->member_id);
         $messages = [
             'name_member.required' => 'ingresar nombre',
         ];
@@ -362,20 +364,26 @@ class WelcomeController extends Controller
         ], $messages);
 
 
-        $member =  Member::findOrFail($id);
+        $member =  Member::findOrFail($request->member_id);
+
         $member->name_member = $request->name_member;
         $member->lastname_member = $request->lastname_member;
        // $member->birthdate = $request->birthdate;
         $member->document_number_type = $request->document_number_type;
       //  $member->document_type_id = $request->document_type_id;
         $member->Update();
-        $group = $member->user_has_group->first();
-        $group_id = $group->group_id;
-     //  dd( $member->organization_id);
-        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id)->first();
-      //  dd(  $group_church);
-        $group_church->group_id = $request->grupo_id;
-        $group_church->update();
+       // $group = $member->user_has_group->first();
+        $group_id = $member->user_has_group->first(); //$group->group_id;
+
+        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id->group_id)->first();
+
+        $user_has_grupo= user_has_grupo::where('member_id', '=', $member->id)->where('group_per_church_id', '=', $group_church->id)->first();
+
+        $group_churchnew = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=', $request->grupo_id)->first();
+
+        $user_has_grupo->group_per_church_id=  $group_churchnew->id;
+        $user_has_grupo->update();
+
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
     }

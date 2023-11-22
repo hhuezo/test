@@ -38,6 +38,11 @@
                                         <form method="POST" action="{{ url('update_group_member', $member->id) }}"
                                             class="space-y-4">
                                             @csrf
+                                            <input type="hidden" name="member_id" id=member_id  required
+                                            class="form-control"
+                                            value=" {{ $member->id }}">
+
+
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">{{ __('Nombre') }}</label>
