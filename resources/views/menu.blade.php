@@ -134,6 +134,7 @@
                                 </span>
                             </a>
                         </li>
+
                     @endcan
 
                     @can('read course')
@@ -170,7 +171,7 @@
                                 <a href="{{ url('catalog/Quiz') }}">Examen</a>
                             </li>-->
                             <li>
-                                <a href="{{ url('catalog/MemberStatus') }}">Estatus del miembro</a>
+                                <a href="{{ url('catalog/member_status') }}">Estatus del miembro</a>
                             </li>
                             <li>
                                 <a href="{{ url('catalog/course') }}">Cursos</a>

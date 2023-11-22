@@ -24,7 +24,7 @@
                                     <tr class="td-table">
                                         <th style="text-align: center">Id</th>
                                         <th>Descripción</th>
-
+                                        <th>Descripción_español</th>
                                         <th style="text-align: center">Opciones</th>
                                     </tr>
                                 </thead>
@@ -34,6 +34,7 @@
                                             <tr>
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td>{{ $obj->description }}</td>
+                                                <td>{{ $obj->description_es }}</td>
                                                 <td align="center">
                                                     <a href="{{url('catalog/organization_status')}}/{{$obj->id}}/edit">
                                                     <iconify-icon icon="mdi:pencil-box"

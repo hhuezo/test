@@ -84,7 +84,7 @@
     <!-- END : Theme Config js-->
     @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
     <div class="loginwrapper bg-cover bg-no-repeat bg-center" style="background-image: url(img/otro2_dashboard.jpg);">
-    {{-- style="background-image: url(img/familia_dashboard.jpg);" --}}
+        {{-- style="background-image: url(img/familia_dashboard.jpg);" --}}
         <div class="lg-inner-column">
             <div class="left-columns lg:w-1/2 lg:block hidden">
                 <div class="logo-box-3">
@@ -193,18 +193,18 @@
                     <div
                         class="mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm text-center">
                         {{-- Already registered? --}}
-                        <a href="signup-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
-                            <a class="nav-link" href="{{ url('register_member') }}"> Registro miembro</a>
-                        </a>
+                        {{-- <a href="signup-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
+                            <a class="nav-link" href="{{ url('register_member') }}"> Registro miembro</a> <a class="nav-link" onclick="participante_link()"> Registro miembro</a>--}}
+                                                <a class="nav-link" href="{{ url('register_member_leader') }}"> Registro miembro</a>
                     </div>
 
                     <div
-                    class="mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm text-center">
-                    {{-- Already registered? --}}
-                    <a href="signup-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
-                        <a class="nav-link" href="{{ url('/registrar') }}">  Registro cohort</a>
-                    </a>
-                </div>
+                        class="mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm text-center">
+                        {{-- Already registered? --}}
+
+                        <a class="nav-link" href="{{ url('/registrar') }}"> Registro cohort</a>
+
+                    </div>
                 </div>
             </div>
             {{-- <div class="auth-footer3 text-white py-5 px-5 text-xl w-full">
@@ -213,6 +213,20 @@
         </div>
     </div>
     <!-- Core Js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function participante_link() {
+            //   alert('');
+            // Swal.fire('El Nuevo participante debe registrarse con el link enviado de su iglesia');
+            Swal.fire({
+                title: 'Error!',
+                text: 'El Nuevo participante debe registrarse con el link enviado de su iglesia',
+                icon: 'error',
+              ///  timer: '3600',
+                confirmButtonText: 'OK'
+            })
+        }
+    </script>
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>

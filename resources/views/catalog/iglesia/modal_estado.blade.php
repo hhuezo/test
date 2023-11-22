@@ -8,7 +8,7 @@
                           rounded-md outline-none text-current">
               <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
                 <!-- Modal header -->
-                <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-danger-500">
+                <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-black-500">
                   <h3 class="text-base font-medium text-white dark:text-white capitalize">
                  Cambiar Estado
                   </h3>
@@ -24,7 +24,7 @@
                 <!-- Modal body -->
                 <div class="p-6 space-y-4">
                   <h6 class="text-base text-slate-900 dark:text-white leading-6">
-                    Confirme si desea modificar El estado
+                    Confirme Si Desea Modificar El Estado
                   </h6>
 
 
@@ -32,7 +32,7 @@
                     <label for="largeInput" class="form-label">{{ __('Estado') }}</label>
                     <select name="status_id" class="form-control ">
                         @foreach ($estatuorg as $obj)
-                            <option value="{{ $obj->id }}">{{ $obj->description }}
+                            <option value="{{ $obj->id }}">{{ $obj->description_es }}
                             </option>
                         @endforeach
                     </select>
@@ -41,7 +41,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
-                  <button type="submit" class="btn inline-flex justify-center text-white bg-danger-500 float-right" style="margin-bottom: 15px">Aceptar</button>
+                  <button type="submit" class="btn inline-flex justify-center text-white bg-black-500 float-right" style="margin-bottom: 15px">Aceptar</button>
                 </div>
               </div>
             </div>

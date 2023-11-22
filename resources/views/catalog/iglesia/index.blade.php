@@ -42,7 +42,7 @@
                                                     @foreach ($estatuorg as $obj2)
                                                 @if ($obj2->id == $obj->status)
                                                     <option value="{{ $obj2->id }}" selected>
-                                                        {{ $obj2->description }}
+                                                        {{ $obj2->description_es }}
                                                 @endif
                                             @endforeach
                                                 <td align="center">

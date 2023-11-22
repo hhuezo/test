@@ -9,6 +9,8 @@
             <header class=" card-header noborder">
                 <h4 class="card-title">Listado de Participantes de Grupos de la iglesia : {{ $iglesia->name }}
                 </h4>
+                <div style="text-align: right;">
+
 
                 <a href="{{ url('datos_iglesia') }}">
                     <button class="btn btn-dark btn-sm float-right">
@@ -16,10 +18,7 @@
                         </iconify-icon>
                     </button>
                 </a>
-                <a href="{{url('reporte_grupos/'.$iglesia->id )}}">
-                    <iconify-icon icon="mdi:printer"
-                        style="color: #1769aa;" width="40"></iconify-icon>
-                </a>
+            </div>
             </header>
             <div class="card-body px-6 pb-6">
                 <div class="overflow-x-auto -mx-6">
@@ -29,25 +28,30 @@
                         <thead class="bg-slate-200 dark:bg-slate-700">
 
                                     <tr class="td-table">
-                                        <th style="text-align: center">Id</th>
+                                        <th style="text-align: center">id</th>
                                         <th style="text-align: center">Nombre</th>
                                         <th style="text-align: center">Apellido</th>
                                         <th style="text-align: center">Grupo</th>
+                                        <th style="text-align: center">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($miembros->count() > 0)
+
                                         @foreach ($miembros as $obj)
                                             <tr>
-                                                <td align="center">{{ $obj->id }}</td>
+                                                    <td  align="center">{{ $obj->member_id }}</td>
                                                     <td  align="center">{{ $obj->name_member }}</td>
                                                     <td  align="center">{{ $obj->lastname_member }}</td>
-                                                    <td  align="center">{{ $obj->nombre }}</td>
+                                                    <td  align="center">{{ $obj->nombre_grupo }}</td>
+                                                    <td align="center">
+                                                        <a href="{{ url('reasigna_grupos') }}/{{ $obj->member_id }}">
+                                                            <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;" width="40"></iconify-icon>
+                                                        </a></td>
 
                                             </tr>
 
                                         @endforeach
-                                    @endif
+
 
                                 </tbody>
                             </table>
