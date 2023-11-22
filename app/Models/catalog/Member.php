@@ -47,4 +47,8 @@ class Member extends Model
     {
         return $this->belongsToMany(GroupPerchuchPlan::class, 'user_has_group', 'member_id', 'group_per_church_id');
     }
+
+    public function genders(){
+        return $this->belongsTo(Gender::class, 'catalog_gender_id','id');
+    }
 };

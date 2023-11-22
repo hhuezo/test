@@ -4,6 +4,7 @@ namespace App\Http\Controllers\catalog;
 
 use App\Http\Controllers\Controller;
 use App\Models\catalog\Departamento;
+use App\Models\catalog\Gender;
 use App\Models\catalog\GroupPerchuchPlan;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
@@ -51,9 +52,10 @@ class MemberController extends Controller
         //  //$organizations = Organization::get();
         $iglesia = Iglesia::get();
         $grupos = Grupo::get();
+        $genero = Gender::get();
 
 
-        return view('catalog.member.create', compact('departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan'));
+        return view('catalog.member.create', compact('genero','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan'));
     }
 
     /**
@@ -94,7 +96,8 @@ class MemberController extends Controller
         $member->name_member = $request->name;
         $member->lastname_member = $request->last_name;
         $member->birthdate = $request->birthdate;
-        //$member->document_number = $request->document_number;
+        $member->document_number = $request->document_number;
+        $member->catalog_gender_id = $request->genero;
         $member->email = $request->email;
         $member->cell_phone_number = $request->phone_number;
         $member->address = $request->address;
@@ -176,8 +179,12 @@ class MemberController extends Controller
         $member = member::findOrFail($id);
 
         $group = $member->user_has_group->first();
-
-        $group_id = $group->group_id;
+        if(($group) != null){
+            $group_id = $group->group_id;
+        }else{
+            $group_id = '';
+        }
+        
 
         $grupos = Grupo::get();
         $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
