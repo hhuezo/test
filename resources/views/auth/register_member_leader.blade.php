@@ -9,12 +9,10 @@
     <link rel="icon" type="image/png" href="assets/images/logo/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/rt-plugins.css') }}">
     <link href="https://unpkg.com/aos@2.3.0/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     <!-- START : Theme Config js-->
     <script src="{{ asset('assets/js/settings.js') }}" sync></script>
@@ -27,17 +25,14 @@
     <main class="app-wrapper">
         <div class="flex flex-col justify-between min-h-screen">
             <div>
-                                 <!-- BEGIN: Search Modal -->
-                <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-                    id="modal-register-member" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+                <!-- BEGIN: Search Modal -->
+                <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="modal-register-member" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
                     <div class="modal-dialog relative w-auto pointer-events-none top-1/4">
-                        <div
-                            class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-900 bg-clip-padding rounded-md outline-none text-current">
+                        <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-900 bg-clip-padding rounded-md outline-none text-current">
                             <form>
                                 <div class="relative">
                                     <input type="text" class="form-control !py-3 !pr-12" placeholder="Search">
-                                    <button
-                                        class="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-full border-l text-xl border-l-slate-200 dark:border-l-slate-600 dark:text-slate-300 flex items-center justify-center">
+                                    <button class="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-full border-l text-xl border-l-slate-200 dark:border-l-slate-600 dark:text-slate-300 flex items-center justify-center">
                                         <iconify-icon icon="heroicons-solid:search"></iconify-icon>
                                     </button>
                                 </div>
@@ -48,8 +43,7 @@
                 <!-- END: Search Modal -->
                 <!-- END: Header -->
                 <!-- END: Header -->
-                <div class="content-wrapper transition-all duration-150 ltr:ml-[248px] rtl:mr-[248px]"
-                    id="content_wrapper">
+                <div class="content-wrapper transition-all duration-150 ltr:ml-[248px] rtl:mr-[248px]" id="content_wrapper">
                     <div class="page-content">
                         <div class="transition-all duration-150 container-fluid" id="page_layout">
                             <div id="content_layout">
@@ -67,11 +61,9 @@
                                                 <div class="2xl:col-span-6 lg:col-span-8 col-span-12">
                                                     <div class="card">
                                                         <div class="card-body flex flex-col p-6">
-                                                            <header
-                                                                class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
+                                                            <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                                                                 <div class="flex-1">
-                                                                    <div
-                                                                        class="card-title text-slate-900 dark:text-white">
+                                                                    <div class="card-title text-slate-900 dark:text-white">
                                                                         Registro de Nuevos Miembros
                                                                         <h1>
                                                                         </h1>
@@ -80,99 +72,76 @@
 
                                                                 <a href="{{ URL('login') }}">
                                                                     <button class="btn btn-dark btn-sm float-right">
-                                                                        <iconify-icon icon="icon-park-solid:back"
-                                                                            style="color: white;" width="18">
+                                                                        <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                                                         </iconify-icon>
                                                                     </button>
                                                                 </a>
                                                             </header>
 
                                                             @if (count($errors) > 0)
-                                                                <div class="alert alert-danger">
-                                                                    <ul>
-                                                                        @foreach ($errors->all() as $error)
-                                                                            <li>{{ $error }}</li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                </div>
+                                                            <div class="alert alert-danger">
+                                                                <ul>
+                                                                    @foreach ($errors->all() as $error)
+                                                                    <li>{{ $error }}</li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
                                                             @endif
 
-                                                            <form method="POST" action="{{ route('store_member') }}"
-                                                            class="space-y-4">
-                                                            @csrf
+                                                            <form method="POST" action="{{ route('store_member') }}" class="space-y-4">
+                                                                @csrf
                                                                 <div class="input-area relative">
                                                                 </div>
-                                                                <div
-                                                                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
+                                                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">Nombre </label>
-                                                                        <input type="text" name="name"
-                                                                            onblur="this.value = this.value.toUpperCase()"
-                                                                            required class="form-control"
-                                                                            value="{{ old('name') }}"
-                                                                            autofocus="true">
+                                                                        <label for="largeInput" class="form-label">Nombre </label>
+                                                                        <input type="text" name="name" onblur="this.value = this.value.toUpperCase()" required class="form-control" value="{{ old('name') }}" autofocus="true">
                                                                     </div>
 
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">Apellido</label>
-                                                                        <input type="text" name="last_name"
-                                                                            onblur="this.value = this.value.toUpperCase()"
-                                                                            required class="form-control"
-                                                                            value="{{ old('last_name') }}"
-                                                                            autofocus="true">
+                                                                        <label for="largeInput" class="form-label">Apellido</label>
+                                                                        <input type="text" name="last_name" onblur="this.value = this.value.toUpperCase()" required class="form-control" value="{{ old('last_name') }}" autofocus="true">
                                                                     </div>
 
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput" class="form-label">Fecha
                                                                             nacimiento</label>
-                                                                        <input type="date" id="birthdate"
-                                                                            name="birthdate" required
-                                                                            class="form-control"
-                                                                            onblur="calcularEdad(this.value)"
-                                                                            value="{{ old('birthdate') }}"
-                                                                            autofocus="true">
+                                                                        <input type="date" id="birthdate" name="birthdate" required class="form-control" onblur="calcularEdad(this.value)" value="{{ old('birthdate') }}" autofocus="true">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput" class="form-label">Genero</label>
+                                                                        <select name="genero" class="form-control" required>
+                                                                            @foreach ($generos as $obj)
+                                                                            <option value="{{ $obj->id }}">
+                                                                                {{ $obj->description }}
+                                                                            </option>
+                                                                            @endforeach
+                                                                        </select>
+
                                                                     </div>
 
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">Email</label>
-                                                                        <input type="email" name="email" required
-                                                                            class="form-control"
-                                                                            value="{{ old('email') }}">
+                                                                        <label for="largeInput" class="form-label">Email</label>
+                                                                        <input type="email" name="email" required class="form-control" value="{{ old('email') }}">
                                                                     </div>
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">Password</label>
-                                                                        <input type="password" name="password"
-                                                                            required class="form-control">
+                                                                        <label for="largeInput" class="form-label">Número documento</label>
+                                                                        <input type="text" name="document_number" id="document_number" data-inputmask="'mask': ['99999999-9']" class="form-control" value="{{ old('document_number') }}">
                                                                     </div>
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">ConfirmePassword</label>
-                                                                        <input type="password"
-                                                                            name="password_confirmation" required
-                                                                            class="form-control">
+                                                                        <label for="largeInput" class="form-label">Password</label>
+                                                                        <input type="password" name="password" required class="form-control">
+                                                                    </div>
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput" class="form-label">ConfirmePassword</label>
+                                                                        <input type="password" name="password_confirmation" required class="form-control">
                                                                     </div>
 
 
+                                                                   
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">Número documento</label>
-                                                                        <input type="text" name="document_number"
-                                                                            id="document_number"
-                                                                            data-inputmask="'mask': ['99999999-9']"
-                                                                            class="form-control"
-                                                                            value="{{ old('document_number') }}">
-                                                                    </div>
-                                                                    <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">Telefono</label>
-                                                                        <input type="text" name="phone_number"
-                                                                            required class="form-control"
-                                                                            data-inputmask="'mask': ['9999-9999']"
-                                                                            value="{{ old('phone_number') }}">
+                                                                        <label for="largeInput" class="form-label">Telefono</label>
+                                                                        <input type="text" name="phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']" value="{{ old('phone_number') }}">
                                                                     </div>
 
 
@@ -180,28 +149,24 @@
 
 
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">Iglesia</label>
-                                                                            <select id="iglesia_id" name="iglesia_id"
-                                                                            class="form-control" required>
+                                                                        <label for="largeInput" class="form-label">Iglesia</label>
+                                                                        <select id="iglesia_id" name="iglesia_id" class="form-control" required>
                                                                             @foreach ($iglesias as $obj)
-                                                                                <option value="{{ $obj->id }}">
-                                                                                    {{ $obj->name }}
-                                                                                </option>
+                                                                            <option value="{{ $obj->id }}">
+                                                                                {{ $obj->name }}
+                                                                            </option>
                                                                             @endforeach
                                                                         </select>
 
 
                                                                     </div>
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">grupo</label>
-                                                                        <select id="grupo_id" name="grupo_id"
-                                                                            class="form-control" required>
+                                                                        <label for="largeInput" class="form-label">grupo</label>
+                                                                        <select id="grupo_id" name="grupo_id" class="form-control" required>
                                                                             @foreach ($grupos as $obj)
-                                                                                <option value="{{ $obj->id }}">
-                                                                                    {{ $obj->nombre }}
-                                                                                </option>
+                                                                            <option value="{{ $obj->id }}">
+                                                                                {{ $obj->nombre }}
+                                                                            </option>
                                                                             @endforeach
                                                                         </select>
 
@@ -222,24 +187,23 @@
                                                                         </select>
                                                                     </div>-->
 
-
+                                                                    <div class="input-area relative">
+                                                                       &nbsp;
+                                                                    </div>
 
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">Direccion</label>
+                                                                        <label for="largeInput" class="form-label">Direccion</label>
                                                                         <textarea name="address" required class="form-control" rows="5">{{ old('address') }}</textarea>
                                                                     </div>
                                                                     <div class="input-area relative">
-                                                                        <label for="largeInput"
-                                                                            class="form-label">Acerca de mi</label>
+                                                                        <label for="largeInput" class="form-label">Acerca de mi</label>
                                                                         <textarea name="about_me" class="form-control" rows="5">{{ old('about_me') }}</textarea>
                                                                     </div>
 
 
                                                                 </div>
                                                                 <div style="text-align: right;">
-                                                                    <button type="submit"
-                                                                        class="btn inline-flex justify-center btn-dark">Aceptar</button>
+                                                                    <button type="submit" class="btn inline-flex justify-center btn-dark">Aceptar</button>
                                                                 </div>
 
 
@@ -265,17 +229,14 @@
                 </div>
             </div>
 
-            <div
-                class="bg-white bg-no-repeat custom-dropshadow footer-bg dark:bg-slate-700 flex justify-around items-center
+            <div class="bg-white bg-no-repeat custom-dropshadow footer-bg dark:bg-slate-700 flex justify-around items-center
                 backdrop-filter backdrop-blur-[40px] fixed left-0 bottom-0 w-full z-[9999] bothrefm-0 py-[12px] px-4 md:hidden">
                 <a href="chat.html">
                     <div>
-                        <span
-                            class="relative cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center mb-1 dark:text-white
+                        <span class="relative cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center mb-1 dark:text-white
           text-slate-900 ">
                             <iconify-icon icon="heroicons-outline:mail"></iconify-icon>
-                            <span
-                                class="absolute right-[5px] lg:hrefp-0 -hrefp-2 h-4 w-4 bg-red-500 text-[8px] font-semibold flex flex-col items-center
+                            <span class="absolute right-[5px] lg:hrefp-0 -hrefp-2 h-4 w-4 bg-red-500 text-[8px] font-semibold flex flex-col items-center
             justify-center rounded-full text-white z-[99]">
                                 10
                             </span>
@@ -285,22 +246,18 @@
                         </span>
                     </div>
                 </a>
-                <a href="profile.html"
-                    class="relative bg-white bg-no-repeat backdrop-filter backdrop-blur-[40px] rounded-full footer-bg dark:bg-slate-700
+                <a href="profile.html" class="relative bg-white bg-no-repeat backdrop-filter backdrop-blur-[40px] rounded-full footer-bg dark:bg-slate-700
                 h-[65px] w-[65px] z-[-1] -mt-[40px] flex justify-center items-center">
                     <div class="h-[50px] w-[50px] rounded-full relative left-[0px] hrefp-[0px] custom-dropshadow">
-                        <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt=""
-                            class="w-full h-full rounded-full border-2 border-slate-100">
+                        <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="" class="w-full h-full rounded-full border-2 border-slate-100">
                     </div>
                 </a>
                 <a href="#">
                     <div>
-                        <span
-                            class=" relative cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center mb-1 dark:text-white
+                        <span class=" relative cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center mb-1 dark:text-white
           text-slate-900">
                             <iconify-icon icon="heroicons-outline:bell"></iconify-icon>
-                            <span
-                                class="absolute right-[17px] lg:hrefp-0 -hrefp-2 h-4 w-4 bg-red-500 text-[8px] font-semibold flex flex-col items-center
+                            <span class="absolute right-[17px] lg:hrefp-0 -hrefp-2 h-4 w-4 bg-red-500 text-[8px] font-semibold flex flex-col items-center
             justify-center rounded-full text-white z-[99]">
                                 2
                             </span>

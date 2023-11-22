@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\catalog\ChurchQuestionWizard;
 use App\Models\catalog\Cohorte;
 use App\Models\catalog\Departamento;
+use App\Models\catalog\Gender;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member; //as CatalogMember;
@@ -186,7 +187,8 @@ class WelcomeController extends Controller
         //  //$organizations = Organization::get();
         $iglesias = Iglesia::get();
         $grupos = Grupo::get();
-        return view('auth.register_member_leader', compact('departamentos', 'grupos', 'iglesias'));
+        $generos = Gender::get();
+        return view('auth.register_member_leader', compact('generos','departamentos', 'grupos', 'iglesias'));
         //return view('auth.register_member', compact('departamentos'));
 
     }
@@ -251,7 +253,8 @@ class WelcomeController extends Controller
         $member->name_member = $request->name;
         $member->lastname_member = $request->last_name;
         $member->birthdate = $request->birthdate;
-        //$member->document_number = $request->document_number;
+        $member->document_number = $request->document_number;
+        $member->catalog_gender_id = $request->genero;
         $member->email = $request->email;
         $member->cell_phone_number = $request->phone_number;
         $member->address = $request->address;
