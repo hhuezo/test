@@ -13,6 +13,8 @@ use App\Models\catalog\Municipio;
 use App\Models\catalog\OrganizationStatus;
 //use App\Models\Member;
 use App\Models\catalog\Sede;
+use App\Models\catalog\user_has_grupo;
+use App\Models\catalog\UserHasGrupo;
 use App\Models\catalog\WizardQuestions;
 use App\Models\Organization;
 use App\Models\User;
@@ -35,10 +37,10 @@ class WelcomeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct()
-     {
-      //   $this->middleware('auth');
-     }
+    public function __construct()
+    {
+        //   $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -47,17 +49,17 @@ class WelcomeController extends Controller
     }
 
 
- public function  reporte_grupos($id_grupo_iglesia)
+    public function  reporte_grupos($id_grupo_iglesia)
     {
 
 
-        $grupos_iglesia =  GroupPerchuchPlan ::findorfail($id_grupo_iglesia);
+        $grupos_iglesia =  GroupPerchuchPlan::findorfail($id_grupo_iglesia);
 
-                $usuarios= Users::get();
-                $grupo=Grupo::get();
+        $usuarios = Users::get();
+        $grupo = Grupo::get();
 
 
-                $sql="select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
+        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
                 from iglesia i
                 join group_per_chuch_plan gpc
                 on gpc.iglesia_id = i.id
@@ -70,15 +72,15 @@ class WelcomeController extends Controller
                 and q.group_per_church_id=gpc.id
                 where  gpc.id=?";
 
-                $miembros = DB::select($sql, array($grupos_iglesia->id));
+        $miembros = DB::select($sql, array($grupos_iglesia->id));
 
-                $iglesia=Iglesia::findorfail($grupos_iglesia->iglesia_id);
-                $member_status= MemberStatus::get();
-
-
+        $iglesia = Iglesia::findorfail($grupos_iglesia->iglesia_id);
+        $member_status = MemberStatus::get();
 
 
-        $pdf =\Pdf::loadView('auth.reporte_grupos', compact('miembros', 'iglesia', 'usuarios','grupo' ,'member_status'));
+
+
+        $pdf = \Pdf::loadView('auth.reporte_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
         return $pdf->stream('Info.pdf');
     }
     public function create()
@@ -103,11 +105,11 @@ class WelcomeController extends Controller
 
         $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
 
-    $departamentos = Departamento::get();
-    $iglesia = iglesia::findOrFail($member->organization_id);
-    $grupos=Grupo::get();
+        $departamentos = Departamento::get();
+        $iglesia = iglesia::findOrFail($member->organization_id);
+        $grupos = Grupo::get();
 
-    return view('auth.reasigna_grupos', compact('member','departamentos','iglesia','member_status','group_church','grupos','group_id'));
+        return view('auth.reasigna_grupos', compact('member', 'departamentos', 'iglesia', 'member_status', 'group_church', 'grupos', 'group_id'));
     }
 
 
@@ -118,25 +120,25 @@ class WelcomeController extends Controller
 
         //$municipios = Municipio::where('departamento_id', '=', 1)->get();
         //  //$organizations = Organization::get();
-       // $iglesia = Iglesia::where('id', '=', $id_iglesia)->get();
-        $grupos_iglesia =  GroupPerchuchPlan ::findorfail($id_grupo_iglesia);
-//dd($iglesia,$i);
+        // $iglesia = Iglesia::where('id', '=', $id_iglesia)->get();
+        $grupos_iglesia =  GroupPerchuchPlan::findorfail($id_grupo_iglesia);
+        //dd($iglesia,$i);
 
-      //  $miembros = Member::where('organization_id', '=', $id_iglesia)->get();
+        //  $miembros = Member::where('organization_id', '=', $id_iglesia)->get();
         //dd($miembros->iglesia_grupo->nombre);
-        $usuarios= Users::get();
-        $grupo=Grupo::get();
+        $usuarios = Users::get();
+        $grupo = Grupo::get();
 
-       // $miembros = DB::table('member as a')
-       // ->join('user_has_group as b', 'b.member_id', '=', 'a.id')
+        // $miembros = DB::table('member as a')
+        // ->join('user_has_group as b', 'b.member_id', '=', 'a.id')
         //->join('group_per_chuch_plan as c', function ($join) {
         //    $join->on('c.iglesia_id', '=', 'a.organization_id')
-                //->on('c.id', '=', 'b.group_per_church_id')
-                //->on('a.organization_id =? ');
+        //->on('c.id', '=', 'b.group_per_church_id')
+        //->on('a.organization_id =? ');
         //})        ->join('grupo as d', 'c.group_id', '=', 'd.id')        ->select('a.id','a.name_member', 'a.lastname_member', 'd.nombre')        ->get();
 
 
-        $sql="select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
+        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
         from iglesia i
         join group_per_chuch_plan gpc
         on gpc.iglesia_id = i.id
@@ -151,18 +153,18 @@ class WelcomeController extends Controller
 
         $miembros = DB::select($sql, array($grupos_iglesia->id));
 
-        $iglesia=Iglesia::findorfail($grupos_iglesia->iglesia_id);
-        $member_status= MemberStatus::get();
+        $iglesia = Iglesia::findorfail($grupos_iglesia->iglesia_id);
+        $member_status = MemberStatus::get();
 
 
 
-        return view('auth.consulta_grupos', compact('miembros', 'iglesia', 'usuarios','grupo' ,'member_status'));
+        return view('auth.consulta_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
         //return view('auth.register_member', compact('departamentos'));
 
     }
     public function register_member()
     {
-       //  dd('aqui estoy');
+        //  dd('aqui estoy');
 
         $departamentos = Departamento::get();
         //$municipios = Municipio::where('departamento_id', '=', 1)->get();
@@ -177,7 +179,7 @@ class WelcomeController extends Controller
 
     public function register_member_leader()
     {
-       //  dd('aqui estoy');
+        //  dd('aqui estoy');
 
         $departamentos = Departamento::get();
         //$municipios = Municipio::where('departamento_id', '=', 1)->get();
@@ -243,7 +245,7 @@ class WelcomeController extends Controller
         //asign role
 
         $iglesia = Iglesia::findorfail($request->iglesia_id);
-        $deptos = Departamento::findorfail( $iglesia->catalog_departamento_id);
+        $deptos = Departamento::findorfail($iglesia->catalog_departamento_id);
 
         $member = new Member();
         $member->name_member = $request->name;
@@ -257,7 +259,7 @@ class WelcomeController extends Controller
         $member->organization_id = (int)$request->iglesia_id;
         $member->status = 1;
         $member->users_id = $user->id;
-        $member->state_id=   $deptos->id;
+        $member->state_id =   $deptos->id;
         //   $user->assignRole('Participante');
         // $member->municipio_id = $user->Municipio;
         $member->save();
@@ -292,9 +294,9 @@ class WelcomeController extends Controller
 
     public function get_departamento($id)
     {
-       $iglesia= Iglesia::findorfail($id);
-       $departamento= Departamento::findorfail( $iglesia->catalog_departamento_id);
-       //dd($departamento->nombre);
+        $iglesia = Iglesia::findorfail($id);
+        $departamento = Departamento::findorfail($iglesia->catalog_departamento_id);
+        //dd($departamento->nombre);
         return $departamento;
     }
 
@@ -331,24 +333,21 @@ class WelcomeController extends Controller
 
         if ($fechaNacimiento->diffInYears($hoy) > 18) {
             // La persona tiene más de 18 años
-           $grupos=Grupo::where('id', '>', 1)->get();
-
+            $grupos = Grupo::where('id', '>', 1)->get();
         } else {
             // La persona tiene 18 años o menos
-            $grupos=Grupo::where('id', '=', 1)->get();
-
+            $grupos = Grupo::where('id', '=', 1)->get();
         }
         return $grupos;
     }
 
     public function show($id)
     {
-
-
     }
     public function update_member_group(Request $request, $id)
     {
 
+        // dd($request->member_id);
         $messages = [
             'name_member.required' => 'ingresar nombre',
         ];
@@ -362,20 +361,26 @@ class WelcomeController extends Controller
         ], $messages);
 
 
-        $member =  Member::findOrFail($id);
+        $member =  Member::findOrFail($request->member_id);
+
         $member->name_member = $request->name_member;
         $member->lastname_member = $request->lastname_member;
-       // $member->birthdate = $request->birthdate;
+        // $member->birthdate = $request->birthdate;
         $member->document_number_type = $request->document_number_type;
-      //  $member->document_type_id = $request->document_type_id;
+        //  $member->document_type_id = $request->document_type_id;
         $member->Update();
-        $group = $member->user_has_group->first();
-        $group_id = $group->group_id;
-     //  dd( $member->organization_id);
-        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id)->first();
-      //  dd(  $group_church);
-        $group_church->group_id = $request->grupo_id;
-        $group_church->update();
+        // $group = $member->user_has_group->first();
+        $group_id = $member->user_has_group->first(); //$group->group_id;
+
+        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id->group_id)->first();
+
+        $user_has_grupo = UserHasGrupo::where('member_id', '=', $member->id)->where('group_per_church_id', '=', $group_church->id)->first();
+
+        $group_churchnew = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=', $request->grupo_id)->first();
+
+        $user_has_grupo->group_per_church_id =  $group_churchnew->id;
+        $user_has_grupo->update();
+
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
     }
@@ -404,7 +409,6 @@ class WelcomeController extends Controller
         //$group_per_chuch_plan= group_per_chuch_plan::get();
         //$newmiembro =grupo::where('departamento_id', '=', 1)->get();
         return view('auth.modal_register_member', compact('iglesia', 'departamentos', 'iglesia_grupo'));
-
     }
 
 
@@ -414,78 +418,78 @@ class WelcomeController extends Controller
 
 
 
-      $messages = [
-        'name.required' => 'El nombre es un valor requerido',
-        'last_name.required' => 'El apellido es un valor requerido',
-        'email.required' => 'El Correo electronico es un valor requerido',
-        'email.unique' => 'El correo ingresado ya existe',
-        'password.required' => 'La Contraseña es un valor obligatorio',
-        'password.confirmed' => 'Las claves no coinciden.',
-        'password.min' => 'La contraseña debe tener un minimo de 8 caracteres',
-        'document_number.required' => 'El número de documento es un valor requerido',
-        'phone_number.required' => 'El Numero de telefono es un valor requerido',
-        'address.required' => 'La dirección es un valor requerido',
-        //'organization_id.required' => 'La organización es requerida',
-        'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
-        'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
-        'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
-        'cargo_contacto_secundario.required' => 'El Cargo del contacto secundario es un valor requerido',
-        'telefono_secundario.required' => 'El Numero de telefono del contacto secundario es un valor requerido'
-    ];
+        $messages = [
+            'name.required' => 'El nombre es un valor requerido',
+            'last_name.required' => 'El apellido es un valor requerido',
+            'email.required' => 'El Correo electronico es un valor requerido',
+            'email.unique' => 'El correo ingresado ya existe',
+            'password.required' => 'La Contraseña es un valor obligatorio',
+            'password.confirmed' => 'Las claves no coinciden.',
+            'password.min' => 'La contraseña debe tener un minimo de 8 caracteres',
+            'document_number.required' => 'El número de documento es un valor requerido',
+            'phone_number.required' => 'El Numero de telefono es un valor requerido',
+            'address.required' => 'La dirección es un valor requerido',
+            //'organization_id.required' => 'La organización es requerida',
+            'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
+            'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
+            'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
+            'cargo_contacto_secundario.required' => 'El Cargo del contacto secundario es un valor requerido',
+            'telefono_secundario.required' => 'El Numero de telefono del contacto secundario es un valor requerido'
+        ];
 
 
 
-    $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'last_name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
-        //'document_number' => ['required', 'string', 'max:255'],
-        'phone_number' => ['required', 'string', 'max:9'],
-        'address' => ['required', 'string', 'max:255'],
-        //'organization_id' => ['required'],
-    ], $messages);
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            //'document_number' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'string', 'max:9'],
+            'address' => ['required', 'string', 'max:255'],
+            //'organization_id' => ['required'],
+        ], $messages);
 
 
 
-    $user = new User();
-    $user->name = $request->name . ' ' . $request->last_name;
-    $user->email = $request->email;
-    $user->password = Hash::make($request->password);
-    $user->status = 0;
-    $user->assignRole('participante');
+        $user = new User();
+        $user->name = $request->name . ' ' . $request->last_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->status = 0;
+        $user->assignRole('participante');
 
-    $user->save();
+        $user->save();
 
-    //asign role
+        //asign role
 
-    $iglesia = Iglesia::findorfail($request->iglesia_id);
-    $deptos = Departamento::findorfail( $iglesia->catalog_departamento_id);
+        $iglesia = Iglesia::findorfail($request->iglesia_id);
+        $deptos = Departamento::findorfail($iglesia->catalog_departamento_id);
 
-    $member = new Member();
-    $member->name_member = $request->name;
-    $member->lastname_member = $request->last_name;
-    $member->birthdate = $request->birthdate;
-    //$member->document_number = $request->document_number;
-    $member->email = $request->email;
-    $member->cell_phone_number = $request->phone_number;
-    $member->address = $request->address;
-    $member->about_me = $request->about_me;
-    $member->organization_id = (int)$request->iglesia_id;
-    $member->status = 1;
-    $member->users_id = $user->id;
-    $member->state_id=   $deptos->id;
-    //   $user->assignRole('Participante');
-    // $member->municipio_id = $user->Municipio;
-    $member->save();
+        $member = new Member();
+        $member->name_member = $request->name;
+        $member->lastname_member = $request->last_name;
+        $member->birthdate = $request->birthdate;
+        //$member->document_number = $request->document_number;
+        $member->email = $request->email;
+        $member->cell_phone_number = $request->phone_number;
+        $member->address = $request->address;
+        $member->about_me = $request->about_me;
+        $member->organization_id = (int)$request->iglesia_id;
+        $member->status = 1;
+        $member->users_id = $user->id;
+        $member->state_id =   $deptos->id;
+        //   $user->assignRole('Participante');
+        // $member->municipio_id = $user->Municipio;
+        $member->save();
 
-    $GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
+        $GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
 
-    $GroupPerchuchPlan->miembro_grupo()->attach($member->id);
+        $GroupPerchuchPlan->miembro_grupo()->attach($member->id);
 
-    alert()->success('Miembro registrado correctamente');
-    return back();
-    //return redirect('/login');
+        alert()->success('Miembro registrado correctamente');
+        return back();
+        //return redirect('/login');
 
     }
 
@@ -550,7 +554,7 @@ class WelcomeController extends Controller
 
         $conteo_miembros = DB::select($sql, array($iglesia->id));
 
-$sql2="select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
+        $sql2 = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
 from iglesia i
 join group_per_chuch_plan gpc
 on gpc.iglesia_id = i.id
@@ -563,22 +567,26 @@ p.id=q.member_id
 and q.group_per_church_id=gpc.id
 where i.id=?";
 
-$miembros_iglesia = DB::select($sql2, array($iglesia->id));
+        $miembros_iglesia = DB::select($sql2, array($iglesia->id));
         // dd($iglesiagp,$iglesia_grupo);
 
-$sql3="select a.id iglesia_grupo,a.iglesia_id,a.group_id No_grupo,b.nombre nombre_grupo FROM urban_stategies.group_per_chuch_plan a,urban_stategies.grupo b
+        $sql3 = "select a.id iglesia_grupo,a.iglesia_id,a.group_id No_grupo,b.nombre nombre_grupo FROM urban_stategies.group_per_chuch_plan a,urban_stategies.grupo b
 where a.group_id=b.id
 and a.iglesia_id=?";
 
-$grupos_iglesia = DB::select($sql3, array($iglesia->id));
+        $grupos_iglesia = DB::select($sql3, array($iglesia->id));
 
 
-        $url =  $request->root() . "/registro_participantes/" . $iglesia->id;
+
+
+
+        $urlgrupo1 =  $request->root() . "/registro_participantes/" . $iglesia->id;
+
 
         QrCode::format('png')->size(200)->generate($url, public_path('img/qrcodeiglesia.png'));
 
 
-        return view('auth.datos_iglesia', compact('departamentos',  'iglesia','conteo_miembros','miembros_iglesia','grupos_iglesia'));
+        return view('auth.datos_iglesia', compact('departamentos',  'iglesia', 'conteo_miembros', 'miembros_iglesia', 'grupos_iglesia'));
         //return view('auth.register_member', compact('departamentos'));
     }
 }
