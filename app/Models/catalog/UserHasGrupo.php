@@ -5,7 +5,7 @@ namespace App\Models\catalog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class user_has_grupo extends Model
+class UserHasGrupo extends Model
 {
     use HasFactory;
 
