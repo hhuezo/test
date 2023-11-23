@@ -10,6 +10,7 @@ use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
 use App\Models\catalog\MemberStatus;
+use App\Models\catalog\Municipio;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -53,9 +54,10 @@ class MemberController extends Controller
         $iglesia = Iglesia::get();
         $grupos = Grupo::get();
         $genero = Gender::get();
+        $municipios = Municipio::get();
 
 
-        return view('catalog.member.create', compact('genero','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan'));
+        return view('catalog.member.create', compact('genero','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan','municipios'));
     }
 
     /**
@@ -103,6 +105,8 @@ class MemberController extends Controller
         $member->address = $request->address;
         $member->about_me = $request->about_me;
         $member->organization_id = (int)$request->iglesia_id;
+        $member->departamento_id = $request->departamento_id;
+        $member->municipio_id = $request->municipio_id;
         $member->status = 1;
         $member->users_id = $user->id;
         $member->state_id=   $deptos->id;
@@ -144,7 +148,7 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-       // dd($id);
+       dd($id);
         $iglesia = Iglesia::findorfail($id);
         $member = Member::get();
 
@@ -153,12 +157,12 @@ class MemberController extends Controller
         $groupperchuchplan = GroupPerchuchPlan::get();
 
         $departamentos = Departamento::get();
-        //$municipios = Municipio::where('departamento_id', '=', 1)->get();
+        $municipios = Municipio::get();
         //  //$organizations = Organization::get();
 
         $grupos = Grupo::get();
         $iglesia_grupo = $iglesia->iglesia_grupo;
-        return view('catalog.member.show', compact('iglesia_grupo','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan'));
+        return view('catalog.member.show', compact('iglesia_grupo','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan','municipios'));
         alert()->success('El registro ha sido añadido correctamente');
         return back();
     }
@@ -220,7 +224,10 @@ class MemberController extends Controller
         $member->birthdate = $request->birthdate;
         $member->document_number_type = $request->document_number_type;
         $member->document_type_id = $request->document_type_id;
-        $member->Update();
+        $member->organization_id = (int)$request->iglesia_id;
+        $member->departamento_id = $request->departamento_id;
+        $member->municipio_id = $request->municipio_id;
+        $member->update();
         $group = $member->user_has_group->first();
         $group_id = $group->group_id;
      //  dd( $member->organization_id);

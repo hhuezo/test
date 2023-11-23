@@ -172,7 +172,11 @@ class WelcomeController extends Controller
         //  //$organizations = Organization::get();
         $iglesias = Iglesia::get();
         $newmiembro = Grupo::get();
-        return view('auth.register_member', compact('departamentos', 'newmiembro', 'iglesias'));
+        $grupos = Grupo::get();
+        $departamentos = Departamento::get();
+        $municipios = Municipio::get();
+        $generos = Gender::get();
+        return view('auth.register_member_leader', compact('departamentos', 'newmiembro', 'iglesias','departamentos','municipios','generos','grupos'));
         //return view('auth.register_member', compact('departamentos'));
 
     }
@@ -188,7 +192,9 @@ class WelcomeController extends Controller
         $iglesias = Iglesia::get();
         $grupos = Grupo::get();
         $generos = Gender::get();
-        return view('auth.register_member_leader', compact('generos','departamentos', 'grupos', 'iglesias'));
+        $departamentos = Departamento::get();
+        $municipios = Municipio::get();
+        return view('auth.register_member_leader', compact('generos','departamentos', 'grupos', 'iglesias','departamentos','municipios'));
         //return view('auth.register_member', compact('departamentos'));
 
     }
@@ -260,6 +266,8 @@ class WelcomeController extends Controller
         $member->address = $request->address;
         $member->about_me = $request->about_me;
         $member->organization_id = (int)$request->iglesia_id;
+        $member->departamento_id = $request->departamento_id;
+        $member->municipio_id = $request->municipio_id;
         $member->status = 1;
         $member->users_id = $user->id;
         $member->state_id =   $deptos->id;
