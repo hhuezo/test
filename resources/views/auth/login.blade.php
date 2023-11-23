@@ -159,57 +159,23 @@
                             O {{-- Or continue with --}}
                         </div>
                     </div>
-                    {{-- <div class="max-w-[242px] mx-auto mt-8 w-full">
-
-                        <!-- BEGIN: Social Log in Area -->
-                        <ul class="flex">
-                            <li class="flex-1">
-                                <a href="#"
-                                    class="inline-flex h-10 w-10 bg-[#1C9CEB] text-white text-2xl flex-col items-center justify-center rounded-full">
-                                    <img src="assets/images/icon/tw.svg" alt="">
-                                </a>
-                            </li>
-                            <li class="flex-1">
-                                <a href="#"
-                                    class="inline-flex h-10 w-10 bg-[#395599] text-white text-2xl flex-col items-center justify-center rounded-full">
-                                    <img src="assets/images/icon/fb.svg" alt="">
-                                </a>
-                            </li>
-                            <li class="flex-1">
-                                <a href="#"
-                                    class="inline-flex h-10 w-10 bg-[#0A63BC] text-white text-2xl flex-col items-center justify-center rounded-full">
-                                    <img src="assets/images/icon/in.svg" alt="">
-                                </a>
-                            </li>
-                            <li class="flex-1">
-                                <a href="#"
-                                    class="inline-flex h-10 w-10 bg-[#EA4335] text-white text-2xl flex-col items-center justify-center rounded-full">
-                                    <img src="assets/images/icon/gp.svg" alt="">
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- END: Social Log In Area -->
-                    </div>  <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> --}}
+                 
                     <div
                         class="mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm text-center">
-                        {{-- Already registered? --}}
-                        {{-- <a href="signup-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
-                            <a class="nav-link" href="{{ url('register_member') }}"> Registro miembro</a> <a class="nav-link" onclick="participante_link()"> Registro miembro</a>--}}
-                                                <a class="nav-link" href="{{ url('register_member_leader') }}"> Registro miembro</a>
+
+                                                <a class="nav-link" href="{{ url('register_member') }}"> Registro Participante</a>
                     </div>
 
                     <div
                         class="mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm text-center">
                         {{-- Already registered? --}}
 
-                        <a class="nav-link" href="{{ url('/registrar') }}"> Registro cohort</a>
+                        <a class="nav-link" href="{{ url('/registrar') }}"> Registro Iglesia</a>
 
                     </div>
                 </div>
             </div>
-            {{-- <div class="auth-footer3 text-white py-5 px-5 text-xl w-full">
-                Unlock your Project performance
-            </div> --}}
+          
         </div>
     </div>
     <!-- Core Js -->

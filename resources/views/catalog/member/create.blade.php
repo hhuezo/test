@@ -44,31 +44,6 @@
                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
 
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">Iglesia</label>
-                                                <select id="iglesia_id" name="iglesia_id" class="form-control">
-                                                    @foreach ($iglesia as $obj)
-                                                    <option value="{{ $obj->id }}">{{ $obj->name }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-
-
-
-                                            </div>
-
-                                            <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">Grupos</label>
-                                                <select name="grupo_id" id="grupo_id" class="form-control">
-                                                    @foreach ($grupos as $obj)
-                                                    <option value="{{ $obj->id }}">{{ $obj->nombre }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-
-
-                                            <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Nombre </label>
                                                 <input type="text" name="name" onblur="this.value = this.value.toUpperCase()" required class="form-control" value="{{ old('name') }}" autofocus="true">
                                             </div>
@@ -86,16 +61,48 @@
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Genero</label>
                                                 <select name="genero" class="form-control">
+                                                    <option value="">Seleccione ...</option>
                                                     @foreach ($genero as $obj)
                                                     <option value="{{ $obj->id }}">{{ $obj->description }}
                                                     </option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="input-area relative">
+                                                <label for="largeInput" class="form-label">Iglesia</label>
+                                                <select id="iglesia_id" name="iglesia_id" class="form-control" required>
+                                                    <option value="">Seleccione ...</option>
+                                                    @foreach ($iglesia as $obj)
+                                                    <option value="{{ $obj->id }}">{{ $obj->name }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+
+
+
+                                            </div>
+
+                                            <div class="input-area relative">
+                                                <label for="largeInput" class="form-label">Grupos</label>
+                                                <select name="grupo_id" id="grupo_id" class="form-control" required>
+                                                    <option value="">Seleccione ...</option>
+                                                    @foreach ($grupos as $obj)
+                                                    <option value="{{ $obj->id }}">{{ $obj->nombre }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Email</label>
                                                 <input type="email" name="email" required class="form-control" value="{{ old('email') }}">
+                                            </div>
+
+                                            <div class="input-area relative">
+                                                <label for="largeInput" class="form-label">Número documento</label>
+                                                <input type="text" name="document_number" id="document_number" data-inputmask="'mask': ['99999999-9']" class="form-control" value="{{ old('document_number') }}">
                                             </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Contraseña</label>
@@ -108,15 +115,35 @@
 
 
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">Número documento</label>
-                                                <input type="text" name="document_number" id="document_number" data-inputmask="'mask': ['99999999-9']" class="form-control" value="{{ old('document_number') }}">
-                                            </div>
-                                            <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Teléfono</label>
                                                 <input type="text" name="phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']" value="{{ old('phone_number') }}">
                                             </div>
                                             <div class="input-area relative">
-                                               &nbsp;
+                                                &nbsp;
+                                            </div>
+
+                                            <div class="input-area relative">
+                                                <label for="largeInput" class="form-label">Departamento</label>
+                                                <select id="departamento_id" name="departamento_id" class="form-control" required>
+                                                    @foreach ($departamentos as $obj)
+                                                    <option value="{{ $obj->id }}">
+                                                        {{ $obj->nombre }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+
+                                            </div>
+
+                                            <div class="input-area relative">
+                                                <label for="largeInput" class="form-label">Municipio</label>
+                                                <select id="municipio_id" name="municipio_id" class="form-control" required>
+                                                    @foreach ($municipios as $obj)
+                                                    <option value="{{ $obj->id }}">
+                                                        {{ $obj->nombre }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+
                                             </div>
 
                                             <div class="input-area relative">
@@ -130,6 +157,7 @@
 
 
                                         </div>
+                                        <br>
                                         <div style="text-align: right;">
                                             <button type="submit" class="btn inline-flex justify-center btn-dark">Aceptar</button>
                                         </div>
@@ -155,8 +183,27 @@
 <script type="text/javascript">
     $(document).ready(function() {
         //combo para Departamento
+        //combo para Departamento
+        //$("#departamento_id").change();
+        $("#departamento_id").change(function() {
+            //alert('holi');
+            // var para la Departamento
+            var Departamento = $(this).val();
 
-   
+            $.get("{{ url('get_municipio/') }}" + '/' + Departamento, function(data) {
+
+                console.log(data);
+                var _select = ''
+                for (var i = 0; i < data.length; i++)
+                    _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
+                    '</option>';
+
+                $("#municipio_id").html(_select);
+
+            });
+
+        });
+
 
     });
 
@@ -176,7 +223,7 @@
         } else {
             $("#document_number").prop("required", false);
         }
-    
+
 
         $.get('/get_grupo/' + fechaNacimiento, function(data) {
             // Manejar la respuesta aquí
