@@ -189,7 +189,8 @@ class IglesiaController extends Controller
 
         $questionArray = $wizzaranswer->pluck('question_id')->toArray();
 
-        $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->get();
+        $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->where('active','=',1)->get();
+        //dd($wizzarquestion);
 
 
         $grupo_iglesias =  $iglesia->iglesia_grupo;
@@ -511,24 +512,24 @@ class IglesiaController extends Controller
         $conteo_miembros = DB::select($sql, array($iglesia->id));
 
         $sql2 = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
-from iglesia i
-join group_per_chuch_plan gpc
-on gpc.iglesia_id = i.id
-join grupo g on
-g.id = gpc.group_id
-join member p on
-p.organization_id=i.id
-join user_has_group q on
-p.id=q.member_id
-and q.group_per_church_id=gpc.id
-where i.id=?";
+            from iglesia i
+            join group_per_chuch_plan gpc
+            on gpc.iglesia_id = i.id
+            join grupo g on
+            g.id = gpc.group_id
+            join member p on
+            p.organization_id=i.id
+            join user_has_group q on
+            p.id=q.member_id
+            and q.group_per_church_id=gpc.id
+            where i.id=?";
 
         $miembros_iglesia = DB::select($sql2, array($iglesia->id));
         // dd($iglesiagp,$iglesia_grupo);
 
         $sql3 = "select a.id iglesia_grupo,a.iglesia_id,a.group_id No_grupo,b.nombre nombre_grupo FROM urban_stategies.group_per_chuch_plan a,urban_stategies.grupo b
-where a.group_id=b.id
-and a.iglesia_id=?";
+            where a.group_id=b.id
+            and a.iglesia_id=?";
 
         $grupos_iglesia = DB::select($sql3, array($iglesia->id));
 
@@ -633,6 +634,8 @@ and a.iglesia_id=?";
             'password.required' => 'La contraseña es requerida',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres',
             'password.confirmed' => 'Las contraseñas ingresadas no coinsiden',
+            'pastor_name.required' => 'El nombre del pastor es requerido',
+            'pastor_phone_number' => 'El fomato de telefono de contacto 2 no es válido',
         ];
 
         $request->validate([
@@ -640,14 +643,13 @@ and a.iglesia_id=?";
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
             'address' => 'required',
+            'pastor_name' => 'required',
+            'pastor_phone_number' => 'regex:/^\d{4}-\d{4}$/',
 
         ], $messages);
 
 
         $iglesia = Iglesia::findOrFail($request->iglesia_id);
-
-
-
 
         $sede = DB::table('sede as s')
             ->join('cohorte as c', 'c.id', '=', 's.cohorte_id')
@@ -698,7 +700,10 @@ and a.iglesia_id=?";
         $iglesia->website = $request->website;
         $iglesia->address = $request->address;
         $iglesia->status_id = 1;
-        $iglesia->save();
+        $iglesia->contact_name = $request->name;
+        $iglesia->pastor_phone_number = $request->pastor_phone_number;
+        $iglesia->pastor_name = $request->pastor_name;
+        $iglesia->save();   //actualizar iglesia
 
 
         $usuario = new User();

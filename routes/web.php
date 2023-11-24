@@ -82,7 +82,7 @@ Route::post('/iglesia/registro_respuesta', [IglesiaController::class, 'registro_
 
 
 
-
+Route::post('/upload', [WelcomeController::class, 'store_file'])->name('dropzone.store');
 
 
 Route::post('/iglesia/registro_iglesia', [IglesiaController::class, 'registro_iglesia']);
