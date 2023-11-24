@@ -34,8 +34,8 @@ class IglesiaController extends Controller
     public function index()
     {
         $iglesia = Iglesia::get();
-        $estatuorg= OrganizationStatus::get();
-        return view('catalog.iglesia.index', compact('iglesia','estatuorg'));
+        $estatuorg = OrganizationStatus::get();
+        return view('catalog.iglesia.index', compact('iglesia', 'estatuorg'));
     }
 
     /**
@@ -50,7 +50,7 @@ class IglesiaController extends Controller
         $municipio = Municipio::get();
         $sede = Sede::get();
         $estatuorg = OrganizationStatus::get();
-        return view('catalog.iglesia.create', compact('sede', 'depto', 'municipio', 'sede', 'estatuorg', ));
+        return view('catalog.iglesia.create', compact('sede', 'depto', 'municipio', 'sede', 'estatuorg',));
     }
 
     /**
@@ -89,7 +89,7 @@ class IglesiaController extends Controller
         $organizations->website = $request->website;
         $organizations->personeria_juridica = $request->personeria_juridica;
         $organizations->organization_type = $request->organization_type;
-        $organizations->status = 1;
+        $organizations->status_id = 1;
         $organizations->sede_id = $request->sede_id;
         $archivo = $request->file('logo_name');
         $filename = $archivo->getClientOriginalName();
@@ -114,7 +114,7 @@ class IglesiaController extends Controller
 
 
 
-       $userfaclitator=User::get();
+        $userfaclitator = User::get();
 
 
         $iglesia = Iglesia::findOrFail($id);
@@ -134,10 +134,10 @@ class IglesiaController extends Controller
         $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->get();
 
 
-        $grupo_iglesias=  $iglesia->iglesia_grupo;
+        $grupo_iglesias =  $iglesia->iglesia_grupo;
 
         //$grupos= Grupo::whereNotIn('id', $iglesiaArray)->get();
-  //dd(   $grupo_iglesias);
+        //dd(   $grupo_iglesias);
 
         $grupoArray =  $grupo_iglesias->pluck('id')->toArray();
 
@@ -145,7 +145,7 @@ class IglesiaController extends Controller
         $grupos_asignados = Grupo::where('id', $grupoArray)->get();
 
 
-       // return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias','grupos_noasignados'));
+        // return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias','grupos_noasignados'));
 
         //   dd($wizzarquestion);
         //where('id' ,'=', $wizzaranswer->question_id)->get();
@@ -154,14 +154,17 @@ class IglesiaController extends Controller
 
 
 
+
+
         //generando QR
-        QrCode::format('png')->size(200)->generate( (string)$iglesia->id, public_path('img/qrcode.png'));
+        // QrCode::format('png')->size(200)->generate( (string)$iglesia->id, public_path('img/qrcode.png'));
 
 
 
-        $pdf = \PDF::loadView('catalog.iglesia.show',compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'))->setWarnings(false)->setPaper('letter');
+
+
+        $pdf = \PDF::loadView('catalog.iglesia.show', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion', 'deptos',  'grupo_iglesias', 'grupos_asignados', 'grupos_noasignados'))->setWarnings(false)->setPaper('letter');
         return $pdf->stream('Info.pdf');
-
     }
 
     /**
@@ -189,10 +192,10 @@ class IglesiaController extends Controller
         $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->get();
 
 
-        $grupo_iglesias=  $iglesia->iglesia_grupo;
+        $grupo_iglesias =  $iglesia->iglesia_grupo;
 
         //$grupos= Grupo::whereNotIn('id', $iglesiaArray)->get();
-  // dd(   $grupo_iglesias);
+        // dd(   $grupo_iglesias);
 
         $grupoArray =  $grupo_iglesias->pluck('id')->toArray();
 
@@ -200,11 +203,11 @@ class IglesiaController extends Controller
         $grupos_asignados = Grupo::where('id', $grupoArray)->get();
 
 
-       // return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias','grupos_noasignados'));
+        // return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias','grupos_noasignados'));
 
         //   dd($wizzarquestion);
         //where('id' ,'=', $wizzaranswer->question_id)->get();
-        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg',  'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'));
+        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg',  'wizzaranswer', 'wizzarquestion', 'deptos',  'grupo_iglesias', 'grupos_asignados', 'grupos_noasignados'));
     }
 
     public function update(Request $request, $id)
@@ -232,14 +235,14 @@ class IglesiaController extends Controller
         $organizations->website = $request->website;
         $organizations->personeria_juridica = $request->personeria_juridica;
         $organizations->organization_type = $request->organization_type;
-        $organizations->status = $request->status;
+        $organizations->status_id = $request->status_id;
         $organizations->sede_id = $request->sede_id;
         $archivo = $request->file('logo_name');
         $filename = $archivo->getClientOriginalName();
         $path = $filename;
         $destinationPath = public_path('/images');
         $archivo->move($destinationPath, $path);
-        $organizations->logo_url ="./images";/// $destinationPath;
+        $organizations->logo_url = "./images"; /// $destinationPath;
         $organizations->logo = $filename;
         $organizations->update();
         //  dd($organizations->id);
@@ -277,7 +280,7 @@ class IglesiaController extends Controller
         $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $request->iglesia_id)->where('question_id', '=', $request->question_id)->first();
         $wizzarquestion = WizardQuestions::where('id', '=',  $request->question_id)->first();
         $wizzaranswer->delete();
-       // $wizzarquestion->delete();
+        // $wizzarquestion->delete();
         alert()->error('La  Respuesta han sido eliminadas correctamente');
         return back();
     }
@@ -287,8 +290,8 @@ class IglesiaController extends Controller
     public function attach_grupos(Request $request)
     {
 
-     // dd($request->group_id,$request->iglesia_id);
-        $grupoiglesia =iglesia::findOrFail($request->iglesia_id);
+        // dd($request->group_id,$request->iglesia_id);
+        $grupoiglesia = iglesia::findOrFail($request->iglesia_id);
         $grupoiglesia->iglesia_grupo()->attach($request->group_id);
         alert()->success('El registro ha sido agregado correctamente');
         return back();
@@ -299,20 +302,19 @@ class IglesiaController extends Controller
     public function dettach_grupos(Request $request)
     {
 
-        $grupoiglesia =iglesia::findOrFail($request->iglesia_id);
+        $grupoiglesia = iglesia::findOrFail($request->iglesia_id);
         $grupoiglesia->iglesiagrupo()->detach($request->group_id);
         alert()->error('se han sido eliminadas correctamente');
         return back();
-
     }
 
 
     public function modificar_estado(Request $request)
     {
-       // dd($request->status_id,$request->iglesia_id);
+        // dd($request->status_id,$request->iglesia_id);
 
-        $iglesia =iglesia::findOrFail($request->iglesia_id);
-        $iglesia->status=$request->status_id;
+        $iglesia = iglesia::findOrFail($request->iglesia_id);
+        $iglesia->status_id = $request->status_id;
         $iglesia->update();
         alert()->success('El Estado ha sido Modificado correctamente');
         return back();
@@ -466,6 +468,92 @@ class IglesiaController extends Controller
         return back();
     }
 
+
+
+    public function datos_iglesia(Request $request)
+    {
+        $i = 1;
+        $user   = User::findOrFail(auth()->user()->id);
+        $iglesia = $user->iglesia->first();
+        $departamentos = Departamento::get();
+        $iglesia_grupo = $iglesia->iglesia_grupo;
+        // $conteomiembros = DB::table('iglesia as i')
+        // ->join('group_per_chuch_plan as gpc', 'gpc.iglesia_id', '=', 'i.id')
+        // ->join('grupo as g', 'g.id', '=', 'gpc.group_id')
+        // ->join('member as p', function ($join) {
+        //     $join->on('p.organization_id', '=', 'i.id')
+        //         ->on('p.id', '=', 'user_has_group.member_id');
+        // })
+        // ->join('user_has_group as q', function ($join) {
+        //     $join->on('p.id', '=', 'q.member_id')
+        //         ->on('q.group_per_church_id', '=', 'gpc.id');
+        // })
+        // ->where('i.id', 28)
+        // ->groupBy('i.id', 'i.name', 'g.id', 'g.nombre')
+        // ->select('i.id as iglesia_id', 'i.name as nombre_iglesia', 'g.id as No_grupo', 'g.nombre as nombre_grupo', DB::raw('count(*) as numero_participantes'))
+        // ->get();
+        ///dd($iglesia->id);
+
+        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo , count(*) as numero_participantes
+        from iglesia i
+        join group_per_chuch_plan gpc
+        on gpc.iglesia_id = i.id
+        join grupo g on
+        g.id = gpc.group_id
+        join member p on
+        p.organization_id=i.id
+        join user_has_group q on
+        p.id=q.member_id
+        and q.group_per_church_id=gpc.id
+        where i.id=?
+        group by i.id , i.name  , g.id , g.nombre ";
+
+        $conteo_miembros = DB::select($sql, array($iglesia->id));
+
+        $sql2 = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
+from iglesia i
+join group_per_chuch_plan gpc
+on gpc.iglesia_id = i.id
+join grupo g on
+g.id = gpc.group_id
+join member p on
+p.organization_id=i.id
+join user_has_group q on
+p.id=q.member_id
+and q.group_per_church_id=gpc.id
+where i.id=?";
+
+        $miembros_iglesia = DB::select($sql2, array($iglesia->id));
+        // dd($iglesiagp,$iglesia_grupo);
+
+        $sql3 = "select a.id iglesia_grupo,a.iglesia_id,a.group_id No_grupo,b.nombre nombre_grupo FROM urban_stategies.group_per_chuch_plan a,urban_stategies.grupo b
+where a.group_id=b.id
+and a.iglesia_id=?";
+
+        $grupos_iglesia = DB::select($sql3, array($iglesia->id));
+
+
+
+
+
+        $url =  $request->root() . "/registro_participantes/" . $iglesia->id;
+
+
+        QrCode::format('png')->size(200)->generate($url, public_path('img/qrcodeiglesia.png'));
+
+        QrCode::format('png')->size(200)->generate($url . '1', public_path('img/qrcodeiglesiagrupo1.png'));
+
+
+        QrCode::format('png')->size(200)->generate($url . '2', public_path('img/qrcodeiglesiagrupo2.png'));
+
+        QrCode::format('png')->size(200)->generate($url . '3', public_path('img/qrcodeiglesiagrupo3.png'));
+
+        QrCode::format('png')->size(200)->generate($url . '4', public_path('img/qrcodeiglesiagrupo4.png'));
+
+
+        return view('catalog.iglesia.datos_iglesia', compact('departamentos',  'iglesia', 'conteo_miembros', 'miembros_iglesia', 'grupos_iglesia'));
+        //return view('auth.register_member', compact('departamentos'));
+    }
     public function copiarImagen(Request $request)
     {
         if ($request->hasFile('image')) {
@@ -592,7 +680,7 @@ class IglesiaController extends Controller
             $sede_new->cohorte_id = $cohort_id;
             $sede_new->save();
 
-           $sede_id = $sede_new->id;
+            $sede_id = $sede_new->id;
         }
 
 
@@ -602,14 +690,14 @@ class IglesiaController extends Controller
             $id_file = uniqid();
             $file->move(public_path("images/"), $id_file . ' ' . $file->getClientOriginalName());
             $iglesia->logo = $id_file . ' ' . $file->getClientOriginalName();
-            $iglesia->logo_url= "./images/";
-                }
+            $iglesia->logo_url = "./images/";
+        }
 
         $iglesia->sede_id = $sede_id;
         $iglesia->facebook = $request->facebook;
         $iglesia->website = $request->website;
         $iglesia->address = $request->address;
-        $iglesia->status =1;
+        $iglesia->status_id = 1;
         $iglesia->save();
 
 
@@ -622,38 +710,35 @@ class IglesiaController extends Controller
 
         $grupo =  Grupo::get();
 
-        foreach($grupo as $grupo){
+        foreach ($grupo as $grupo) {
 
-        $iglesia_asig_grupo= new GroupPerchuchPlan();
-        $iglesia_asig_grupo->iglesia_id=$iglesia->id;
-        $iglesia_asig_grupo->group_id=$grupo->id;
-        $iglesia_asig_grupo->save();
-         };
+            $iglesia_asig_grupo = new GroupPerchuchPlan();
+            $iglesia_asig_grupo->iglesia_id = $iglesia->id;
+            $iglesia_asig_grupo->group_id = $grupo->id;
+            $iglesia_asig_grupo->save();
+        };
 
         $iglesia->users()->attach($usuario->id);
 
 
-//agregando las respuestas de las preguntas del enrolamiento de la iglesia
+        //agregando las respuestas de las preguntas del enrolamiento de la iglesia
 
 
         /*agregando el grupo desde el enrrolamiento */
-    //    $grupis=new iglesia_has_grupo ();
+        //    $grupis=new iglesia_has_grupo ();
 
-     //       $grupis->save();
+        //       $grupis->save();
 
 
 
-//fin de  las respuestas de las preguntas del enrolamiento de la iglesia
+        //fin de  las respuestas de las preguntas del enrolamiento de la iglesia
 
         // Iniciar sesión con el nuevo usuario
-      //  Auth::login($usuario);
+        //  Auth::login($usuario);
 
         // Redirigir a la página de inicio o a donde desees después del registro e inicio de sesión
-       // return redirect('/home');
+        // return redirect('/home');
 
-       return view('confirma');
-
-
-
+        return view('confirma');
     }
 }

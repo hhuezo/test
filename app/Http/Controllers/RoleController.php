@@ -73,7 +73,15 @@ class RoleController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $time = Carbon::now('America/El_Salvador');
+        $rol = role::findorFail($id);
+        $rol->name = $request->name;
+      //  $rol->guard_name ='web';
+       // $rol->created_at= $time->toDateTimeString();
+        $rol->updated_at= $time->toDateTimeString();
+        $rol->update();
+        alert()->success('se ha sido Actualizado correctamente');
+        return back();
     }
 
     public function destroy($id)

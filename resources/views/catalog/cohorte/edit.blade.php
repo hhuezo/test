@@ -11,7 +11,7 @@
                         <div class="flex-1">
                             <div class="card-title text-slate-900 dark:text-white">Modificar Cohorte
 
-                                <a href="{{ url('catalog/cohorte') }}">
+                                <a href="{{ url('catalog/cohorte')}}">
                                     <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
@@ -45,13 +45,13 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{('nombre') }}Nombre Congregacion</label>
-                                                    <input type="text" name="nombre" required class="form-control"
+                                                    <input type="text" name="nombre" id="nombre" required class="form-control"
                                                         value="{{$cohorte->nombre }}" autofocus="true">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Region</label>
-                                                    <select name="region_id" class="form-control">
+                                                    <select name="region_id" id="region_id" class="form-control">
                                                         @foreach ($region as $obj)
                                                         @if ($obj->id == $cohorte->region_id)
                                                                 <option value="{{ $obj->id }}" selected>

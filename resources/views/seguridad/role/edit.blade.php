@@ -20,7 +20,11 @@
                         </a>
                     </header>
                     <div class="space-y-4">
-                        <form class="space-y-4">
+
+                        <form method="POST" action="{{ route('role.update',$role->id) }}"  enctype="multipart/form-data">
+                                @method('PUT')
+
+                            @csrf
                             <div class="input-area relative pl-28">
                                 <label for="largeInput" class="inline-inputLabel">Nombre</label>
                                 <input type="text" name="name" value="{{ $role->name }}" class="form-control">

@@ -8,9 +8,9 @@
         <div class="modal-dialog relative w-auto pointer-events-none">
             <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding
                           rounded-md outline-none text-current">
-              <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
+              <div class="relative bg-white rounded-lg shadow black:bg-slate-700">
                 <!-- Modal header -->
-                <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-black-500">
+                <div class="flex items-center justify-between p-5 border-b rounded-t black:border-slate-600 bg-black-500">
                   <h3 class="text-base font-medium text-white dark:text-white capitalize">
                     Eliminar Registro
                   </h3>
@@ -25,7 +25,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-4">
-                  <h6 class="text-base text-slate-900 dark:text-white leading-6">
+                  <h6 class="text-base text-slate-900 black:text-white leading-6">
                     Confirme si desea Eliminar el Registro
                   </h6>
 

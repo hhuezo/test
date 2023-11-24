@@ -10,7 +10,7 @@
                         <div class="flex-1">
                             <div class="card-title text-slate-900 dark:text-white">Participantes
 
-                                <a href="{{ url('datos_iglesia') }}">
+                                <a href="{{ url('catalog/iglesia/datos_iglesia') }}">
                                     <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>

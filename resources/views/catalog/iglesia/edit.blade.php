@@ -191,7 +191,7 @@
                                                     <label for="largeInput" class="form-label">Estatus</label>
                                                     <select name="Status" class="form-control">
                                                         @foreach ($estatuorg as $obj2)
-                                                            @if ($obj2->id == $iglesia->status)
+                                                            @if ($obj2->id == $iglesia->status_id)
                                                                 <option value="{{ $obj2->id }}" selected>
                                                                     {{ $obj2->description_es  }}
                                                                 @else
@@ -263,13 +263,13 @@
 
 
                                         <div class="input-area relative">
-                                           <button type="button" class="btn btn-dark btn-sm float-right" data-bs-toggle="modal"
-                                            data-bs-target="#modal-create-iglesia">
+                                          <button type="button" class="btn btn-black btn-sm float-right" data-bs-toggle="modal"
+                                            data-bs-target="#modal-create-iglesia"> Agregar Pregunta
                                                 <iconify-icon  icon="mdi:plus-box"
-                                                    style="color: #ede9e9;" width="20"></iconify-icon>
+                                                    style="color: #110f0f;" width="20"></iconify-icon>
                                             </button>
-                                            <table id="myTable" class="display" cellspacing="0" width="100%">
-                                                <thead>
+                                            <table id="myTable"  class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
+                                                <thead  class="bg-slate-200 dark:bg-slate-700">
                                                     <tr class="td-table">
                                                         <th style="text-align: center">Iglesia</th>
                                                         <th style="text-align: center">Idpregunta</th>
@@ -279,7 +279,7 @@
 
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
                                                     @foreach ($wizzaranswer as $obj)
                                                         <td align="center"> {{ $obj->iglesia_id }} </td>
                                                         <td align="center">{{ $obj->question_id }}</td>
@@ -305,7 +305,7 @@
                                                         <td align="center">
                                                             <iconify-icon data-bs-toggle="modal"
                                                                 data-bs-target="#modal-{{ $obj->id }}"
-                                                                icon="mdi:pencil-box" style="color: #1769aa;"
+                                                                icon="mdi:pencil" style="color: #1769aa;"
                                                                 width="40"></iconify-icon> &nbsp;&nbsp;
                                                             <iconify-icon data-bs-toggle="modal"
                                                                 data-bs-target="#modal-preg-{{ $obj->question_id }}"
@@ -368,14 +368,15 @@
                                         &nbsp;&nbsp;
 
                                         <div class="input-area relative">
-                                            <table id="myTable" class="display" cellspacing="0" width="100%">
-                                                <thead>
+                                            <table id="myTable"  class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
+                                                <thead  class="bg-slate-200 dark:bg-slate-700">
                                                     <tr class="td-table">
                                                         <th style="text-align: center">Id</th>
                                                         <th style="text-align: center">Nombre Grupo</th>
+                                                        <th style="text-align: center">Opciones</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody  class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
                                                     @foreach ($grupo_iglesias as $obj)
                                                         <td align="center"> {{ $obj->id }} </td>
                                                         <td align="center">{{ $obj->nombre }}</td>
@@ -391,10 +392,11 @@
                                                 </tbody>
                                             </table>
                                             &nbsp;
-                                            <div class="btn btn-dark btn-sm float-right">
-                                                <iconify-icon data-bs-toggle="modal"
+
+                                            <div class="btn btn-black btn-sm float-right">
+                                                Agregar Grupo <iconify-icon data-bs-toggle="modal"
                                                     data-bs-target="#modal-creategroup-{{ $iglesia->id }}"
-                                                    icon="mdi:plus-box" style="color: #ede9e9;"
+                                                    icon="mdi:plus-box" style="color: #0f0d0d;"
                                                     width="20"></iconify-icon>
                                             </div>
                                             @include('catalog.iglesia.modal_add_grupo')

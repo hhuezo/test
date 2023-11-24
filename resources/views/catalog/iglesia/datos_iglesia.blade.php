@@ -14,11 +14,11 @@
                             </h4>
                             <div class="card-title text-slate-900 dark:text-white">
 
-                                <button class="btn btn-dark btn-sm float-right">
-                                    <img src="img/qrcodeiglesia.png">
+                                <button class="btn btn-black btn-sm float-right">
+                                    <img src="{{asset('img/qrcodeiglesia.png')}}">
                                 </button>
-                                <button class="btn btn-dark btn-sm float-left">
-                                    <img src="{{ $iglesia->logo_url }}{{ $iglesia->logo }}" width="120" height="120">
+                                <button class="btn btn-black btn-sm float-left">
+                                    <img src="{{asset($iglesia->logo_url.$iglesia->logo)}}" width="120" height="120">
                                 </button>
 
                             </div>
@@ -38,7 +38,7 @@
                                                 <input type="hidden" name="iglesia_id" value="{{ $iglesia->id }}" required
                                                     class="form-control" autofocus="true" disabled>
                                             </div>
-<div></div>
+                                            <div></div>
                                             <div class="input-area relative">
                                                 <label for="largeInput"
                                                     class="form-label">{{ __('Nombre de la Iglesia') }}</label>
@@ -101,12 +101,12 @@
 
                                         </div> &nbsp;
                                         <div style="text-align: right;">
-                                        <a href="{{ url('catalog/member') }}/{{$iglesia->id }}">
-                                            <iconify-icon icon="mdi:person"
-                                                style="color: #1769aa;" width="40"></iconify-icon>
+                                            <a href="{{ url('catalog/member') }}/{{ $iglesia->id }}">
+                                                <iconify-icon icon="mdi:person" style="color: #1769aa;"
+                                                    width="40"></iconify-icon>
                                                 Crear Participantes
-                                        </a>
-                                       </div>
+                                            </a>
+                                        </div>
                                         &nbsp; &nbsp;
                                         <center>
 
@@ -131,17 +131,22 @@
                                                             <td align="center">{{ $obj->nombre_grupo }}</td>
 
                                                             <td align="center"> <a
-                                                                    href="{{ url('consulta_grupos') }}/{{ $obj->iglesia_grupo }}">
-                                                                    <iconify-icon icon="healthicons:eye-negative"
+                                                                    href="{{ url('catalog/grupo/consulta_grupos') }}/{{ $obj->iglesia_grupo }}">
+                                                                    <iconify-icon icon="healthicons:eye"
                                                                         style="color: #1769aa;"
                                                                         width="40"></iconify-icon>
                                                                 </a>
-                                                                <a href="{{url('reporte_grupos/'. $obj->iglesia_grupo )}}">
-                                                                    <iconify-icon icon="mdi:printer"
-                                                                        style="color: #1769aa;" width="40"></iconify-icon>
-                                                                </a>
+                                                                <a
+                                                                    href="{{ url('catalog/grupo/reporte_grupos/' . $obj->iglesia_grupo) }}">
+                                                                    <iconify-icon icon="mdi:printer" style="color: #1769aa;"
+                                                                        width="40"></iconify-icon>
+
+                                                                    </a> <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-viewqr-{{ $obj->No_grupo }}" icon="icons8:qr-code" style="color: #1769aa;" width="40"></iconify-icon>
+
+                                                            </a>
                                                             </td>
                                                         </tr>
+                                                         @include('catalog.iglesia.modal_viewqr')
                                                     @endforeach
 
                                                 </tbody>

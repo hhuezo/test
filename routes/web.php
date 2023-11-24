@@ -45,16 +45,17 @@ Route::get('/', function () {
 });*/
 
 Route::get('/', [WelcomeController::class, 'index']);
-Route::get('datos_iglesia', [WelcomeController::class, 'datos_iglesia']);
-Route::get('register_member_leader', [WelcomeController::class, 'register_member_leader']);
+Route::get('iglesia/datos_iglesia', [IglesiaController::class, 'datos_iglesia']);
+Route::get('register_member_leader', [MemberController::class, 'register_member_leader']);
 Route::post('attach_new_member',[WelcomeController::class,'attach_new_member']);
 
 
 
-Route::get('consulta_grupos/{id_grupo_iglesia}', [WelcomeController::class, 'consulta_grupos']);
-Route::get('reporte_grupos/{id_grupo_iglesia}', [WelcomeController::class, 'reporte_grupos']);
-Route::get('reasigna_grupos/{idpersona}', [WelcomeController::class, 'reasigna_grupos']);
-Route::post('update_group_member/{idpersona}', [WelcomeController::class, 'update_member_group']);
+Route::get('consulta_grupos/{id_grupo_iglesia}', [GrupoController::class, 'consulta_grupos']);
+
+Route::get('reporte_grupos/{id_grupo_iglesia}', [GrupoController::class, 'reporte_grupos']);
+Route::get('reasigna_grupos/{idpersona}', [GrupoController::class, 'reasigna_grupos']);
+Route::post('update_group_member/{idpersona}', [MemberController::class, 'update_member_group']);
 
 
 
@@ -113,12 +114,12 @@ Route::get('/register_edit/{id}',[IglesiaController::class, 'register_edit']);
 
 
 Route::get('/test', [HomeController::class, 'test'])->name('test');
-Route::get('/register_member', [WelcomeController::class, 'register_member'])->name('register_member');
+Route::get('/register_member', [MemberController::class, 'register_member'])->name('register_member');
 Route::post('/store_member', [WelcomeController::class, 'store_member'])->name('store_member');
 Route::get('/get_municipio/{id}', [WelcomeController::class, 'get_municipio'])->name('get_municipio');
 
 
-Route::get('/get_grupo/{fecha}', [WelcomeController::class, 'get_grupo'])->name('get_grupo');
+Route::get('/get_grupo/{fecha}', [GrupoController::class, 'get_grupo'])->name('get_grupo');
 
 Route::resource('seguridad/permission', PermissionController::class);
 Route::post('seguridad/permission/update_permission', [PermissionController::class, 'update_permission']);

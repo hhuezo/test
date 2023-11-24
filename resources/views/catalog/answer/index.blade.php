@@ -18,9 +18,9 @@
             <span class="  col-span-4 hidden"></span>
             <div class="inline-block min-w-full align-middle">
                 <div class="overflow-hidden " style=" margin-bottom:20px ">
-                    <table id="myTable" class="display" cellspacing="0" width="100%">
-                        <thead>
-                            <tr class="td-table">
+                    <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
+                        <thead class="bg-slate-200 dark:bg-slate-700">
+                            <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                 <th style="text-align: center">Id</th>
                                 <th>Respuesta</th>
                                 <th>Pregunta</th>
@@ -36,7 +36,7 @@
                                 <td>{{ $obj->questions->description }}</td>
                                 <td align="center">
                                     <a href="{{ url('catalog/answer') }}/{{ $obj->id }}/edit">
-                                        <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;" width="40"></iconify-icon>
+                                        <iconify-icon icon="mdi:pencil" style="color: #1769aa;" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;&nbsp;
                                     <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>

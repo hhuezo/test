@@ -11,10 +11,11 @@ use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
 use App\Models\catalog\MemberStatus;
 use App\Models\catalog\Municipio;
+use App\Models\catalog\UserHasGrupo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\DB;
 class MemberController extends Controller
 {
     /**
@@ -148,7 +149,7 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-       dd($id);
+
         $iglesia = Iglesia::findorfail($id);
         $member = Member::get();
 
@@ -167,6 +168,62 @@ class MemberController extends Controller
         return back();
     }
 
+    public function register_member_leader()
+    {
+        //  dd('aqui estoy');
+
+        $departamentos = Departamento::get();
+        //$municipios = Municipio::where('departamento_id', '=', 1)->get();
+        //  //$organizations = Organization::get();
+        $iglesias = Iglesia::get();
+        $grupos = Grupo::get();
+        $generos = Gender::get();
+        $departamentos = Departamento::get();
+        $municipios = Municipio::get();
+        return view('catalog.member.register_member_leader', compact('generos','departamentos', 'grupos', 'iglesias','departamentos','municipios'));
+        //return view('auth.register_member', compact('departamentos'));
+
+    }
+    public function update_member_group(Request $request, $id)
+    {
+
+        // dd($request->member_id);
+        $messages = [
+            'name_member.required' => 'ingresar nombre',
+        ];
+
+
+
+        $request->validate([
+
+            'name_member.required' => 'ingresar nombre miembro',
+
+        ], $messages);
+
+
+        $member =  Member::findOrFail($request->member_id);
+
+        $member->name_member = $request->name_member;
+        $member->lastname_member = $request->lastname_member;
+        // $member->birthdate = $request->birthdate;
+        $member->document_number_type = $request->document_number_type;
+        //  $member->document_type_id = $request->document_type_id;
+        $member->Update();
+        // $group = $member->user_has_group->first();
+        $group_id = $member->user_has_group->first(); //$group->group_id;
+
+        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id->group_id)->first();
+
+        $user_has_grupo = UserHasGrupo::where('member_id', '=', $member->id)->where('group_per_church_id', '=', $group_church->id)->first();
+
+        $group_churchnew = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=', $request->grupo_id)->first();
+
+        $user_has_grupo->group_per_church_id =  $group_churchnew->id;
+        $user_has_grupo->update();
+
+        alert()->success('El registro ha sido Modificado correctamente');
+        return back();
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -188,7 +245,7 @@ class MemberController extends Controller
         }else{
             $group_id = '';
         }
-        
+
 
         $grupos = Grupo::get();
         $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
