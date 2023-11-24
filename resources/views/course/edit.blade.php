@@ -131,8 +131,8 @@
                         </a>
                     </div>
                 </div>
-                
-                <!-- 
+
+                <!--
                 {{-- <div class="card-body p-6 embed-responsive embed-responsive-16by">
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/QjqsNMjpzFo"
                             title="YouTube video player" frameborder="0"
@@ -142,7 +142,7 @@
 
                 <div class="card-body px-6 pb-6" >
                 @livewire('section', ['id' => $course->id])
-                    
+
                 </div>
 
 
@@ -199,7 +199,7 @@
                                         </tr>
                                         @php($i++)
                                         @endforeach
-                                        
+
                                         <!-- {{-- <tr>
                                                 <td class="table-td">1</td>
                                                 <td class="table-td">Examen 1</td>
@@ -255,8 +255,8 @@
 
                     </div>
                     <!-- Modal footer -->
-                    <div class="flex items-center justify-end p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
-                        <button type="submit" class="btn inline-flex justify-center text-white bg-black-500">Aceptar</button>
+                    <div class="flex items-right justify-end p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
+                        <button type="submit" class="btn inline-flex justify-right text-white bg-black-500">Aceptar</button>
                     </div>
                 </form>
             </div>
