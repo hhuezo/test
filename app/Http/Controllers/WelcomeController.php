@@ -176,6 +176,14 @@ class WelcomeController extends Controller
         return view('map', compact('dep'));
     }
 
+    public function store_file(Request $request)
+    {
+        $image = $request->file('file_document');
+        $imageName = time() . rand(1, 100) . '.' . $image->getClientOriginalName();
+        $image->move(public_path('images'), $imageName);
+        return response()->json(['success' => $imageName]);
+    }
+
     public function get_dep($id)
     {
         $dep = Departamento::where('abbrev', '=', $id)->first();

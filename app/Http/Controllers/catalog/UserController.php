@@ -21,9 +21,11 @@ class UserController extends Controller
     {
 
 
-        $members = Member::where('status_id','=',1)->get();
+        $members = Member:://where('status_id','=',1)->
+        get();
+        
         $usuarios =  Users::get();
-
+//dd($members, $usuarios);
 
         return view('catalog.iglesiauser.index', compact('usuarios','members'));
 
