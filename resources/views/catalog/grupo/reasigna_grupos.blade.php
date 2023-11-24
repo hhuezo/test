@@ -35,8 +35,9 @@
                                             </div>
                                         @endif
 
-                                        <form method="POST" action="{{ url('grupo.update_group_member', $member->id) }}"
+                                        <form method="POST" action="{{ url('update_group_member', $member->id) }}"
                                             class="space-y-4">
+
                                             @csrf
                                             <input type="hidden" name="member_id" id=member_id  required
                                             class="form-control"

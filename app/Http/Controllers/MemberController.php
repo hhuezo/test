@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\catalog\Departamento;
 use App\Models\catalog\Gender;
+use App\Models\catalog\GroupPerchuchPlan;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Municipio;
+use App\Models\catalog\UserHasGrupo;
 use App\Models\Member;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -76,7 +78,46 @@ class MemberController extends Controller
         return view('catalog.member.edit', compact('member','departamentos','municipios'));
     }
 
+    public function update_member_group(Request $request, $id)
+    {
 
+        // dd($request->member_id);
+        $messages = [
+            'name_member.required' => 'ingresar nombre',
+        ];
+
+
+
+        $request->validate([
+
+            'name_member.required' => 'ingresar nombre miembro',
+
+        ], $messages);
+
+
+        $member =  Member::findOrFail($request->member_id);
+
+        $member->name_member = $request->name_member;
+        $member->lastname_member = $request->lastname_member;
+        // $member->birthdate = $request->birthdate;
+        $member->document_number_type = $request->document_number_type;
+        //  $member->document_type_id = $request->document_type_id;
+        $member->Update();
+        // $group = $member->user_has_group->first();
+        $group_id = $member->user_has_group->first(); //$group->group_id;
+
+        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id->group_id)->first();
+
+        $user_has_grupo = UserHasGrupo::where('member_id', '=', $member->id)->where('group_per_church_id', '=', $group_church->id)->first();
+
+        $group_churchnew = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=', $request->grupo_id)->first();
+
+        $user_has_grupo->group_per_church_id =  $group_churchnew->id;
+        $user_has_grupo->update();
+
+        alert()->success('El registro ha sido Modificado correctamente');
+        return back();
+    }
     public function update(Request $request, $id)
     {
 
