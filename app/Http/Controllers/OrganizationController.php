@@ -10,11 +10,11 @@ class OrganizationController extends Controller
     public function index()
     {
         $organizations = Organization::with('user')->where('status','=',1)->get();
-        
+
         foreach($organizations as $organization)
         {
             $user = $organization->user->first();
-            $organization->user_name = $user->name;
+            $organization->user_name->name = $user->name;
         }
         return view('organization.index', compact('organizations'));
     }
