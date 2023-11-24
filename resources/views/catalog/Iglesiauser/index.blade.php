@@ -28,11 +28,12 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
+                                @if ($usuarios->count() > 0)
+                                @foreach ($usuarios as $obj)
+                                @foreach ($members as $obj2)
+                                @if ($obj->id==$obj2->users_id)
                                 <tr>
-                                    @if ($usuarios->count() > 0)
-                                    @foreach ($usuarios as $obj)
-                                    @foreach ($members as $obj2)
-                                    @if ($obj->id==$obj2->users_id)
+
                                     <td align="center">{{ $obj->id }}</td>
                                     <td align="center">{{ $obj->email }}</td>
                                     <td align="center">{{ $obj->name }}</td>
@@ -44,13 +45,13 @@
                                         &nbsp;&nbsp;
                                         <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
                                     </td>
-                                    @endif
 
-                                    @endforeach
-                                    @endforeach
-                                    @endif
                                 </tr>
+                                @endif
 
+                                @endforeach
+                                @endforeach
+                                @endif
 
                             </tbody>
                         </table>

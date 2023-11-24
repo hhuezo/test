@@ -1,7 +1,43 @@
 @extends ('menu')
 @section('contenido')
 @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
+<style>
+    .lbl-switch {
+        display: inline-block;
+        width: 55px;
+        height: 30px;
+        background: #aaa;
+        border-radius: 100px;
+        position: relative;
+        cursor: pointer;
+    }
 
+    #btn-switch:checked~.lbl-switch {
+        background: #61a0ff;
+
+    }
+
+    .lbl-switch:after {
+        position: absolute;
+        content: '';
+        width: 22px;
+        height: 22px;
+        background: #fff;
+        border-radius: 100px;
+        top: 4px;
+        left: 5px;
+        transition: 0.3s;
+    }
+
+    #btn-switch:checked~.lbl-switch:after {
+        left: 28px;
+
+    }
+
+    #btn-switch {
+        display: none;
+    }
+</style>
 <div class="grid grid-cols-12 gap-5 mb-5">
 
     <div class="2xl:col-span-12 lg:col-span-12 col-span-12">
@@ -97,7 +133,7 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Email</label>
-                                                <input type="email" name="email" required class="form-control" value="{{ old('email') }}">
+                                                <input type="email" name="email"  class="form-control" value="{{ old('email') }}">
                                             </div>
 
                                             <div class="input-area relative">
@@ -119,7 +155,11 @@
                                                 <input type="text" name="phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']" value="{{ old('phone_number') }}">
                                             </div>
                                             <div class="input-area relative">
-                                                &nbsp;
+                                            <label for="largeInput" class="form-label">¿Es Pastor? </label>
+                                                <div class="boton">
+                                                    <input type="checkbox" id="btn-switch" name="is_pastor">
+                                                    <label for="btn-switch" class="lbl-switch"></label>
+                                                </div>
                                             </div>
 
                                             <div class="input-area relative">
