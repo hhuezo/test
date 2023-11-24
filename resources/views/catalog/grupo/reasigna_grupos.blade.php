@@ -10,7 +10,7 @@
                         <div class="flex-1">
                             <div class="card-title text-slate-900 dark:text-white">Participantes
 
-                                <a href="{{ url('catalog/iglesia/datos_iglesia') }}">
+                                <a href="{{ url('iglesia/datos_iglesia') }}">
                                     <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
@@ -35,7 +35,7 @@
                                             </div>
                                         @endif
 
-                                        <form method="POST" action="{{ url('update_group_member', $member->id) }}"
+                                        <form method="POST" action="{{ url('grupo.update_group_member', $member->id) }}"
                                             class="space-y-4">
                                             @csrf
                                             <input type="hidden" name="member_id" id=member_id  required

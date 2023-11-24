@@ -131,13 +131,13 @@
                                                             <td align="center">{{ $obj->nombre_grupo }}</td>
 
                                                             <td align="center"> <a
-                                                                    href="{{ url('catalog/grupo/consulta_grupos') }}/{{ $obj->iglesia_grupo }}">
+                                                                    href="{{ url('consulta_grupos') }}/{{ $obj->iglesia_grupo }}">
                                                                     <iconify-icon icon="healthicons:eye"
                                                                         style="color: #1769aa;"
                                                                         width="40"></iconify-icon>
                                                                 </a>
                                                                 <a
-                                                                    href="{{ url('catalog/grupo/reporte_grupos/' . $obj->iglesia_grupo) }}">
+                                                                    href="{{ url('reporte_grupos/' . $obj->iglesia_grupo) }}">
                                                                     <iconify-icon icon="mdi:printer" style="color: #1769aa;"
                                                                         width="40"></iconify-icon>
 
