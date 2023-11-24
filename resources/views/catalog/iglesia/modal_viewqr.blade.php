@@ -28,16 +28,20 @@
                     CODIGO QR
                </h6>
                @if(  $obj->No_grupo ==1 )
-                <img src="img/qrcodeiglesiagrupo1.png">
+               <img src="{{asset('img/qrcodeiglesiagrupo1.png')}}">
+
                 @endif
                @if(  $obj->No_grupo==2 )
-                <img src="img/qrcodeiglesiagrupo2.png">
+               <img src="{{asset('img/qrcodeiglesiagrupo2.png')}}">
+
                 @endif
                @if( $obj->No_grupo==3 )
-                <img src="img/qrcodeiglesiagrupo3.png">
+               <img src="{{asset('img/qrcodeiglesiagrupo3.png')}}">
+
                 @endif
                @if( $obj->No_grupo==4 )
-                <img src="img/qrcodeiglesiagrupo4.png">
+               <img src="{{asset('img/qrcodeiglesiagrupo4.png')}}">
+
                 @endif
 
              </div>

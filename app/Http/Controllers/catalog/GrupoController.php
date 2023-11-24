@@ -142,7 +142,7 @@ class GrupoController extends Controller
         $iglesia = iglesia::findOrFail($member->organization_id);
         $grupos = Grupo::get();
 
-        return view('auth.reasigna_grupos', compact('member', 'departamentos', 'iglesia', 'member_status', 'group_church', 'grupos', 'group_id'));
+        return view('catalog.grupo.reasigna_grupos', compact('member', 'departamentos', 'iglesia', 'member_status', 'group_church', 'grupos', 'group_id'));
     }
 
     public function get_grupo($fecha)
@@ -214,7 +214,7 @@ class GrupoController extends Controller
 
 
 
-           $pdf = \Pdf::loadView('auth.reporte_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
+           $pdf = \Pdf::loadView('catalog.grupo.reporte_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
            return $pdf->stream('Info.pdf');
        }
 
@@ -262,7 +262,7 @@ class GrupoController extends Controller
 
 
 
-           return view('auth.consulta_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
+           return view('catalog.grupo.consulta_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
            //return view('auth.register_member', compact('departamentos'));
 
        }
