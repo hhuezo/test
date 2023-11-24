@@ -22,7 +22,7 @@
                 </header>
 
                 <div class="space-y-4">
-                    <form method="POST" action="{{ url('seguridad.user.update', $usuarios->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('user.update', $usuarios->id) }}" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
                         <div class="input-area relative pl-28">
@@ -49,8 +49,8 @@
                     </form>
                 </div>
                 <div>
-                <button class="btn inline-flex justify-center btn-dark float-left" data-bs-toggle="modal" data-bs-target="#modal-add-{{ $usuarios->id }}">Agregar Rol &nbsp;
-                    <iconify-icon  icon="mdi:plus" style="color: white;" width="20"></iconify-icon></button>
+                    <button class="btn inline-flex justify-center btn-dark float-left" data-bs-toggle="modal" data-bs-target="#modal-add-{{ $usuarios->id }}">Agregar Rol &nbsp;
+                        <iconify-icon icon="mdi:plus" style="color: white;" width="20"></iconify-icon></button>
                 </div>
 
 
@@ -65,9 +65,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($roles as $obj)
                         <tr>
-
-                            @foreach ($roles as $obj)
                             <td align="center">{{ $obj->id }}</td>
                             <td align="center">{{ $obj->name }}</td>
                             <td align="center">

@@ -1,7 +1,43 @@
 @extends ('menu')
 @section('contenido')
 @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
+<style>
+    .lbl-switch {
+        display: inline-block;
+        width: 55px;
+        height: 30px;
+        background: #aaa;
+        border-radius: 100px;
+        position: relative;
+        cursor: pointer;
+    }
 
+    #btn-switch:checked~.lbl-switch {
+        background: #61a0ff;
+
+    }
+
+    .lbl-switch:after {
+        position: absolute;
+        content: '';
+        width: 22px;
+        height: 22px;
+        background: #fff;
+        border-radius: 100px;
+        top: 4px;
+        left: 5px;
+        transition: 0.3s;
+    }
+
+    #btn-switch:checked~.lbl-switch:after {
+        left: 28px;
+
+    }
+
+    #btn-switch {
+        display: none;
+    }
+</style>
 <div class="grid grid-cols-12 gap-5 mb-5">
 
     <div class="2xl:col-span-12 lg:col-span-12 col-span-12">
@@ -61,44 +97,52 @@
                                                     nacimiento</label>
                                                 <input type="date" id="birthdate" name="birthdate" required class="form-control" onblur="calcularEdad(this.value)" value="{{ old('birthdate') }}" autofocus="true">
                                             </div>
+                                            <div class="input-area relative">
+                                                <label for="largeInput" class="form-label">Genero</label>
+                                                <select name="genero" class="form-control">
+                                                    <option value="">Seleccione ...</option>
+                                                    @foreach ($generos as $obj)
+                                                    <option value="{{ $obj->id }}">{{ $obj->description }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Email</label>
                                                 <input type="email" name="email" required class="form-control" value="{{ old('email') }}">
                                             </div>
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">Password</label>
-                                                <input type="password" name="password" required class="form-control">
-                                            </div>
-                                            <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">ConfirmePassword</label>
-                                                <input type="password" name="password_confirmation" required class="form-control">
-                                            </div>
-
-
-                                            <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Número documento</label>
                                                 <input type="text" name="document_number" id="document_number" data-inputmask="'mask': ['99999999-9']" class="form-control" value="{{ old('document_number') }}">
                                             </div>
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">Telefono</label>
+                                                <label for="largeInput" class="form-label">Contraseña</label>
+                                                <input type="password" name="password" required class="form-control">
+                                            </div>
+                                            <div class="input-area relative">
+                                                <label for="largeInput" class="form-label">Confirme Contraseña</label>
+                                                <input type="password" name="password_confirmation" required class="form-control">
+                                            </div>
+
+                                            
+                                            <div class="input-area relative">
+                                                <label for="largeInput" class="form-label">Teléfono</label>
                                                 <input type="text" name="phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']" value="{{ old('phone_number') }}">
                                             </div>
-
-
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">Departamento</label>
-                                                <input type="text" name="state_id" required class="form-control" value="" disabled>
+                                            <label for="largeInput" class="form-label">¿Es Pastor? </label>
+                                                <div class="boton">
+                                                    <input type="checkbox" id="btn-switch" name="is_pastor">
+                                                    <label for="btn-switch" class="lbl-switch"></label>
+                                                </div>
                                             </div>
-
-
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Iglesia</label>
                                                 <input type="text" name="iglesia" required class="form-control" value=" {{ $iglesia->name }}" disabled>
-
-
                                             </div>
+                                           
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">grupo</label>
                                                 <select id="grupo_id" name="grupo_id" class="form-control" required>
