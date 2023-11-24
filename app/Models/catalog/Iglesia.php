@@ -34,7 +34,7 @@ class Iglesia extends Model
         'website',
         'personeria_juridica',
         'organization_type',
-        'status',
+        'status_id',
         'sede_id',
         'logo_url',
         'logo'
@@ -78,7 +78,7 @@ class Iglesia extends Model
     public function iglesia_estatus()
     {
         //return $this->belongsTo('use App\Models\catalog\Sede', 'id', 'sede_id');
-        return $this->belongsTo(OrganizationStatus::class, 'status', 'id');
+        return $this->belongsTo(OrganizationStatus::class, 'status_id', 'id');
     }
 
     public function churchanswer()

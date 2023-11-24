@@ -36,7 +36,7 @@
                                             </div>
                                         @endif
 
-                                        <form method="POST" action="{{ url('catalog/organization') }}" class="space-y-4">
+                                        <form method="POST" action="{{ url('catalog/organization_status') }}" class="space-y-4">
                                             @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
@@ -66,7 +66,7 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Fecha') }}</label>
-                                                    <input type="text" name="date_created"
+                                                    <input type="date" name="date_created"
                                                          required class="form-control"
                                                         value="{{ old('date_created') }}">
                                                 </div>

@@ -181,7 +181,7 @@
                                             </div>
                                             <!-- Modal footer -->
                                             <div class="flex items-center justify-end p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
-                                                <button data-bs-dismiss="modal" class="btn inline-flex justify-center text-white bg-black-500" type="submit">Accept</button>
+                                                <button data-bs-dismiss="modal" class="btn inline-flex justify-center text-white bg-black-500" type="submit">Aceptar</button>
                                             </div>
                                         </form>
                                     </div>

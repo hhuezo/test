@@ -13,8 +13,8 @@
                 <div class="inline-block min-w-full align-middle">
                     <div class="overflow-hidden " style=" margin-bottom:20px ">
 
-                        <table id="myTable" class="display" cellspacing="0" width="100%">
-                            <thead>
+                        <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
+                            <thead class="bg-slate-200 dark:bg-slate-700">
                                 <tr class="td-table">
                                     <th>Nombre</th>
                                     <th>Documento</th>
@@ -25,7 +25,7 @@
                                 </tr>
 
                             </thead>
-                            <tbody>
+                            <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                 @foreach ($members as $obj)
                                     <tr>
                                         <td>{{ $obj->name_member }} {{$obj->lastname_member}}</td>
@@ -39,7 +39,7 @@
                                                 <a href="{{ url('members') }}/{{ $obj->id }}/edit"
                                                     class="on-default edit-row">
                                                     <button class="action-btn" type="button">
-                                                        <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;" width="40"></iconify-icon>
+                                                        <iconify-icon icon="mdi:pencil" style="color: #1769aa;" width="40"></iconify-icon>
                                                              </button>
                                                 </a>
                                                 {{-- <a href="{{ url('organizations') }}/{{ $obj->id }}/"

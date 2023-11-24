@@ -60,6 +60,7 @@ class AnswersController extends Controller
         $answer = new Answer();
         $answer->description = $request->description;
         $answer->catalog_questions_id = $request->catalog_questions_id;
+
         // if ($request->correct_answer == null) {
         //     $answer->correct_answer = 0;
         // } else {
@@ -152,17 +153,17 @@ class AnswersController extends Controller
      */
     public function destroy($id)
     {
-      
+
         $answer = Answer::findOrFail($id);
         $question =Question::findOrFail($answer->catalog_questions_id);
         $question->question_has_answer()->detach($answer->id);
         $answer->delete();
-        alert()->info('El registro ha sido eliminado correctamente');
+        alert()->error('El registro ha sido eliminado correctamente');
         return back();
     }
 
     public function add_answer(Request $request){
-        
+
     }
 }
 

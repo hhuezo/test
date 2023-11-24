@@ -41,7 +41,7 @@
                                                 <a href="{{ url('organizations') }}/{{ $obj->id }}/edit"
                                                     class="on-default edit-row">
                                                     <button class="action-btn" type="button">
-                                                        <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;" width="40"></iconify-icon>
+                                                        <iconify-icon icon="mdi:pencil" style="color: #1769aa;" width="40"></iconify-icon>
                                                              </button>
                                                 </a>
                                                 {{-- <a href="{{ url('organizations') }}/{{ $obj->id }}/"

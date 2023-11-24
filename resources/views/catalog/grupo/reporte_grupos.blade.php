@@ -23,7 +23,8 @@
        <CENTER> <img src="{{ $iglesia->logo_url }}{{ $iglesia->logo }}"></CENTER>
         &nbsp; <p>
             <CENTER>
-        <table  BORDER>
+                <div style="text-align:center;">
+        <table   border="1" style="margin: 0 auto;">
             <thead >
 
                         <tr class="td-table">
@@ -48,7 +49,9 @@
 
 
                     </tbody>
-                </table></CENTER>
+                </table>
+                </div>
+            </CENTER>
             </form>
 
 </body>

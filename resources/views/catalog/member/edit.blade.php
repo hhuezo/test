@@ -75,7 +75,7 @@
                                                     class="form-label">Estatus</label>
                                                     <select name="status" class="form-control select2">
                                                         @foreach ($member_status as $obj)
-                                                            @if ($obj->id == $member->status)
+                                                            @if ($obj->id == $member->status_id)
                                                                 <option value="{{ $obj->id }}" selected>
                                                                     {{ $obj->description_es }}
                                                                 </option>

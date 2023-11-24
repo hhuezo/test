@@ -18,11 +18,11 @@
                     <span class="  col-span-4 hidden"></span>
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden " style=" margin-bottom:20px ">
-                            <table id="myTable" class="display" cellspacing="0" width="100%">
-                                <thead>
+                            <table id="myTable" class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700" cellspacing="0" width="100%">
+                                <thead class="bg-slate-200 dark:bg-slate-700">
                                     <tr class="td-table">
                                         <th style="text-align: center">Id</th>
-                                        <th>Descripción</th>
+                                        <th  style="text-align: center">Descripción</th>
                                         <th style="text-align: center">Opciones</th>
                                     </tr>
                                 </thead>
@@ -31,9 +31,9 @@
                                         @foreach ($permissions as $obj)
                                             <tr>
                                                 <td align="center">{{ $obj->id }}</td>
-                                                <td>{{ $obj->name }}</td>
+                                                <td align="center">{{ $obj->name }}</td>
                                                 <td align="center">
-                                                    <iconify-icon icon="mdi:pencil-box"
+                                                    <iconify-icon icon="mdi:pencil"
                                                         onclick="modal_edit({{ $obj->id }},'{{ $obj->name }}')"
                                                         style="color: #1769aa;" width="40"></iconify-icon>
 

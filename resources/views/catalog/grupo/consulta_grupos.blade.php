@@ -12,7 +12,7 @@
                 <div style="text-align: right;">
 
 
-                <a href="{{ url('datos_iglesia') }}">
+                <a href="{{ url('catalog/iglesia/datos_iglesia') }}">
                     <button class="btn btn-dark btn-sm float-right">
                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                         </iconify-icon>
@@ -44,8 +44,8 @@
                                                     <td  align="center">{{ $obj->lastname_member }}</td>
                                                     <td  align="center">{{ $obj->nombre_grupo }}</td>
                                                     <td align="center">
-                                                        <a href="{{ url('reasigna_grupos') }}/{{ $obj->member_id }}">
-                                                            <iconify-icon icon="mdi:pencil-box" style="color: #1769aa;" width="40"></iconify-icon>
+                                                        <a href="{{ url('catalog/grupo/reasigna_grupos') }}/{{ $obj->member_id }}">
+                                                            <iconify-icon icon="mdi:pencil" style="color: #1769aa;" width="40"></iconify-icon>
                                                         </a></td>
 
                                             </tr>

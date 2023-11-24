@@ -30,7 +30,7 @@
                                         <th style="text-align: center">opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                     @if ($organizations->count() > 0)
                                         @foreach ($organizations as $obj)
                                             <tr>
@@ -41,7 +41,7 @@
 
                                                 <td align="center">
                                                     <a href="{{url('catalog/organization')}}/{{$obj->id}}/edit">
-                                                    <iconify-icon icon="mdi:pencil-box"
+                                                    <iconify-icon icon="mdi:pencil"
                                                         style="color: #1769aa;" width="40"></iconify-icon>
                                                     </a>
                                                     &nbsp;&nbsp;

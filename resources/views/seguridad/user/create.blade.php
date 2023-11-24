@@ -23,22 +23,22 @@
                 </header>
 
                 <div class="space-y-4">
-                    <form method="POST" action="{{ url('seguridad.user') }}"
+                    <form method="POST" action="{{ url('seguridad/user') }}"
                         enctype="multipart/form-data">
-                        @method('PUT')
+
                         @csrf
                         <div class="input-area relative pl-28">
                             <label for="largeInput" class="inline-inputLabel">nombre</label>
-                            <input type="text" name="nombre"  required class="form-control">
+                            <input type="text" name="name" id="name" required class="form-control">
                         </div> &nbsp;
                         <div class="input-area relative pl-28">
                             <label for="largeInput" class="inline-inputLabel">Email</label>
-                            <input type="text" name="email" required class="form-control">
+                            <input type="text" name="email" id="email" required class="form-control">
                         </div> &nbsp;
 
                         <div class="input-area relative pl-28">
                             <label for="largeInput" class="inline-inputLabel">clave</label>
-                            <input type="text" name="password"   required class="form-control">
+                            <input type="text" name="password" id="password"   required class="form-control">
                         </div> &nbsp;
 
 

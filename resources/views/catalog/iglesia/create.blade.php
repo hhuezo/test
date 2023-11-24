@@ -43,21 +43,21 @@
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">{{ __('Nombre') }}</label>
-                                                    <input type="text" name="name" required class="form-control"
+                                                    <input type="text" name="name" id="name" required class="form-control"
                                                         value="{{ old('name') }}" autofocus="true">
                                                 </div>
 
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">{{ __('Direccion') }}</label>
-                                                    <input type="text" name="address" required class="form-control"
+                                                    <input type="text" name="address" id="address" required class="form-control"
                                                         value="{{ old('address') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('departamento') }}</label>
-                                                    <select name="catalog_departamento_id" class="form-control select2">
+                                                    <select name="catalog_departamento_id" id="catalog_departamento_id" class="form-control select2">
                                                         @foreach ($depto as $obj1)
                                                             <option value="{{ $obj1->id }}">{{ $obj1->nombre }}
                                                             </option>
@@ -68,7 +68,7 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('municipio') }}</label>
-                                                    <select name="catalog_municipio_id" class="form-control select2">
+                                                    <select name="catalog_municipio_id" id="catalog_municipio_id" class="form-control select2">
                                                         @foreach ($municipio as $obj2)
                                                             @if ($obj2->departamento_id == $obj1->id)
                                                                 <option value="{{ $obj2->id }}">{{ $obj2->nombre }}
@@ -80,34 +80,34 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">{{ __('telefono') }}</label>
-                                                    <input type="text" name="phone_number" required class="form-control"
+                                                    <input type="text" name="phone_number" id="phone_number" required class="form-control"
                                                         value="{{ old('phone_number') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">{{ __('Notas') }}</label>
-                                                    <input type="text" name="notes" required class="form-control"
+                                                    <input type="text" name="notes" id="notes" required class="form-control"
                                                         value="{{ old('notes') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Nombre de Contacto') }}</label>
-                                                    <input type="text" name="contac_name" required class="form-control"
+                                                    <input type="text" name="contac_name" id="contac_name"  required class="form-control"
                                                         value="{{ old('contac_name') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Cargo del contacto') }}</label>
-                                                    <input type="text" name="contact_job_title" required
+                                                    <input type="text" name="contact_job_title" id="contact_job_title" required
                                                         class="form-control" value="{{ old('contact_job_title') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('telefono del contacto') }}</label>
-                                                    <input type="text" name="contac_phone_number" required
+                                                    <input type="text" name="contac_phone_number" id="contac_phone_number" required
                                                         class="form-control" value="{{ old('contac_phone_number') }}">
                                                 </div>
 
@@ -115,7 +115,7 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Nombre de segundo Contacto') }}</label>
-                                                    <input type="text" name="secondary_contac_name" required
+                                                    <input type="text" name="secondary_contac_name" id="secondary_contac_name" required
                                                         class="form-control" value="{{ old('secondary_contac_name') }}">
                                                 </div>
 
@@ -129,14 +129,14 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('telefono1 del Segundo  contacto') }}</label>
-                                                    <input type="text" name="secondary_contac_phone_number" required
+                                                    <input type="text" name="secondary_contac_phone_number" id="secondary_contac_phone_number" required
                                                         class="form-control" value="{{ old('contac_phone_number') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('telefono2 del Segundo  contacto') }}</label>
-                                                    <input type="text" name="secondary_contac_phone_number_2" required
+                                                    <input type="text" name="secondary_contac_phone_number_2" id="secondary_contac_phone_number_2" required
                                                         class="form-control" value="{{ old('contac_phone_number_2') }}">
                                                 </div>
 
@@ -144,35 +144,35 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Lider Religioso') }}</label>
-                                                    <input type="text" name="pastor_name" required
+                                                    <input type="text" name="pastor_name" id= "pastor_name" required
                                                         class="form-control" value="{{ old('pastor_name') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Telefono de Pastor') }}</label>
-                                                    <input type="text" name="pastor_phone_number" required
+                                                    <input type="text" name="pastor_phone_number" id="pastor_phone_number" required
                                                         class="form-control" value="{{ old('pastor_phone_number') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Red social') }}</label>
-                                                    <input type="text" name="facebook" required class="form-control"
+                                                    <input type="text" name="facebook" id="facebook" required class="form-control"
                                                         value="{{ old('facebook') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('sitio web') }}</label>
-                                                    <input type="text" name="website" required class="form-control"
+                                                    <input type="text" name="website" id="website" required class="form-control"
                                                         value="{{ old('website') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Personeria Juridica') }}</label>
-                                                    <input type="text" name="Personeria_Juridica" required
+                                                    <input type="text" name="Personeria_Juridica" id="Personeria_Juridica" required
                                                         class="form-control" value="{{ old('Personeria_Juridica') }}">
                                                 </div>
 
@@ -185,7 +185,7 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Estatus</label>
-                                                    <select name="Status" class="form-control">
+                                                    <select id="status_id" name="Status" class="form-control">
                                                         @foreach ($estatuorg as $obj2)
                                                             <option value="{{ $obj2->id }}">{{ $obj2->description_es }}
                                                             </option>
@@ -197,7 +197,7 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Sede') }}</label>
-                                                    <select name="sede_id" class="form-control select2">
+                                                    <select id="sede_id" name="sede_id" class="form-control select2">
                                                         @foreach ($sede as $obj3)
                                                             <option value="{{ $obj3->id }}">{{ $obj3->nombre }}
                                                             </option>

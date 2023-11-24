@@ -43,13 +43,13 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">Nombre congregacion</label>
-                                                    <input type="text" name="nombre" required class="form-control"
+                                                    <input type="text" name="nombre" id="nombre" required class="form-control"
                                                         value="{{ old('nombre') }}" autofocus="true">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Region</label>
-                                                    <select name="region_id" class="form-control">
+                                                    <select name="region_id" id="region_id" class="form-control">
                                                         @foreach ($region as $obj)
                                                         <option value="{{ $obj->id }}">{{ $obj->nombre }}
                                                         </option>

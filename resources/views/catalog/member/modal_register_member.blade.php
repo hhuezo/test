@@ -3,7 +3,7 @@
     <form method="POST" action="{{url('#') }}">
         <input type="hidden" name='iglesia_id' value="{{$iglesia->id }}">
         <input type="hidden" name='grupo_id' value="{{$grupo->id }}">
-        <input type="hidden" name='grupo_id' value="{{$member->id }}">
+        <input type="hidden" name='member_id' value="{{$member->id }}">
      @csrf
      <div class="modal-dialog relative w-auto pointer-events-none">
          <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding

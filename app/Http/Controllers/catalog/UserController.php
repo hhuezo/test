@@ -21,7 +21,7 @@ class UserController extends Controller
     {
 
 
-        $members = Member::where('status','=',1)->get();
+        $members = Member::where('status_id','=',1)->get();
         $usuarios =  Users::get();
 
 

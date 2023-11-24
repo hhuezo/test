@@ -26,7 +26,7 @@ class Member extends Model
         'city_id',
         'address',
         'data_created',
-        'status',
+        'status_id',
         'organization_id',
         'user_id'
     ];

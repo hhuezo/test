@@ -19,8 +19,8 @@
                     <span class="  col-span-4 hidden"></span>
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden " style=" margin-bottom:20px ">
-                            <table id="myTable" class="display" cellspacing="0" width="100%">
-                                <thead>
+                            <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
+                                <thead class="bg-slate-200 dark:bg-slate-700">
                                     <tr class="td-table">
                                         <th style="text-align: center">Id</th>
                                         <th style="text-align: center">Descripcion</th>
@@ -31,7 +31,7 @@
                                         <th style="text-align: center">opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                     @if ($MemberStatus->count() > 0)
                                         @foreach ($MemberStatus as $obj)
                                             <tr>
@@ -42,8 +42,8 @@
 
                                                 <td align="center">{{ $obj->status}}</td>
                                                 <td align="center">
-                                                    <a href="{{url('catalog/MemberStatus')}}/{{$obj->id}}/edit">
-                                                    <iconify-icon icon="mdi:pencil-box"
+                                                    <a href="{{url('catalog/member_status')}}/{{$obj->id}}/edit">
+                                                    <iconify-icon icon="mdi:pencil"
                                                         style="color: #1769aa;" width="40"></iconify-icon>
                                                     </a>
                                                     &nbsp;&nbsp;

@@ -111,9 +111,9 @@
             <tr class="td-table">
                 <th style="text-align: center">Iglesia</th>
                 <th style="text-align: center">Nombre</th>
-                <th style="text-align: center">grupo</th>
+                <th style="text-align: center">Grupo</th>
                 <th style="text-align: center">Participantes</th>
-                <th style="text-align: center">opciones</th>
+                <th style="text-align: center">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -126,7 +126,7 @@
 
                         <td align="center">
                             <a href="{{url('catalog/member')}}/{{$obj->id}}/edit">
-                            <iconify-icon icon="mdi:pencil-box"
+                            <iconify-icon icon="mdi:pencil"
                                 style="color: #1769aa;" width="40"></iconify-icon>
                             </a>
                             &nbsp;&nbsp;

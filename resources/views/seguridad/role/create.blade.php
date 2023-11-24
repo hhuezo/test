@@ -23,12 +23,11 @@
                 </header>
 
                 <div class="space-y-4">
-                    <form method="POST" action="{{ url('seguridad.role.create') }}">
-                        @method('PUT')
+                    <form method="POST" action="{{ url('seguridad/role') }}">
                         @csrf
                         <div class="input-area relative pl-28">
                             <label for="largeInput" class="inline-inputLabel">nombre</label>
-                            <input type="text" name="name"  required class="form-control">
+                            <input type="text" name="name" id="name"  required class="form-control">
                         </div> &nbsp;
 
                                                     <div></div>

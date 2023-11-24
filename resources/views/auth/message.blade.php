@@ -58,7 +58,8 @@
                             <h4 class="bnr-sub-title">Te invitamos a unirte mas adelante.</h4>
                 </td><td>
                   <p class="bnr-para"></p><div>
-                    <img src="/img/losentimos.png" ><p>
+                    <img src="{{asset('/img/losentimos.png')}}">
+                     <p>
                    </div>
                 </td>
             </tr>

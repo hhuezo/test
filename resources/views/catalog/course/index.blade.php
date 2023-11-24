@@ -7,9 +7,9 @@
         <header class=" card-header noborder">
             <h4 class="card-title">Cursos
             </h4>
-            <a href="{{url('catalog/course/create')}}">
-            <button class="btn btn-outline-primary" >Nuevo</button>
-        </a>
+            <a href="{{ url('catalog/course/create') }}">
+                <button class="btn btn-outline-primary">Nuevo</button>
+            </a>
         </header>
         <div class="card-body px-6 pb-6">
             <div style=" margin-left:20px; margin-right:20px; ">
@@ -17,32 +17,33 @@
                 <span class="  col-span-4 hidden"></span>
                 <div class="inline-block min-w-full align-middle">
                     <div class="overflow-hidden " style=" margin-bottom:20px ">
-                        <table id="myTable" class="display" cellspacing="0" width="100%">
-                            <thead>
+                        <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700"
+                            cellspacing="0" width="100%">
+                            <thead class="bg-slate-200 dark:bg-slate-700">
                                 <tr class="td-table">
                                     <th style="text-align: center">Id</th>
-                                            <td>Nombre español</td>
-                                            <td>Nombre ingles</td>
-                                            <td>descripcion</td>
-                                            <td>descripcion español</td>
-                                            <td>opciones</td>
+                                    <td style="text-align: center">Nombre español</td>
+                                    <td style="text-align: center">Nombre ingles</td>
+                                    <td style="text-align: center">descripcion</td>
+                                    <td style="text-align: center">descripcion español</td>
+                                    <td style="text-align: center">opciones</td>
 
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                 @if ($Course->count() > 0)
-                                    @foreach ($Course  as $obj)
+                                    @foreach ($Course as $obj)
                                         <tr>
                                             <td align="center">{{ $obj->id }}</td>
                                             <td>{{ $obj->name_es }}</td>
                                             <td>{{ $obj->name_en }}</td>
-                                            <td>{{ $obj->description}}</td>
+                                            <td>{{ $obj->description }}</td>
                                             <td>{{ $obj->description_es }}</td>
 
                                             <td align="center">
-                                                <a href="{{url('catalog/course')}}/{{$obj->id}}/edit">
-                                                <iconify-icon icon="mdi:pencil-box"
-                                                    style="color: #1769aa;" width="40"></iconify-icon>
+                                                <a href="{{ url('catalog/course') }}/{{ $obj->id }}/edit">
+                                                    <iconify-icon icon="mdi:pencil" style="color:#1769aa;"
+                                                        width="40"></iconify-icon>
                                                 </a>
                                                 &nbsp;&nbsp;
                                                 <iconify-icon data-bs-toggle="modal"
@@ -53,7 +54,7 @@
                                         @include('catalog.course.modal')
                                     @endforeach
                                 @endif
-                            </thead>
+                                </thead>
                             <tbody>
 
 
@@ -66,17 +67,17 @@
     </div>
 
 
-</div>
+    </div>
 
 
 
-<script type="text/javascript">
-    function modal_edit(id, name) {
-        //alert(id);
-        document.getElementById('id').value = id;
-        document.getElementById('name').value = name;
-        $('#usuario_edit_modal').modal('show');
-    };
-</script>
+    <script type="text/javascript">
+        function modal_edit(id, name) {
+            //alert(id);
+            document.getElementById('id').value = id;
+            document.getElementById('name').value = name;
+            $('#usuario_edit_modal').modal('show');
+        };
+    </script>
 
 @endsection

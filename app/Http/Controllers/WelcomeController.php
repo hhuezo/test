@@ -50,40 +50,7 @@ class WelcomeController extends Controller
     }
 
 
-    public function  reporte_grupos($id_grupo_iglesia)
-    {
 
-
-        $grupos_iglesia =  GroupPerchuchPlan::findorfail($id_grupo_iglesia);
-
-        $usuarios = Users::get();
-        $grupo = Grupo::get();
-
-
-        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
-                from iglesia i
-                join group_per_chuch_plan gpc
-                on gpc.iglesia_id = i.id
-                join grupo g on
-                g.id = gpc.group_id
-                join member p on
-                p.organization_id=i.id
-                join user_has_group q on
-                p.id=q.member_id
-                and q.group_per_church_id=gpc.id
-                where  gpc.id=?";
-
-        $miembros = DB::select($sql, array($grupos_iglesia->id));
-
-        $iglesia = Iglesia::findorfail($grupos_iglesia->iglesia_id);
-        $member_status = MemberStatus::get();
-
-
-
-
-        $pdf = \Pdf::loadView('auth.reporte_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
-        return $pdf->stream('Info.pdf');
-    }
     public function create()
     {
         //
@@ -92,113 +59,6 @@ class WelcomeController extends Controller
     public function store(Request $request)
     {
     }
-
-    public function reasigna_grupos($id)
-    {
-        $member_status = MemberStatus::get();
-
-        $member = member::findOrFail($id);
-
-        $group = $member->user_has_group->first();
-
-        $group_id = $group->group_id;
-
-
-        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
-
-        $departamentos = Departamento::get();
-        $iglesia = iglesia::findOrFail($member->organization_id);
-        $grupos = Grupo::get();
-
-        return view('auth.reasigna_grupos', compact('member', 'departamentos', 'iglesia', 'member_status', 'group_church', 'grupos', 'group_id'));
-    }
-
-
-
-    public function consulta_grupos($id_grupo_iglesia)
-    {
-
-
-        //$municipios = Municipio::where('departamento_id', '=', 1)->get();
-        //  //$organizations = Organization::get();
-        // $iglesia = Iglesia::where('id', '=', $id_iglesia)->get();
-        $grupos_iglesia =  GroupPerchuchPlan::findorfail($id_grupo_iglesia);
-        //dd($iglesia,$i);
-
-        //  $miembros = Member::where('organization_id', '=', $id_iglesia)->get();
-        //dd($miembros->iglesia_grupo->nombre);
-        $usuarios = Users::get();
-        $grupo = Grupo::get();
-
-        // $miembros = DB::table('member as a')
-        // ->join('user_has_group as b', 'b.member_id', '=', 'a.id')
-        //->join('group_per_chuch_plan as c', function ($join) {
-        //    $join->on('c.iglesia_id', '=', 'a.organization_id')
-        //->on('c.id', '=', 'b.group_per_church_id')
-        //->on('a.organization_id =? ');
-        //})        ->join('grupo as d', 'c.group_id', '=', 'd.id')        ->select('a.id','a.name_member', 'a.lastname_member', 'd.nombre')        ->get();
-
-
-        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
-        from iglesia i
-        join group_per_chuch_plan gpc
-        on gpc.iglesia_id = i.id
-        join grupo g on
-        g.id = gpc.group_id
-        join member p on
-        p.organization_id=i.id
-        join user_has_group q on
-        p.id=q.member_id
-        and q.group_per_church_id=gpc.id
-        where  gpc.id=?";
-
-        $miembros = DB::select($sql, array($grupos_iglesia->id));
-
-        $iglesia = Iglesia::findorfail($grupos_iglesia->iglesia_id);
-        $member_status = MemberStatus::get();
-
-
-
-        return view('auth.consulta_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
-        //return view('auth.register_member', compact('departamentos'));
-
-    }
-    public function register_member()
-    {
-        //  dd('aqui estoy');
-
-        $departamentos = Departamento::get();
-        //$municipios = Municipio::where('departamento_id', '=', 1)->get();
-        //  //$organizations = Organization::get();
-        $iglesias = Iglesia::get();
-        $newmiembro = Grupo::get();
-        $grupos = Grupo::get();
-        $departamentos = Departamento::get();
-        $municipios = Municipio::get();
-        $generos = Gender::get();
-        return view('auth.register_member_leader', compact('departamentos', 'newmiembro', 'iglesias','departamentos','municipios','generos','grupos'));
-        //return view('auth.register_member', compact('departamentos'));
-
-    }
-
-
-    public function register_member_leader()
-    {
-        //  dd('aqui estoy');
-
-        $departamentos = Departamento::get();
-        //$municipios = Municipio::where('departamento_id', '=', 1)->get();
-        //  //$organizations = Organization::get();
-        $iglesias = Iglesia::get();
-        $grupos = Grupo::get();
-        $generos = Gender::get();
-        $departamentos = Departamento::get();
-        $municipios = Municipio::get();
-        return view('auth.register_member_leader', compact('generos','departamentos', 'grupos', 'iglesias','departamentos','municipios'));
-        //return view('auth.register_member', compact('departamentos'));
-
-    }
-
 
 
 
@@ -268,7 +128,7 @@ class WelcomeController extends Controller
         $member->organization_id = (int)$request->iglesia_id;
         $member->departamento_id = $request->departamento_id;
         $member->municipio_id = $request->municipio_id;
-        $member->status = 1;
+        $member->status_id= 1;
         $member->users_id = $user->id;
         $member->state_id =   $deptos->id;
         //   $user->assignRole('Participante');
@@ -337,64 +197,12 @@ class WelcomeController extends Controller
     }
 
 
-    public function get_grupo($fecha)
-    {
-        $fechaNacimiento = Carbon::createFromFormat('Y-m-d', $fecha);
-        $hoy = Carbon::now();
 
-        if ($fechaNacimiento->diffInYears($hoy) > 18) {
-            // La persona tiene más de 18 años
-            $grupos = Grupo::where('id', '>', 1)->get();
-        } else {
-            // La persona tiene 18 años o menos
-            $grupos = Grupo::where('id', '=', 1)->get();
-        }
-        return $grupos;
-    }
 
     public function show($id)
     {
     }
-    public function update_member_group(Request $request, $id)
-    {
 
-        // dd($request->member_id);
-        $messages = [
-            'name_member.required' => 'ingresar nombre',
-        ];
-
-
-
-        $request->validate([
-
-            'name_member.required' => 'ingresar nombre miembro',
-
-        ], $messages);
-
-
-        $member =  Member::findOrFail($request->member_id);
-
-        $member->name_member = $request->name_member;
-        $member->lastname_member = $request->lastname_member;
-        // $member->birthdate = $request->birthdate;
-        $member->document_number_type = $request->document_number_type;
-        //  $member->document_type_id = $request->document_type_id;
-        $member->Update();
-        // $group = $member->user_has_group->first();
-        $group_id = $member->user_has_group->first(); //$group->group_id;
-
-        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id->group_id)->first();
-
-        $user_has_grupo = UserHasGrupo::where('member_id', '=', $member->id)->where('group_per_church_id', '=', $group_church->id)->first();
-
-        $group_churchnew = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=', $request->grupo_id)->first();
-
-        $user_has_grupo->group_per_church_id =  $group_churchnew->id;
-        $user_has_grupo->update();
-
-        alert()->success('El registro ha sido Modificado correctamente');
-        return back();
-    }
 
 
     public function update(Request $request, $id)
@@ -409,18 +217,6 @@ class WelcomeController extends Controller
 
 
 
-    public function  modal_register_member($id)
-    {
-
-
-
-        $iglesia = Iglesia::findorfail($id);
-        $iglesia_grupo = $iglesia->iglesia_grupo;
-        $departamentos = Departamento::get();
-        //$group_per_chuch_plan= group_per_chuch_plan::get();
-        //$newmiembro =grupo::where('departamento_id', '=', 1)->get();
-        return view('auth.modal_register_member', compact('iglesia', 'departamentos', 'iglesia_grupo'));
-    }
 
 
 
@@ -487,7 +283,7 @@ class WelcomeController extends Controller
         $member->address = $request->address;
         $member->about_me = $request->about_me;
         $member->organization_id = (int)$request->iglesia_id;
-        $member->status = 1;
+        $member->status_id = 1;
         $member->users_id = $user->id;
         $member->state_id =   $deptos->id;
         //   $user->assignRole('Participante');
@@ -525,79 +321,4 @@ class WelcomeController extends Controller
 
 
 
-    public function datos_iglesia(Request $request)
-    {
-        $i = 1;
-        $user   = User::findOrFail(auth()->user()->id);
-        $iglesia = $user->iglesia->first();
-        $departamentos = Departamento::get();
-        $iglesia_grupo = $iglesia->iglesia_grupo;
-        // $conteomiembros = DB::table('iglesia as i')
-        // ->join('group_per_chuch_plan as gpc', 'gpc.iglesia_id', '=', 'i.id')
-        // ->join('grupo as g', 'g.id', '=', 'gpc.group_id')
-        // ->join('member as p', function ($join) {
-        //     $join->on('p.organization_id', '=', 'i.id')
-        //         ->on('p.id', '=', 'user_has_group.member_id');
-        // })
-        // ->join('user_has_group as q', function ($join) {
-        //     $join->on('p.id', '=', 'q.member_id')
-        //         ->on('q.group_per_church_id', '=', 'gpc.id');
-        // })
-        // ->where('i.id', 28)
-        // ->groupBy('i.id', 'i.name', 'g.id', 'g.nombre')
-        // ->select('i.id as iglesia_id', 'i.name as nombre_iglesia', 'g.id as No_grupo', 'g.nombre as nombre_grupo', DB::raw('count(*) as numero_participantes'))
-        // ->get();
-        ///dd($iglesia->id);
-
-        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo , count(*) as numero_participantes
-        from iglesia i
-        join group_per_chuch_plan gpc
-        on gpc.iglesia_id = i.id
-        join grupo g on
-        g.id = gpc.group_id
-        join member p on
-        p.organization_id=i.id
-        join user_has_group q on
-        p.id=q.member_id
-        and q.group_per_church_id=gpc.id
-        where i.id=?
-        group by i.id , i.name  , g.id , g.nombre ";
-
-        $conteo_miembros = DB::select($sql, array($iglesia->id));
-
-        $sql2 = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
-from iglesia i
-join group_per_chuch_plan gpc
-on gpc.iglesia_id = i.id
-join grupo g on
-g.id = gpc.group_id
-join member p on
-p.organization_id=i.id
-join user_has_group q on
-p.id=q.member_id
-and q.group_per_church_id=gpc.id
-where i.id=?";
-
-        $miembros_iglesia = DB::select($sql2, array($iglesia->id));
-        // dd($iglesiagp,$iglesia_grupo);
-
-        $sql3 = "select a.id iglesia_grupo,a.iglesia_id,a.group_id No_grupo,b.nombre nombre_grupo FROM urban_stategies.group_per_chuch_plan a,urban_stategies.grupo b
-where a.group_id=b.id
-and a.iglesia_id=?";
-
-        $grupos_iglesia = DB::select($sql3, array($iglesia->id));
-
-
-
-
-
-        $urlgrupo1 =  $request->root() . "/registro_participantes/" . $iglesia->id;
-
-
-        QrCode::format('png')->size(200)->generate($url, public_path('img/qrcodeiglesia.png'));
-
-
-        return view('auth.datos_iglesia', compact('departamentos',  'iglesia', 'conteo_miembros', 'miembros_iglesia', 'grupos_iglesia'));
-        //return view('auth.register_member', compact('departamentos'));
-    }
 }

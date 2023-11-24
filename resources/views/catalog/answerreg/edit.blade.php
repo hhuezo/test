@@ -72,7 +72,7 @@
                                                                     </div>
                                                                     </label>
                                                                     <label>
-                                                                    @else
+
                                                                         <div class="primary-radio">
                                                                             <label class="flex items-center cursor-pointer">
                                                                                 <input type="radio" class="hidden"
@@ -85,7 +85,7 @@
                                                                                     class="text-primary-500 text-sm leading-6 capitalize">No</span>
                                                                             </label>
                                                                         </div>
-                                                                @endif
+
                                                             </td>
 
                                                         </tr>

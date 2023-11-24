@@ -42,13 +42,14 @@
                                         </ul>
                                     </div>
                                     @endif
-                                    <form method="POST" action="{{ url('catalog/answer') }}">
-                                        @csrf
+
+                                        <form method="POST" action="{{ url('catalog/answer') }}">
+                                            @csrf
                                         <div class="card h-full">
                                             <div class="grid pt-4 pb-3 px-4">
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Respuesta</label>
-                                                    <input type="text" name="description" value="{{ old('description') }}" required class="form-control">
+                                                    <input type="text" name="description" id="description" value="{{ old('description') }}" required class="form-control">
                                                 </div>
                                                 <p>
                                                 <div class="input-area relative">

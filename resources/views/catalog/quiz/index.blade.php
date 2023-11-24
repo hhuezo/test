@@ -17,31 +17,31 @@
                 <span class="  col-span-4 hidden"></span>
                 <div class="inline-block min-w-full align-middle">
                     <div class="overflow-hidden " style=" margin-bottom:20px ">
-                        <table id="myTable" class="display" cellspacing="0" width="100%">
-                            <thead>
+                        <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
+                            <thead  class="bg-slate-200 dark:bg-slate-700">
                                 <tr class="td-table">
                                     <th style="text-align: center">Id</th>
-                                            <td>Nombre_español</td>
-                                            <td>Nombre_ingles</td>
-                                            <td>Estatus</td>
-                                            <td>Fecha</td>
-                                            <td>Identificacion del curso</td>
+                                            <td  style="text-align: center">Nombre_español</td>
+                                            <td  style="text-align: center">Nombre_ingles</td>
+                                            <td style="text-align: center">Estatus</td>
+                                            <td  style="text-align: center">Fecha</td>
+                                            <td  style="text-align: center">Identificacion del curso</td>
 
                                     <th style="text-align: center">Opciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                 @if ($Quiz->count() > 0)
                                     @foreach ($Quiz  as $obj)
                                         <tr>
                                             <td align="center">{{ $obj->id }}</td>
-                                            <td>{{ $obj->name_es }}</td>
-                                            <td>{{ $obj->name_en }}</td>
-                                            <td>{{ $obj->status }}</td>
-                                            <td>{{ date('d/m/Y', strtotime($obj->date_created )) }}</td>
+                                            <td align="center">{{ $obj->name_es }}</td>
+                                            <td align="center">{{ $obj->name_en }}</td>
+                                            <td align="center">{{ $obj->status }}</td>
+                                            <td align="center">{{ date('d/m/Y', strtotime($obj->date_created )) }}</td>
 
                                             @if ($obj->coursecat)
-                                            <td>{{ $obj->coursecat->name }}</td>
+                                            <td align="center">{{ $obj->coursecat->name }}</td>
                                             @else
                                             <td></td>
                                             @endif
@@ -53,7 +53,7 @@
 
                                             <td align="center">
                                                 <a href="{{url('catalog/Quiz')}}/{{$obj->id}}/edit">
-                                                <iconify-icon icon="mdi:pencil-box"
+                                                <iconify-icon icon="mdi:pencil"
                                                     style="color: #1769aa;" width="40"></iconify-icon>
                                                 </a>
                                                 &nbsp;&nbsp;

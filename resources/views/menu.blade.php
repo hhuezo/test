@@ -55,13 +55,13 @@
             <div class="logo-segment">
                 <a class="flex items-center" href="{{ url('/') }}">
                     <img src="{{ asset('images/') }}/urban.png" class="black_logo" alt="logo">
-                  
+
                     <span class="ltr:ml-3 rtl:mr-3 text-xl font-Inter font-bold text-slate-900 dark:text-white">
                         Urban Strategies
                     </span>
                 </a>
                 <!-- Sidebar Type Button -->
-      
+
             </div>
             <div id="nav_shadow"
                 class="nav_shadow h-[60px] absolute top-[80px] nav-shadow z-[1] w-full transition-all duration-200 pointer-events-none opacity-0">
@@ -116,7 +116,7 @@
 
                     @can('datos iglesia')
                         <li>
-                            <a href="{{ url('datos_iglesia') }}" class="navItem">
+                            <a href="{{ url('iglesia/datos_iglesia') }}" class="navItem">
                                 <span class="flex items-center">
                                     <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
                                     <span>Datos Generales Iglesia</span>
@@ -220,7 +220,7 @@
 
         <!-- BEGIN: Settings -->
         <!-- Settings Toggle Button -->
- 
+
 
 
         <!-- END: Settings -->
@@ -247,19 +247,19 @@
                                         class="leading-none bg-transparent relative text-xl top-[2px] text-slate-900 dark:text-white"
                                         icon="heroicons-outline:menu-alt-3"></iconify-icon>
                                 </button>
-                             
+
 
                             </div>
-    
 
 
 
-                        
+
+
                             <!-- end top menu -->
                             <div
                                 class="nav-tools flex items-center lg:space-x-5 space-x-3 rtl:space-x-reverse leading-0">
 
-                
+
                                 <div class="relative md:block hidden">
                                     <button
                                         class="lg:h-[32px] lg:w-[32px] lg:bg-slate-100 lg:dark:bg-slate-900 dark:text-white text-slate-900 cursor-pointer
@@ -422,7 +422,7 @@
                                                     <span class="font-Inter">Dashboard</span>
                                                 </a>
                                             </li>
-                                 
+
                                             <li>
                                                 <a href="{{ url('courses') }}"
                                                     class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white font-inter text-sm text-slate-600
@@ -434,7 +434,7 @@
                                                 </a>
                                             </li>
 
-                                            
+
                                             <li>
                                                 <a class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white font-inter text-sm text-slate-600
                                                     dark:text-white font-normal"

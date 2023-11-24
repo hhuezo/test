@@ -21,7 +21,6 @@
                         </div>
                     </header>
 
-
                     <div class="transition-all duration-150 container-fluid" id="page_layout">
                         <div id="content_layout">
                             <div class="space-y-5">
@@ -42,69 +41,61 @@
                                             </div>
                                         @endif
                                         <form method="POST" action="{{ url('catalog/member_status') }}">
-                            @csrf
-                            <div
-                                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
-                                <div class="input-area relative">
-                                    <label for="largeInput"
-                                        class="form-label">{{ __('Descripcion') }}</label>
-                                    <input type="text" name="description" required
-                                        class="form-control"
-                                        value="{{ old('description') }}"
-                                        autofocus="true">
-                                </div>
+                                            @csrf
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('Descripcion') }}</label>
+                                                    <input type="text" name="description" required class="form-control"
+                                                        value="{{ old('description') }}" autofocus="true">
+                                                </div>
 
 
-                                <div class="input-area relative">
-                                    <label for="largeInput"
-                                        class="form-label">{{ __('Descripcion_español') }}</label>
-                                    <input type="text" name="description_es" required
-                                        class="form-control"
-                                        value="{{ old('description_es') }}">
-                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('Descripcion_español') }}</label>
+                                                    <input type="text" name="description_es" required
+                                                        class="form-control" value="{{ old('description_es') }}">
+                                                </div>
 
-                                <div class="input-area relative">
-                                    <label for="largeInput"
-                                        class="form-label">{{ __('Estatus') }}</label>
-                                    <input type="status"
-                                        name="status" required
-                                        class="form-control">
-                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">{{ __('Estatus') }}</label>
+                                                    <input type="status" name="status" required class="form-control">
+                                                </div>
 
-                                <div class="input-area relative">
-                                    <label for="largeInput"
-                                        class="form-label">{{ __('Fecha_creada') }}</label>
-                                    <input type="text" name="date_created"
-                                        required class="form-control"
-                                        value="{{ old('date_created') }}">
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('Fecha_creada') }}</label>
+                                                    <input type="text" name="date_created" required class="form-control"
+                                                        value="{{ old('date_created') }}">
+                                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('course_id') }}</label>
+                                                    <input type="text" name="course_id" required class="form-control"
+                                                        value="{{ old('course_id') }}">
+                                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">{{ __('status') }}</label>
+                                                    <select name="status" class="form-control">
+                                                        @foreach ($MemberStatus as $obj)
+                                                            <option value="{{ $obj->id }}">{{ $obj->description_es }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                    </div>&nbsp;
+
                                 </div>
-                                <div class="input-area relative">
-                                    <label for="largeInput"
-                                        class="form-label">{{ __('course_id') }}</label>
-                                    <input type="text" name="course_id"
-                                        required class="form-control"
-                                        value="{{ old('course_id') }}">
-                               </div>
                             </div>
-                            <div class="input-area relative">
-                                <label for="largeInput"
-                                        class="form-label">{{ __('status') }}</label>
-                                <select name="status" class="form-control">
-                                    @foreach ($MemberStatus as $obj)
-                                        <option value="{{ $obj->id }}">{{ $obj->description_es }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>&nbsp;
                             <div style="text-align: right;">
                                 <button type="submit"
-                                    class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
+                                    class="btn inline-flex justify-center btn-dark">Aceptar</button>
                             </div>
-                        </form>
+                                    </form>
 
-</div>
-</div>
-</div>
-@endsection
-
+                                </div>
+                            </div>
+                        </div>
+                    @endsection

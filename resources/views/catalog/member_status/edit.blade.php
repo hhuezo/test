@@ -34,10 +34,10 @@
                                                 </ul>
                                             </div>
                                         @endif
-
-                                        <form method="POST" action="{{ route('register') }}" class="space-y-4">
-                                            @csrf
-                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
+                                        <form method="POST" action="{{ route('member_status.update', $MemberStatus->id) }}"
+                                            class="space-y-4">
+                                            @method('PUT')
+                                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('description') }}</label>

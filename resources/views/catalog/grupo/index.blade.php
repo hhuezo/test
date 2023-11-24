@@ -26,7 +26,7 @@
                                         <th style="text-align: center">opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                     @if ($grupos->count() > 0)
                                         @foreach ($grupos as $obj)
                                             <tr>
