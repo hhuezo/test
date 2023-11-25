@@ -111,9 +111,11 @@ class MemberController extends Controller
         $member->status = 1;
         $member->users_id = $user->id;
         $member->state_id=   $deptos->id;
-
-        //   $user->assignRole('Participante');
-        // $member->municipio_id = $user->Municipio;
+        if($request->get('is_pastor') == 'on'){
+            $member->is_pastor = 1;   // si es pastor
+        }else{
+            $member->is_pastor = 0;
+        }
         $member->save();
 
 
@@ -160,12 +162,13 @@ class MemberController extends Controller
         $departamentos = Departamento::get();
         $municipios = Municipio::get();
         //  //$organizations = Organization::get();
-
+        $generos = Gender::get();
         $grupos = Grupo::get();
         $iglesia_grupo = $iglesia->iglesia_grupo;
-        return view('catalog.member.show', compact('iglesia_grupo','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan','municipios'));
+       
+        return view('catalog.member.show', compact('iglesia_grupo','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan','municipios','generos'));
         alert()->success('El registro ha sido añadido correctamente');
-        return back();
+       // return back();
     }
 
     public function register_member_leader()

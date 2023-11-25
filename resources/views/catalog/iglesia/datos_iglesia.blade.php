@@ -49,8 +49,8 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput"
-                                                    class="form-label">{{ __('Estado de la Iglesia') }}</label>
-                                                <input type="text" name="estado"
+                                                    class="form-label">{{ __('Estado de la Iglesia') }}</label> 
+                                                <input type="text" name="estado" 
                                                     value=" {{ $iglesia->iglesia_estatus->description_es }}" required
                                                     class="form-control" autofocus="true" disabled>
                                             </div>

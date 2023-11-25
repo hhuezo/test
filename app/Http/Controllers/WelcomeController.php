@@ -176,6 +176,14 @@ class WelcomeController extends Controller
         return view('map', compact('dep'));
     }
 
+    public function store_file(Request $request)
+    {
+        $image = $request->file('file_document');
+        $imageName = time() . rand(1, 100) . '.' . $image->getClientOriginalName();
+        $image->move(public_path('images'), $imageName);
+        return response()->json(['success' => $imageName]);
+    }
+
     public function get_dep($id)
     {
         $dep = Departamento::where('abbrev', '=', $id)->first();
@@ -277,7 +285,8 @@ class WelcomeController extends Controller
         $member->name_member = $request->name;
         $member->lastname_member = $request->last_name;
         $member->birthdate = $request->birthdate;
-        //$member->document_number = $request->document_number;
+        $member->document_number = $request->document_number;
+        $member->catalog_gender_id = $request->genero;
         $member->email = $request->email;
         $member->cell_phone_number = $request->phone_number;
         $member->address = $request->address;
@@ -286,6 +295,11 @@ class WelcomeController extends Controller
         $member->status_id = 1;
         $member->users_id = $user->id;
         $member->state_id =   $deptos->id;
+        if($request->get('is_pastor') == 'on'){
+            $member->is_pastor = 1;   // si es pastor
+        }else{
+            $member->is_pastor = 0;
+        }
         //   $user->assignRole('Participante');
         // $member->municipio_id = $user->Municipio;
         $member->save();

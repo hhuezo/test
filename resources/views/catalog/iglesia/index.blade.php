@@ -1,7 +1,7 @@
 @extends ('menu')
 @section('contenido')
 
-    @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
+@include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
 
 
 
@@ -33,7 +33,7 @@
                                 <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                     @if ($iglesia->count() > 0)
                                         @foreach ($iglesia as $obj)
-                                            <tr class="even:bg-slate-50 dark:even:bg-slate-700">
+                                            <tr>
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td  align="center">{{ $obj->name }}</td>
                                                 <td  align="center">{{ $obj->address }}</td>
@@ -60,33 +60,32 @@
                                                         style="color: #1769aa;" width="40"></iconify-icon>
                                                         &nbsp;&nbsp;
 
-                                                </td>
-                                            </tr>
-                                            @include('catalog/iglesia/modal')
-                                            @include('catalog/iglesia/modal_estado')
-                                        @endforeach
-                                    @endif
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                </td>
+                            </tr>
+                            @include('catalog/iglesia/modal')
+                            @include('catalog/iglesia/modal_estado')
+                            @endforeach
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
-
     </div>
+</div>
+
+
+</div>
 
 
 
-    <script type="text/javascript">
-        function modal_edit(id, name) {
-            //alert(id);
-            document.getElementById('id').value = id;
-            document.getElementById('name').value = name;
-            $('#usuario_edit_modal').modal('show');
-        };
-    </script>
+<script type="text/javascript">
+    function modal_edit(id, name) {
+        //alert(id);
+        document.getElementById('id').value = id;
+        document.getElementById('name').value = name;
+        $('#usuario_edit_modal').modal('show');
+    };
+</script>
 
 @endsection
