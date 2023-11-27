@@ -361,11 +361,11 @@
                 $("#document_number").prop("required", false);
             }
 
-            $.get('{{url("/get_grupo")}}/' + fechaNacimiento, function(data) {
+            $.get('{{ url('/get_grupo') }}/' + fechaNacimiento, function(data) {
                 // Manejar la respuesta aquí
                 var _select = ''
                 for (var i = 0; i < data.length; i++)
-                    _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
+                    _select += '<option value="' + data[i].id + '" >' + data[i].nombre +
                     '</option>';
 
                 $("#grupo_id").html(_select);
