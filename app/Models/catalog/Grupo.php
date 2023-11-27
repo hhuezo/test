@@ -16,10 +16,13 @@ class Grupo extends Model
         'nombre',
     ];
 
-    public function iglesia_grupo()
-        {
-            return $this->belongsToMany(Iglesia::class, 'group_per_chuch_plan', 'group_id', 'id');
-        }
+    public function member_has_group()
+    {
+        return $this->belongsToMany(Member::class, 'member_has_group', 'group_id', 'member_id');
+    }
 
-
+    // public function iglesia_grupo()
+    // {
+    //     return $this->belongsToMany(Iglesia::class, 'group_per_chuch_plan', 'group_id', 'id');
+    // }
 }

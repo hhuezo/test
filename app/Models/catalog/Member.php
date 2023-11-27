@@ -43,9 +43,9 @@ class Member extends Model
         return $this->belongsToMany(Users::class, 'users_has_iglesia', 'id', 'user_id');
     }
 
-    public function user_has_group()
+    public function member_has_group()
     {
-        return $this->belongsToMany(GroupPerchuchPlan::class, 'user_has_group', 'member_id', 'group_per_church_id');
+        return $this->belongsToMany(Grupo::class, 'member_has_group', 'member_id', 'grupo_id');
     }
 
     public function genders(){

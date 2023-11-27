@@ -109,7 +109,7 @@
                                                                 Nombre de la Iglesia</h4>
                                                         </div>
                                                         <div class="input-area">
-                                                          <center>  <label for="username" class="form-label" >Ingrese el Nombre de la
+                                                          <center>  <label for="username" class="form-label" >Ingrese el nombre de la
                                                                 Iglesia a la que pertence</label></center>
                                                             <input id="nombre" name="nombre" type="text"
                                                                 class="form-control" placeholder="Nombre de Iglesia"
