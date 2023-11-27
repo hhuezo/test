@@ -33,7 +33,7 @@
                                 <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                     @if ($iglesia->count() > 0)
                                         @foreach ($iglesia as $obj)
-                                            <tr>
+                                            <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td  align="center">{{ $obj->name }}</td>
                                                 <td  align="center">{{ $obj->address }}</td>

@@ -20,7 +20,7 @@
                       <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
                         <thead class="bg-slate-200 dark:bg-slate-700">
 
-                                    <tr class="td-table">
+                                    <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                         <th style="text-align: center">Id</th>
                                         <th style="text-align: center">grupo</th>
                                         <th style="text-align: center">opciones</th>
@@ -29,7 +29,7 @@
                                 <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                     @if ($grupos->count() > 0)
                                         @foreach ($grupos as $obj)
-                                            <tr>
+                                            <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td  align="center">{{ $obj->nombre }}</td>
 

@@ -77,13 +77,13 @@ class WelcomeController extends Controller
             'password.min' => 'La contraseña debe tener un minimo de 8 caracteres',
             'document_number.required' => 'El número de documento es un valor requerido',
             'phone_number.required' => 'El Numero de telefono es un valor requerido',
-            'address.required' => 'La dirección es un valor requerido',
+            'address.required' => 'La dirección es un valor requerido'
             //'organization_id.required' => 'La organización es requerida',
-            'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
-            'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
-            'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
-            'cargo_contacto_secundario.required' => 'El Cargo del contacto secundario es un valor requerido',
-            'telefono_secundario.required' => 'El Numero de telefono del contacto secundario es un valor requerido'
+           // 'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
+           // 'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
+            //'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
+            //'cargo_contacto_secundario.required' => 'El Cargo del contacto secundario es un valor requerido',
+           // 'telefono_secundario.required' => 'El Numero de telefono del contacto secundario es un valor requerido'
         ];
 
 
@@ -243,13 +243,13 @@ class WelcomeController extends Controller
             'password.min' => 'La contraseña debe tener un minimo de 8 caracteres',
             'document_number.required' => 'El número de documento es un valor requerido',
             'phone_number.required' => 'El Numero de telefono es un valor requerido',
-            'address.required' => 'La dirección es un valor requerido',
+            'address.required' => 'La dirección es un valor requerido'
             //'organization_id.required' => 'La organización es requerida',
-            'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
-            'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
-            'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
-            'cargo_contacto_secundario.required' => 'El Cargo del contacto secundario es un valor requerido',
-            'telefono_secundario.required' => 'El Numero de telefono del contacto secundario es un valor requerido'
+            //'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
+            //'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
+            //'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
+            //'cargo_contacto_secundario.required' => 'El Cargo del contacto secundario es un valor requerido',
+            //'telefono_secundario.required' => 'El Numero de telefono del contacto secundario es un valor requerido'
         ];
 
 

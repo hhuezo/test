@@ -54,8 +54,8 @@
                 <p class="bnr-para"></p>
                     <table>
                         <tr><td>
-                            <div>
-                    <img src="/img/losentimos.png" ><p></td>
+                            <div>    <img src="{{asset('/img/losentimos.png')}}">
+               <p></td>
                    </div>
                 <h1 class="bnr-sub-title">Gracias por Registrarse.<br>Se le notificara<br>por email su  enrrolamiento</h1>
                 <p class="bnr-para"></p>

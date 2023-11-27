@@ -635,7 +635,7 @@ class IglesiaController extends Controller
             'password.min' => 'La contraseña debe tener al menos 8 caracteres',
             'password.confirmed' => 'Las contraseñas ingresadas no coinsiden',
             'pastor_name.required' => 'El nombre del pastor es requerido',
-            'pastor_phone_number' => 'El fomato de telefono de contacto 2 no es válido',
+          //  'pastor_phone_number' => 'El fomato de telefono de contacto 2 no es válido',
         ];
 
         $request->validate([
@@ -644,7 +644,7 @@ class IglesiaController extends Controller
             'password' => 'required|min:8|confirmed',
             'address' => 'required',
             'pastor_name' => 'required',
-            'pastor_phone_number' => 'regex:/^\d{4}-\d{4}$/',
+           // 'pastor_phone_number' => 'regex:/^\d{4}-\d{4}$/',
 
         ], $messages);
 

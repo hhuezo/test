@@ -108,9 +108,9 @@ class MemberController extends Controller
         $member->organization_id = (int)$request->iglesia_id;
         $member->departamento_id = $request->departamento_id;
         $member->municipio_id = $request->municipio_id;
-        $member->status = 1;
+        $member->status_id = 1;
         $member->users_id = $user->id;
-        $member->state_id=   $deptos->id;
+        $member->departamento_id=   $deptos->id;
         if($request->get('is_pastor') == 'on'){
             $member->is_pastor = 1;   // si es pastor
         }else{
@@ -165,7 +165,7 @@ class MemberController extends Controller
         $generos = Gender::get();
         $grupos = Grupo::get();
         $iglesia_grupo = $iglesia->iglesia_grupo;
-       
+
         return view('catalog.member.show', compact('iglesia_grupo','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan','municipios','generos'));
         alert()->success('El registro ha sido añadido correctamente');
        // return back();

@@ -20,7 +20,7 @@
                     <div class="overflow-hidden " style=" margin-bottom:20px ">
                         <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
                             <thead class="bg-slate-200 dark:bg-slate-700">
-                                <tr>
+                                <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                     <th style="text-align: center">Id</th>
                                     <th style="text-align: center">Email</th>
                                     <th style="text-align: center">Nombre</th>
@@ -32,7 +32,7 @@
                                 @foreach ($usuarios as $obj)
                                 @foreach ($members as $obj2)
                                 @if ($obj->id==$obj2->users_id)
-                                <tr>
+                                <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
 
                                     <td align="center">{{ $obj->id }}</td>
                                     <td align="center">{{ $obj->email }}</td>

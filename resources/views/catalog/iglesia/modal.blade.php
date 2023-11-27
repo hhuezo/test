@@ -3,8 +3,6 @@
     <form method="POST" action="{{ route('iglesia.destroy', $obj->id) }}">
         @method('delete')
         @csrf
-
-
         <div class="modal-dialog relative w-auto pointer-events-none">
             <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding
                           rounded-md outline-none text-current">

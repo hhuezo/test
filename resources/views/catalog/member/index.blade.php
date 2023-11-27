@@ -31,7 +31,7 @@
                                 <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                     @if ($member->count() > 0)
                                         @foreach ($member as $obj)
-                                            <tr>
+                                            <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td align="center">{{ $obj->name_member}}</td>
                                                 <td align="center">{{ $obj->lastname_member}}</td>

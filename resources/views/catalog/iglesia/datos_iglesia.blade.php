@@ -49,8 +49,8 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput"
-                                                    class="form-label">{{ __('Estado de la Iglesia') }}</label> 
-                                                <input type="text" name="estado" 
+                                                    class="form-label">{{ __('Estado de la Iglesia') }}</label>
+                                                <input type="text" name="estado"
                                                     value=" {{ $iglesia->iglesia_estatus->description_es }}" required
                                                     class="form-control" autofocus="true" disabled>
                                             </div>
@@ -114,17 +114,17 @@
                                                 class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
                                                 <thead class="bg-slate-200 dark:bg-slate-700">
 
-                                                    <tr class="td-table">
+                                                    <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                                         <th style="text-align: center">id</th>
                                                         <th style="text-align: center">Grupo</th>
                                                         <th style="text-align: center">Nombre</th>
                                                         <th style="text-align: center">Opciones</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
 
                                                     @foreach ($grupos_iglesia as $obj)
-                                                        <tr>
+                                                        <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
 
                                                             <td align="center">{{ $obj->iglesia_grupo }}</td>
                                                             <td align="center">{{ $obj->No_grupo }}</td>

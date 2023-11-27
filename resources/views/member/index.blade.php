@@ -15,7 +15,7 @@
 
                         <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
                             <thead class="bg-slate-200 dark:bg-slate-700">
-                                <tr class="td-table">
+                                <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                     <th>Nombre</th>
                                     <th>Documento</th>
                                     <th>Fecha nacimiento</th>
@@ -27,7 +27,7 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                 @foreach ($members as $obj)
-                                    <tr>
+                                    <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                         <td>{{ $obj->name_member }} {{$obj->lastname_member}}</td>
                                         <td class="table-td ">{{ $obj->document_number }}</td>
                                         <td>{{ date('d/m/Y', strtotime($obj->birthdate)) }}</td>
