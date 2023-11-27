@@ -29,7 +29,7 @@
                                 <tbody>
                                     @if ($permissions->count() > 0)
                                         @foreach ($permissions as $obj)
-                                            <tr>
+                                            <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td align="center">{{ $obj->name }}</td>
                                                 <td align="center">

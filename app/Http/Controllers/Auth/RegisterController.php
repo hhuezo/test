@@ -77,11 +77,11 @@ class RegisterController extends Controller
             'phone_number.required' => 'El Numero de telefono es un valor requerido',
             'address' => 'La dirección es un valor requerido',
             'contact_name.required' => 'El Contacto es un valor requerido',
-            'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
-            'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
-            'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
-            'cargo_contacto_secundario.required' => 'El Cargo del contacto secundario es un valor requerido',
-            'telefono_secundario.required' => 'El Numero de telefono del contacto secundario es un valor requerido'
+            //'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
+           // 'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
+          //  'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
+           // 'cargo_contacto_secundario.required' => 'El Cargo del contacto secundario es un valor requerido',
+           // 'telefono_secundario.required' => 'El Numero de telefono del contacto secundario es un valor requerido'
         ];
 
         if (Session::get('locale') && Session::get('locale') == 'en') {

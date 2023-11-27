@@ -1,8 +1,10 @@
 
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-viewqr-{{  $obj->No_grupo }}">
-    <form method="POST" action="{{url('catalog\iglesia\datos_iglesia') }}">
+
+    <form method="get" action="{{url('iglesia/datos_iglesia') }}">
      <input type="hidden" name='group_id' value="{{ $obj->No_grupo }}">
      <input type="hidden" name='iglesia_id' value="{{$iglesia->id }}">
+
      @csrf
      <div class="modal-dialog relative w-auto pointer-events-none">
          <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding
@@ -25,7 +27,7 @@
              <!-- Modal body -->
              <div class="p-6 space-y-4">
                <h6 class="text-base text-slate-900 dark:text-white leading-6">
-                    CODIGO QR
+                    Codigo del Grupo
                </h6>
                @if(  $obj->No_grupo ==1 )
                <img src="{{asset('img/qrcodeiglesiagrupo1.png')}}">

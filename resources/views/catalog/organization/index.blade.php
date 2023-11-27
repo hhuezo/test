@@ -21,7 +21,7 @@
                         <div class="overflow-hidden " style=" margin-bottom:20px ">
                             <table id="myTable" class="display" cellspacing="0" width="100%">
                                 <thead>
-                                    <tr class="td-table">
+                                    <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                         <th style="text-align: center">Id</th>
                                         <th style="text-align: center">organizacion</th>
                                         <th style="text-align: center">direccion</th>

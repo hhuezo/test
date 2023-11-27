@@ -30,7 +30,7 @@
                         <tbody>
                             @if ($answers->count() > 0)
                             @foreach ($answers as $obj)
-                            <tr>
+                            <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                 <td align="center">{{ $obj->id }}</td>
                                 <td>{{ $obj->description }}</td>
                                 <td>{{ $obj->questions->description }}</td>

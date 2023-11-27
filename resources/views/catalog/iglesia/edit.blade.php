@@ -225,7 +225,7 @@
                                                     <!-- <input type="file" name="logo_name" value="{{ old('logo_name') }}" class="form-control"> -->
 
                                                     <input type="file" name="cv_pdf" id="fileInput" style="display: none;">
-                                                    <div id="avatar" name="avatar" class="dropzone"> </div>
+                                                     <!-- <div id="avatar" name="avatar" class="dropzone"> </div>-->
 
                                                 </div>
                                                 <p>
@@ -260,7 +260,7 @@
                                     @endif
                                     <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
                                         <thead class="bg-slate-200 dark:bg-slate-700">
-                                            <tr class="td-table">
+                                            <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                                 <th style="text-align: center">Iglesia</th>
                                                 <th style="text-align: center">Idpregunta</th>
                                                 <th style="text-align: center">Pregunta</th>
@@ -302,9 +302,9 @@
                                         </tbody>
                                     </table>
                                     &nbsp;
-                                    
+
                                     @include('catalog.iglesia.modal_create_question')
-                                   
+
                                     &nbsp;
 
 
@@ -337,9 +337,9 @@
                                     </table>
                                     &nbsp;
 
-                                   
+
                                     @include('catalog.iglesia.modal_add_grupo')
-                                   
+
                                     &nbsp;
                                 </div>
                             </div>
@@ -383,20 +383,20 @@
 </script>
 <script type="text/javascript">
     // Configura Dropzone para el campo de entrada 'avatar'
-    const avatarDropzone = new Dropzone('#avatar', {
-        url: "{{ route('dropzone.store') }}", // Ruta de carga de avatar en Laravel
-        paramName: 'avatar', // Nombre del campo que Laravel espera
-        maxFilesize: 2, // Tamaño máximo de archivo en MB
-        acceptedFiles: 'image/*', // Permitir cualquier tipo de archivo
-        addRemoveLinks: true, // Mostrar el botón para quitar el archivo
-        dictRemoveFile: "<br><button class='btn btn-danger'>Remover</button>", // Texto del botón para quitar el archivo
-        dictDefaultMessage: "Arrastra aquí o haz clic para subir tu hoja de vida", // Cambia el título por defecto
-        maxFile: 1,
-    });
+  //  const avatarDropzone = new Dropzone('#avatar', {
+   //     url: "{{ route('dropzone.store') }}", // Ruta de carga de avatar en Laravel
+    //    paramName: 'avatar', // Nombre del campo que Laravel espera
+    //    maxFilesize: 2, // Tamaño máximo de archivo en MB
+     //   acceptedFiles: 'image/*', // Permitir cualquier tipo de archivo
+      //  addRemoveLinks: true, // Mostrar el botón para quitar el archivo
+       // dictRemoveFile: "<br><button class='btn btn-danger'>Remover</button>", // Texto del botón para quitar el archivo
+       // dictDefaultMessage: "Arrastra aquí o haz clic para subir tu hoja de vida", // Cambia el título por defecto
+       // maxFile: 1,
+   // });
 
     document.getElementById('avatar').addEventListener('click', function() {
         // Simula un clic en el input para abrir el selector de archivos
-        //document.getElementById('fileInput').click();
+        document.getElementById('fileInput').click();
         //   console.log(document.getElementById('avatar'));
     });
 

@@ -39,10 +39,10 @@ use App\Http\Controllers\catalog\WizardQuestionsController;
 | contains the "web" middleware group. Now create something great!
 |
 
-
+*/
 Route::get('/', function () {
-    return view('welcome');
-});*/
+    return view('auth/message');
+});
 
 Route::get('/', [WelcomeController::class, 'index']);
 Route::get('iglesia/datos_iglesia', [IglesiaController::class, 'datos_iglesia']);

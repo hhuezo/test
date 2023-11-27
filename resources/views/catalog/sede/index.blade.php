@@ -19,7 +19,7 @@
                 <div class="overflow-hidden " style=" margin-bottom:20px ">
                     <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
                         <thead class="bg-slate-200 dark:bg-slate-700">
-                            <tr class="td-table">
+                            <tr   class="even:bg-slate-50 dark:even:bg-slate-700" >
 
                                 <td style="text-align: center">id</td>
                                 <td style="text-align: center">Nombre</td>
@@ -31,7 +31,7 @@
                         <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                             @if ($sede->count() > 0)
                             @foreach ($sede as $obj)
-                            <tr>
+                            <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                 <td align="center">{{ $obj->id }}</td>
                                 <td align="center">{{ $obj->nombre }}</td>
                                 <td align="center">{{ $obj->cohorte->nombre }}</td>

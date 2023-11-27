@@ -21,7 +21,7 @@
                         <div class="overflow-hidden " style=" margin-bottom:20px ">
                             <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
                                 <thead class="bg-slate-200 dark:bg-slate-700">
-                                    <tr class="td-table">
+                                    <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                         <th style="text-align: center">Id</th>
                                         <th style="text-align: center">Descripcion</th>
                                         <th style="text-align: center">Descripcion en español</th>
@@ -34,7 +34,7 @@
                                 <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                     @if ($MemberStatus->count() > 0)
                                         @foreach ($MemberStatus as $obj)
-                                            <tr>
+                                            <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td align="center">{{ $obj->description}}</td>
                                                 <td align="center">{{ $obj->description_es}}</td>

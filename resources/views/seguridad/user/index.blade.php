@@ -19,20 +19,19 @@
                     <span class="  col-span-4 hidden"></span>
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden " style=" margin-bottom:20px ">
-                            <table id="myTable"class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700" cellspacing="0" width="100%">
+                            <table id="myTable" class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700" cellspacing="0" width="100%">
                                 <thead class="bg-slate-200 dark:bg-slate-700">
-                                    <tr>
+                                    <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                         <th style="text-align: center">Id</th>
                                         <th style="text-align: center">Email</th>
                                         <th style="text-align: center">Nombre</th>
-
                                         <th style="text-align: center">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($usuarios->count() > 0)
                                         @foreach ($usuarios as $obj)
-                                            <tr>
+                                            <tr   class="even:bg-slate-50 dark:even:bg-slate-700">
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td  align="center">{{ $obj->email }}</td>
                                                 <td  align="center">{{ $obj->name }}</td>
