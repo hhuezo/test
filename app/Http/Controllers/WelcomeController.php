@@ -2,33 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\catalog\ChurchQuestionWizard;
-use App\Models\catalog\Cohorte;
 use App\Models\catalog\Departamento;
-use App\Models\catalog\Gender;
-use App\Models\catalog\Grupo;
+
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member; //as CatalogMember;
-use App\Models\catalog\MemberStatus;
+
 use App\Models\catalog\Municipio;
-use App\Models\catalog\OrganizationStatus;
+
 //use App\Models\Member;
-use App\Models\catalog\Sede;
-use App\Models\catalog\user_has_grupo;
-use App\Models\catalog\UserHasGrupo;
-use App\Models\catalog\WizardQuestions;
-use App\Models\Organization;
+
 use App\Models\User;
-use Auth;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\catalog\GroupPerchuchPlan;
-use App\Models\catalog\Users;
-use Barryvdh\DomPDF\PDF;
-use Carbon\Carbon;
+use DateTime;
+use Illuminate\Validation\ValidationException;
 
 class WelcomeController extends Controller
 {
@@ -76,14 +65,13 @@ class WelcomeController extends Controller
             'password.confirmed' => 'Las claves no coinciden.',
             'password.min' => 'La contraseña debe tener un minimo de 8 caracteres',
             'document_number.required' => 'El número de documento es un valor requerido',
-            'phone_number.required' => 'El Numero de telefono es un valor requerido',
-            'address.required' => 'La dirección es un valor requerido'
-            //'organization_id.required' => 'La organización es requerida',
-           // 'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
-           // 'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
-            //'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
-            //'cargo_contacto_secundario.required' => 'El Cargo del contacto secundario es un valor requerido',
-           // 'telefono_secundario.required' => 'El Numero de telefono del contacto secundario es un valor requerido'
+            'phone_number.required' => 'El número de telefono es un valor requerido',
+            'phone_number.regex' => 'El número de teléfono no es válido',
+            'address.required' => 'La dirección es un valor requerido',
+            'document_number.required' => 'El número de documento es un valor requerido',
+            'document_number.min' => 'El número de documento no es válido',
+            'document_number.regex' => 'El número de documento no es válido',
+            'birthdate.before' => 'El grupo seleccionado no es válido',
         ];
 
 
@@ -93,22 +81,50 @@ class WelcomeController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            //'document_number' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required', 'string', 'max:9'],
+            'phone_number' => ['required', 'string', 'regex:/^\d{4}-\d{4}$/'],
             'address' => ['required', 'string', 'max:255'],
-            //'organization_id' => ['required'],
         ], $messages);
 
+        if ($request->grupo_id != 1) {
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'phone_number' => ['required', 'string', 'max:9'],
+                'address' => ['required', 'string', 'max:255'],
+                'document_number' => ['required', 'string', 'regex:/^\d{8}-\d$/'],
+                'phone_number' => ['required', 'string', 'regex:/^\d{4}-\d{4}$/'],
+            ], $messages);
+        }
 
+
+        $fechaNacimientoObj = new DateTime($request->birthdate);
+        $fechaActual = new DateTime();
+        $edad = $fechaNacimientoObj->diff($fechaActual);
+        $edad->y;
+
+        if($edad->y >= 18  &&  $request->grupo_id == 1)
+        {
+            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+
+        }
+
+
+        if($edad->y < 18  &&  $request->grupo_id != 1)
+        {
+            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+
+        }
 
         $user = new User();
         $user->name = $request->name . ' ' . $request->last_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->status = 0;
-        $user->assignRole('participante');
-
         $user->save();
+
+        $user->assignRole('participante');
 
         //asign role
 
@@ -128,32 +144,15 @@ class WelcomeController extends Controller
         $member->organization_id = (int)$request->iglesia_id;
         $member->departamento_id = $request->departamento_id;
         $member->municipio_id = $request->municipio_id;
-        $member->status_id= 1;
+        $member->status_id = 1;
         $member->users_id = $user->id;
-        $member->state_id =   $deptos->id;
-        //   $user->assignRole('Participante');
-        // $member->municipio_id = $user->Municipio;
         $member->save();
 
 
-        $GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
-        // dd( $GroupPerchuchPlan->id);
-        $GroupPerchuchPlan->miembro_grupo()->attach($member->id);
-        //$grupoiglesia =iglesia::where('id', '=',(int)$request->iglesia_id)->get();
-        //$grupoiglesia->iglesia_grupo()->attach($request->group_id);
-        // alert()->success('El registro ha sido agregado correctamente');
+        /*$GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
 
+        $GroupPerchuchPlan->miembro_grupo()->attach($member->id);*/
 
-
-
-
-        //Envio de correo usando metodo sendMail de MailController
-        // $objeto = new  MailController();
-        // $email = $request->email;
-        //$email = $request->get('email');
-        // $subject = "Notificación: Datos registrados correctamente";
-        // $content = "Sus datos han sido registrados, nuestro equipo revisará la información y le notificará cuando sean aprobados";
-        // $result = $objeto->sendMail($email, $subject, $content);
         alert()->success('Miembro registrado correctamente');
         return redirect('/login');
     }
@@ -295,9 +294,9 @@ class WelcomeController extends Controller
         $member->status_id = 1;
         $member->users_id = $user->id;
         $member->state_id =   $deptos->id;
-        if($request->get('is_pastor') == 'on'){
+        if ($request->get('is_pastor') == 'on') {
             $member->is_pastor = 1;   // si es pastor
-        }else{
+        } else {
             $member->is_pastor = 0;
         }
         //   $user->assignRole('Participante');
@@ -330,9 +329,4 @@ class WelcomeController extends Controller
 
 
     }
-
-
-
-
-
 }
