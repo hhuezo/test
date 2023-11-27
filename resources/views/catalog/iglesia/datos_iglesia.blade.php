@@ -13,12 +13,13 @@
 
                             </h4>
                             <div class="card-title text-slate-900 dark:text-white">
-
-                                <button class="btn btn-black btn-sm float-right">
-                                    <img src="{{asset('img/qrcodeiglesia.png')}}">
-                                </button>
+                                @if ($iglesia->status_id > 1)
+                                    <button class="btn btn-black btn-sm float-right">
+                                        <img src="{{ asset('img/qrcodeiglesia.png') }}">
+                                    </button>
+                                @endif
                                 <button class="btn btn-black btn-sm float-left">
-                                    <img src="{{asset($iglesia->logo_url.$iglesia->logo)}}" width="120" height="120">
+                                    <img src="{{ asset($iglesia->logo_url . $iglesia->logo) }}" width="120" height="120">
                                 </button>
 
                             </div>
@@ -100,6 +101,7 @@
                                         <div>
 
                                         </div> &nbsp;
+                                        @if ($iglesia->status_id > 1)
                                         <div style="text-align: right;">
                                             <a href="{{ url('catalog/member') }}/{{ $iglesia->id }}">
                                                 <iconify-icon icon="mdi:person" style="color: #1769aa;"
@@ -107,6 +109,7 @@
                                                 Crear Participantes
                                             </a>
                                         </div>
+                                        @endif
                                         &nbsp; &nbsp;
                                         <center>
 
@@ -121,16 +124,19 @@
                                                         <th style="text-align: center">Opciones</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
+                                                <tbody
+                                                    class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
 
                                                     @foreach ($grupos_iglesia as $obj)
-                                                        <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
+                                                        <tr class="even:bg-slate-50 dark:even:bg-slate-700">
 
                                                             <td align="center">{{ $obj->iglesia_grupo }}</td>
                                                             <td align="center">{{ $obj->No_grupo }}</td>
                                                             <td align="center">{{ $obj->nombre_grupo }}</td>
 
-                                                            <td align="center"> <a
+                                                            <td align="center">
+                                                                @if ($iglesia->status_id > 1)
+                                                                 <a
                                                                     href="{{ url('consulta_grupos') }}/{{ $obj->iglesia_grupo }}">
                                                                     <iconify-icon icon="healthicons:eye"
                                                                         style="color: #1769aa;"
@@ -141,12 +147,18 @@
                                                                     <iconify-icon icon="mdi:printer" style="color: #1769aa;"
                                                                         width="40"></iconify-icon>
 
-                                                                    </a> <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-viewqr-{{ $obj->No_grupo }}" icon="icons8:qr-code" style="color: #1769aa;" width="40"></iconify-icon>
+                                                                </a>
 
-                                                            </a>
+                                                                    <iconify-icon data-bs-toggle="modal"
+                                                                        data-bs-target="#modal-viewqr-{{ $obj->No_grupo }}"
+                                                                        icon="icons8:qr-code" style="color: #1769aa;"
+                                                                        width="40"></iconify-icon>
+
+                                                                </a>
+                                                                @endif
                                                             </td>
                                                         </tr>
-                                                         @include('catalog.iglesia.modal_viewqr')
+                                                        @include('catalog.iglesia.modal_viewqr')
                                                     @endforeach
 
                                                 </tbody>
