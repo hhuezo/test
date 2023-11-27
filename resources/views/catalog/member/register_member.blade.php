@@ -27,124 +27,11 @@
     <main class="app-wrapper">
         <div class="flex flex-col justify-between min-h-screen">
             <div>
-                <!-- BEGIN: Header -->
-                <!-- BEGIN: Header -->
-                {{-- <div class="z-[12]" id="app_header">
-                    <div class="app-header   rtl:mr-[248px] bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-700">
-                        <div class="flex justify-between items-center h-full">
-                            <div
-                                class="flex items-center md:space-x-4 space-x-2 xl:space-x-0 rtl:space-x-reverse vertical-box">
-                                <a href="index.html" class="mobile-logo xl:hidden inline-block">
-                                    <img src="{{ asset('assets/images/logo/logo-c.svg') }}" class="black_logo"
-                                        alt="logo">
-                                    <img src="{{ asset('assets/images/logo/logo-c-white.svg') }}" class="white_logo"
-                                        alt="logo">
-                                </a>
-                                <button class="smallDeviceMenuController hidden md:inline-block xl:hidden">
-                                    <iconify-icon
-                                        class="leading-none bg-transparent relative text-xl top-[2px] text-slate-900 dark:text-white"
-                                        icon="heroicons-outline:menu-alt-3"></iconify-icon>
-                                </button>
-
-
-                            </div>
-                            <!-- end vertcial -->
-
-
-
-
-
-                            <!-- end top menu -->
-                            <div
-                                class="nav-tools flex items-center lg:space-x-5 space-x-3 rtl:space-x-reverse leading-0">
-
-                                <!-- BEGIN: Language Dropdown  -->
-
-                                <div class="relative">
-
-                                    <div
-                                        class="dropdown-menu z-10 hidden bg-white divide-y divide-slate-100 shadow w-44 dark:bg-slate-800 border dark:border-slate-900 !top-[25px] rounded-md
-                                        overflow-hidden">
-                                        <ul class="py-1 text-sm text-slate-800 dark:text-slate-200">
-
-                                            @if (config('locale.status') && count(config('locale.languages')) > 1)
-                                                @foreach (array_keys(config('locale.languages')) as $lang)
-                                                    <li>
-                                                        <a href="{!! route('lang.swap', $lang) !!}"
-                                                            class="flex items-center px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                                            @if ($lang == 'es')
-                                                                <img src="{{ asset('img/esp.png') }}"
-                                                                    style="width: 25px;">
-                                                                <span class="font-medium">&nbsp;ESP</span>
-                                                            @else
-                                                                <img src="{{ asset('img/eng.png') }}"
-                                                                    style="width: 25px;">
-                                                                <span class="font-medium">&nbsp;ENG</span>
-                                                            @endif
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            @endif
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Theme Changer -->
-                                <!-- END: Language Dropdown -->
-
-                                <!-- BEGIN: Toggle Theme -->
-
-
-
-
-
-
-
-
-
-                                <!-- END: Header -->
-                                <button class="smallDeviceMenuController md:hidden block leading-0">
-                                    <iconify-icon class="cursor-pointer text-slate-900 dark:text-white text-2xl"
-                                        icon="heroicons-outline:menu-alt-3"></iconify-icon>
-                                </button>
-                                <!-- end mobile menu -->
-                            </div>
-                            <!-- end nav tools -->
-                        </div>
-                    </div>
-                </div> --}}
-
-                <!-- BEGIN: Search Modal -->
-                <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-                    id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-                    <div class="modal-dialog relative w-auto pointer-events-none top-1/4">
-                        <div
-                            class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-900 bg-clip-padding rounded-md outline-none text-current">
-                            <form>
-                                <div class="relative">
-                                    <input type="text" class="form-control !py-3 !pr-12" placeholder="Search">
-                                    <button
-                                        class="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-full border-l text-xl border-l-slate-200 dark:border-l-slate-600 dark:text-slate-300 flex items-center justify-center">
-                                        <iconify-icon icon="heroicons-solid:search"></iconify-icon>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- END: Search Modal -->
-                <!-- END: Header -->
-                <!-- END: Header -->
                 <div class="content-wrapper transition-all duration-150 ltr:ml-[248px] rtl:mr-[248px]"
                     id="content_wrapper">
                     <div class="page-content">
                         <div class="transition-all duration-150 container-fluid" id="page_layout">
                             <div id="content_layout">
-                                {{-- @yield('contenido') --}}
-
-
-
-
-
 
 
                                 <div class="page-content">
@@ -161,11 +48,10 @@
                                                             <header
                                                                 class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                                                                 <div class="flex-1">
-                                                                    <div
-                                                                        class="card-title text-slate-900 dark:text-white">
-                                                                        Registro de Nuevos Miembros
-                                                                        <h1>
-                                                                        </h1>
+                                                                    <div class="card-title text-slate-900 dark:text-white"
+                                                                        style="text-transform:none">
+                                                                        Registro de nuevos participantes
+
                                                                     </div>
                                                                 </div>
 
@@ -475,7 +361,7 @@
                 $("#document_number").prop("required", false);
             }
 
-            $.get('/get_grupo/' + fechaNacimiento, function(data) {
+            $.get('{{url("/get_grupo")}}/' + fechaNacimiento, function(data) {
                 // Manejar la respuesta aquí
                 var _select = ''
                 for (var i = 0; i < data.length; i++)
