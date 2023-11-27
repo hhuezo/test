@@ -271,7 +271,7 @@ class MemberController extends Controller
         $member = Member::findOrFail($id);
         //dd($question);
         $member->delete();
-        alert()->info('El registro ha sido eliminado correctamente');
+        alert()->error('El registro ha sido eliminado correctamente');
         return back();
     }
 }

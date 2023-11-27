@@ -324,7 +324,7 @@ class WelcomeController extends Controller
         $departamentos = Departamento::get();
         //$group_per_chuch_plan= group_per_chuch_plan::get();
         //$newmiembro =grupo::where('departamento_id', '=', 1)->get();
-        return view('auth.register_member', compact('iglesia', 'departamentos', 'iglesia_grupo'));
+        return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'iglesia_grupo'));
 
         //
 

@@ -39,12 +39,20 @@
                                     <form method="POST" action="{{ url('catalog/answerreg/create') }}" enctype="multipart/form-data">
                                         @csrf
 
-                                            <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">{{ __('iglesia') }}</label>
-                                                <input type="text" name="name" required class="form-control" value="{{ old('name') }}" autofocus="true">
-                                            </div>
+                                        <div class="input-area relative">
+                                            <label for="largeInput" class="form-label">Iglesia</label>
+                                            <select id="iglesia_id" name="iglesia_id" class="form-control" required>
+                                                @foreach ($iglesia as $obj)
+                                                <option value="{{ $obj->id }}">
+                                                    {{ $obj->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+
+
+                                        </div>
                                                 <div>  &nbsp;&nbsp;</div>
-                                            <table id="myTable" class="display" cellspacing="0" width="100%">
+                                            <table id="myTable" class="bg-slate-200 dark:bg-slate-700" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr class="td-table">
                                                         <th style="text-align: center">Id</th>
@@ -55,7 +63,7 @@
                                                 <tbody>
 
                                                         @foreach ($wizzarquestion as $obj2)
-                                                        <tr>
+                                                        <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                                                     <td align="center">{{ $obj2->id }}</td>
                                                                     <td align="center">{{ $obj2->question }}</td>
                                                                     <td align="center">

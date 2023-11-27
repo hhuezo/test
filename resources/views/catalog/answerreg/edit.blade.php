@@ -40,8 +40,8 @@
                                         @endif
                                         <form method="POST" action="{{ url('catalog/answerreg/edit') }}">
                                             @csrf
-                                            <table id="myTable" class="display" cellspacing="0" width="100%">
-                                                <thead>
+                                            <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
+                                                <thead >
                                                     <tr class="td-table">
                                                         <th style="text-align: center">Id</th>
                                                         <th style="text-align: center">Pregunta</th>
@@ -93,12 +93,13 @@
                                                 </tbody>
 
                                             </table>
+                                            <div style="text-align: right;">
+                                                <button type="submit"
+                                                    class="btn inline-flex justify-right btn-dark">{{ __('Aceptar') }}</button>
+                                            </div>
                                     </div>
                                     </form>
-                                    <div style="text-align: right;">
-                                        <button type="submit"
-                                            class="btn inline-flex justify-right btn-dark">{{ __('Aceptar') }}</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
