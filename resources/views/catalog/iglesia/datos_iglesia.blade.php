@@ -112,7 +112,7 @@
                                         @endif
                                         &nbsp; &nbsp;
                                         <center>
-
+                                            @if ($iglesia->status_id > 1)
                                             <table
                                                 class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
                                                 <thead class="bg-slate-200 dark:bg-slate-700">
@@ -135,7 +135,7 @@
                                                             <td align="center">{{ $obj->nombre_grupo }}</td>
 
                                                             <td align="center">
-                                                                @if ($iglesia->status_id > 1)
+
                                                                  <a
                                                                     href="{{ url('consulta_grupos') }}/{{ $obj->iglesia_grupo }}">
                                                                     <iconify-icon icon="healthicons:eye"
@@ -155,7 +155,7 @@
                                                                         width="40"></iconify-icon>
 
                                                                 </a>
-                                                                @endif
+
                                                             </td>
                                                         </tr>
                                                         @include('catalog.iglesia.modal_viewqr')
@@ -164,7 +164,7 @@
                                                 </tbody>
                                             </table>
                                         </center>
-
+                                        @endif
 
                                     </div>
                                 </div>
