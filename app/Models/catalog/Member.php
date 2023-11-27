@@ -22,7 +22,8 @@ class Member extends Model
         'aboutme', 'email',
         'cel_phone_number',
         'country_id',
-        'departamento_id',        'city_id',
+        'departamento_id',
+        'city_id',
         'address',
         'data_created',
         'status_id',
@@ -34,7 +35,6 @@ class Member extends Model
     public function organizacionestado()
     {
         return $this->belongsTo('App\Models\catalog\OrganizationStatus', 'id', 'status');
-        //return $this->belongsTo('App\Models\LugarOrigen', 'tck_lor_codigo', 'lor_codigo');
     }
 
     public function usuario_iglesia()
@@ -44,8 +44,9 @@ class Member extends Model
 
     public function member_has_group()
     {
-        return $this->belongsToMany(Grupo::class, 'member_has_group', 'member_id', 'grupo_id');
+        return $this->belongsToMany(Grupo::class, 'member_has_group','member_id');
     }
+
 
     public function genders(){
         return $this->belongsTo(Gender::class, 'catalog_gender_id','id');

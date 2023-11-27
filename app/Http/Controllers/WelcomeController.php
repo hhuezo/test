@@ -55,7 +55,6 @@ class WelcomeController extends Controller
     public function store_member(Request $request)
     {
 
-
         $messages = [
             'name.required' => 'El nombre es un valor requerido',
             'last_name.required' => 'El apellido es un valor requerido',
@@ -99,6 +98,9 @@ class WelcomeController extends Controller
         }
 
 
+
+
+
         $fechaNacimientoObj = new DateTime($request->birthdate);
         $fechaActual = new DateTime();
         $edad = $fechaNacimientoObj->diff($fechaActual);
@@ -117,6 +119,7 @@ class WelcomeController extends Controller
 
         }
 
+
         $user = new User();
         $user->name = $request->name . ' ' . $request->last_name;
         $user->email = $request->email;
@@ -125,11 +128,6 @@ class WelcomeController extends Controller
         $user->save();
 
         $user->assignRole('participante');
-
-        //asign role
-
-        $iglesia = Iglesia::findorfail($request->iglesia_id);
-        $deptos = Departamento::findorfail($iglesia->catalog_departamento_id);
 
         $member = new Member();
         $member->name_member = $request->name;
@@ -148,12 +146,10 @@ class WelcomeController extends Controller
         $member->users_id = $user->id;
         $member->save();
 
+        $member->member_has_group()->attach($request->grupo_id);
 
-        /*$GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
 
-        $GroupPerchuchPlan->miembro_grupo()->attach($member->id);*/
-
-        alert()->success('Miembro registrado correctamente');
+        alert()->success('Participante registrado correctamente');
         return redirect('/login');
     }
 
