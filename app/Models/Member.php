@@ -28,7 +28,7 @@ class Member extends Model
         'email',
         'cell_phone_number',
         'country_id',
-        'state_id',
+        'departamento_id',
         'city_id',
         'address',
         'date_created',
