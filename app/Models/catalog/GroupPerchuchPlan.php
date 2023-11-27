@@ -24,12 +24,23 @@ class GroupPerchuchPlan extends Model
     ];
 
 
-    public function miembro_grupo()
-    {
-        return $this->belongsToMany(Member::class, 'user_has_group', 'group_per_church_id', 'member_id');
+    // public function miembro_grupo()
+    // {
+    //     return $this->belongsToMany(Member::class, 'user_has_group', 'group_per_church_id', 'member_id');
+    // }
 
+    public function iglesia()
+    {
+        return $this->belongsTo(Iglesia::class, 'iglesia_id', 'id');
 
     }
+
+    public function plan_estudio()
+    {
+        return $this->belongsTo(PlanEstudio::class, 'study_plan_id', 'id');
+
+    }
+
     public function grupo()
     {
         return $this->belongsTo(Grupo::class, 'group_id', 'id');
