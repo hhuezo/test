@@ -1,5 +1,6 @@
 
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-viewqr-{{  $obj->No_grupo }}">
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1"
+id="modal-viewqr-{{  $obj->id }}">
 
     <form method="get" action="{{url('iglesia/datos_iglesia') }}">
      <input type="hidden" name='group_id' value="{{ $obj->No_grupo }}">
@@ -29,28 +30,16 @@
                <h6 class="text-base text-slate-900 dark:text-white leading-6">
                     Codigo del Grupo
                </h6>
-               @if(  $obj->No_grupo ==1 )
-               <img src="{{asset('img/qrcodeiglesiagrupo1.png')}}">
+               <img src="{{$obj->codigo_qr}}">
+               <img src="{{asset('img/')}}/{{$obj->codigo_qr}}">
 
-                @endif
-               @if(  $obj->No_grupo==2 )
-               <img src="{{asset('img/qrcodeiglesiagrupo2.png')}}">
 
-                @endif
-               @if( $obj->No_grupo==3 )
-               <img src="{{asset('img/qrcodeiglesiagrupo3.png')}}">
-
-                @endif
-               @if( $obj->No_grupo==4 )
-               <img src="{{asset('img/qrcodeiglesiagrupo4.png')}}">
-
-                @endif
 
              </div>
              <!-- Modal footer -->
-             <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
+             {{-- <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
                <button type="submit" class="btn inline-flex justify-center text-white bg-black-500 float-right" style="margin-bottom: 15px">Aceptar</button>
-             </div>
+             </div> --}}
            </div>
          </div>
        </div>

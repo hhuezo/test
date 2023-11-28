@@ -120,7 +120,6 @@
                                                     <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                                         <th style="text-align: center">id</th>
                                                         <th style="text-align: center">Grupo</th>
-                                                        <th style="text-align: center">Nombre</th>
                                                         <th style="text-align: center">Opciones</th>
                                                     </tr>
                                                 </thead>
@@ -130,12 +129,10 @@
                                                     @foreach ($grupos_iglesia as $obj)
                                                         <tr class="even:bg-slate-50 dark:even:bg-slate-700">
 
-                                                            <td align="center">{{ $obj->iglesia_grupo }}</td>
-                                                            <td align="center">{{ $obj->No_grupo }}</td>
-                                                            <td align="center">{{ $obj->nombre_grupo }}</td>
+                                                            <td align="center">{{ $obj->id }}</td>
+                                                            <td align="center">{{ $obj->nombre }}</td>
 
                                                             <td align="center">
-
                                                                  <a
                                                                     href="{{ url('consulta_grupos') }}/{{ $obj->iglesia_grupo }}">
                                                                     <iconify-icon icon="healthicons:eye"
@@ -150,7 +147,7 @@
                                                                 </a>
 
                                                                     <iconify-icon data-bs-toggle="modal"
-                                                                        data-bs-target="#modal-viewqr-{{ $obj->No_grupo }}"
+                                                                        data-bs-target="#modal-viewqr-{{ $obj->id }}"
                                                                         icon="icons8:qr-code" style="color: #1769aa;"
                                                                         width="40"></iconify-icon>
 

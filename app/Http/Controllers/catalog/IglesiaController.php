@@ -377,9 +377,18 @@ class IglesiaController extends Controller
         $user   = User::findOrFail(auth()->user()->id);
         $iglesia = $user->user_has_iglesia->first();
         $departamentos = Departamento::get();
-        $iglesia_grupo = $iglesia->iglesia_grupo;
+        $grupos_iglesia = $iglesia->iglesia_has_grupo;
 
-        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo , count(*) as numero_participantes
+
+        $url =  $request->root() . "/registro_participantes/" . $iglesia->id.'/';
+
+        foreach( $grupos_iglesia as $obj)
+        {
+            $obj->codigo_qr ='qrcodeiglesiagrupo'.$obj->id.'.png';
+            QrCode::format('png')->size(200)->generate($url . '/'.$obj->id, public_path('img/qrcodeiglesiagrupo'.$obj->id.'.png'));
+        }
+
+       /* $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo , count(*) as numero_participantes
         from iglesia i
         join group_per_chuch_plan gpc
         on gpc.iglesia_id = i.id
@@ -415,25 +424,25 @@ class IglesiaController extends Controller
             where a.group_id=b.id
             and a.iglesia_id=?";
 
-        $grupos_iglesia = DB::select($sql3, array($iglesia->id));
+        $grupos_iglesia = DB::select($sql3, array($iglesia->id));*/
 
 
 
 
 
-        $url =  $request->root() . "/registro_participantes/" . $iglesia->id.'/0';
 
 
-        QrCode::format('png')->size(200)->generate($url, public_path('img/qrcodeiglesia.png'));
 
-        QrCode::format('png')->size(200)->generate($url . '1', public_path('img/qrcodeiglesiagrupo1.png'));
+        QrCode::format('png')->size(200)->generate($url.'0', public_path('img/qrcodeiglesia.png'));
+
+       /* QrCode::format('png')->size(200)->generate($url . '1', public_path('img/qrcodeiglesiagrupo1.png'));
 
 
         QrCode::format('png')->size(200)->generate($url . '2', public_path('img/qrcodeiglesiagrupo2.png'));
 
         QrCode::format('png')->size(200)->generate($url . '3', public_path('img/qrcodeiglesiagrupo3.png'));
 
-        QrCode::format('png')->size(200)->generate($url . '4', public_path('img/qrcodeiglesiagrupo4.png'));
+        QrCode::format('png')->size(200)->generate($url . '4', public_path('img/qrcodeiglesiagrupo4.png'));*/
         //'conteo_miembros', 'miembros_iglesia',
 
         return view('catalog.iglesia.datos_iglesia', compact('departamentos',  'iglesia',
