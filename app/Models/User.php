@@ -56,5 +56,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id');
     }
 
+    protected $guarded = [];
+
+
+
 
 }

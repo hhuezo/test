@@ -40,7 +40,11 @@
                                                 </ul>
                                             </div>
                                         @endif
-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                                         <form method="POST" action="{{ url('iglesiauser.update', $usuario->id) }}">
                                             @method('PUT')
                                             @csrf
@@ -67,17 +71,6 @@
                                                 </div>
 
 
-                                                <div class="btn btn-dark btn-sm float-right">
-                                                    <div class="input-area relative">
-                                                    <button type="submit">{{ __('Aceptar') }}</button>
-                                                </div>
-                                             </div>
-                                             <div class="card-title text-slate-900 dark:text-white">Modificar Datos de Usuario
-
-                                                <a href="{{ url('catalog/Iglesiauser') }}">
-                                                    <button type="submit">{{ __('Aceptar') }}</button>
-                                                </a>
-                                            </div>
 
                                             &nbsp;
 
@@ -86,24 +79,16 @@
                                                         <p>
                                                     </div>
 
+                                                    <div class="btn btn-dark btn-sm float-right">
+                                                        <div class="input-area relative">
+                                                        <button type="submit">{{ __('Aceptar') }}</button>
+                                                    </div>
+                                                 </div>
 
-                                                </div>
-
-                                            </div>
 
                                         </form>
 
                                         &nbsp;&nbsp;
-
-
-
-                                            &nbsp;
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
 
 
 

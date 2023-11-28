@@ -9,7 +9,8 @@ use App\Models\catalog\Users;
  use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class UserController extends Controller
 {
     /**
@@ -21,11 +22,19 @@ class UserController extends Controller
     {
 
 
-        $members = Member::where('status_id','=',1)->get();
-        $usuarios =  Users::get();
+       // $members = Member::where('status_id','=',1)->get();
+        $usuarios =  User::where('status','=',1)->get();;
 
 
-        return view('catalog.iglesiauser.index', compact('usuarios','members'));
+         $miembros_iglesia =  DB::select("select  p.id idusuario, p.name as nombre  , i.name iglesia
+         from iglesia i
+         join users_has_iglesia q on
+         i.id =q.iglesia_id
+         join users p on   p.id =q.user_id");
+
+
+
+        return view('catalog.iglesiauser.index', compact('usuarios','miembros_iglesia'));
 
     }
 
@@ -37,7 +46,7 @@ class UserController extends Controller
     public function create()
     {
 
-        $usuarios = Users::get();
+        $usuarios = User::get();
 
         return view('catalog.iglesiauser.create', compact('usuarios'));
     }
@@ -62,7 +71,7 @@ class UserController extends Controller
 
         ], $messages);
 
-        $usuario = new Users();
+        $usuario = new User();
         $usuario->nombre = $request->nombre;
         $usuario->email = $request->email;
 
@@ -99,7 +108,7 @@ class UserController extends Controller
     {
 
 
-        $usuario = Users::findOrFail($id);
+        $usuario = User::findOrFail($id);
 
         return view('catalog.iglesiauser.edit', compact('usuario' ));
     }
@@ -125,7 +134,7 @@ class UserController extends Controller
 
         ], $messages);
 
-        $usuario =  Users::findOrFail($id);
+        $usuario =  User::findOrFail($id);
         $usuario->nombre = $request->nombre;
         $usuario->email = $request->email;
         if($request->password !=""){
@@ -144,7 +153,7 @@ class UserController extends Controller
 
 
 
-       $useriglesia =Users::findOrFail($request->user_id);
+       $useriglesia =User::findOrFail($request->user_id);
        $useriglesia->usuarioiglesia()->attach($request->iglesia_id);
        $useriglesia->save();
         alert()->success('El registro ha sido agregada correctamente');
