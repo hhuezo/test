@@ -46,7 +46,8 @@ class User extends Authenticatable
     ];
 
     public $timestamps = false;
-    public function iglesia()
+
+    public function user_has_iglesia()
     {
         return $this->belongsToMany(Iglesia::class,'users_has_iglesia');
     }
