@@ -9,6 +9,7 @@ use App\Models\catalog\GroupPerchuchPlan;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
+use App\Models\catalog\MemberHasGrupo;
 use App\Models\catalog\MemberStatus;
 use App\Models\catalog\Municipio;
 use App\Models\catalog\UserHasGrupo;
@@ -164,7 +165,7 @@ class MemberController extends Controller
         //  //$organizations = Organization::get();
         $generos = Gender::get();
         $grupos = Grupo::get();
-        $iglesia_grupo = $iglesia->iglesia_grupo;
+        $iglesia_grupo = $iglesia->iglesia_has_grupo;
 
         return view('catalog.member.show', compact('iglesia_grupo','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan','municipios','generos'));
         alert()->success('El registro ha sido añadido correctamente');
@@ -203,7 +204,7 @@ class MemberController extends Controller
 
         $member = member::findOrFail($id);
 
-        $group = $member->user_has_group->first();
+        $group = $member->member_has_group->first();
         if(($group) != null){
             $group_id = $group->group_id;
         }else{
@@ -249,13 +250,15 @@ class MemberController extends Controller
         $member->departamento_id = $request->departamento_id;
         $member->municipio_id = $request->municipio_id;
         $member->update();
-        $group = $member->user_has_group->first();
+        $group = $member->member_has_group->first();
         $group_id = $group->group_id;
      //  dd( $member->organization_id);
         $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id)->first();
+        $group_member = MemberHasGrupo::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id)->first();
       //  dd(  $group_church);
         $group_church->group_id = $request->grupo_id;
         $group_church->update();
+        $group_member->update();
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
     }

@@ -7,6 +7,7 @@ use App\Models\catalog\Gender;
 use App\Models\catalog\GroupPerchuchPlan;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
+use App\Models\catalog\MemberHasGrupo;
 use App\Models\catalog\Municipio;
 use App\Models\catalog\UserHasGrupo;
 use App\Models\Member;
@@ -108,7 +109,7 @@ class MemberController extends Controller
 
         $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=',  $group_id->group_id)->first();
 
-        $user_has_grupo = UserHasGrupo::where('member_id', '=', $member->id)->where('group_per_church_id', '=', $group_church->id)->first();
+        $user_has_grupo = MemberHasGrupo::where('member_id', '=', $member->id)->where('grupo_id', '=', $group_id->id)->first();
 
         $group_churchnew = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->where('group_id', '=', $request->grupo_id)->first();
 

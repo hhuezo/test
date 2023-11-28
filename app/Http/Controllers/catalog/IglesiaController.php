@@ -172,6 +172,7 @@ class IglesiaController extends Controller
      */
     public function edit($id)
     {
+
         $iglesia = Iglesia::findOrFail($id);
         $cohorte = Cohorte::get();
         $depto = Departamento::where('id', '=', $iglesia->catalog_departamento_id)->get();
@@ -190,7 +191,7 @@ class IglesiaController extends Controller
         //dd($wizzarquestion);
 
 
-        $grupo_iglesias =  $iglesia->iglesia_grupo;
+        $grupo_iglesias =  $iglesia->iglesia_has_grupo;
 
         //$grupos= Grupo::whereNotIn('id', $iglesiaArray)->get();
         // dd(   $grupo_iglesias);

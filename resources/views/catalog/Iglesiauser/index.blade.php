@@ -22,36 +22,34 @@
                             <thead class="bg-slate-200 dark:bg-slate-700">
                                 <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                     <th style="text-align: center">Id</th>
-                                    <th style="text-align: center">Email</th>
+
                                     <th style="text-align: center">Nombre</th>
+                                    <th style="text-align: center">Iglesia</th>
                                     <th style="text-align: center">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
-                                @if ($usuarios->count() > 0)
-                                @foreach ($usuarios as $obj)
-                                @foreach ($members as $obj2)
-                                @if ($obj->id==$obj2->users_id)
+                                        @foreach ($miembros_iglesia as $obj)
+
                                 <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
 
-                                    <td align="center">{{ $obj->id }}</td>
-                                    <td align="center">{{ $obj->email }}</td>
-                                    <td align="center">{{ $obj->name }}</td>
+                                    <td align="center">{{ $obj->idusuario }}</td>
+                                    <td align="center">{{ $obj->nombre }}</td>
 
+                                    <td align="center">{{ $obj->iglesia}}</td>
                                     <td align="center">
-                                        <a href="{{ url('catalog/Iglesiauser') }}/{{ $obj->id }}/edit">
+                                        <a href="{{ url('catalog/Iglesiauser') }}/{{ $obj->idusuario }}/edit">
                                             <iconify-icon icon="mdi:pencil" style="color: #1769aa;" width="40"></iconify-icon>
                                         </a>
                                         &nbsp;&nbsp;
-                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
+                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->idusuario }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
                                     </td>
 
                                 </tr>
-                                @endif
+
 
                                 @endforeach
-                                @endforeach
-                                @endif
+
 
                             </tbody>
                         </table>
