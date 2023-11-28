@@ -30,7 +30,6 @@ id="modal-viewqr-{{  $obj->id }}">
                <h6 class="text-base text-slate-900 dark:text-white leading-6">
                     Codigo del Grupo
                </h6>
-               <img src="{{$obj->codigo_qr}}">
                <img src="{{asset('img/')}}/{{$obj->codigo_qr}}">
 
 
