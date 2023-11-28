@@ -130,6 +130,9 @@ class WelcomeController extends Controller
         $member->municipio_id = $request->municipio_id;
         $member->status_id = 1;
         $member->users_id = $user->id;
+        $member->state_id =   $deptos->id;
+        //   $user->assignRole('Participante');
+        // $member->municipio_id = $user->Municipio;
         $member->save();
 
         $member->member_has_group()->attach($request->grupo_id);
@@ -248,7 +251,7 @@ class WelcomeController extends Controller
         $member->status_id = 1;
         $member->users_id = $user->id;
         $member->state_id =   $deptos->id;
-        if ($request->get('is_pastor') == 'on') {
+        if($request->get('is_pastor') == 'on'){
             $member->is_pastor = 1;   // si es pastor
         } else {
             $member->is_pastor = 0;
