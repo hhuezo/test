@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function user_has_iglesia()
     {
-        return $this->belongsToMany(Iglesia::class,'users_has_iglesia');
+        return $this->belongsToMany(Iglesia::class,'users_has_iglesia','user_id','iglesia_id');
     }
     public function user_rol()
     {
