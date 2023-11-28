@@ -46,7 +46,8 @@ class Member extends Model
 
     public function member_has_group()
     {
-        return $this->belongsToMany(Grupo::class, 'member_has_group','member_id');
+        //return $this->belongsToMany(Member::class, 'member_has_group', 'group_id', 'member_id');
+        return $this->belongsToMany(Grupo::class, 'member_has_group','member_id', 'group_id');
     }
 
 

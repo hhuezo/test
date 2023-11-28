@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\catalog\GroupPerchuchPlan;
 use DateTime;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class WelcomeController extends Controller
@@ -85,61 +86,69 @@ class WelcomeController extends Controller
 
 
 
+        try {
+            // Iniciar la transacción
+            DB::beginTransaction();
+
+            $fechaNacimientoObj = new DateTime($request->birthdate);
+            $fechaActual = new DateTime();
+            $edad = $fechaNacimientoObj->diff($fechaActual);
+            $edad->y;
+
+            if ($edad->y >= 18  &&  $request->grupo_id == 1) {
+                throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+            }
 
 
-        $fechaNacimientoObj = new DateTime($request->birthdate);
-        $fechaActual = new DateTime();
-        $edad = $fechaNacimientoObj->diff($fechaActual);
-        $edad->y;
+            if ($edad->y < 18  &&  $request->grupo_id != 1) {
+                throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+            }
 
-        if ($edad->y >= 18  &&  $request->grupo_id == 1) {
-            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+
+            $user = new User();
+            $user->name = $request->name . ' ' . $request->last_name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->status = 0;
+            $user->save();
+
+            //ASIGNANDO ROL
+            $user->user_has_iglesia()->attach($request->iglesia_id);
+
+            //ASIGNANDO IGLESIA
+            $user->assignRole('participante');
+
+            $member = new Member();
+            $member->name_member = $request->name;
+            $member->lastname_member = $request->last_name;
+            $member->birthdate = $request->birthdate;
+            $member->document_number = $request->document_number;
+            $member->catalog_gender_id = $request->genero;
+            $member->email = $request->email;
+            $member->cell_phone_number = $request->phone_number;
+            $member->address = $request->address;
+            $member->about_me = $request->about_me;
+            $member->organization_id = (int)$request->iglesia_id;
+            $member->departamento_id = $request->departamento_id;
+            $member->municipio_id = $request->municipio_id;
+            $member->status_id = 1;
+            $member->users_id = $user->id;
+            $member->save();
+
+            $group_id = $request->grupo_id;
+            $member->member_has_group()->attach($group_id);
+
+
+            alert()->success('Participante registrado correctamente');
+            return redirect('/login');
+        } catch (\Exception $e) {
+            // Rollback en caso de error
+            DB::rollBack();
+
+            dd($e->getMessage());
+            // Manejar el error, puedes redirigir o mostrar un mensaje de error
+            return redirect()->route('ruta_error')->with('error', 'Error al guardar: ' . $e->getMessage());
         }
-
-
-        if ($edad->y < 18  &&  $request->grupo_id != 1) {
-            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
-        }
-
-
-        $user = new User();
-        $user->name = $request->name . ' ' . $request->last_name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->status = 0;
-        $user->save();
-
-        //ASIGNANDO ROL
-        $user->user_has_iglesia()->attach($request->iglesia_id);
-
-        //ASIGNANDO IGLESIA
-        $user->assignRole('participante');
-
-        $member = new Member();
-        $member->name_member = $request->name;
-        $member->lastname_member = $request->last_name;
-        $member->birthdate = $request->birthdate;
-        $member->document_number = $request->document_number;
-        $member->catalog_gender_id = $request->genero;
-        $member->email = $request->email;
-        $member->cell_phone_number = $request->phone_number;
-        $member->address = $request->address;
-        $member->about_me = $request->about_me;
-        $member->organization_id = (int)$request->iglesia_id;
-        $member->departamento_id = $request->departamento_id;
-        $member->municipio_id = $request->municipio_id;
-        $member->status_id = 1;
-        $member->users_id = $user->id;
-        $member->state_id =   $deptos->id;
-        //   $user->assignRole('Participante');
-        // $member->municipio_id = $user->Municipio;
-        $member->save();
-
-        $member->member_has_group()->attach($request->grupo_id);
-
-
-        alert()->success('Participante registrado correctamente');
-        return redirect('/login');
     }
 
     public function get_municipio($id)
