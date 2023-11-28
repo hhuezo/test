@@ -2,6 +2,7 @@
 
 namespace App\Models\catalog;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,10 +38,11 @@ class Member extends Model
         return $this->belongsTo('App\Models\catalog\OrganizationStatus', 'id', 'status');
     }
 
-    public function usuario_iglesia()
+    public function usuario()
     {
-        return $this->belongsToMany(Users::class, 'users_has_iglesia', 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
+
 
     public function member_has_group()
     {
