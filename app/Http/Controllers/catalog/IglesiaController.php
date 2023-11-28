@@ -375,7 +375,7 @@ class IglesiaController extends Controller
     {
         $i = 1;
         $user   = User::findOrFail(auth()->user()->id);
-        $iglesia = $user->iglesia->first();
+        $iglesia = $user->user_has_iglesia->first();
         $departamentos = Departamento::get();
         $iglesia_grupo = $iglesia->iglesia_grupo;
 
@@ -393,7 +393,7 @@ class IglesiaController extends Controller
         where i.id=?
         group by i.id , i.name  , g.id , g.nombre ";
 
-        $conteo_miembros = DB::select($sql, array($iglesia->id));
+       // $conteo_miembros = DB::select($sql, array($iglesia->id));
 
         $sql2 = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member
             from iglesia i
@@ -408,7 +408,7 @@ class IglesiaController extends Controller
             and q.group_per_church_id=gpc.id
             where i.id=?";
 
-        $miembros_iglesia = DB::select($sql2, array($iglesia->id));
+        //$miembros_iglesia = DB::select($sql2, array($iglesia->id));
         // dd($iglesiagp,$iglesia_grupo);
 
         $sql3 = "select a.id iglesia_grupo,a.iglesia_id,a.group_id No_grupo,b.nombre nombre_grupo FROM urban_stategies.group_per_chuch_plan a,urban_stategies.grupo b
@@ -421,7 +421,7 @@ class IglesiaController extends Controller
 
 
 
-        $url =  $request->root() . "/registro_participantes/" . $iglesia->id;
+        $url =  $request->root() . "/registro_participantes/" . $iglesia->id.'/0';
 
 
         QrCode::format('png')->size(200)->generate($url, public_path('img/qrcodeiglesia.png'));
@@ -434,10 +434,11 @@ class IglesiaController extends Controller
         QrCode::format('png')->size(200)->generate($url . '3', public_path('img/qrcodeiglesiagrupo3.png'));
 
         QrCode::format('png')->size(200)->generate($url . '4', public_path('img/qrcodeiglesiagrupo4.png'));
+        //'conteo_miembros', 'miembros_iglesia',
 
+        return view('catalog.iglesia.datos_iglesia', compact('departamentos',  'iglesia',
+          'grupos_iglesia'));
 
-        return view('catalog.iglesia.datos_iglesia', compact('departamentos',  'iglesia', 'conteo_miembros', 'miembros_iglesia', 'grupos_iglesia'));
-        //return view('auth.register_member', compact('departamentos'));
     }
     public function copiarImagen(Request $request)
     {

@@ -62,8 +62,7 @@ Route::get('/iglesia/back_page', [RegisterController::class, 'back_page'])->name
 //registro participante
 Route::get('/register_member', [MemberController::class, 'register_member'])->name('register_member');
 Route::post('/store_member', [WelcomeController::class, 'store_member'])->name('store_member');
-Route::get('registro_participantes/{iglesia}', [WelcomeController::class, 'registro_participantes']);
-
+Route::get('registro_participantes/{iglesia}/{grupo}', [WelcomeController::class, 'registro_participantes']);
 
 
 

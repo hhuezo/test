@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\catalog\GroupPerchuchPlan;
+use App\Models\catalog\Grupo;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -282,11 +283,18 @@ class WelcomeController extends Controller
     }
 
 
-    public function registro_participantes($id)
+    public function registro_participantes($id,$grupo)
     {
         $iglesia = Iglesia::findorfail($id);
-        $grupos = $iglesia->iglesia_has_grupo;
+        if($grupo == 0)
+        {
+            $grupos = $iglesia->iglesia_has_grupo;
+        }
+        else{
+            $grupos = Grupo::where('id','=',$grupo)->get();
+        }
+
         $departamentos = Departamento::get();
-        return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'grupos'));
+        return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'grupos','grupo'));
     }
 }
