@@ -184,7 +184,7 @@
                                                                             class="form-label">grupo</label>
                                                                         <select id="grupo_id" name="grupo_id"
                                                                             class="form-control" required>
-                                                                            @foreach ($iglesia_grupo as $obj)
+                                                                            @foreach ($grupos as $obj)
                                                                                 <option value="{{ $obj->id }}">
                                                                                     {{ $obj->nombre }}
                                                                                 </option>

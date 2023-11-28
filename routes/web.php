@@ -51,23 +51,29 @@ Route::get('/', [WelcomeController::class, 'index']);
 
 //registro iglesia
 
-Route::get('/registrar',[RegisterController::class,'index']);
-Route::get('/register_edit/{id}',[RegisterController::class, 'register_edit']);
+Route::get('/registrar', [RegisterController::class, 'index']);
+Route::get('/register_edit/{id}', [RegisterController::class, 'register_edit']);
 Route::post('/iglesia_actualizar', [RegisterController::class, 'actualizar_registro']);
 Route::post('/iglesia/registro_respuesta', [RegisterController::class, 'registro_respuesta']);
 Route::post('/iglesia/registro_iglesia', [RegisterController::class, 'registro_iglesia']);
 Route::get('/iglesia/back_page', [RegisterController::class, 'back_page'])->name('back_page');
 
 
+//registro participante
+Route::get('/register_member', [MemberController::class, 'register_member'])->name('register_member');
+Route::post('/store_member', [WelcomeController::class, 'store_member'])->name('store_member');
 Route::get('registro_participantes/{iglesia}', [WelcomeController::class, 'registro_participantes']);
+
+
+
 
 //seguridad
 Route::resource('seguridad/permission', PermissionController::class);
 Route::post('seguridad/permission/update_permission', [PermissionController::class, 'update_permission']);
 Route::resource('seguridad/user', UsuarioController::class);
 
-Route::post('seguridad/user/attach_roles',[UsuarioController::class,'attach_roles']);
-Route::post('seguridad/user/dettach_roles',[UsuarioController::class,'dettach_roles']);
+Route::post('seguridad/user/attach_roles', [UsuarioController::class, 'attach_roles']);
+Route::post('seguridad/user/dettach_roles', [UsuarioController::class, 'dettach_roles']);
 
 
 Route::resource('seguridad/role', RoleController::class);
@@ -82,7 +88,7 @@ Route::post('seguridad/role/link_permission', [RoleController::class, 'link_perm
 
 Route::get('iglesia/datos_iglesia', [IglesiaController::class, 'datos_iglesia']);
 Route::get('register_member_leader', [MemberController::class, 'register_member_leader']);
-Route::post('attach_new_member',[WelcomeController::class,'attach_new_member']);
+Route::post('attach_new_member', [WelcomeController::class, 'attach_new_member']);
 
 
 
@@ -124,19 +130,19 @@ Route::post('/upload', [WelcomeController::class, 'store_file'])->name('dropzone
 Route::post('/iglesia/modificar_estado', [IglesiaController::class, 'modificar_estado']);
 
 
- Route::post('catalog/iglesia/add_preguntaresp', [IglesiaController::class, 'add_preguntaresp']);
- Route::post('catalog/iglesia/attach_preguntas', [IglesiaController::class, 'attach_preguntas'] );
- Route::post('catalog/iglesia/dettach_preguntas', [IglesiaController::class, 'dettach_preguntas']);
+Route::post('catalog/iglesia/add_preguntaresp', [IglesiaController::class, 'add_preguntaresp']);
+Route::post('catalog/iglesia/attach_preguntas', [IglesiaController::class, 'attach_preguntas']);
+Route::post('catalog/iglesia/dettach_preguntas', [IglesiaController::class, 'dettach_preguntas']);
 
 
- Route::post('catalog/Iglesiauser/dettach_iglesiauser', [UserController::class, 'dettach_iglesiauser']);
- Route::post('catalog/Iglesiauser/attach_iglesiauser', [UserController::class, 'attach_iglesiauser']);
+Route::post('catalog/Iglesiauser/dettach_iglesiauser', [UserController::class, 'dettach_iglesiauser']);
+Route::post('catalog/Iglesiauser/attach_iglesiauser', [UserController::class, 'attach_iglesiauser']);
 
- Route::post('catalog/grupo/dettach_iglesiagrupo', [GrupoController::class, 'dettach_iglesiagrupo']);
- Route::post('catalog/grupo/attach_iglesiagrupo', [GrupoController::class, 'attach_iglesiagrupo']);
+Route::post('catalog/grupo/dettach_iglesiagrupo', [GrupoController::class, 'dettach_iglesiagrupo']);
+Route::post('catalog/grupo/attach_iglesiagrupo', [GrupoController::class, 'attach_iglesiagrupo']);
 
- Route::post('catalog/iglesia/dettach_grupos', [IglesiaController::class, 'dettach_grupos']);
- Route::post('catalog/iglesia/attach_grupos', [IglesiaController::class, 'attach_grupos']);
+Route::post('catalog/iglesia/dettach_grupos', [IglesiaController::class, 'dettach_grupos']);
+Route::post('catalog/iglesia/attach_grupos', [IglesiaController::class, 'attach_grupos']);
 
 
 Auth::routes();
@@ -148,8 +154,7 @@ Route::get('/confirma', [HomeController::class, 'confirmacion'])->name('confirma
 
 
 Route::get('/test', [HomeController::class, 'test'])->name('test');
-Route::get('/register_member', [MemberController::class, 'register_member'])->name('register_member');
-Route::post('/store_member', [WelcomeController::class, 'store_member'])->name('store_member');
+
 Route::get('/get_municipio/{id}', [WelcomeController::class, 'get_municipio'])->name('get_municipio');
 
 
@@ -178,11 +183,11 @@ Route::resource('courses', CourseController::class);
 Route::post('course/upload_file', [CourseController::class, 'upload_file']);
 
 //Quiz
-Route::post('catalog/question/attach_questions',[QuestionController::class,'attach_questions']);
-Route::post('catalog/question/dettach_questions',[QuestionController::class,'dettach_questions']);
-Route::post('catalog/question/correct_answer',[QuestionController::class, 'correct_answer']);
-Route::post('catalog/question/delete_correct_answer',[QuestionController::class, 'delete_correct_answer']);
-Route::post('catalog/add_answer',[AnswersController::class, 'store']);
+Route::post('catalog/question/attach_questions', [QuestionController::class, 'attach_questions']);
+Route::post('catalog/question/dettach_questions', [QuestionController::class, 'dettach_questions']);
+Route::post('catalog/question/correct_answer', [QuestionController::class, 'correct_answer']);
+Route::post('catalog/question/delete_correct_answer', [QuestionController::class, 'delete_correct_answer']);
+Route::post('catalog/add_answer', [AnswersController::class, 'store']);
 
 Route::resource('Quiz', QuizController::class);
 
@@ -204,7 +209,7 @@ Route::resource('catalog/course', CatalogCourseController::class);
 
 Route::resource('catalog/cohorte', CohorteController::class);
 
-Route::post('/images', [IglesiaController::class,'copiarImagen']);
+Route::post('/images', [IglesiaController::class, 'copiarImagen']);
 
 Route::resource('catalog/iglesia', IglesiaController::class);
 

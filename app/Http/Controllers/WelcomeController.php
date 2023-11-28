@@ -92,17 +92,13 @@ class WelcomeController extends Controller
         $edad = $fechaNacimientoObj->diff($fechaActual);
         $edad->y;
 
-        if($edad->y >= 18  &&  $request->grupo_id == 1)
-        {
+        if ($edad->y >= 18  &&  $request->grupo_id == 1) {
             throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
-
         }
 
 
-        if($edad->y < 18  &&  $request->grupo_id != 1)
-        {
+        if ($edad->y < 18  &&  $request->grupo_id != 1) {
             throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
-
         }
 
 
@@ -113,6 +109,10 @@ class WelcomeController extends Controller
         $user->status = 0;
         $user->save();
 
+        //ASIGNANDO ROL
+        $user->user_has_iglesia()->attach($request->iglesia_id);
+
+        //ASIGNANDO IGLESIA
         $user->assignRole('participante');
 
         $member = new Member();
@@ -251,7 +251,7 @@ class WelcomeController extends Controller
         $member->status_id = 1;
         $member->users_id = $user->id;
         $member->state_id =   $deptos->id;
-        if($request->get('is_pastor') == 'on'){
+        if ($request->get('is_pastor') == 'on') {
             $member->is_pastor = 1;   // si es pastor
         } else {
             $member->is_pastor = 0;
@@ -271,11 +271,11 @@ class WelcomeController extends Controller
     }
 
 
-    public function registro_participantes($id_iglesia)
+    public function registro_participantes($id)
     {
-        $iglesia = Iglesia::findorfail($id_iglesia);
-        $iglesia_grupo = $iglesia->iglesia_grupo;
+        $iglesia = Iglesia::findorfail($id);
+        $grupos = $iglesia->iglesia_has_grupo;
         $departamentos = Departamento::get();
-        return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'iglesia_grupo'));
-   }
+        return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'grupos'));
+    }
 }
