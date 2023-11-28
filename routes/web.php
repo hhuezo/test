@@ -47,6 +47,27 @@ Route::get('/', function () {
 */
 
 Route::get('/', [WelcomeController::class, 'index']);
+
+
+//seguridad
+Route::resource('seguridad/permission', PermissionController::class);
+Route::post('seguridad/permission/update_permission', [PermissionController::class, 'update_permission']);
+Route::resource('seguridad/user', UsuarioController::class);
+
+Route::post('seguridad/user/attach_roles',[UsuarioController::class,'attach_roles']);
+Route::post('seguridad/user/dettach_roles',[UsuarioController::class,'dettach_roles']);
+
+
+Route::resource('seguridad/role', RoleController::class);
+
+
+Route::post('seguridad/role/unlink_permission', [RoleController::class, 'unlink_permission']);
+Route::post('seguridad/role/link_permission', [RoleController::class, 'link_permission']);
+
+
+
+
+
 Route::get('iglesia/datos_iglesia', [IglesiaController::class, 'datos_iglesia']);
 Route::get('register_member_leader', [MemberController::class, 'register_member_leader']);
 Route::post('attach_new_member',[WelcomeController::class,'attach_new_member']);
@@ -123,22 +144,9 @@ Route::get('/get_municipio/{id}', [WelcomeController::class, 'get_municipio'])->
 
 Route::get('/get_grupo/{fecha}', [GrupoController::class, 'get_grupo'])->name('get_grupo');
 
-Route::resource('seguridad/permission', PermissionController::class);
-Route::post('seguridad/permission/update_permission', [PermissionController::class, 'update_permission']);
-Route::resource('seguridad/user', UsuarioController::class);
-
-Route::post('seguridad/user/attach_roles',[UsuarioController::class,'attach_roles']);
-Route::post('seguridad/user/dettach_roles',[UsuarioController::class,'dettach_roles']);
 
 
-Route::resource('seguridad/role', RoleController::class);
 
-
-Route::post('seguridad/role/unlink_permission', [RoleController::class, 'unlink_permission']);
-Route::post('seguridad/role/link_permission', [RoleController::class, 'link_permission']);
-
-Route::resource('courses', CourseController::class);
-Route::post('course/upload_file', [CourseController::class, 'upload_file']);
 
 Route::post('organization/decline', [OrganizationController::class, 'decline']);
 Route::post('organization/activate', [OrganizationController::class, 'activate']);
@@ -149,6 +157,14 @@ Route::post('member/decline', [MemberController::class, 'decline']);
 Route::post('member/activate', [MemberController::class, 'activate']);
 Route::resource('members', MemberController::class);
 
+
+
+
+
+
+
+Route::resource('courses', CourseController::class);
+Route::post('course/upload_file', [CourseController::class, 'upload_file']);
 
 //Quiz
 Route::post('catalog/question/attach_questions',[QuestionController::class,'attach_questions']);
