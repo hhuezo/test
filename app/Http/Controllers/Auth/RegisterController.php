@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\MailController;
+use App\Models\catalog\ChurchQuestionWizard;
+use App\Models\catalog\Cohorte;
+use App\Models\catalog\Departamento;
+use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
-use App\Models\catalog\Question;
+use App\Models\catalog\Sede;
 use App\Models\catalog\WizardQuestions;
-use App\Models\Organization;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -77,11 +79,6 @@ class RegisterController extends Controller
             'phone_number.required' => 'El Numero de telefono es un valor requerido',
             'address' => 'La dirección es un valor requerido',
             'contact_name.required' => 'El Contacto es un valor requerido',
-            //'cargo_contacto_principal.required' => 'El cargo del contacto principal es un valor requerido',
-           // 'contact_phone_number.required' => 'El número de telefono del contacto es un valor requerido',
-          //  'contacto_secundario.required' => 'El Contacto secundario es un valor requerido',
-           // 'cargo_contacto_secundario.required' => 'El Cargo del contacto secundario es un valor requerido',
-           // 'telefono_secundario.required' => 'El Numero de telefono del contacto secundario es un valor requerido'
         ];
 
         if (Session::get('locale') && Session::get('locale') == 'en') {
@@ -117,67 +114,196 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // // try {
-        // //     DB::beginTransaction();
-        //     $user = new User();
-        //     $user->name = $data['name'];
-        //     $user->email = $data['email'];
-        //     $user->password = Hash::make($data['password']);
-        //     $user->status = 0;
-        //     $user->save();
-
-        //     //asign role
-        //     $user->assignRole('facilitator');
-
-        //     $organization = new Organization();
-        //     //$organization->user_id = $user->id;
-        //     $organization->name = $data['name_organization'];
-        //     $organization->address = $data['address'];
-        //     $organization->phone_number = $data['phone_number'];
-        //     $organization->notes = $data['notes'];
-        //     $organization->contact_name = $data['contact_name'];
-        //     $organization->contact_job_title = $data['contact_job_title'];
-        //     $organization->contact_phone_number = $data['contact_phone_number'];
-        //     $organization->contact_phone_number_2 = $data['contact_phone_number_2'];
-        //     $organization->secondary_contact_name = $data['secondary_contact_name'];
-        //     $organization->secondary_contact_job_title = $data['secondary_contact_job_title'];
-        //     $organization->secondary_contact_phone_number = $data['secondary_contact_phone_number'];
-        //     $organization->secondary_contact_phone_number_2 = $data['secondary_contact_phone_number_2'];
-        //     $organization->status = 1;
-        //     $organization->save();
-
-        //     $user->organization()->attach($organization->id);
-
-        //     //Envio de correo usando metodo sendMail de MailController
-        //     $objeto = new  MailController();
-        //     $email = $data['email'];
-        //     //$email = $request->get('email');
-        //     $subject = "Notificación: Datos registrados correctamente";
-        //     $content = "Sus datos han sido registrados, nuestro equipo revisará la información y le notificará cuando sean aprobados";
-        //     $result = $objeto->sendMail($email, $subject, $content);
-
-        //     return $user;
-        // //     DB::commit();
-        // // } catch (\Exception $e) {
-        // //     DB::rollback();
-        // //     return redirect()->back()->withErrors(collect($e->getMessage()));
-        // // }
     }
 
     public function register(Request $request)
     {
         $iglesia  = new Iglesia();
-        $questions=new WizardQuestions();
         $iglesia->name = $request->nombre;
-      //  $iglesia->catalog_departamento_id = $request->departamento;
         $iglesia->save();
         session(['tab' => 2]);
 
         return redirect('register_edit/'.$iglesia->id);
-     //  return redirect('register_edit/')
+    }
+
+
+    public function register_edit($id)
+    {
+        $iglesia = Iglesia::findOrFail($id);
+
+        $departamento = null;
+        if ($iglesia->departamento) {
+            $departamento = Departamento::findOrFail($iglesia->catalog_departamento_id);
+        }
+
+
+        $questions = WizardQuestions::where('active', '=', 1)->get();
+
+        foreach ($questions as $question) {
+            $respuesta =  ChurchQuestionWizard::where('question_id', '=', $question->id)->where('iglesia_id', '=', $id)->first();
+            if ($respuesta) {
+                $question->answer = $respuesta->answer;
+            } else {
+                $question->answer = 1;
+            }
+        }
+
+        return view('auth.register_edit', compact('iglesia', 'questions',  'departamento'));
+    }
+
+
+    public function actualizar_registro(Request $request)
+    {
+        session(['tab' => 3]);
+        $count = WizardQuestions::get()->Count();
+
+
+        $questions = WizardQuestions::where('active', '=', 1)->get();
+
+        $iglesia = Iglesia::findOrFail($request->id);
+
+        $iglesia->catalog_departamento_id = $request->departamento;
+        $iglesia->update();
+        alert()->success('El registro ha sido Modificado correctamente');
+        return back();
     }
 
 
 
+    public function registro_respuesta(Request $request)
+    {
+        $respuesta =  ChurchQuestionWizard::where('question_id', '=', $request->question_id)->where('iglesia_id', '=', $request->iglesia_id)->first();
+
+        $pregunta = WizardQuestions::findOrFail($request->question_id);
+
+
+
+        if ($respuesta) {
+            $respuesta->answer = $request->answer;
+            $respuesta->update();
+        } else {
+            $respuesta = new ChurchQuestionWizard();
+            $respuesta->question_id = $request->question_id;
+            $respuesta->iglesia_id = $request->iglesia_id;
+            $respuesta->answer = $request->answer;
+            $respuesta->save();
+        }
+        if ($request->answer != $pregunta->answer) {
+            //dd($request->answer , $pregunta->answer);
+            return view('auth.message');
+        }
+
+        alert()->success('El registro ha sido Ingresado satisfactoriamente');
+        session(['tab' => (session('tab') + 1)]);
+        return back();
+    }
+
+    public function registro_iglesia(Request $request)
+    {
+
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'email.required' => 'El correo es requerido',
+            'email.unique' => 'El correo ya existe en la base de datos',
+            'address.required' => 'La dirección  es requerida',
+            'password.required' => 'La contraseña es requerida',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres',
+            'password.confirmed' => 'Las contraseñas ingresadas no coinsiden',
+            'pastor_name.required' => 'El nombre del pastor es requerido',
+          //  'pastor_phone_number' => 'El fomato de telefono de contacto 2 no es válido',
+        ];
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8|confirmed',
+            'address' => 'required',
+            'pastor_name' => 'required',
+           // 'pastor_phone_number' => 'regex:/^\d{4}-\d{4}$/',
+
+        ], $messages);
+
+
+        $iglesia = Iglesia::findOrFail($request->iglesia_id);
+
+        $sede = DB::table('sede as s')
+            ->join('cohorte as c', 'c.id', '=', 's.cohorte_id')
+            ->where('c.region_id', $iglesia->departamento->region_id)
+            ->select('s.id', DB::raw('(SELECT COUNT(*) FROM iglesia i WHERE i.sede_id = s.id) AS conteo'))
+            ->having('conteo', '<', 5)
+            ->first();
+
+        if ($sede) {
+            $sede_id = $sede->id;
+        } else {
+            $cohort = Cohorte::where('region_id', '=', $iglesia->departamento->region_id)
+                ->select('id', DB::raw('(COUNT(*)) AS conteo'))
+                ->groupBy('id')
+                ->having('conteo', '<', 20)->first();
+
+            if ($cohort) {
+                $cohort_id = $cohort->id;
+            } else {
+                $cohort_new = new Cohorte();
+                $cohort_new->nombre = "congregación";
+                $cohort_new->region_id = $iglesia->departamento->region_id;
+                $cohort_new->save();
+
+                $cohort_id = $cohort_new->id;
+            }
+
+            $sede_new = new Sede();
+            $sede_new->nombre =  "Sede";
+            $sede_new->cohorte_id = $cohort_id;
+            $sede_new->save();
+
+            $sede_id = $sede_new->id;
+        }
+
+
+
+        if ($request->file('logo')) {
+            $file = $request->file('logo');
+            $id_file = uniqid();
+            $file->move(public_path("images/"), $id_file . ' ' . $file->getClientOriginalName());
+            $iglesia->logo = $id_file . ' ' . $file->getClientOriginalName();
+            $iglesia->logo_url = "./images/";
+        }
+
+        $iglesia->sede_id = $sede_id;
+        $iglesia->facebook = $request->facebook;
+        $iglesia->website = $request->website;
+        $iglesia->address = $request->address;
+        $iglesia->status_id = 1;
+        $iglesia->contact_name = $request->name;
+        $iglesia->pastor_phone_number = $request->pastor_phone_number;
+        $iglesia->pastor_name = $request->pastor_name;
+        $iglesia->save();   //actualizar iglesia
+
+
+        $usuario = new User();
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->password =  Hash::make($request->password);
+        $usuario->assignRole("encargado");
+        $usuario->save();
+
+        $grupos =  Grupo::get();
+
+        foreach ($grupos as $grupo) {
+            $iglesia->iglesia_has_grupo()->attach($grupo->id);
+        };
+
+        $iglesia->users()->attach($usuario->id);
+
+
+        return view('confirma');
+    }
+
+    public function back_page(Request $request)
+    {
+        session(['tab' => (session('tab') - 1)]);
+        return back();
+    }
 
 }

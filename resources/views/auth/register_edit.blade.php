@@ -159,7 +159,7 @@
 
                                                     <div class="grid lg:grid-cols-1 md:grid-cols-1 grid-cols-1 gap-5">
 
-                                                        <label class="form-label" align="center">Nombre de la Iglesia </label>
+                                                        <label class="form-label" align="center">Nombre de la Iglesia</label>
                                                         <div class="input-area">
                                                             <input id="nombre" name="nombre" value="{{ $iglesia->name }}" class="form-control" readonly>
                                                         </div>
@@ -359,8 +359,8 @@
                                                              <!-- <input type="file" name="logo" id="logo" class="form-control"> -->
 
 
-                                                          
-                                                           <input type="file" name="logo" id="fileInput" stye="display: none;">
+
+                                                           <input type="file" name="logo" id="fileInput" style="display: none;">
                                                             <div id="avatar" name="avatar" class="dropzone"> </div>
                                                         </div>
                                                     </div>

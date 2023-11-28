@@ -68,16 +68,15 @@ class Iglesia extends Model
 
     }
 
-    public function iglesia_grupo()
+    public function iglesia_has_grupo()
     {
-        return $this->belongsToMany(Grupo::class, 'group_per_chuch_plan', 'iglesia_id', 'group_id');
+        return $this->belongsToMany(Grupo::class, 'iglesia_has_grupo', 'iglesia_id', 'grupo_id');
     }
 
 
 
     public function iglesia_estatus()
     {
-        //return $this->belongsTo('use App\Models\catalog\Sede', 'id', 'sede_id');
         return $this->belongsTo(OrganizationStatus::class, 'status_id', 'id');
     }
 

@@ -35,21 +35,7 @@ class WelcomeController extends Controller
     public function index()
     {
         return view('auth.login');
-        // return view('welcome');
     }
-
-
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-    }
-
-
 
 
     public function store_member(Request $request)
@@ -195,34 +181,6 @@ class WelcomeController extends Controller
     }
 
 
-    public function edit($id)
-    {
-    }
-
-
-
-
-    public function show($id)
-    {
-    }
-
-
-
-    public function update(Request $request, $id)
-    {
-    }
-
-
-    public function destroy($id)
-    {
-        //
-    }
-
-
-
-
-
-
     public function attach_new_member(Request $request)
     {
 
@@ -310,19 +268,11 @@ class WelcomeController extends Controller
     }
 
 
-
     public function registro_participantes($id_iglesia)
     {
-
         $iglesia = Iglesia::findorfail($id_iglesia);
         $iglesia_grupo = $iglesia->iglesia_grupo;
         $departamentos = Departamento::get();
-        //$group_per_chuch_plan= group_per_chuch_plan::get();
-        //$newmiembro =grupo::where('departamento_id', '=', 1)->get();
         return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'iglesia_grupo'));
-
-        //
-
-
-    }
+   }
 }

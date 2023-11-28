@@ -49,6 +49,18 @@ Route::get('/', function () {
 Route::get('/', [WelcomeController::class, 'index']);
 
 
+//registro iglesia
+
+Route::get('/registrar',[RegisterController::class,'index']);
+Route::get('/register_edit/{id}',[RegisterController::class, 'register_edit']);
+Route::post('/iglesia_actualizar', [RegisterController::class, 'actualizar_registro']);
+Route::post('/iglesia/registro_respuesta', [RegisterController::class, 'registro_respuesta']);
+Route::post('/iglesia/registro_iglesia', [RegisterController::class, 'registro_iglesia']);
+Route::get('/iglesia/back_page', [RegisterController::class, 'back_page'])->name('back_page');
+
+
+Route::get('registro_participantes/{iglesia}', [WelcomeController::class, 'registro_participantes']);
+
 //seguridad
 Route::resource('seguridad/permission', PermissionController::class);
 Route::post('seguridad/permission/update_permission', [PermissionController::class, 'update_permission']);
@@ -82,7 +94,7 @@ Route::post('update_group_member/{idpersona}', [MemberController::class, 'update
 
 
 
-Route::get('registro_participantes/{iglesia}', [WelcomeController::class, 'registro_participantes']);
+
 
 //Route::get('/', [WelcomeController::class, 'show']);
 
@@ -96,11 +108,11 @@ Route::get('/get_departamento/{id}', [WelcomeController::class, 'get_departament
 
 
 
-Route::post('/iglesia_actualizar', [IglesiaController::class, 'actualizar_registro']);
 
-Route::get('/iglesia/back_page', [IglesiaController::class, 'back_page'])->name('back_page');
 
-Route::post('/iglesia/registro_respuesta', [IglesiaController::class, 'registro_respuesta']);
+
+
+
 
 
 
@@ -108,7 +120,7 @@ Route::post('/iglesia/registro_respuesta', [IglesiaController::class, 'registro_
 Route::post('/upload', [WelcomeController::class, 'store_file'])->name('dropzone.store');
 
 
-Route::post('/iglesia/registro_iglesia', [IglesiaController::class, 'registro_iglesia']);
+
 Route::post('/iglesia/modificar_estado', [IglesiaController::class, 'modificar_estado']);
 
 
@@ -132,8 +144,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/confirma', [HomeController::class, 'confirmacion'])->name('confirma');
 
-Route::get('/registrar',[RegisterController::class,'index']);
-Route::get('/register_edit/{id}',[IglesiaController::class, 'register_edit']);
+
 
 
 Route::get('/test', [HomeController::class, 'test'])->name('test');
