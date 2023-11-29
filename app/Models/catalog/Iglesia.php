@@ -3,8 +3,6 @@
 namespace App\Models\catalog;
 
 use App\Models\User;
-use App\Models\catalog\catalog_organization_status;
-use App\Models\Member;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -48,10 +46,10 @@ class Iglesia extends Model
 
 
 
-    public function participantes()
-    {
-        return $this->hasMany(Member::class, 'organization_id');
-    }
+    // public function participantes()
+    // {
+    //     return $this->hasMany(Member::class, 'organization_id');
+    // }
 
     public function sedeiglesia()
     {
@@ -72,8 +70,7 @@ class Iglesia extends Model
 
     public function usuario_iglesia()
     {
-        return $this->belongsToMany(Users::class, 'users_has_iglesia', 'iglesia_id','user_id');
-
+        return $this->belongsToMany(Users::class, 'users_has_iglesia', 'iglesia_id', 'user_id');
     }
 
     public function iglesia_has_grupo()
@@ -96,10 +93,21 @@ class Iglesia extends Model
     public function countMembers($iglesiaId, $groupId)
     {
         return DB::table('member_has_group')->join('member as m', 'member_has_group.member_id', '=', 'm.id')
-        ->join('users as u', 'm.users_id', '=', 'u.id')
-        ->join('users_has_iglesia as uhi', 'u.id', '=', 'uhi.user_id')
-        ->where('uhi.iglesia_id', $iglesiaId)
-        ->where('member_has_group.group_id', $groupId)
-        ->count();
+            ->join('users as u', 'm.users_id', '=', 'u.id')
+            ->join('users_has_iglesia as uhi', 'u.id', '=', 'uhi.user_id')
+            ->where('uhi.iglesia_id', $iglesiaId)
+            ->where('member_has_group.group_id', $groupId)
+            ->count();
+    }
+
+
+    public function participantes($iglesiaId)
+    {
+        return DB::table('member_has_group')->join('member as m', 'member_has_group.member_id', '=', 'm.id')
+            ->join('users as u', 'm.users_id', '=', 'u.id')
+            ->join('users_has_iglesia as uhi', 'u.id', '=', 'uhi.user_id')
+            ->where('uhi.iglesia_id', $iglesiaId)
+            ->select('m.id', DB::raw('CONCAT(m.name_member, " ", m.lastname_member) as nombre'), 'member_has_group.group_id')
+            ->get();
     }
 }

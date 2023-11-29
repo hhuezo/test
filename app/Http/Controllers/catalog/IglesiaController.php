@@ -8,6 +8,7 @@ use App\Models\catalog\Cohorte;
 use App\Models\catalog\Departamento;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
+use App\Models\catalog\Member;
 use App\Models\catalog\Municipio;
 use App\Models\catalog\Organization;
 use App\Models\catalog\OrganizationStatus;
@@ -100,12 +101,9 @@ class IglesiaController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
+    /*
     public function show($id)
     {
 
@@ -163,7 +161,7 @@ class IglesiaController extends Controller
         $pdf = \PDF::loadView('catalog.iglesia.show', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion', 'deptos',  'grupo_iglesias', 'grupos_asignados', 'grupos_noasignados'))->setWarnings(false)->setPaper('letter');
         return $pdf->stream('Info.pdf');
     }
-
+*/
     /**
      * Show the form for editing the specified resource.
      *
@@ -381,22 +379,107 @@ class IglesiaController extends Controller
         $grupos_iglesia = $iglesia->iglesia_has_grupo;
 
 
-        $url =  $request->root() . "/registro_participantes/" . $iglesia->id.'/';
+        $url =  url('/') . "/registro_participantes/" . $iglesia->id . '/';
 
-        foreach( $grupos_iglesia as $obj)
-        {
-            $obj->conteo = $iglesia->countMembers($iglesia->id,$obj->id);
-            $obj->codigo_qr ='qrcodeiglesiagrupo'.$obj->id.'.png';
-            QrCode::format('png')->size(200)->generate($url . '/'.$obj->id, public_path('img/qrcodeiglesiagrupo'.$obj->id.'.png'));
+        foreach ($grupos_iglesia as $obj) {
+            $obj->conteo = $iglesia->countMembers($iglesia->id, $obj->id);
+            $obj->codigo_qr = 'qrcodeiglesiagrupo' . $obj->id . '.png';
+            QrCode::format('png')->size(200)->generate($url . '/' . $obj->id, public_path('img/qrcodeiglesiagrupo' . $obj->id . '.png'));
         }
 
 
-        QrCode::format('png')->size(200)->generate($url.'0', public_path('img/qrcodeiglesia.png'));
+        QrCode::format('png')->size(200)->generate($url . '0', public_path('img/qrcodeiglesia.png'));
 
-        return view('catalog.iglesia.datos_iglesia', compact('departamentos',  'iglesia',
-          'grupos_iglesia'));
-
+        return view('catalog.iglesia.datos_iglesia', compact(
+            'departamentos',
+            'iglesia',
+            'grupos_iglesia'
+        ));
     }
+
+
+
+    public function show($id)
+    {
+
+        $iglesia = Iglesia::findOrFail($id);
+
+        $participantes = $iglesia->participantes($id);
+        $grupos = $iglesia->iglesia_has_grupo;
+
+        return view('catalog.iglesia.show', compact('iglesia', 'participantes', 'grupos'));
+
+        /*//$municipios = Municipio::where('departamento_id', '=', 1)->get();
+        //  //$organizations = Organization::get();
+        // $iglesia = Iglesia::where('id', '=', $id_iglesia)->get();
+        $grupos_iglesia =  GroupPerchuchPlan::findorfail($id_grupo_iglesia);
+        //dd($iglesia,$i);
+
+        //  $miembros = Member::where('organization_id', '=', $id_iglesia)->get();
+        //dd($miembros->iglesia_grupo->nombre);
+        $usuarios = Users::get();
+        $grupo = Grupo::get();
+
+        // $miembros = DB::table('member as a')
+        // ->join('user_has_group as b', 'b.member_id', '=', 'a.id')
+        //->join('group_per_chuch_plan as c', function ($join) {
+        //    $join->on('c.iglesia_id', '=', 'a.organization_id')
+        //->on('c.id', '=', 'b.group_per_church_id')
+        //->on('a.organization_id =? ');
+        //})        ->join('grupo as d', 'c.group_id', '=', 'd.id')        ->select('a.id','a.name_member', 'a.lastname_member', 'd.nombre')        ->get();
+
+
+        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
+        from iglesia i
+        join group_per_chuch_plan gpc
+        on gpc.iglesia_id = i.id
+        join grupo g on
+        g.id = gpc.group_id
+        join member p on
+        p.organization_id=i.id
+        join user_has_group q on
+        p.id=q.member_id
+        and q.group_per_church_id=gpc.id
+        where  gpc.id=?";
+
+        $miembros = DB::select($sql, array($grupos_iglesia->id));
+
+        $iglesia = Iglesia::findorfail($grupos_iglesia->iglesia_id);
+        $member_status = MemberStatus::get();
+
+
+
+        return view('catalog.grupo.consulta_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
+        //return view('auth.register_member', compact('departamentos'));*/
+    }
+
+    public function get_participantes($id)
+    {
+
+        $iglesia = Iglesia::findOrFail($id);
+
+        $participantes = $iglesia->participantes($id);
+        $grupos = $iglesia->iglesia_has_grupo;
+
+        return view('catalog.iglesia.participantes_contenedor', compact('iglesia', 'participantes', 'grupos'));
+    }
+
+    public function set_grupo($paticipanteId, $grupoId)
+    {
+
+        $grupoId = str_replace("c", "", $grupoId);
+
+        $participante = Member::findOrFail($paticipanteId);
+
+        $record = DB::table('member_has_group')->where('member_id', '=', $paticipanteId)->delete();
+
+        // $question->question_has_Quiz()->attach($this->Quiz_id);
+        $participante->member_has_group()->attach($grupoId);
+
+        return $grupoId;
+    }
+
+
     public function copiarImagen(Request $request)
     {
         if ($request->hasFile('image')) {

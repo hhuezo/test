@@ -38,9 +38,9 @@
             text-transform: none;
         }
 
-        .btn-dark {
+        /* .btn-dark {
             background-color: #740816;
-        }
+        } */
     </style>
 </head>
 
@@ -522,7 +522,7 @@
     <!-- scripts -->
 
     <!-- Core Js -->
-    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
     <script src="{{ asset('assets/js/popper.js') }}"></script>
     <script src="{{ asset('assets/js/SimpleBar.js') }}"></script>

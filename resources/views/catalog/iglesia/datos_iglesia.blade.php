@@ -184,6 +184,9 @@
                                             <header class="card-header">
                                                 <h4 class="card-title">Grupos
                                                 </h4>
+                                                <a href="{{url('catalog/iglesia')}}/{{$iglesia->id}}">
+                                                <button class="btn btn-dark float-right"> Ver participantes</button>
+                                                </a>
                                             </header>
                                             <div class="card-body">
 
