@@ -385,6 +385,7 @@ class IglesiaController extends Controller
 
         foreach( $grupos_iglesia as $obj)
         {
+            $obj->conteo = $iglesia->countMembers($iglesia->id,$obj->id);
             $obj->codigo_qr ='qrcodeiglesiagrupo'.$obj->id.'.png';
             QrCode::format('png')->size(200)->generate($url . '/'.$obj->id, public_path('img/qrcodeiglesiagrupo'.$obj->id.'.png'));
         }

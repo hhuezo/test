@@ -4,8 +4,10 @@ namespace App\Models\catalog;
 
 use App\Models\User;
 use App\Models\catalog\catalog_organization_status;
+use App\Models\Member;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Iglesia extends Model
 {
@@ -44,13 +46,19 @@ class Iglesia extends Model
 
     protected $guarded = [];
 
+
+
+    public function participantes()
+    {
+        return $this->hasMany(Member::class, 'organization_id');
+    }
+
     public function sedeiglesia()
     {
         //return $this->belongsTo('use App\Models\catalog\Sede', 'id', 'sede_id');
         return $this->belongsTo(Sede::class, 'sede_id', 'id');
     }
 
-        //return $this->belongsTo('App\Models\LugarOrigen', 'tck_lor_codigo', 'lor_codigo');
 
     public function departamento()
     {
@@ -83,5 +91,15 @@ class Iglesia extends Model
     public function churchanswer()
     {
         return $this->belongsTo('App\Models\catalog\wizardQuestions', 'iglesia_id', 'id');
+    }
+
+    public function countMembers($iglesiaId, $groupId)
+    {
+        return DB::table('member_has_group')->join('member as m', 'member_has_group.member_id', '=', 'm.id')
+        ->join('users as u', 'm.users_id', '=', 'u.id')
+        ->join('users_has_iglesia as uhi', 'u.id', '=', 'uhi.user_id')
+        ->where('uhi.iglesia_id', $iglesiaId)
+        ->where('member_has_group.group_id', $groupId)
+        ->count();
     }
 }

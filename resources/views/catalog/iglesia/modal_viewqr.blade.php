@@ -26,10 +26,10 @@ id="modal-viewqr-{{  $obj->id }}">
                </button>
              </div>
              <!-- Modal body -->
-             <div class="p-6 space-y-4">
-               <h6 class="text-base text-slate-900 dark:text-white leading-6">
+             <div class="p-6 space-y-4" align="center">
+               {{-- <h6 class="text-base text-slate-900 dark:text-white leading-6">
                     Codigo del Grupo
-               </h6>
+               </h6> --}}
                <img src="{{asset('img/')}}/{{$obj->codigo_qr}}">
 
 

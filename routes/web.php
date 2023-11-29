@@ -86,6 +86,11 @@ Route::post('seguridad/role/link_permission', [RoleController::class, 'link_perm
 
 
 Route::get('iglesia/datos_iglesia', [IglesiaController::class, 'datos_iglesia']);
+
+
+
+
+
 Route::get('register_member_leader', [MemberController::class, 'register_member_leader']);
 Route::post('attach_new_member', [WelcomeController::class, 'attach_new_member']);
 

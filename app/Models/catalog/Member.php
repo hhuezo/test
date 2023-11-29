@@ -50,8 +50,10 @@ class Member extends Model
         return $this->belongsToMany(Grupo::class, 'member_has_group','member_id', 'group_id');
     }
 
-
     public function genders(){
         return $this->belongsTo(Gender::class, 'catalog_gender_id','id');
     }
+
+
+
 };
