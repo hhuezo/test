@@ -464,19 +464,65 @@ class IglesiaController extends Controller
         return view('catalog.iglesia.participantes_contenedor', compact('iglesia', 'participantes', 'grupos'));
     }
 
+    public function validarEdad($id)
+    {
+        $participante = Member::findOrFail($id);
+
+        $fechaNacimiento = Carbon::parse($participante->birthdate);
+        $edad = $fechaNacimiento->age;
+
+        if($edad>=18)
+        {
+           return true;
+        }
+
+        return false;
+    }
+
     public function set_grupo($paticipanteId, $grupoId)
     {
+        //  $participante = Member::findOrFail($paticipanteId);
+        //  return $participante;
 
         $grupoId = str_replace("c", "", $grupoId);
 
-        $participante = Member::findOrFail($paticipanteId);
+        //return $edad;
+        if($grupoId == 1)
+        {
+            if($this->validarEdad($paticipanteId)== true)
+            {
+                $response = ["val" => 0, "mensaje" => "El participante es mayor de edad"];
+                return $response;
+            }
+        }
+        else{
+            if($this->validarEdad($paticipanteId)== false)
+            {
+                $response = ["val" => 0, "mensaje" => "El participante es menor de edad"];
+                return $response;
+            }
+
+            $participante = Member::findOrFail($paticipanteId);
+
+            if($grupoId == 2 && $participante->catalog_gender_id == 1)
+            {
+                $response = ["val" => 0, "mensaje" => "El genero del participante no es válido"];
+                return $response;
+            }
+
+            if($grupoId == 3 && $participante->catalog_gender_id == 2)
+            {
+                $response = ["val" => 0, "mensaje" => "El genero del participante no es válido"];
+                return $response;
+            }
+        }
+
 
         $record = DB::table('member_has_group')->where('member_id', '=', $paticipanteId)->delete();
 
-        // $question->question_has_Quiz()->attach($this->Quiz_id);
         $participante->member_has_group()->attach($grupoId);
 
-        return $grupoId;
+        return  $response = ["val" => 1, "mensaje" => "Ok"];
     }
 
 
@@ -492,5 +538,45 @@ class IglesiaController extends Controller
         } else {
             return response()->json(['success' => false]);
         }
+    }
+
+
+    public function  reporte_grupos($iglesiaId, $grupoId)
+    {
+
+        $iglesia = Iglesia::findOrFail($iglesiaId);
+
+        $participantes =  $iglesia->participantes($iglesiaId)->where('group_id', '=', $grupoId);
+
+        dd($participantes);
+        /*   $grupos_iglesia =  GroupPerchuchPlan::findorfail($id_grupo_iglesia);
+
+        $usuarios = Users::get();
+        $grupo = Grupo::get();
+
+
+        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
+                from iglesia i
+                join group_per_chuch_plan gpc
+                on gpc.iglesia_id = i.id
+                join grupo g on
+                g.id = gpc.group_id
+                join member p on
+                p.organization_id=i.id
+                join user_has_group q on
+                p.id=q.member_id
+                and q.group_per_church_id=gpc.id
+                where  gpc.id=?";
+
+        $miembros = DB::select($sql, array($grupos_iglesia->id));
+
+        $iglesia = Iglesia::findorfail($grupos_iglesia->iglesia_id);
+        $member_status = MemberStatus::get();
+
+
+
+
+        $pdf = \Pdf::loadView('catalog.grupo.reporte_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
+        return $pdf->stream('Info.pdf');*/
     }
 }

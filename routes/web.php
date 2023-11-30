@@ -96,7 +96,7 @@ Route::post('attach_new_member', [WelcomeController::class, 'attach_new_member']
 
 
 
-Route::get('reporte_grupos/{id_grupo_iglesia}', [GrupoController::class, 'reporte_grupos']);
+
 Route::get('reasigna_grupos/{idpersona}', [GrupoController::class, 'reasigna_grupos']);
 Route::post('update_group_member/{idpersona}', [MemberController::class, 'update_member_group']);
 
@@ -132,7 +132,7 @@ Route::post('/upload', [WelcomeController::class, 'store_file'])->name('dropzone
 Route::get('iglesia/datos_iglesia', [IglesiaController::class, 'datos_iglesia']);
 Route::get('catalog/iglesia/set_grupo/{participante}/{grupo}', [IglesiaController::class, 'set_grupo']);
 Route::get('catalog/iglesia/get_participantes/{iglesia}', [IglesiaController::class, 'get_participantes']);
-/*Route::get('consulta_grupos/{id_grupo_iglesia}', [GrupoController::class, 'consulta_grupos']);*/
+Route::get('reporte_grupos/{iglesia}/{grupo}', [IglesiaController::class, 'reporte_grupos']);
 
 Route::post('/iglesia/modificar_estado', [IglesiaController::class, 'modificar_estado']);
 

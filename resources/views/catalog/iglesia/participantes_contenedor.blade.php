@@ -1,5 +1,5 @@
 <div class="flex flex-col justify-between min-h-screen">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .draggable-item {
             background-color: #fff;
@@ -101,6 +101,14 @@
                             grupoId,
                         type: 'GET',
                         success: function(response) {
+                            if (response.val == "0") {
+                                Swal.fire({
+                                    title: '¡Error!',
+                                    text: response.mensaje,
+                                    icon: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
                             console.log('Request successful:', response);
                             getParticipantes();
                         },

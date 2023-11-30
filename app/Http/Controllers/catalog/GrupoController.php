@@ -183,40 +183,7 @@ class GrupoController extends Controller
 
 
        }
-       public function  reporte_grupos($id_grupo_iglesia)
-       {
 
-
-           $grupos_iglesia =  GroupPerchuchPlan::findorfail($id_grupo_iglesia);
-
-           $usuarios = Users::get();
-           $grupo = Grupo::get();
-
-
-           $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
-                   from iglesia i
-                   join group_per_chuch_plan gpc
-                   on gpc.iglesia_id = i.id
-                   join grupo g on
-                   g.id = gpc.group_id
-                   join member p on
-                   p.organization_id=i.id
-                   join user_has_group q on
-                   p.id=q.member_id
-                   and q.group_per_church_id=gpc.id
-                   where  gpc.id=?";
-
-           $miembros = DB::select($sql, array($grupos_iglesia->id));
-
-           $iglesia = Iglesia::findorfail($grupos_iglesia->iglesia_id);
-           $member_status = MemberStatus::get();
-
-
-
-
-           $pdf = \Pdf::loadView('catalog.grupo.reporte_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
-           return $pdf->stream('Info.pdf');
-       }
 
 
 

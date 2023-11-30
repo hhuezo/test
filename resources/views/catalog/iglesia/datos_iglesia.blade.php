@@ -220,14 +220,9 @@
                                                                         <td class="table-td">{{ $obj->nombre }}</td>
                                                                         <td class="table-td">{{ $obj->conteo }}</td>
                                                                         <td class="table-td ">
-                                                                            <a
-                                                                            href="{{ url('consulta_grupos') }}/{{ $obj->iglesia_grupo }}">
-                                                                            <iconify-icon icon="healthicons:eye"
-                                                                                style="color: #475569;"
-                                                                                width="40"></iconify-icon>
-                                                                        </a>
+
                                                                         <a
-                                                                            href="{{ url('reporte_grupos/' . $obj->iglesia_grupo) }}">
+                                                                            href="{{ url('reporte_grupos') }}/{{$iglesia->id}}/{{$obj->id}}">
                                                                             <iconify-icon icon="mdi:printer" style="color: #475569;"
                                                                                 width="40"></iconify-icon>
 

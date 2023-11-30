@@ -73,7 +73,7 @@
                 url: "{{ url('catalog/iglesia/get_participantes') }}/" + {{ $iglesia->id }},
                 type: 'GET',
                 success: function(response) {
-                    console.log('Request successful:', response);
+                    //console.log('Request successful:', response);
                     $('#contenedor').html(response);
                 },
                 error: function(error) {
