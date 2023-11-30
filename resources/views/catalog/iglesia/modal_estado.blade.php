@@ -24,15 +24,15 @@
                 <!-- Modal body -->
                 <div class="p-6 space-y-4">
                   <h6 class="text-base text-slate-900 dark:text-white leading-6">
-                    Confirme Si Desea Modificar El Estado
+                    Confirme si desea modificar el estado
                   </h6>
 
 
                   <div class="input-area">
                     <label for="largeInput" class="form-label">{{ __('Estado') }}</label>
                     <select name="status_id" class="form-control ">
-                        @foreach ($estatuorg as $obj)
-                            <option value="{{ $obj->id }}">{{ $obj->description_es }}
+                        @foreach ($estatuorg as $estado)
+                            <option value="{{ $estado->id }}" {{$estado->id == $obj->status_id ? 'selected':''}}>{{ $estado->description_es }}
                             </option>
                         @endforeach
                     </select>
