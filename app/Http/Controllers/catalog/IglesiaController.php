@@ -486,7 +486,6 @@ class IglesiaController extends Controller
 
         $grupoId = str_replace("c", "", $grupoId);
 
-        //return $edad;
         if($grupoId == 1)
         {
             if($this->validarEdad($paticipanteId)== true)

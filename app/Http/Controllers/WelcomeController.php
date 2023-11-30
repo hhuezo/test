@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\catalog\Departamento;
-
+use App\Models\catalog\Gender;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member; //as CatalogMember;
 
@@ -128,7 +128,7 @@ class WelcomeController extends Controller
         $member->lastname_member = $request->last_name;
         $member->birthdate = $request->birthdate;
         $member->document_number = $request->document_number;
-        $member->catalog_gender_id = $request->genero;
+        $member->catalog_gender_id = $request->catalog_gender_id;
         $member->email = $request->email;
         $member->cell_phone_number = $request->phone_number;
         $member->address = $request->address;
@@ -294,7 +294,8 @@ class WelcomeController extends Controller
             $grupos = Grupo::where('id','=',$grupo)->get();
         }
 
+        $generos = Gender::get();
         $departamentos = Departamento::get();
-        return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'grupos','grupo'));
+        return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'grupos','grupo','generos'));
     }
 }

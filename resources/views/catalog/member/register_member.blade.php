@@ -149,6 +149,18 @@
                                                                             class="form-control"
                                                                             value="{{ old('document_number') }}">
                                                                     </div>
+
+                                                                    <div class="input-area relative">
+                                                                        <label for="largeInput"
+                                                                            class="form-label">Género</label>
+                                                                        <select name="catalog_gender_id" class="form-control">
+                                                                            @foreach ($generos as $obj)
+                                                                                <option value="{{$obj->id}}" >{{$obj->description}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+
+
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Telefono</label>
@@ -157,6 +169,8 @@
                                                                             data-inputmask="'mask': ['9999-9999']"
                                                                             value="{{ old('phone_number') }}">
                                                                     </div>
+
+
 
 
                                                                     <div class="input-area relative">
