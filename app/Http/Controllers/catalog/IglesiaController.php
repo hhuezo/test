@@ -36,11 +36,6 @@ class IglesiaController extends Controller
         return view('catalog.iglesia.index', compact('iglesia', 'estatuorg'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $sede = Sede::get();
@@ -51,12 +46,6 @@ class IglesiaController extends Controller
         return view('catalog.iglesia.create', compact('sede', 'depto', 'municipio', 'sede', 'estatuorg',));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $messages = [
@@ -162,12 +151,7 @@ class IglesiaController extends Controller
         return $pdf->stream('Info.pdf');
     }
 */
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
 
@@ -319,17 +303,6 @@ class IglesiaController extends Controller
 
 
 
-
-
-
-
-
-
-
-    //  dd($organizations->id);
-    //preguntas    if ( $wizzaranswer->question_id==$request->id) {        $wizzaranswer->answer=$request->answer;        $wizzaranswer->update();    }
-
-
     public function add_preguntaresp(Request $request)
     {
         // $organizations = Iglesia::findOrFail($id);
@@ -353,10 +326,6 @@ class IglesiaController extends Controller
         alert()->success('La Pregunta y Respuesta han sido agregado correctamente');
         return back();
     }
-
-
-
-
 
 
     public function destroy($id)
@@ -397,8 +366,6 @@ class IglesiaController extends Controller
         ));
     }
 
-
-
     public function show($id)
     {
 
@@ -408,49 +375,6 @@ class IglesiaController extends Controller
         $grupos = $iglesia->iglesia_has_grupo;
 
         return view('catalog.iglesia.show', compact('iglesia', 'participantes', 'grupos'));
-
-        /*//$municipios = Municipio::where('departamento_id', '=', 1)->get();
-        //  //$organizations = Organization::get();
-        // $iglesia = Iglesia::where('id', '=', $id_iglesia)->get();
-        $grupos_iglesia =  GroupPerchuchPlan::findorfail($id_grupo_iglesia);
-        //dd($iglesia,$i);
-
-        //  $miembros = Member::where('organization_id', '=', $id_iglesia)->get();
-        //dd($miembros->iglesia_grupo->nombre);
-        $usuarios = Users::get();
-        $grupo = Grupo::get();
-
-        // $miembros = DB::table('member as a')
-        // ->join('user_has_group as b', 'b.member_id', '=', 'a.id')
-        //->join('group_per_chuch_plan as c', function ($join) {
-        //    $join->on('c.iglesia_id', '=', 'a.organization_id')
-        //->on('c.id', '=', 'b.group_per_church_id')
-        //->on('a.organization_id =? ');
-        //})        ->join('grupo as d', 'c.group_id', '=', 'd.id')        ->select('a.id','a.name_member', 'a.lastname_member', 'd.nombre')        ->get();
-
-
-        $sql = "select  i.id iglesia_id, i.name nombre_iglesia, g.id No_grupo, g.nombre nombre_grupo ,p.name_member,p.lastname_member,p.id as member_id
-        from iglesia i
-        join group_per_chuch_plan gpc
-        on gpc.iglesia_id = i.id
-        join grupo g on
-        g.id = gpc.group_id
-        join member p on
-        p.organization_id=i.id
-        join user_has_group q on
-        p.id=q.member_id
-        and q.group_per_church_id=gpc.id
-        where  gpc.id=?";
-
-        $miembros = DB::select($sql, array($grupos_iglesia->id));
-
-        $iglesia = Iglesia::findorfail($grupos_iglesia->iglesia_id);
-        $member_status = MemberStatus::get();
-
-
-
-        return view('catalog.grupo.consulta_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
-        //return view('auth.register_member', compact('departamentos'));*/
     }
 
     public function get_participantes($id)
@@ -471,9 +395,8 @@ class IglesiaController extends Controller
         $fechaNacimiento = Carbon::parse($participante->birthdate);
         $edad = $fechaNacimiento->age;
 
-        if($edad>=18)
-        {
-           return true;
+        if ($edad >= 18) {
+            return true;
         }
 
         return false;
@@ -481,36 +404,29 @@ class IglesiaController extends Controller
 
     public function set_grupo($paticipanteId, $grupoId)
     {
-        //  $participante = Member::findOrFail($paticipanteId);
-        //  return $participante;
+        $participante = Member::findOrFail($paticipanteId);
 
         $grupoId = str_replace("c", "", $grupoId);
 
-        if($grupoId == 1)
-        {
-            if($this->validarEdad($paticipanteId)== true)
-            {
+        if ($grupoId == 1) {
+            if ($this->validarEdad($paticipanteId) == true) {
                 $response = ["val" => 0, "mensaje" => "El participante es mayor de edad"];
                 return $response;
             }
-        }
-        else{
-            if($this->validarEdad($paticipanteId)== false)
-            {
+        } else {
+            if ($this->validarEdad($paticipanteId) == false) {
                 $response = ["val" => 0, "mensaje" => "El participante es menor de edad"];
                 return $response;
             }
 
-            $participante = Member::findOrFail($paticipanteId);
 
-            if($grupoId == 2 && $participante->catalog_gender_id == 1)
-            {
+
+            if ($grupoId == 2 && $participante->catalog_gender_id == 1) {
                 $response = ["val" => 0, "mensaje" => "El genero del participante no es válido"];
                 return $response;
             }
 
-            if($grupoId == 3 && $participante->catalog_gender_id == 2)
-            {
+            if ($grupoId == 3 && $participante->catalog_gender_id == 2) {
                 $response = ["val" => 0, "mensaje" => "El genero del participante no es válido"];
                 return $response;
             }
@@ -546,6 +462,10 @@ class IglesiaController extends Controller
         $iglesia = Iglesia::findOrFail($iglesiaId);
 
         $participantes =  $iglesia->participantes($iglesiaId)->where('group_id', '=', $grupoId);
+        // dd($participantes);
+
+
+        return view('catalog.iglesia.reporte', compact('iglesia', 'participantes'));
 
         dd($participantes);
         /*   $grupos_iglesia =  GroupPerchuchPlan::findorfail($id_grupo_iglesia);
@@ -578,4 +498,6 @@ class IglesiaController extends Controller
         $pdf = \Pdf::loadView('catalog.grupo.reporte_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
         return $pdf->stream('Info.pdf');*/
     }
+
+
 }
