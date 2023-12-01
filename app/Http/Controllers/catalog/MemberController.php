@@ -222,7 +222,7 @@ class MemberController extends Controller
         $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
         $departamentos=Departamento::get();
         $municipios=Municipio::get();
-        $iglesia = Iglesia::get();
+        $iglesia = Iglesia::where('status_id','<>',3)->get();
         return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'group_church', 'group_id','generos','departamentos','municipios','iglesia'));
     }
 
@@ -252,7 +252,7 @@ class MemberController extends Controller
         $member->name_member = $request->name_member;
         $member->lastname_member = $request->lastname_member;
         $member->birthdate = $request->birthdate;
-        $member->document_number_type = $request->document_number_type;
+        $member->document_number = $request->document_number;
         $member->document_type_id = $request->document_type_id;
         $member->organization_id = (int)$request->iglesia_id;
         $member->departamento_id = $request->departamento_id;
@@ -261,12 +261,12 @@ class MemberController extends Controller
         $member->email = $request->email;
         $member->cell_phone_number = $request->cell_phone_number;
         $group = $member->member_has_group->first();
-        $group_id = $group->group_id;
+        $group_id = $request->group_id;
         $member->address=$request->address;
 
         $member ->member_has_group()->attach($group_id);
         $member->update();
-        alert()->success('El registro ha sido Modificado correctamente');
+        alert()->success('El registro ha sido modificado correctamente');
         return back();
     }
 

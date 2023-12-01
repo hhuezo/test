@@ -8,7 +8,7 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Editar Datos Participantes
+                            <div class="card-title text-slate-900 dark:text-white">Editar datos participante
 
                                 <a href="{{ url('catalog/member') }}">
                                     <button class="btn btn-dark btn-sm float-right">
@@ -94,7 +94,7 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                     class="form-label">Grupos</label>
-                                                    <select name="grupo_id" class="form-control select2">
+                                                    <select name="group_id" class="form-control select2">
 
                                                             @foreach ($grupos as $obj)
                                                                 <option value="{{ $obj->id }}">{{ $obj->nombre }}        </option>
@@ -169,25 +169,6 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">Género</label>
-                                                    <select name="catalog_gender_id" class="form-control">
-                                                        @foreach ($generos as $obj)
-                                                            <option value="{{$obj->id}}" >{{$obj->description}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">Dirección</label>
-                                                    <textarea name="address" id="address"  value="{{ $member->address }}" required class="form-control" rows="5">{{ old('address') }}</textarea>
-                                                </div>
-                                                <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">Acerca de mi</label>
-                                                    <textarea name="about_me" id= "about_me" value="{{ $member->about_me }}"  class="form-control" rows="5">{{ old('about_me') }}</textarea>
-                                                </div>
-
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
                                                     class="form-label">Estatus</label>
                                                     <select name="status" class="form-control select2">
                                                         @foreach ($member_status as $obj)
@@ -202,7 +183,26 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                &nbsp;&nbsp;
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">Género</label>
+                                                    <select name="catalog_gender_id" class="form-control">
+                                                        @foreach ($generos as $obj)
+                                                            <option value="{{$obj->id}}" >{{$obj->description}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Dirección</label>
+                                                    <textarea name="address" id="address"   required class="form-control" rows="5">{{ $member->address }}</textarea>
+                                                </div>
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Acerca de mi</label>
+                                                    <textarea name="about_me" id= "about_me"   class="form-control" rows="5">{{ $member->about_me }}</textarea>
+                                                </div>
+
                                             </div>&nbsp;
                                             <div style="text-align: right;">
                                                 <button type="submit"
