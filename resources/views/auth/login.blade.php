@@ -159,23 +159,23 @@
                             O {{-- Or continue with --}}
                         </div>
                     </div>
-                 
+
                     <div
                         class="mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm text-center">
 
-                                                <a class="nav-link" href="{{ url('register_member') }}"> Registro Participante</a>
+                        <a  class="btn btn-secondary block w-full text-center" href="{{ url('register_member') }}"> Registro participante</a>
                     </div>
 
                     <div
                         class="mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm text-center">
                         {{-- Already registered? --}}
 
-                        <a class="nav-link" href="{{ url('/registrar') }}"> Registro Iglesia</a>
+                        <a class="btn btn-secondary block w-full text-center" href="{{ url('/registrar') }}"> Registro Iglesia</a>
 
                     </div>
                 </div>
             </div>
-          
+
         </div>
     </div>
     <!-- Core Js -->
@@ -188,7 +188,7 @@
                 title: 'Error!',
                 text: 'El Nuevo participante debe registrarse con el link enviado de su iglesia',
                 icon: 'error',
-              ///  timer: '3600',
+                ///  timer: '3600',
                 confirmButtonText: 'OK'
             })
         }
