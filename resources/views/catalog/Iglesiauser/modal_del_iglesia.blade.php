@@ -1,8 +1,8 @@
 
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{ $obj->id }}">
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{ $obj->idusuario }}">
        <form method="POST" action="{{url('catalog/Iglesiauser/dettach_iglesiauser') }}">
-        <input type="hidden" name='user_id' value="{{$usuario->id }}">
-        <input type="hidden" name='iglesia_id' value="{{$obj->id }}">
+        <input type="hidden" name='user_id' value="{{$obj->idusuario }}">
+        <input type="hidden" name='iglesia_id' value="{{$$obj->iglesia }}">
         @csrf
         <div class="modal-dialog relative w-auto pointer-events-none">
             <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding

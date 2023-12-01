@@ -1,7 +1,7 @@
 
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-create-{{$usuario->id }}">
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-create-{{$obj->idusuario }}">
     <form method="POST" action="{{url('catalog/grupo/dettach_iglesiauser') }}">
-     <input type="hidden" name='user_id' value="{{$usuario->id }}">
+     <input type="hidden" name='user_id' value="{{$obj->idusuario }}">
      @csrf
      <div class="modal-dialog relative w-auto pointer-events-none">
          <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding

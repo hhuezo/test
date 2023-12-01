@@ -10,6 +10,7 @@ use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
 use App\Models\catalog\MemberStatus;
 use App\Models\catalog\Users;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -189,7 +190,7 @@ class GrupoController extends Controller
 
            $grupos_iglesia =  GroupPerchuchPlan::findorfail($id_grupo_iglesia);
 
-           $usuarios = Users::get();
+           $usuarios = User::get();
            $grupo = Grupo::get();
 
 

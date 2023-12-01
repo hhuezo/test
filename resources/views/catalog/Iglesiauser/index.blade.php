@@ -7,7 +7,7 @@
 <div class=" space-y-5">
     <div class="card">
         <header class=" card-header noborder">
-            <h4 class="card-title">Listado de usuarios
+            <h4 class="card-title">Listado de Participantes
             </h4>
             <!--<button class="btn btn-dark" data-bs-toggle="modal"
                     data-bs-target="#usuario_create_modal">Nuevo</button>-->
@@ -18,7 +18,7 @@
                 <span class="  col-span-4 hidden"></span>
                 <div class="inline-block min-w-full align-middle">
                     <div class="overflow-hidden " style=" margin-bottom:20px ">
-                        <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
+                        <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed black:divide-slate-700" cellspacing="0" width="100%">
                             <thead class="bg-slate-200 dark:bg-slate-700">
                                 <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                     <th style="text-align: center">Id</th>
@@ -39,10 +39,10 @@
                                     <td align="center">{{ $obj->iglesia}}</td>
                                     <td align="center">
                                         <a href="{{ url('catalog/Iglesiauser') }}/{{ $obj->idusuario }}/edit">
-                                            <iconify-icon icon="mdi:pencil" style="color: #1769aa;" width="40"></iconify-icon>
+                                            <iconify-icon icon="mdi:pencil" style="color: #090a0b;" width="40"></iconify-icon>
                                         </a>
                                         &nbsp;&nbsp;
-                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->idusuario }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
+                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->idusuario }}" icon="mdi:trash" style="color: #0c0d0e;" width="40"></iconify-icon>
                                     </td>
 
                                 </tr>
