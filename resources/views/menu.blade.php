@@ -185,9 +185,9 @@
                             <li>
                                 <a href="{{ url('catalog/iglesia') }}">Iglesias</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ url('catalog/Iglesiauser') }}">Usuario Iglesias</a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ url('catalog/grupo') }}">Grupo Iglesias</a>
                             </li>

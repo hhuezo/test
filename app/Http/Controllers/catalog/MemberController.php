@@ -217,13 +217,13 @@ class MemberController extends Controller
             $group_id = '';
         }
 
-        $genero=Gender::get();
+        $generos=Gender::get();
         $grupos = Grupo::get();
         $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
         $departamentos=Departamento::get();
         $municipios=Municipio::get();
         $iglesia = Iglesia::get();
-        return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'group_church', 'group_id','genero','departamentos','municipios','iglesia'));
+        return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'group_church', 'group_id','generos','departamentos','municipios','iglesia'));
     }
 
     /**
