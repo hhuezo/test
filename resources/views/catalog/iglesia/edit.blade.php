@@ -58,16 +58,17 @@
                             <div class="space-y-5">
                                 <div class="grid grid-cols-12 gap-5">
 
-                                    <div class="xl:col-span-12 col-span-12 lg:col-span-12">
-                                        @if (count($errors) > 0)
-                                            <div class="alert alert-danger">
-                                                <ul>
-                                                    @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        @endif
+                                <div class="xl:col-span-12 col-span-12 lg:col-span-12">
+                                    @if (count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    @endif
+
 
                                         <form method="POST" action="{{ route('iglesia.update', $iglesia->id) }}"
                                             enctype="multipart/form-data">
@@ -76,17 +77,14 @@
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Nombre</label>
-                                                    <input type="text" name="name" value="{{ $iglesia->name }}"
-                                                        required class="form-control" value="{{ old('name') }}"
-                                                        autofocus="true">
+                                                    <input type="text" name="name" id="name"  value="{{ $iglesia->name }}" required class="form-control" value="{{ old('name') }}" autofocus="true">
                                                 </div>
 
 
-                                                <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">Dirección</label>
-                                                    <input type="text" name="address" value="{{ $iglesia->address }}"
-                                                        required class="form-control" value="{{ old('address') }}">
-                                                </div>
+                                            <div class="input-area relative">
+                                                <label for="largeInput" class="form-label">{{ __('Direccion') }}</label>
+                                                <input type="text" id="address" name="address" value="{{ $iglesia->address }}" required class="form-control" value="{{ old('address') }}">
+                                            </div>
 
                                                 {{--  <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">{{ __('Sede') }}</label>

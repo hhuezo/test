@@ -24,6 +24,7 @@
                                     <th style="text-align: center">Id</th>
 
                                     <th style="text-align: center">Nombre</th>
+                                    <th style="text-align: center">Apellido</th>
                                     <th style="text-align: center">Iglesia</th>
                                     <th style="text-align: center">Opciones</th>
                                 </tr>
@@ -35,7 +36,7 @@
 
                                     <td align="center">{{ $obj->idusuario }}</td>
                                     <td align="center">{{ $obj->nombre }}</td>
-
+                                    <td align="center">{{ $obj->apellido}}</td>
                                     <td align="center">{{ $obj->iglesia}}</td>
                                     <td align="center">
                                         <a href="{{ url('catalog/Iglesiauser') }}/{{ $obj->idusuario }}/edit">

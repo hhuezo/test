@@ -27,7 +27,7 @@ class UserController extends Controller
         $usuarios =  User::where('status','=',1)->get();;
 
 
-         $miembros_iglesia =  DB::select("select  q.id idusuario, q.name_member as nombre  , i.name iglesia
+         $miembros_iglesia =  DB::select("select  q.id idusuario, q.name_member as nombre,q.lastname_member as apellido  , i.name iglesia
          from iglesia i
          join member q on
          i.id =q.organization_id");
