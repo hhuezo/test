@@ -142,20 +142,6 @@ class GrupoController extends Controller
         return view('catalog.grupo.reasigna_grupos', compact('member', 'departamentos', 'iglesia', 'member_status', 'group_church', 'grupos', 'group_id'));
     }
 
-    public function get_grupo($fecha)
-    {
-        $fechaNacimiento = Carbon::createFromFormat('Y-m-d', $fecha);
-        $hoy = Carbon::now();
-
-        if ($fechaNacimiento->diffInYears($hoy) > 18) {
-            // La persona tiene más de 18 años
-            $grupos = Grupo::where('id', '>', 1)->get();
-        } else {
-            // La persona tiene 18 años o menos
-            $grupos = Grupo::where('id', '=', 1)->get();
-        }
-        return $grupos;
-    }
 
     public function attach_iglesiagrupo(Request $request)
     {

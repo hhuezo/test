@@ -39,23 +39,7 @@ class MemberController extends Controller
         //
     }
 
-    public function register_member()
-    {
-        //  dd('aqui estoy');
 
-        $departamentos = Departamento::get();
-        //$municipios = Municipio::where('departamento_id', '=', 1)->get();
-        //  //$organizations = Organization::get();
-        $iglesias = Iglesia::get();
-        $newmiembro = Grupo::get();
-        $grupos = Grupo::get();
-        $departamentos = Departamento::get();
-        $municipios = Municipio::get();
-        $generos = Gender::get();
-        return view('catalog.member.register_member_leader', compact('departamentos', 'newmiembro', 'iglesias','departamentos','municipios','generos','grupos'));
-        //return view('auth.register_member', compact('departamentos'));
-
-    }
 
     public function  modal_register_member($id)
     {

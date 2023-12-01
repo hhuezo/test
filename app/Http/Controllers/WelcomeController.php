@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\catalog\GroupPerchuchPlan;
 use App\Models\catalog\Grupo;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -38,6 +39,22 @@ class WelcomeController extends Controller
     {
         return view('auth.login');
     }
+
+
+
+    public function register_member()
+    {
+        $departamentos = Departamento::get();
+
+        $iglesias = Iglesia::where('status_id', '<>', 3)->get();
+        $newmiembro = Grupo::get();
+        $grupos = Grupo::get();
+        $departamentos = Departamento::get();
+        $municipios = Municipio::get();
+        $generos = Gender::get();
+        return view('register_member', compact('departamentos', 'newmiembro', 'iglesias', 'departamentos', 'municipios', 'generos', 'grupos'));
+    }
+
 
 
     public function store_member(Request $request)
@@ -91,60 +108,60 @@ class WelcomeController extends Controller
         //     // Iniciar la transacción
         //     DB::beginTransaction();
 
-            $fechaNacimientoObj = new DateTime($request->birthdate);
-            $fechaActual = new DateTime();
-            $edad = $fechaNacimientoObj->diff($fechaActual);
-            $edad->y;
+        $fechaNacimientoObj = new DateTime($request->birthdate);
+        $fechaActual = new DateTime();
+        $edad = $fechaNacimientoObj->diff($fechaActual);
+        $edad->y;
 
-            if ($edad->y >= 18  &&  $request->grupo_id == 1) {
-                throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
-            }
-
-
-            if ($edad->y < 18  &&  $request->grupo_id != 1) {
-                throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
-            }
+        if ($edad->y >= 18  &&  $request->grupo_id == 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+        }
 
 
-            $user = new User();
-            $user->name = $request->name . ' ' . $request->last_name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->status = 0;
-            $user->save();
+        if ($edad->y < 18  &&  $request->grupo_id != 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+        }
 
 
-            //ASIGNANDO IGLESIA
-            $user->user_has_iglesia()->attach($request->iglesia_id);
+        $user = new User();
+        $user->name = $request->name . ' ' . $request->last_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->status = 0;
+        $user->save();
+
+
+        //ASIGNANDO IGLESIA
+        $user->user_has_iglesia()->attach($request->iglesia_id);
 
 
 
-            //ASIGNANDO ROL
-            $user->assignRole('participante');
+        //ASIGNANDO ROL
+        $user->assignRole('participante');
 
 
-            $member = new Member();
-            $member->name_member = $request->name;
-            $member->lastname_member = $request->last_name;
-            $member->birthdate = $request->birthdate;
-            $member->document_number = $request->document_number;
-            $member->catalog_gender_id = $request->catalog_gender_id;
-            $member->email = $request->email;
-            $member->cell_phone_number = $request->phone_number;
-            $member->address = $request->address;
-            $member->about_me = $request->about_me;
-            $member->organization_id = (int)$request->iglesia_id;
-            $member->departamento_id = $request->departamento_id;
-            $member->municipio_id = $request->municipio_id;
-            $member->status_id = 1;
-            $member->users_id = $user->id;
-            $member->save();
+        $member = new Member();
+        $member->name_member = $request->name;
+        $member->lastname_member = $request->last_name;
+        $member->birthdate = $request->birthdate;
+        $member->document_number = $request->document_number;
+        $member->catalog_gender_id = $request->catalog_gender_id;
+        $member->email = $request->email;
+        $member->cell_phone_number = $request->phone_number;
+        $member->address = $request->address;
+        $member->about_me = $request->about_me;
+        $member->organization_id = (int)$request->iglesia_id;
+        $member->departamento_id = $request->departamento_id;
+        $member->municipio_id = $request->municipio_id;
+        $member->status_id = 1;
+        $member->users_id = $user->id;
+        $member->save();
 
-            $member->member_has_group()->attach($request->grupo_id);
+        $member->member_has_group()->attach($request->grupo_id);
 
 
-            alert()->success('Participante registrado correctamente');
-            return redirect('/login');
+        alert()->success('Participante registrado correctamente');
+        return redirect('/login');
         // } catch (\Exception $e) {
         //     //DB::rollBack();
         //     alert()->error($e->getMessage());
@@ -289,20 +306,34 @@ class WelcomeController extends Controller
         $iglesia = Iglesia::findorfail($id);
         if ($grupo == 0) {
             $grupos = $iglesia->iglesia_has_grupo;
-        }
-        else {
+        } else {
             $grupos = Grupo::where('id', '=', $grupo)->get();
         }
 
         if ($grupo == 2) {
-            $generos = Gender::where('id','=',2)->get();
-        }
-        else if($grupo == 3)
-        {
-            $generos = Gender::where('id','=',1)->get();
+            $generos = Gender::where('id', '=', 2)->get();
+        } else if ($grupo == 3) {
+            $generos = Gender::where('id', '=', 1)->get();
         }
 
         $departamentos = Departamento::get();
         return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'grupos', 'grupo', 'generos'));
+    }
+
+
+
+    public function get_grupo($fecha)
+    {
+        $fechaNacimiento = Carbon::createFromFormat('Y-m-d', $fecha);
+        $hoy = Carbon::now();
+
+        if ($fechaNacimiento->diffInYears($hoy) > 18) {
+            // La persona tiene más de 18 años
+            $grupos = Grupo::where('id', '>', 1)->get();
+        } else {
+            // La persona tiene 18 años o menos
+            $grupos = Grupo::where('id', '=', 1)->get();
+        }
+        return $grupos;
     }
 }

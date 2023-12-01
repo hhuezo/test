@@ -60,10 +60,10 @@ Route::get('/iglesia/back_page', [RegisterController::class, 'back_page'])->name
 
 
 //registro participante
-Route::get('/register_member', [MemberController::class, 'register_member'])->name('register_member');
+Route::get('/register_member', [WelcomeController::class, 'register_member'])->name('register_member');
 Route::post('/store_member', [WelcomeController::class, 'store_member'])->name('store_member');
 Route::get('registro_participantes/{iglesia}/{grupo}', [WelcomeController::class, 'registro_participantes']);
-
+Route::get('/get_grupo/{fecha}', [WelcomeController::class, 'get_grupo'])->name('get_grupo');
 
 
 //seguridad
@@ -165,7 +165,7 @@ Route::get('/test', [HomeController::class, 'test'])->name('test');
 Route::get('/get_municipio/{id}', [WelcomeController::class, 'get_municipio'])->name('get_municipio');
 
 
-Route::get('/get_grupo/{fecha}', [GrupoController::class, 'get_grupo'])->name('get_grupo');
+
 
 
 
