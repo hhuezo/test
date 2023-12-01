@@ -33,7 +33,12 @@ class MemberController extends Controller
     {
         $member = Member::get();
         $member_status = MemberStatus::get();
-        return view('catalog.member.index', compact('member', 'member_status'));
+        $miembros_iglesia =  DB::select("select  q.id id, q.name_member as nombre , q.lastname_member as apellido , i.name iglesia
+        from iglesia i
+        join member q on
+        i.id =q.organization_id");
+
+        return view('catalog.member.index', compact('member', 'member_status','miembros_iglesia'));
     }
 
 
@@ -103,7 +108,7 @@ class MemberController extends Controller
         $member->document_number = $request->document_number;
         $member->catalog_gender_id = $request->genero;
         $member->email = $request->email;
-        $member->cell_phone_number = $request->phone_number;
+        $member->cell_phone_number = $request->cell_phone_number;
         $member->address = $request->address;
         $member->about_me = $request->about_me;
         $member->organization_id = (int)$request->iglesia_id;
@@ -112,6 +117,7 @@ class MemberController extends Controller
         $member->status_id = 1;
         $member->users_id = $user->id;
         $member->departamento_id=   $deptos->id;
+        $member->address=$request->address;
         if($request->get('is_pastor') == 'on'){
             $member->is_pastor = 1;   // si es pastor
         }else{
@@ -216,7 +222,8 @@ class MemberController extends Controller
         $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
         $departamentos=Departamento::get();
         $municipios=Municipio::get();
-        return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'group_church', 'group_id','genero','departamentos','municipios'));
+        $iglesia = Iglesia::get();
+        return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'group_church', 'group_id','genero','departamentos','municipios','iglesia'));
     }
 
     /**
@@ -250,9 +257,13 @@ class MemberController extends Controller
         $member->organization_id = (int)$request->iglesia_id;
         $member->departamento_id = $request->departamento_id;
         $member->municipio_id = $request->municipio_id;
-
+        $member->catalog_gender_id = $request->genero;
+        $member->email = $request->email;
+        $member->cell_phone_number = $request->cell_phone_number;
         $group = $member->member_has_group->first();
         $group_id = $group->group_id;
+        $member->address=$request->address;
+
         $member ->member_has_group()->attach($group_id);
         $member->update();
         alert()->success('El registro ha sido Modificado correctamente');

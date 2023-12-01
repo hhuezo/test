@@ -121,7 +121,7 @@
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Email</label>
-                                                                        <input type="email" name="email" required
+                                                                        <input type="email" name="email"
                                                                             class="form-control"
                                                                             value="{{ old('email') }}">
                                                                     </div>

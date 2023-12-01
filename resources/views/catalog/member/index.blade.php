@@ -24,18 +24,18 @@
                                         <th style="text-align: center">Id</th>
                                         <th style="text-align: center">Nombre</th>
                                         <th style="text-align: center">Apellido</th>
-
+                                        <th style="text-align: center">iglesia</th>
                                         <th style="text-align: center">opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
-                                    @if ($member->count() > 0)
-                                        @foreach ($member as $obj)
+
+                                        @foreach ($miembros_iglesia as $obj)
                                             <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                                 <td align="center">{{ $obj->id }}</td>
-                                                <td align="center">{{ $obj->name_member}}</td>
-                                                <td align="center">{{ $obj->lastname_member}}</td>
-
+                                                <td align="center">{{ $obj->nombre}}</td>
+                                                <td align="center">{{ $obj->apellido}}</td>
+                                                <td align="center">{{ $obj->iglesia}}</td>
                                                 <td align="center">
                                                     <a href="{{url('catalog/member')}}/{{$obj->id}}/edit">
                                                     <iconify-icon icon="mdi:pencil"
@@ -49,7 +49,7 @@
                                             </tr>
                                             @include('catalog/member/modal')
                                         @endforeach
-                                    @endif
+
 
                                 </tbody>
                             </table>

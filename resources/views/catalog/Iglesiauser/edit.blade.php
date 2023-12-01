@@ -18,11 +18,7 @@
                                     </button> &nbsp;
                                 </a>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
                     </header>
 
                     <div class="transition-all duration-150 container-fluid" id="page_layout">
@@ -55,15 +51,20 @@
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">Iglesia  </label>
-                                                    <select id="iglesia_id" name="iglesia_id" class="form-control">
+                                                    <label for="largeInput" class="form-label">Iglesia</label>
+                                                    <select id="organization_id" name="organization_id" class="form-control" required>
                                                         @foreach ($iglesia as $obj)
-                                                        <option value="{{ $obj->id }}">{{ $obj->name }}
-                                                        </option>
-                                                        @endforeach
+                                                        @if ($obj->id == $member->organization_id)
+                                                            <option value="{{ $obj->id }}" selected>
+                                                                {{ $obj->name }}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{ $obj->id }}">
+                                                                {{ $obj->name }}</option>
+                                                        @endif
+                                                    @endforeach
                                                     </select>
                                                 </div>
-
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Grupo</label>
@@ -130,8 +131,6 @@
 
 
 
-                                                </div>
-
 
 
 
@@ -140,7 +139,7 @@
 
 
                                                         <p>
-                                                    </div>
+
 
                                                     <div class="btn btn-dark btn-sm float-right">
                                                         <div class="input-area relative">
@@ -152,6 +151,16 @@
                                         </form>
 
                                         &nbsp;&nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 

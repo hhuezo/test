@@ -24,7 +24,7 @@
                                     <tr class="td-table">
                                         <th style="text-align: center">Id</th>
                                         <th  style="text-align: center">Descripción</th>
-                                        <th  style="text-align: center">Descripción_español</th>
+                                        <th  style="text-align: center">Descripción Español</th>
                                         <th style="text-align: center">Opciones</th>
                                     </tr>
                                 </thead>
