@@ -146,9 +146,9 @@ class WelcomeController extends Controller
             alert()->success('Participante registrado correctamente');
             return redirect('/login');
         // } catch (\Exception $e) {
-        //     DB::rollBack();
+        //     //DB::rollBack();
         //     alert()->error($e->getMessage());
-        //     return back();
+        //     //return back();
         //     dd($e->getMessage());
         //     return redirect()->route('ruta_error')->with('error', 'Error al guardar: ' . $e->getMessage());
         // }
@@ -285,14 +285,23 @@ class WelcomeController extends Controller
 
     public function registro_participantes($id, $grupo)
     {
+        $generos = Gender::get();
         $iglesia = Iglesia::findorfail($id);
         if ($grupo == 0) {
             $grupos = $iglesia->iglesia_has_grupo;
-        } else {
+        }
+        else {
             $grupos = Grupo::where('id', '=', $grupo)->get();
         }
 
-        $generos = Gender::get();
+        if ($grupo == 2) {
+            $generos = Gender::where('id','=',2)->get();
+        }
+        else if($grupo == 3)
+        {
+            $generos = Gender::where('id','=',1)->get();
+        }
+
         $departamentos = Departamento::get();
         return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'grupos', 'grupo', 'generos'));
     }

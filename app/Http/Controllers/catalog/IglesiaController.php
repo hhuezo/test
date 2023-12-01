@@ -20,6 +20,7 @@ use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Exception;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class IglesiaController extends Controller
@@ -60,7 +61,7 @@ class IglesiaController extends Controller
             'name' => 'required',
 
         ], $messages);
-        $grupos= Grupo::get();
+        $grupos = Grupo::get();
 
 
         $organizations = new Iglesia();
@@ -95,7 +96,6 @@ class IglesiaController extends Controller
 
         foreach ($grupos as $obj) {
             $organizations->iglesia_has_grupo()->attach($obj->id);
-
         }
 
 
@@ -178,40 +178,24 @@ class IglesiaController extends Controller
         $sede = Sede::get();
 
         $estatuorg = OrganizationStatus::get();
-        //$organizacion = Organization::get();
         $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $iglesia->id)->get();
-        //plural
 
         $questionArray = $wizzaranswer->pluck('question_id')->toArray();
 
         $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->where('active', '=', 1)->get();
-        //dd($wizzarquestion);
-
 
         $grupo_iglesias =  $iglesia->iglesia_has_grupo;
-
-        //$grupos= Grupo::whereNotIn('id', $iglesiaArray)->get();
-        // dd(   $grupo_iglesias);
 
         $grupoArray =  $grupo_iglesias->pluck('id')->toArray();
 
         $grupos_noasignados = Grupo::whereNotIn('id', $grupoArray)->get();
         $grupos_asignados = Grupo::where('id', $grupoArray)->get();
 
-
-        // return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias','grupos_noasignados'));
-
-        //   dd($wizzarquestion);
-        //where('id' ,'=', $wizzaranswer->question_id)->get();
         return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg',  'wizzaranswer', 'wizzarquestion', 'deptos',  'grupo_iglesias', 'grupos_asignados', 'grupos_noasignados'));
     }
 
     public function update(Request $request, $id)
     {
-
-
-
-
         $organizations = Iglesia::findOrFail($id);
 
         $organizations->name = $request->name;
@@ -229,21 +213,32 @@ class IglesiaController extends Controller
         $organizations->pastor_phone_number = $request->pastor_phone_number;
         $organizations->facebook = $request->facebook;
         $organizations->website = $request->website;
-        $organizations->personeria_juridica = $request->personeria_juridica;
+        //$organizations->personeria_juridica = $request->personeria_juridica;
         $organizations->organization_type = $request->organization_type;
         $organizations->status_id = $request->status_id;
         $organizations->sede_id = $request->sede_id;
-        $archivo = $request->file('logo_name');
-        $filename = $archivo->getClientOriginalName();
-        $path = $filename;
-        $destinationPath = public_path('/images');
-        $archivo->move($destinationPath, $path);
-        $organizations->logo_url = "./images"; /// $destinationPath;
-        $organizations->logo = $filename;
-        $organizations->update();
-        //  dd($organizations->id);
-        //preguntas    if ( $wizzaranswer->question_id==$request->id) {        $wizzaranswer->answer=$request->answer;        $wizzaranswer->update();    }
+        if ($request->file('logo_name')) {
 
+
+            try {
+                $url = public_path('/images/') . $organizations->logo;
+
+                unlink($url);
+            } catch (Exception $e) {
+            }
+
+
+
+            $archivo = $request->file('logo_name');
+            $filename = $archivo->getClientOriginalName();
+            $path = $filename;
+            $destinationPath = public_path('/images');
+            $archivo->move($destinationPath, $path);
+            $organizations->logo_url = "./images"; /// $destinationPath;
+            $organizations->logo = $filename;
+        }
+
+        $organizations->update();
 
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
@@ -513,6 +508,4 @@ class IglesiaController extends Controller
         $pdf = \Pdf::loadView('catalog.grupo.reporte_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
         return $pdf->stream('Info.pdf');*/
     }
-
-
 }
