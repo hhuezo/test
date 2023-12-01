@@ -9,11 +9,9 @@ use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
 use App\Models\catalog\MemberStatus;
-use App\Models\catalog\Users;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Barryvdh\DomPDF\PDF;
+
 class GrupoController extends Controller
 {
     /**
@@ -25,10 +23,9 @@ class GrupoController extends Controller
     {
 
         $grupos = Grupo::get();
-        $iglesia =Iglesia::get();
+        $iglesia = Iglesia::get();
 
-        return view('catalog.grupo.index', compact('grupos','iglesia'));
-
+        return view('catalog.grupo.index', compact('grupos', 'iglesia'));
     }
 
     /**
@@ -39,8 +36,8 @@ class GrupoController extends Controller
     public function create()
     {
         $grupos = Grupo::get();
-        $iglesia =Iglesia::get();
-        return view('catalog.grupo.create', compact('grupos','iglesia'));
+        $iglesia = Iglesia::get();
+        return view('catalog.grupo.create', compact('grupos', 'iglesia'));
     }
 
     /**
@@ -88,11 +85,11 @@ class GrupoController extends Controller
     {
 
         $grupos = Grupo::findOrFail($id);
-        $grupo_iglesias=  $grupos->iglesiagrupo;
+        $grupo_iglesias =  $grupos->iglesiagrupo;
         $iglesiaArray =  $grupo_iglesias->pluck('id')->toArray();
         $grupos_noasignados = iglesia::whereNotIn('id', $iglesiaArray)->get();
-        return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias','grupos_noasignados'));
-       //return view('catalog.grupo.edit', compact('grupos'));
+        return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias', 'grupos_noasignados'));
+        //return view('catalog.grupo.edit', compact('grupos'));
     }
 
     /**
@@ -103,7 +100,7 @@ class GrupoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-     {
+    {
         $groups = Grupo::findOrFail($id);
         $groups->nombre = $request->nombre;
         $groups->update();
@@ -164,7 +161,7 @@ class GrupoController extends Controller
     {
 
 
-        $grupoiglesia =iglesia::findOrFail($request->iglesia_id);
+        $grupoiglesia = iglesia::findOrFail($request->iglesia_id);
         $grupoiglesia->iglesiagrupo()->attach($request->grupo_id);
         alert()->success('El registro ha sido agregada correctamente');
         return back();
@@ -176,15 +173,9 @@ class GrupoController extends Controller
     {
 
 
-        $grupoiglesia =iglesia::findOrFail($request->iglesia_id);
+        $grupoiglesia = iglesia::findOrFail($request->iglesia_id);
         $grupoiglesia->iglesiagrupo()->detach($request->grupo_id);
         alert()->error('se han sido eliminadas correctamente');
         return back();
-
-
-       }
-
-
-
-
+    }
 }

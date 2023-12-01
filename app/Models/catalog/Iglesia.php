@@ -70,7 +70,7 @@ class Iglesia extends Model
 
     public function usuario_iglesia()
     {
-        return $this->belongsToMany(Users::class, 'users_has_iglesia', 'iglesia_id', 'user_id');
+        return $this->belongsToMany(User::class, 'users_has_iglesia', 'iglesia_id', 'user_id');
     }
 
     public function iglesia_has_grupo()

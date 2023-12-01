@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\catalog;
 
 use App\Http\Controllers\Controller;
+use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
 use App\Models\catalog\Users;
@@ -26,11 +27,10 @@ class UserController extends Controller
         $usuarios =  User::where('status','=',1)->get();;
 
 
-         $miembros_iglesia =  DB::select("select  p.id idusuario, p.name as nombre  , i.name iglesia
+         $miembros_iglesia =  DB::select("select  q.id idusuario, q.name_member as nombre  , i.name iglesia
          from iglesia i
-         join users_has_iglesia q on
-         i.id =q.iglesia_id
-         join users p on   p.id =q.user_id");
+         join member q on
+         i.id =q.organization_id");
 
 
 
@@ -108,9 +108,14 @@ class UserController extends Controller
     {
 
 
-        $usuario = User::findOrFail($id);
+        $member = Member::findOrFail($id);
+        $iglesia=Iglesia::get();
+        $grupo=Grupo::get();
 
-        return view('catalog.iglesiauser.edit', compact('usuario' ));
+
+
+
+        return view('catalog.iglesiauser.edit', compact('member','iglesia','grupo' ));
     }
 
     /**
@@ -123,7 +128,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $messages = [
-            'nombre.required' => 'ingresar la pregunta',
+            'nombre.required' => 'ingresar nombre',
         ];
 
 

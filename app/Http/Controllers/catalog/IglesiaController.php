@@ -7,6 +7,7 @@ use App\Models\catalog\ChurchQuestionWizard;
 use App\Models\catalog\Cohorte;
 use App\Models\catalog\Departamento;
 use App\Models\catalog\Grupo;
+use App\Models\catalog\GruposIglesia;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
 use App\Models\catalog\Municipio;
@@ -59,6 +60,9 @@ class IglesiaController extends Controller
             'name' => 'required',
 
         ], $messages);
+        $grupos= Grupo::get();
+
+
         $organizations = new Iglesia();
         $organizations->name = $request->name;
         $organizations->address = $request->address;
@@ -86,6 +90,17 @@ class IglesiaController extends Controller
         $organizations->logo_url = "./images";
         $organizations->logo = $filename;
         $organizations->save();
+
+
+
+        foreach ($grupos as $obj) {
+            $organizations->iglesia_has_grupo()->attach($obj->id);
+
+        }
+
+
+
+
         alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
@@ -196,7 +211,7 @@ class IglesiaController extends Controller
 
 
 
-        // dd($wizzaranswer);
+
         $organizations = Iglesia::findOrFail($id);
 
         $organizations->name = $request->name;
