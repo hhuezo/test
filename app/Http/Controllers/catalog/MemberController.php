@@ -99,6 +99,9 @@ class MemberController extends Controller
 
         //asign role
         $iglesia = Iglesia::findorfail($request->iglesia_id);
+
+        $iglesia->users_has_iglesia->attach( $user->id);
+
         $deptos = Departamento::findorfail( $iglesia->catalog_departamento_id);
 
         $member = new Member();
@@ -250,6 +253,12 @@ class MemberController extends Controller
 
 
         $member =  Member::findOrFail($id);
+        //borrando el grupo anterior
+        $group = $member->member_has_group->first();
+        $member ->member_has_group()->detach($group);
+        $iglesia=Iglesia::findOrFail( $member ->organization_id);
+        $iglesia->users_has_iglesia->detach( $member->users_id);
+
         $member->name_member = $request->name_member;
         $member->lastname_member = $request->lastname_member;
         $member->birthdate = $request->birthdate;
@@ -261,11 +270,14 @@ class MemberController extends Controller
         $member->catalog_gender_id = $request->genero;
         $member->email = $request->email;
         $member->cell_phone_number = $request->cell_phone_number;
-        $group = $member->member_has_group->first();
+        //$group = $member->member_has_group->first();
         $group_id = $request->group_id;
         $member->address=$request->address;
-        $member ->member_has_group()->detach( $group_id);
         $member->update();
+//agregando nuevo grupo
+        $member ->member_has_group()->attach($group_id);
+        $iglesia=Iglesia::findOrFail(  $request->organization_id);
+        $iglesia->users_has_iglesia->attach( $member->users_id);
         alert()->success('El registro ha sido modificado correctamente');
         return back();
     }
