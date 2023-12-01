@@ -56,11 +56,7 @@
                             </div>
                         </div>
                     </header>
-                </div>
-            </div>
 
-        </div>
-    </div>
 
     <div class="transition-all duration-150 container-fluid" id="page_layout">
         <div id="content_layout">
@@ -110,7 +106,7 @@
                 <label for="largeInput" class="form-label">Genero</label>
                 <select name="genero" class="form-control">
                     <option value="">Seleccione ...</option>
-                    @foreach ($genero as $obj)
+                    @foreach ($generos as $obj)
                         <option value="{{ $obj->id }}">{{ $obj->description }}
                         </option>
                     @endforeach
@@ -157,6 +153,8 @@
                 <label for="largeInput" class="form-label">Contraseña</label>
                 <input type="password" name="password" required class="form-control">
             </div>
+
+
             <div class="input-area relative">
                 <label for="largeInput" class="form-label">Confirme Contraseña</label>
                 <input type="password" name="password_confirmation" required class="form-control">
@@ -286,5 +284,10 @@
 
         }
     </script>
+</div>
+</div>
+</div>
+
+</div>
 </div>
 @endsection

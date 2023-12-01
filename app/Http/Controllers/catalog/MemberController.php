@@ -60,11 +60,11 @@ class MemberController extends Controller
         //  //$organizations = Organization::get();
         $iglesia = Iglesia::get();
         $grupos = Grupo::get();
-        $genero = Gender::get();
+        $generos = Gender::get();
         $municipios = Municipio::get();
 
 
-        return view('catalog.member.create', compact('genero','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan','municipios'));
+        return view('catalog.member.create', compact('generos','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan','municipios'));
     }
 
     /**
