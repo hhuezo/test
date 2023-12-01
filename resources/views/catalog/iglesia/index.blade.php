@@ -60,16 +60,10 @@
                                                 &nbsp;&nbsp;
                                                 <iconify-icon icon="mdi:delete-circle" style="color: #1e293b;" width="40"  data-bs-toggle="modal"
                                                 data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
-                                                {{-- <iconify-icon data-bs-toggle="modal"
-                                                    data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
-                                                    style="color: #0F172A;" width="40"></iconify-icon> --}}
                                                 &nbsp;&nbsp;
 
                                                 <iconify-icon  icon="lets-icons:check-fill" style="color: #1e293b;" width="40" data-bs-toggle="modal"
                                                 data-bs-target="#modal-estado-{{ $obj->id }}"></iconify-icon>
-                                                {{-- <iconify-icon data-bs-toggle="modal"
-                                                    data-bs-target="#modal-estado-{{ $obj->id }}" icon="mdi:check"
-                                                    style="color: #0F172A;" width="40"></iconify-icon> --}}
                                                 &nbsp;&nbsp;
 
                                             </td>

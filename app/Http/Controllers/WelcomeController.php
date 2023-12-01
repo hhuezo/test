@@ -87,71 +87,71 @@ class WelcomeController extends Controller
 
 
 
-         try {
-        // Iniciar la transacción
-        DB::beginTransaction();
+        // try {
+        //     // Iniciar la transacción
+        //     DB::beginTransaction();
 
-        $fechaNacimientoObj = new DateTime($request->birthdate);
-        $fechaActual = new DateTime();
-        $edad = $fechaNacimientoObj->diff($fechaActual);
-        $edad->y;
+            $fechaNacimientoObj = new DateTime($request->birthdate);
+            $fechaActual = new DateTime();
+            $edad = $fechaNacimientoObj->diff($fechaActual);
+            $edad->y;
 
-        if ($edad->y >= 18  &&  $request->grupo_id == 1) {
-            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
-        }
-
-
-        if ($edad->y < 18  &&  $request->grupo_id != 1) {
-            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
-        }
+            if ($edad->y >= 18  &&  $request->grupo_id == 1) {
+                throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+            }
 
 
-        $user = new User();
-        $user->name = $request->name . ' ' . $request->last_name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->status = 0;
-        $user->save();
+            if ($edad->y < 18  &&  $request->grupo_id != 1) {
+                throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+            }
 
 
-        //ASIGNANDO IGLESIA
-        $user->user_has_iglesia()->attach($request->iglesia_id);
+            $user = new User();
+            $user->name = $request->name . ' ' . $request->last_name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->status = 0;
+            $user->save();
+
+
+            //ASIGNANDO IGLESIA
+            $user->user_has_iglesia()->attach($request->iglesia_id);
 
 
 
-        //ASIGNANDO ROL
-        $user->assignRole('participante');
+            //ASIGNANDO ROL
+            $user->assignRole('participante');
 
 
-        $member = new Member();
-        $member->name_member = $request->name;
-        $member->lastname_member = $request->last_name;
-        $member->birthdate = $request->birthdate;
-        $member->document_number = $request->document_number;
-        $member->catalog_gender_id = $request->catalog_gender_id;
-        $member->email = $request->email;
-        $member->cell_phone_number = $request->phone_number;
-        $member->address = $request->address;
-        $member->about_me = $request->about_me;
-        $member->organization_id = (int)$request->iglesia_id;
-        $member->departamento_id = $request->departamento_id;
-        $member->municipio_id = $request->municipio_id;
-        $member->status_id = 1;
-        $member->users_id = $user->id;
-        $member->save();
+            $member = new Member();
+            $member->name_member = $request->name;
+            $member->lastname_member = $request->last_name;
+            $member->birthdate = $request->birthdate;
+            $member->document_number = $request->document_number;
+            $member->catalog_gender_id = $request->catalog_gender_id;
+            $member->email = $request->email;
+            $member->cell_phone_number = $request->phone_number;
+            $member->address = $request->address;
+            $member->about_me = $request->about_me;
+            $member->organization_id = (int)$request->iglesia_id;
+            $member->departamento_id = $request->departamento_id;
+            $member->municipio_id = $request->municipio_id;
+            $member->status_id = 1;
+            $member->users_id = $user->id;
+            $member->save();
 
-        $member->member_has_group()->attach($request->grupo_id);
+            $member->member_has_group()->attach($request->grupo_id);
 
 
-        alert()->success('Participante registrado correctamente');
-        return redirect('/login');
-         } catch (\Exception $e) {
-            DB::rollBack();
-            alert()->error($e->getMessage());
-            return back();
-            dd($e->getMessage());
-            return redirect()->route('ruta_error')->with('error', 'Error al guardar: ' . $e->getMessage());
-        }
+            alert()->success('Participante registrado correctamente');
+            return redirect('/login');
+        // } catch (\Exception $e) {
+        //     DB::rollBack();
+        //     alert()->error($e->getMessage());
+        //     return back();
+        //     dd($e->getMessage());
+        //     return redirect()->route('ruta_error')->with('error', 'Error al guardar: ' . $e->getMessage());
+        // }
     }
 
     public function get_municipio($id)
@@ -283,19 +283,17 @@ class WelcomeController extends Controller
     }
 
 
-    public function registro_participantes($id,$grupo)
+    public function registro_participantes($id, $grupo)
     {
         $iglesia = Iglesia::findorfail($id);
-        if($grupo == 0)
-        {
+        if ($grupo == 0) {
             $grupos = $iglesia->iglesia_has_grupo;
-        }
-        else{
-            $grupos = Grupo::where('id','=',$grupo)->get();
+        } else {
+            $grupos = Grupo::where('id', '=', $grupo)->get();
         }
 
         $generos = Gender::get();
         $departamentos = Departamento::get();
-        return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'grupos','grupo','generos'));
+        return view('catalog/member/register_member', compact('iglesia', 'departamentos', 'grupos', 'grupo', 'generos'));
     }
 }
