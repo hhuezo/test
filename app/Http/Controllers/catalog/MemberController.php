@@ -265,8 +265,8 @@ class MemberController extends Controller
         $group_id = $group->group_id;
         $member->address=$request->address;
         $member ->member_has_group()->detach( $group_id);
-        $member ->member_has_group()->attach($request->group_id);
         $member->update();
+        $member ->member_has_group()->attach($request->group_id);
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
     }
