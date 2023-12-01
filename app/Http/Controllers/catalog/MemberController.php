@@ -58,7 +58,7 @@ class MemberController extends Controller
         $departamentos = Departamento::get();
         //$municipios = Municipio::where('departamento_id', '=', 1)->get();
         //  //$organizations = Organization::get();
-        $iglesia = Iglesia::get();
+        $iglesia = Iglesia::where('status_id', '!=', 3)->get();
         $grupos = Grupo::get();
         $generos = Gender::get();
         $municipios = Municipio::get();
@@ -93,9 +93,9 @@ class MemberController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->status = 0;
-        $user->assignRole('participante');
-
         $user->save();
+
+        $user->assignRole('participante');
 
         //asign role
         $iglesia = Iglesia::findorfail($request->iglesia_id);
@@ -125,10 +125,11 @@ class MemberController extends Controller
         }
         $member->save();
 
+        $member ->member_has_group()->attach($request->group_id);
 
-        $GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
+       // $GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
         // dd( $GroupPerchuchPlan->id);
-        $GroupPerchuchPlan->miembro_grupo()->attach($member->id);
+       // $GroupPerchuchPlan->miembro_grupo()->attach($member->id);
         //$grupoiglesia =iglesia::where('id', '=',(int)$request->iglesia_id)->get();
         //$grupoiglesia->iglesia_grupo()->attach($request->group_id);
         // alert()->success('El registro ha sido agregado correctamente');
@@ -263,8 +264,7 @@ class MemberController extends Controller
         $group = $member->member_has_group->first();
         $group_id = $request->group_id;
         $member->address=$request->address;
-
-        $member ->member_has_group()->attach($group_id);
+        $member ->member_has_group()->detach( $group_id);
         $member->update();
         alert()->success('El registro ha sido modificado correctamente');
         return back();
