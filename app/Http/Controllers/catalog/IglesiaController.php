@@ -67,8 +67,8 @@ class IglesiaController extends Controller
         $organizations = new Iglesia();
         $organizations->name = $request->name;
         $organizations->address = $request->address;
-        $organizations->catalog_departamento_id = $request->catalog_departamento_id;
-        $organizations->catalog_municipio_id = $request->catalog_municipio_id;
+        $organizations->catalog_departamento_id = $request->departamento_id;
+        $organizations->catalog_municipio_id = $request->municipio_id;
         $organizations->phone_number = $request->phone_number;
         $organizations->notes = $request->notes;
         $organizations->contact_name = $request->contact_name;

@@ -446,7 +446,7 @@
             //combo para Departamento
             //combo para Departamento
             //$("#departamento_id").change();
-            $("#departamento_id").change(function() {
+            $("#catalog_departamento_id").change(function() {
                 //alert('holi');
                 // var para la Departamento
                 var Departamento = $(this).val();
@@ -459,7 +459,7 @@
                         _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
                         '</option>';
 
-                    $("#municipio_id").html(_select);
+                    $("#catalog_municipio_id").html(_select);
 
                 });
 
