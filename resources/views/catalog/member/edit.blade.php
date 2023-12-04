@@ -40,21 +40,7 @@
                                             @method('PUT')
                                             @csrf
 
-                                            <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">Iglesia</label>
-                                                <select id="organization_id" name="organization_id" class="form-control" required>
-                                                    @foreach ($iglesia as $obj)
-                                                    @if ($obj->id == $member->organization_id)
-                                                        <option value="{{ $obj->id }}" selected>
-                                                            {{ $obj->name }}
-                                                        </option>
-                                                    @else
-                                                        <option value="{{ $obj->id }}">
-                                                            {{ $obj->name }}</option>
-                                                    @endif
-                                                @endforeach
-                                                </select>
-                                            </div>
+
 
 
 
@@ -77,17 +63,40 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('fecha cumpleaños') }}</label>
+                                                        class="form-label">fecha nacimiento</label>
                                                     <input type="date" name="birthdate" id="birthdate"
                                                         value="{{ $member->birthdate }}" required
                                                         class="form-control">
                                                 </div>
+
+
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('numero de documento') }}</label>
-                                                    <input type="text" id="document_number" name="document_number"
-                                                        value="{{ $member->document_number }}" required
-                                                        class="form-control">
+                                                    <label for="largeInput" class="form-label">Genero</label>
+                                                    <select name="catalog_gender_id" class="form-control" required>
+                                                        <option value="">Seleccione ...</option>
+                                                        @foreach ($generos as $obj)
+                                                            <option value="{{ $obj->id }}" {{ $member->catalog_gender_id == $obj->id ? 'selected':'' }}>{{ $obj->description }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Iglesia</label>
+                                                    <select id="organization_id" name="organization_id" class="form-control" required>
+                                                        @foreach ($iglesias as $obj)
+                                                        @if ($obj->id == $member->organization_id)
+                                                            <option value="{{ $obj->id }}" selected>
+                                                                {{ $obj->name }}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{ $obj->id }}">
+                                                                {{ $obj->name }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                    </select>
                                                 </div>
 
 
@@ -95,9 +104,8 @@
                                                     <label for="largeInput"
                                                     class="form-label">Grupos</label>
                                                     <select name="group_id" class="form-control select2">
-
                                                             @foreach ($grupos as $obj)
-                                                                <option value="{{ $obj->id }}">{{ $obj->nombre }}        </option>
+                                                                <option value="{{ $obj->id }}"  {{$obj->id == $member->group_id ? 'selected':''}}>{{ $obj->nombre }}        </option>
                                                             @endforeach
 
                                                     </select>
@@ -111,6 +119,21 @@
                                                 </div>
 
 
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label">{{ __('numero de documento') }}</label>
+                                                    <input type="text" id="document_number" name="document_number"
+                                                        value="{{ $member->document_number }}" required
+                                                        class="form-control">
+                                                </div>
+
+
+
+
+
+
+
+
                                               {{--   <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Contraseña</label>
                                                     <input type="password" name="password" required class="form-control">
@@ -121,10 +144,6 @@
                                                 </div>
 
 
-                                                <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">Teléfono</label>
-                                                    <input type="text" name="phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']" value="{{ old('phone_number') }}">
-                                                </div>
                                               {{--  <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">¿Es Pastor? </label>
                                                     <div class="boton">
@@ -168,6 +187,11 @@
                                                 </div>
 
                                                 <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Teléfono</label>
+                                                    <input type="text" name="cell_phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']" value="{{ $member->cell_phone_number }}">
+                                                </div>
+
+                                                <div class="input-area relative">
                                                     <label for="largeInput"
                                                     class="form-label">Estatus</label>
                                                     <select name="status" class="form-control select2">
@@ -184,15 +208,7 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">Género</label>
-                                                    <select name="catalog_gender_id" class="form-control">
-                                                        @foreach ($generos as $obj)
-                                                            <option value="{{$obj->id}}" >{{$obj->description}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Dirección</label>
