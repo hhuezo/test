@@ -235,7 +235,7 @@ Route::resource('catalog/grupo', GrupoController::class);
 Route::resource('catalog/member_status', MemberStatusController::class);
 
 
-Route::resource('catalog/member', CatalogMemberController::class);
+Route::resource('catalog/member', MemberController::class);
 
 Route::resource('catalog/FilePerCourse', FilePerCourseController::class);
 

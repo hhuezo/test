@@ -29,9 +29,10 @@
                   <h6 class="text-base text-slate-900 dark:text-white leading-6">
                     Confirme si desea modificar la respuesta (S/N)
                   </h6>
-                  <input                  type="radio"                   id="answer"                   name="answer"                   value="1"  />Si
-                  <input                  type="radio"                   id="answer"                   name="answer"                   value="0"  />No
 
+                  <input                  type="radio"                   id="answer"                   name="answer"                   value="1"   @if ($obj->answer == "1") checked @endif  />Si
+
+                  <input                  type="radio"                   id="answer"                   name="answer"                   value="0"    @if ($obj->answer == "0") checked @endif />No
 
                 </div>
                 <!-- Modal footer -->

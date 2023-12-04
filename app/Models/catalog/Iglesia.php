@@ -68,7 +68,7 @@ class Iglesia extends Model
         return $this->belongsToMany(User::class, 'users_has_iglesia', 'iglesia_id');
     }
 
-    public function usuario_iglesia()
+    public function users_has_iglesia()
     {
         return $this->belongsToMany(User::class, 'users_has_iglesia', 'iglesia_id', 'user_id');
     }

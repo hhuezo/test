@@ -13,6 +13,7 @@ use App\Models\catalog\MemberHasGrupo;
 use App\Models\catalog\MemberStatus;
 use App\Models\catalog\Municipio;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,7 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -35,10 +36,10 @@ class MemberController extends Controller
         $member_status = MemberStatus::get();
         $miembros_iglesia =  DB::select("select  q.id id, q.name_member as nombre , q.lastname_member as apellido , i.name iglesia
         from iglesia i
-        join member q on
-        i.id =q.organization_id");
+         join member q
+         join  users_has_iglesia r on        r.iglesia_id=i.id and r.user_id=q.users_id ");
 
-        return view('catalog.member.index', compact('member', 'member_status','miembros_iglesia'));
+        return view('catalog.member.index', compact('member', 'member_status', 'miembros_iglesia'));
     }
 
 
@@ -64,7 +65,7 @@ class MemberController extends Controller
         $municipios = Municipio::get();
 
 
-        return view('catalog.member.create', compact('generos','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan','municipios'));
+        return view('catalog.member.create', compact('generos', 'departamentos', 'iglesia', 'grupos', 'member_status', 'groupperchuchplan', 'municipios'));
     }
 
     /**
@@ -88,21 +89,29 @@ class MemberController extends Controller
 
         ], $messages);
 
+
+
         $user = new User();
         $user->name = $request->name . ' ' . $request->last_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->status = 0;
         $user->save();
+        if ($request->get('is_pastor') == 'on') {
+            // si es pastor
+            $user->assignRole('encargado');
 
+      } else {
         $user->assignRole('participante');
+        }
+
 
         //asign role
         $iglesia = Iglesia::findorfail($request->iglesia_id);
 
-        $iglesia->users_has_iglesia->attach( $user->id);
+        $iglesia->users_has_iglesia()->attach($user->id);
 
-        $deptos = Departamento::findorfail( $iglesia->catalog_departamento_id);
+        $deptos = Departamento::findorfail($iglesia->catalog_departamento_id);
 
         $member = new Member();
         $member->name_member = $request->name;
@@ -119,20 +128,20 @@ class MemberController extends Controller
         $member->municipio_id = $request->municipio_id;
         $member->status_id = 1;
         $member->users_id = $user->id;
-        $member->departamento_id=   $deptos->id;
-        $member->address=$request->address;
-        if($request->get('is_pastor') == 'on'){
+        $member->departamento_id =   $deptos->id;
+        $member->address = $request->address;
+        if ($request->get('is_pastor') == 'on') {
             $member->is_pastor = 1;   // si es pastor
-        }else{
+        } else {
             $member->is_pastor = 0;
         }
         $member->save();
 
-        $member ->member_has_group()->attach($request->group_id);
+        $member->member_has_group()->attach($request->group_id);
 
-       // $GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
+        // $GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
         // dd( $GroupPerchuchPlan->id);
-       // $GroupPerchuchPlan->miembro_grupo()->attach($member->id);
+        // $GroupPerchuchPlan->miembro_grupo()->attach($member->id);
         //$grupoiglesia =iglesia::where('id', '=',(int)$request->iglesia_id)->get();
         //$grupoiglesia->iglesia_grupo()->attach($request->group_id);
         // alert()->success('El registro ha sido agregado correctamente');
@@ -177,9 +186,9 @@ class MemberController extends Controller
         $grupos = Grupo::get();
         $iglesia_grupo = $iglesia->iglesia_has_grupo;
 
-        return view('catalog.member.show', compact('iglesia_grupo','departamentos','iglesia','grupos', 'member_status', 'groupperchuchplan','municipios','generos'));
+        return view('catalog.member.show', compact('iglesia_grupo', 'departamentos', 'iglesia', 'grupos', 'member_status', 'groupperchuchplan', 'municipios', 'generos'));
         alert()->success('El registro ha sido añadido correctamente');
-       // return back();
+        // return back();
     }
 
     public function register_member_leader()
@@ -194,7 +203,7 @@ class MemberController extends Controller
         $generos = Gender::get();
         $departamentos = Departamento::get();
         $municipios = Municipio::get();
-        return view('catalog.member.register_member_leader', compact('generos','departamentos', 'grupos', 'iglesias','departamentos','municipios'));
+        return view('catalog.member.register_member_leader', compact('generos', 'departamentos', 'grupos', 'iglesias', 'departamentos', 'municipios'));
         //return view('auth.register_member', compact('departamentos'));
 
     }
@@ -214,20 +223,21 @@ class MemberController extends Controller
 
         $member = member::findOrFail($id);
 
-        $group = $member->member_has_group->first();
-        if(($group) != null){
-            $group_id = $group->group_id;
-        }else{
-            $group_id = '';
-        }
+        $grupo = $member->member_has_group->first();
 
-        $generos=Gender::get();
+
+
+        $usuario = User::findOrFail($member->users_id);
+
+        $iglesia = $usuario->user_has_iglesia->first();
+
+        $generos = Gender::get();
         $grupos = Grupo::get();
-        $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
-        $departamentos=Departamento::get();
-        $municipios=Municipio::get();
-        $iglesia = Iglesia::where('status_id','<>',3)->get();
-        return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'group_church', 'group_id','generos','departamentos','municipios','iglesia'));
+       // $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
+        $departamentos = Departamento::get();
+        $municipios = Municipio::get();
+        $iglesias = Iglesia::where('status_id', '<>', 3)->get();
+        return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'grupo',  'generos', 'departamentos', 'municipios', 'iglesia','iglesias'));
     }
 
     /**
@@ -252,12 +262,20 @@ class MemberController extends Controller
         ], $messages);
 
 
+
         $member =  Member::findOrFail($id);
         //borrando el grupo anterior
         $group = $member->member_has_group->first();
-        $member ->member_has_group()->detach($group);
-        $iglesia=Iglesia::findOrFail( $member ->organization_id);
-        $iglesia->users_has_iglesia->detach( $member->users_id);
+        $member->member_has_group()->detach($group);
+        $user = User::findOrFail($member->users_id);
+        // dd( $user);
+        $iglesia = $user->user_has_iglesia->first();
+
+        try {
+            $user->user_has_iglesia()->detach($iglesia->id);
+        } catch (Exception $e) {
+        }
+
 
         $member->name_member = $request->name_member;
         $member->lastname_member = $request->lastname_member;
@@ -272,12 +290,17 @@ class MemberController extends Controller
         $member->cell_phone_number = $request->cell_phone_number;
         //$group = $member->member_has_group->first();
         $group_id = $request->group_id;
-        $member->address=$request->address;
+        $member->address = $request->address;
         $member->update();
-//agregando nuevo grupo
-        $member ->member_has_group()->attach($group_id);
-        $iglesia=Iglesia::findOrFail(  $request->organization_id);
-        $iglesia->users_has_iglesia->attach( $member->users_id);
+        //agregando nuevo grupo
+        $member->member_has_group()->attach($group_id);
+        $iglesia = Iglesia::findOrFail($request->organization_id);
+
+
+        try {
+            $iglesia->users_has_iglesia()->attach($member->users_id);
+        } catch (Exception $e) {
+        }
         alert()->success('El registro ha sido modificado correctamente');
         return back();
     }

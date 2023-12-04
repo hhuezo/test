@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
+use Illuminate\Support\Facades\Hash;
 class IglesiaController extends Controller
 {
 
@@ -99,9 +99,31 @@ class IglesiaController extends Controller
         }
 
 
+        $user = new User();
+        $user->name = $request->pastor_name;
+        $user->email = $request->emailpastor;
+        $user->password = Hash::make($request->password);
+        $user->status = 1;
+        $user->save();
+        $user->assignRole('encargado');
 
+        $user->user_has_iglesia()->attach($organizations->id);
 
-        alert()->success('El registro ha sido agregado correctamente');
+        $preguntas =  WizardQuestions::where('active','=','1')->get() ;
+
+        $time = Carbon::now('America/El_Salvador');
+        foreach ($preguntas as $obj) {
+
+            $repuestas = new ChurchQuestionWizard;
+            $repuestas->question_id=$obj->id;
+            $repuestas->iglesia_id=$organizations->id;
+            $repuestas->answer=1;
+            $repuestas->date_added=$time->toDateTimeString();
+            $repuestas->save();
+
+              }
+
+       alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
 
@@ -213,7 +235,7 @@ class IglesiaController extends Controller
         $organizations->pastor_phone_number = $request->pastor_phone_number;
         $organizations->facebook = $request->facebook;
         $organizations->website = $request->website;
-        //$organizations->personeria_juridica = $request->personeria_juridica;
+        $organizations->personeria_juridica = $request->personeria_juridica;
         $organizations->organization_type = $request->organization_type;
         $organizations->status_id = $request->status_id;
         $organizations->sede_id = $request->sede_id;

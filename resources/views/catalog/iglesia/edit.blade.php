@@ -129,8 +129,10 @@
                                                         class="form-control select">
                                                         @foreach ($municipio as $obj2)
                                                             @if ($iglesia->catalog_departamento_id == $obj2->departamento_id)
-                                                                <option value="{{ $obj2->id }}">{{ $obj2->nombre }}
+                                                                <option value="{{ $obj2->id }}" selected>{{ $obj2->nombre }}
                                                                 </option>
+                                                                @else
+                                                                <option value="{{ $obj2->id }}">{{ $obj2->nombre }}
                                                             @endif
                                                         @endforeach
                                                     </select>
@@ -435,16 +437,15 @@
             </div>
         </div>
     </div>
+
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $(":input").inputmask();
-        });
-    </script>
     <script type="text/javascript">
         $(document).ready(function() {
+            //combo para Departamento
+            //combo para Departamento
+            //$("#departamento_id").change();
             $("#departamento_id").change(function() {
                 //alert('holi');
                 // var para la Departamento
@@ -463,12 +464,9 @@
                 });
 
             });
-        });
 
-        function show_drop() {
-            $("#div_img").hide();
-            $("#avatar").show();
-        }
+
+        });
     </script>
     <script type="text/javascript">
         // Configura Dropzone para el campo de entrada 'avatar'

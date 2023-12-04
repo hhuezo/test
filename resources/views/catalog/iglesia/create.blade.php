@@ -146,18 +146,38 @@
                                                         id="secondary_contac_phone_number_2" required class="form-control" data-inputmask="'mask': ['9999-9999']"
                                                         value="{{ old('contac_phone_number_2') }}">
                                                 </div>
-
+<div></div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Lider Religioso') }}</label>
+                                                        class="form-label">{{ __('Nombre Lider Religioso') }}</label>
                                                     <input type="text" name="pastor_name" id="pastor_name" required
                                                         class="form-control" value="{{ old('pastor_name') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Correo del Lider</label>
+                                                    <input type="email" id="emailpastor" name="emailpastor" class="form-control">
+                                                </div>
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Contraseña</label>
+                                                    <input type="password" id="password" name="password" required class="form-control">
+                                                </div>
+
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">Confirme Contraseña</label>
+                                                    <input type="password" id="password_confirmation" name="password_confirmation" required
+                                                        class="form-control">
+                                                </div>
+
+
+
+
+                                                <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Telefono de Pastor') }}</label>
+                                                        class="form-label"> Telefono de Lider Religioso </label>
                                                     <input type="text" name="pastor_phone_number"
                                                         id="pastor_phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']"
                                                         value="{{ old('pastor_phone_number') }}">
@@ -185,12 +205,6 @@
                                                         value="{{ old('Personeria_Juridica') }}">
                                                 </div>
 
-                                                <!-- <div class="input-area relative">
-                                                        <label for="largeInput" class="form-label">{{ __('tipo de organizacion') }}</label>
-                                                        <select name="organization_type" class="form-control">
-
-                                                        </select>
-                                                    </div>-->
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Estatus</label>
@@ -204,7 +218,9 @@
                                                 </div>
 
 
-                                                {{--    <div class="input-area relative">
+
+
+                                              <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">{{ __('Sede') }}</label>
                                                 <select id="sede_id" name="sede_id" class="form-control select2">
                                                     @foreach ($sede as $obj3)
@@ -212,7 +228,9 @@
                                                     </option>
                                                     @endforeach
                                                 </select>
-                                            </div> --}}
+                                            </div>
+
+                                            <div></div>
 
                                                 <div class="card h-full">
                                                     <div class="grid pt-4 pb-3 px-4">
