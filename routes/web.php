@@ -129,7 +129,7 @@ Route::get('/get_departamento/{id}', [WelcomeController::class, 'get_departament
 
 Route::post('/upload', [WelcomeController::class, 'store_file'])->name('dropzone.store');
 
-
+Route::post('administracion/datos_iglesia/set_estado', [DatosIglesiaController::class, 'set_estado']);
 Route::get('administracion/datos_iglesia/get_participantes/{iglesia}', [DatosIglesiaController::class, 'get_participantes']);
 Route::resource('administracion/datos_iglesia', DatosIglesiaController::class);
 Route::get('catalog/iglesia/set_grupo/{participante}/{grupo}', [IglesiaController::class, 'set_grupo']);

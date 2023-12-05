@@ -5,6 +5,7 @@ namespace App\Http\Controllers\administracion;
 use App\Http\Controllers\Controller;
 use App\Models\catalog\Departamento;
 use App\Models\catalog\Iglesia;
+use App\Models\catalog\Member;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ class DatosIglesiaController extends Controller
             $user   = User::findOrFail(auth()->user()->id);
             $iglesia = $user->user_has_iglesia->first();
 
+            $participantes = $iglesia->participantes($iglesia->id);
             $departamentos = Departamento::get();
             $grupos_iglesia = $iglesia->iglesia_has_grupo;
 
@@ -37,7 +39,8 @@ class DatosIglesiaController extends Controller
             return view('datos_iglesia.index', compact(
                 'departamentos',
                 'iglesia',
-                'grupos_iglesia'
+                'grupos_iglesia',
+                'participantes'
             ));
         } catch (Exception $e) {
             alert()->error('Error Datos No Coinciden');
@@ -50,11 +53,8 @@ class DatosIglesiaController extends Controller
     {
 
         $iglesia = Iglesia::findOrFail($id);
-
-        $participantes = $iglesia->participantes($id);
         $grupos = $iglesia->iglesia_has_grupo;
-
-        return view('datos_iglesia.show', compact('iglesia', 'participantes', 'grupos'));
+        return view('datos_iglesia.show', compact('iglesia',  'grupos'));
     }
 
     public function get_participantes($id)
@@ -62,9 +62,28 @@ class DatosIglesiaController extends Controller
 
         $iglesia = Iglesia::findOrFail($id);
 
-        $participantes = $iglesia->participantes($id);
+        $participantes = $iglesia->participantes($id)->where('status_id','=',2);
         $grupos = $iglesia->iglesia_has_grupo;
 
         return view('datos_iglesia.participantes_contenedor', compact('iglesia', 'participantes', 'grupos'));
+    }
+
+    public function set_estado(Request $request)
+    {
+        $member = Member::findOrFail($request->id);
+
+        $response = ["val" => 0, "mensaje" => "Error"];
+        if ($member) {
+            if ($member->status_id == 2) {
+                $member->status_id = 1;
+            } else {
+                $member->status_id = 2;
+            }
+
+            $member->update();
+
+            $response = ["val" => 1, "mensaje" => "Registro modificado correctamente"];
+        }
+        return  $response;
     }
 }
