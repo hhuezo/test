@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\administracion\DatosIglesiaController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\catalog\MemberController;
 use App\Http\Controllers\CourseController;
@@ -130,7 +131,7 @@ Route::post('/upload', [WelcomeController::class, 'store_file'])->name('dropzone
 
 
 
-Route::get('iglesia/datos_iglesia', [IglesiaController::class, 'datos_iglesia']);
+Route::resource('iglesia/datos_iglesia', DatosIglesiaController::class);
 Route::get('catalog/iglesia/set_grupo/{participante}/{grupo}', [IglesiaController::class, 'set_grupo']);
 Route::get('catalog/iglesia/get_participantes/{iglesia}', [IglesiaController::class, 'get_participantes']);
 Route::get('reporte_grupos/{iglesia}/{grupo}', [IglesiaController::class, 'reporte_grupos']);

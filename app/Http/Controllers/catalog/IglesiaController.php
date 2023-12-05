@@ -7,21 +7,17 @@ use App\Models\catalog\ChurchQuestionWizard;
 use App\Models\catalog\Cohorte;
 use App\Models\catalog\Departamento;
 use App\Models\catalog\Grupo;
-use App\Models\catalog\GruposIglesia;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
 use App\Models\catalog\Municipio;
-use App\Models\catalog\Organization;
 use App\Models\catalog\OrganizationStatus;
 use App\Models\catalog\Sede;
 use App\Models\catalog\WizardQuestions;
 use App\Models\User;
-use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Hash;
 class IglesiaController extends Controller
 {
@@ -370,42 +366,6 @@ class IglesiaController extends Controller
     }
 
 
-
-    public function datos_iglesia(Request $request)
-    {
-
-        try{
-            $user   = User::findOrFail(auth()->user()->id);
-            // dd($user);
-             $iglesia = $user->user_has_iglesia->first();
-
-             $departamentos = Departamento::get();
-             $grupos_iglesia = $iglesia->iglesia_has_grupo;
-
-
-             $url =  url('/') . "/registro_participantes/" . $iglesia->id . '/';
-
-             foreach ($grupos_iglesia as $obj) {
-                 $obj->conteo = $iglesia->countMembers($iglesia->id, $obj->id);
-                 $obj->codigo_qr = 'qrcodeiglesiagrupo' . $obj->id . '.png';
-                 QrCode::format('png')->size(200)->generate($url . '/' . $obj->id, public_path('img/qrcodeiglesiagrupo' . $obj->id . '.png'));
-             }
-
-
-             QrCode::format('png')->size(200)->generate($url . '0', public_path('img/qrcodeiglesia.png'));
-
-             return view('catalog.iglesia.datos_iglesia', compact(
-                 'departamentos',
-                 'iglesia',
-                 'grupos_iglesia'
-             ));
-        }
-        catch(Exception $e){
-            alert()->error('Error Datos No Coinciden');
-            return back();
-        }
-
-    }
 
     public function show($id)
     {
