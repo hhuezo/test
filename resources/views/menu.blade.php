@@ -203,7 +203,7 @@
                     @endcan
                     @can('datos iglesia')
                     <li>
-                        <a href="{{ url('iglesia/datos_iglesia') }}" class="navItem">
+                        <a href="{{ url('administracion/datos_iglesia') }}" class="navItem">
                             <span class="flex items-center">
                                 <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
                                 <span>Datos Generales Iglesia</span>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\administracion;
 
 use App\Http\Controllers\Controller;
 use App\Models\catalog\Departamento;
+use App\Models\catalog\Iglesia;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -42,5 +43,28 @@ class DatosIglesiaController extends Controller
             alert()->error('Error Datos No Coinciden');
             return back();
         }
+    }
+
+
+    public function show($id)
+    {
+
+        $iglesia = Iglesia::findOrFail($id);
+
+        $participantes = $iglesia->participantes($id);
+        $grupos = $iglesia->iglesia_has_grupo;
+
+        return view('datos_iglesia.show', compact('iglesia', 'participantes', 'grupos'));
+    }
+
+    public function get_participantes($id)
+    {
+
+        $iglesia = Iglesia::findOrFail($id);
+
+        $participantes = $iglesia->participantes($id);
+        $grupos = $iglesia->iglesia_has_grupo;
+
+        return view('datos_iglesia.participantes_contenedor', compact('iglesia', 'participantes', 'grupos'));
     }
 }

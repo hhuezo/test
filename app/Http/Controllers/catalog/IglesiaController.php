@@ -378,16 +378,7 @@ class IglesiaController extends Controller
         return view('catalog.iglesia.show', compact('iglesia', 'participantes', 'grupos'));
     }
 
-    public function get_participantes($id)
-    {
 
-        $iglesia = Iglesia::findOrFail($id);
-
-        $participantes = $iglesia->participantes($id);
-        $grupos = $iglesia->iglesia_has_grupo;
-
-        return view('catalog.iglesia.participantes_contenedor', compact('iglesia', 'participantes', 'grupos'));
-    }
 
     public function validarEdad($id)
     {

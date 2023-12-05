@@ -70,7 +70,7 @@
 
         function getParticipantes() {
             $.ajax({
-                url: "{{ url('catalog/iglesia/get_participantes') }}/" + {{ $iglesia->id }},
+                url: "{{ url('administracion/datos_iglesia/get_participantes') }}/" + {{ $iglesia->id }},
                 type: 'GET',
                 success: function(response) {
                     //console.log('Request successful:', response);

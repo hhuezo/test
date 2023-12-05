@@ -184,7 +184,7 @@
                                             <header class="card-header">
                                                 <h4 class="card-title">Grupos
                                                 </h4>
-                                                <a href="{{url('catalog/iglesia')}}/{{$iglesia->id}}">
+                                                <a href="{{url('administracion/datos_iglesia')}}/{{$iglesia->id}}">
                                                 <button class="btn btn-dark float-right"> Ver participantes</button>
                                                 </a>
                                             </header>
@@ -238,7 +238,7 @@
 
                                                                         </td>
                                                                     </tr>
-                                                                    @include('catalog.iglesia.modal_viewqr')
+                                                                    @include('datos_iglesia.modal_viewqr')
                                                                 @endforeach
 
 
