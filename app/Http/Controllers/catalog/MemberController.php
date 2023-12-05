@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
-class MemberControllers extends Controller
+class MemberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -173,6 +173,7 @@ class MemberControllers extends Controller
     {
 
         $iglesia = Iglesia::findorfail($id);
+       // $iglesia = Iglesia::where('status_id', '!=', 3)->get();
         $member = Member::get();
 
         $member_status = MemberStatus::get();
@@ -217,15 +218,11 @@ class MemberControllers extends Controller
      */
     public function edit($id)
     {
-
-
         $member_status = MemberStatus::get();
 
         $member = member::findOrFail($id);
 
         $grupo = $member->member_has_group->first();
-
-
 
         $usuario = User::findOrFail($member->users_id);
 

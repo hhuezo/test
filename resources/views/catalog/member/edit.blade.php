@@ -87,17 +87,22 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Genero</label>
                                                     <select name="catalog_gender_id" class="form-control" required>
-                                                        <option value="">Seleccione ...</option>
                                                         @foreach ($generos as $obj)
-                                                            <option value="{{ $obj->id }}" {{ $member->catalog_gender_id == $obj->id ? 'selected':'' }}>{{ $obj->description }}
-                                                            </option>
+                                                        @if ($obj->id == $member->catalog_gender_id)
+                                                        <option value="{{ $obj->id }}" selected>
+                                                            {{ $obj->description }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $obj->id }}">
+                                                            {{ $obj->description }}</option>
+                                                    @endif
                                                         @endforeach
                                                     </select>
                                                 </div>
 
 
 
-                                                <div class="input-area relative">
+                                              {{---  <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Iglesia</label>
                                                     <select id="organization_id" name="organization_id" class="form-control" required>
                                                         @foreach ($iglesias as $obj)
@@ -111,15 +116,22 @@
                                                         @endif
                                                     @endforeach
                                                     </select>
-                                                </div>
+                                                </div>--}}
 
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Grupos</label>
                                                     <select name="group_id" class="form-control select2">
-                                                            @foreach ($grupos as $obj)
-                                                                <option value="{{ $obj->id }}"  {{$obj->id == $member->group_id ? 'selected':''}}>{{ $obj->nombre }}        </option>
-                                                            @endforeach
+                                                       @foreach ($grupos as $obj)
+                                                            @if ($obj->id == $grupo->id)
+                                                                <option value="{{ $obj->id }}" selected>
+                                                                    {{  $obj->nombre  }}
+                                                                </option>
+                                                            @else
+                                                                <option value="{{ $obj->id }}">
+                                                                    {{  $obj->nombre  }} </option>
+                                                            @endif
+                                                        @endforeach
 
                                                     </select>
                                                 </div>
@@ -166,7 +178,7 @@
                                                         <label for="btn-switch" class="lbl-switch"></label>
                                                     </div>
                                                 </div> --}}
-
+<div></div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Departamento</label>
                                                     <select id="departamento_id" name="departamento_id" class="form-control"
@@ -219,7 +231,7 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="input-area relative">
+                                              {{--  <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Género</label>
                                                     <select name="catalog_gender_id" class="form-control">
                                                         @foreach ($generos as $obj)
@@ -227,7 +239,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                </div>
+                                                </div>--}}
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Dirección</label>
@@ -245,6 +257,63 @@
                                             </div>
                                         </form>
 
+                                        <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+                                        <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
+                                        <script src="{{ asset('assets/js/app.js') }}"></script>
+                                        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js'></script>
+
+
+                                        <script type="text/javascript">
+                                            $(document).ready(function() {
+                                                $(":input").inputmask();
+                                                $("#departamento_id").change(function() {
+                                                    console.log( $(this).val());
+                                                    var Departamento = $(this).val();
+
+                                                    $.get("{{ url('get_municipio/') }}" + '/' + Departamento, function(data) {
+                                                        console.log(data);
+                                                        var _select = ''
+                                                        for (var i = 0; i < data.length; i++)
+                                                            _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
+                                                            '</option>';
+                                                        $("#municipio_id").html(_select);
+                                                    });
+
+                                                });
+
+
+                                            });
+
+                                            function calcularEdad(fechaNacimiento) {
+                                                var fechaNac = new Date(fechaNacimiento);
+                                                var fechaActual = new Date();
+
+                                                var edad = fechaActual.getFullYear() - fechaNac.getFullYear();
+                                                var mes = fechaActual.getMonth() - fechaNac.getMonth();
+
+                                                if (mes < 0 || (mes === 0 && fechaActual.getDate() < fechaNac.getDate())) {
+                                                    edad--;
+                                                }
+
+                                                if (edad >= 18) {
+                                                    $("#document_number").prop("required", true);
+                                                } else {
+                                                    $("#document_number").prop("required", false);
+                                                }
+
+
+                                                $.get("{{url('/get_grupo')}}/" + fechaNacimiento, function(data) {
+                                                    // Manejar la respuesta aquí
+                                                    var _select = ''
+                                                    for (var i = 0; i < data.length; i++)
+                                                        _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
+                                                        '</option>';
+
+                                                    $("#grupo_id").html(_select);
+                                                });
+
+                            }
+                        </script>
                                     </div>
                                 </div>
                             </div>

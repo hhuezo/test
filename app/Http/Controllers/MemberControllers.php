@@ -14,13 +14,12 @@ use App\Models\Member;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class MemberController extends Controller
+class MemberControllers extends Controller
 {
 
     public function index()
     {
-        $members = Member::where('status_id','=',1)->get();
-        return view('members.index', compact('members'));
+        //$members = Member::where('status_id','=',1)->get();        return view('members.index', compact('members'));
     }
 
 
@@ -46,21 +45,21 @@ class MemberController extends Controller
 
 
 
-        $iglesia = Iglesia::findorfail($id);
-        $iglesia_grupo = $iglesia->iglesia_grupo;
-        $departamentos = Departamento::get();
+      ///  $iglesia = Iglesia::findorfail($id);
+      //  $iglesia_grupo = $iglesia->iglesia_grupo;
+      //  $departamentos = Departamento::get();
         //$group_per_chuch_plan= group_per_chuch_plan::get();
         //$newmiembro =grupo::where('departamento_id', '=', 1)->get();
-        return view('catalog.member.modal_register_member', compact('iglesia', 'departamentos', 'iglesia_grupo'));
+        //return view('catalog.member.modal_register_member', compact('iglesia', 'departamentos', 'iglesia_grupo'));
     }
 
 
     public function edit($id)
     {
-        $member = Member::findOrFail($id);
-        $departamentos = Departamento::get();
-        $municipios = Municipio::get();
-        return view('catalog.member.edit', compact('member','departamentos','municipios'));
+      //  $member = Member::findOrFail($id);
+     //   $departamentos = Departamento::get();
+    //    $municipios = Municipio::get();
+    //    return view('catalog.member.edit', compact('member','departamentos','municipios'));
     }
 
     public function update_member_group(Request $request, $id)

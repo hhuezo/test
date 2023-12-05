@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\catalog\MemberController;
 use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MemberControllers;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\QuizController;
@@ -22,7 +23,7 @@ use App\Http\Controllers\catalog\MemberStatusController;
 use App\Http\Controllers\catalog\FilePerCourseController;
 use App\Http\Controllers\catalog\GrupoController;
 use App\Http\Controllers\catalog\IglesiaController;
-use App\Http\Controllers\catalog\MemberController as CatalogMemberController;
+//use App\Http\Controllers\catalog\MemberController ;
 use App\Http\Controllers\catalog\OrganizationController as CatalogOrganizationController;
 use App\Http\Controllers\catalog\RegionController;
 use App\Http\Controllers\catalog\SedeController;
@@ -90,7 +91,7 @@ Route::post('seguridad/role/link_permission', [RoleController::class, 'link_perm
 
 
 
-Route::get('register_member_leader', [MemberController::class, 'register_member_leader']);
+Route::get('register_member_leader', [MemberControllers::class, 'register_member_leader']);
 Route::post('attach_new_member', [WelcomeController::class, 'attach_new_member']);
 
 
@@ -98,7 +99,7 @@ Route::post('attach_new_member', [WelcomeController::class, 'attach_new_member']
 
 
 Route::get('reasigna_grupos/{idpersona}', [GrupoController::class, 'reasigna_grupos']);
-Route::post('update_group_member/{idpersona}', [MemberController::class, 'update_member_group']);
+Route::post('update_group_member/{idpersona}', [MemberControllers::class, 'update_member_group']);
 
 
 
@@ -176,9 +177,9 @@ Route::post('organization/activate', [OrganizationController::class, 'activate']
 Route::resource('organizations', OrganizationController::class);
 
 
-Route::post('member/decline', [MemberController::class, 'decline']);
-Route::post('member/activate', [MemberController::class, 'activate']);
-Route::resource('catalog/member', MemberController::class);
+Route::post('member/decline', [MemberControllers::class, 'decline']);
+Route::post('member/activate', [MemberControllers::class, 'activate']);
+//Route::resource('catalog/member', MemberController::class);
 
 
 
