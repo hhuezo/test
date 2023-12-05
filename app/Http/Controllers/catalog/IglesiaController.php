@@ -373,29 +373,38 @@ class IglesiaController extends Controller
 
     public function datos_iglesia(Request $request)
     {
-        $i = 1;
-        $user   = User::findOrFail(auth()->user()->id);
-        $iglesia = $user->user_has_iglesia->first();
-        $departamentos = Departamento::get();
-        $grupos_iglesia = $iglesia->iglesia_has_grupo;
+
+        try{
+            $user   = User::findOrFail(auth()->user()->id);
+            // dd($user);
+             $iglesia = $user->user_has_iglesia->first();
+
+             $departamentos = Departamento::get();
+             $grupos_iglesia = $iglesia->iglesia_has_grupo;
 
 
-        $url =  url('/') . "/registro_participantes/" . $iglesia->id . '/';
+             $url =  url('/') . "/registro_participantes/" . $iglesia->id . '/';
 
-        foreach ($grupos_iglesia as $obj) {
-            $obj->conteo = $iglesia->countMembers($iglesia->id, $obj->id);
-            $obj->codigo_qr = 'qrcodeiglesiagrupo' . $obj->id . '.png';
-            QrCode::format('png')->size(200)->generate($url . '/' . $obj->id, public_path('img/qrcodeiglesiagrupo' . $obj->id . '.png'));
+             foreach ($grupos_iglesia as $obj) {
+                 $obj->conteo = $iglesia->countMembers($iglesia->id, $obj->id);
+                 $obj->codigo_qr = 'qrcodeiglesiagrupo' . $obj->id . '.png';
+                 QrCode::format('png')->size(200)->generate($url . '/' . $obj->id, public_path('img/qrcodeiglesiagrupo' . $obj->id . '.png'));
+             }
+
+
+             QrCode::format('png')->size(200)->generate($url . '0', public_path('img/qrcodeiglesia.png'));
+
+             return view('catalog.iglesia.datos_iglesia', compact(
+                 'departamentos',
+                 'iglesia',
+                 'grupos_iglesia'
+             ));
+        }
+        catch(Exception $e){
+            alert()->error('Error Datos No Coinciden');
+            return back();
         }
 
-
-        QrCode::format('png')->size(200)->generate($url . '0', public_path('img/qrcodeiglesia.png'));
-
-        return view('catalog.iglesia.datos_iglesia', compact(
-            'departamentos',
-            'iglesia',
-            'grupos_iglesia'
-        ));
     }
 
     public function show($id)
