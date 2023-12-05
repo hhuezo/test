@@ -24,11 +24,11 @@ class Member extends Model
         'cel_phone_number',
         'country_id',
         'departamento_id',
+        'municipio_id',
         'city_id',
         'address',
         'data_created',
         'status_id',
-        'organization_id',
         'user_id'
     ];
     protected $guarded = [];

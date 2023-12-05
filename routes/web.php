@@ -178,7 +178,7 @@ Route::resource('organizations', OrganizationController::class);
 
 Route::post('member/decline', [MemberController::class, 'decline']);
 Route::post('member/activate', [MemberController::class, 'activate']);
-Route::resource('members', MemberController::class);
+Route::resource('catalog/member', MemberController::class);
 
 
 

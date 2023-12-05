@@ -9,7 +9,7 @@ use App\Models\catalog\GroupPerchuchPlan;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
-use App\Models\catalog\MemberHasGrupo;
+//use App\Models\catalog\MemberHasGrupo;
 use App\Models\catalog\MemberStatus;
 use App\Models\catalog\Municipio;
 use App\Models\User;
@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
-class MemberController extends Controller
+class MemberControllers extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,12 +34,12 @@ class MemberController extends Controller
     {
         $member = Member::get();
         $member_status = MemberStatus::get();
-        $miembros_iglesia =  DB::select("select  q.id id, q.name_member as nombre , q.lastname_member as apellido , i.name iglesia
+        $participantes =  DB::select("select  q.id id, q.name_member as nombre , q.lastname_member as apellido , i.name iglesia
         from iglesia i
          join member q
          join  users_has_iglesia r on        r.iglesia_id=i.id and r.user_id=q.users_id ");
 
-        return view('catalog.member.index', compact('member', 'member_status', 'miembros_iglesia'));
+        return view('catalog.member.index', compact('member', 'member_status', 'participantes'));
     }
 
 
@@ -237,6 +237,7 @@ class MemberController extends Controller
         $departamentos = Departamento::get();
         $municipios = Municipio::get();
         $iglesias = Iglesia::where('status_id', '<>', 3)->get();
+
         return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'grupo',  'generos', 'departamentos', 'municipios', 'iglesia','iglesias'));
     }
 

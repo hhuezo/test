@@ -20,7 +20,7 @@ class MemberController extends Controller
     public function index()
     {
         $members = Member::where('status_id','=',1)->get();
-        return view('member.index', compact('members'));
+        return view('members.index', compact('members'));
     }
 
 
