@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\administracion\IglesiaPlanEstudio;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
-use App\Models\catalog\PlanEstudio;
+use App\Models\catalog\StudyPlan;
+use App\Models\catalog\StudyPlanDetail;
 use Illuminate\Http\Request;
 
 class IglesiaPlanEstudioController extends Controller
@@ -25,7 +26,7 @@ class IglesiaPlanEstudioController extends Controller
     {
         $iglesias = Iglesia::where('status_id','=','2')->get();
         $grupos = Grupo::where('active','=',1)->get();
-        $planes_estudio = PlanEstudio::get();
+        $planes_estudio = StudyPlan::get();
         return view('administracion.iglesia_plan_estudio.create',compact('iglesias','grupos','planes_estudio'));
     }
 
@@ -73,8 +74,12 @@ class IglesiaPlanEstudioController extends Controller
         $plan = IglesiaPlanEstudio::findOrFail($id);
         $iglesias = Iglesia::where('status_id','=','2')->get();
         $grupos = Grupo::where('active','=',1)->get();
-        $planes_estudio = PlanEstudio::get();
-        return view('administracion.iglesia_plan_estudio.edit',compact('plan','iglesias','grupos','planes_estudio'));
+        $planes_estudio = StudyPlan::get();
+        $participantes = $plan->iglesia->participantes($plan->iglesia_id)->where('group_id','=',$plan->group_id)->where('status_id','=',2);
+        $cursos = StudyPlanDetail::where('study_plan_id','=',$plan->study_plan_id)->get();
+
+        return view('administracion.iglesia_plan_estudio.edit',compact('plan','iglesias','grupos','planes_estudio',
+        'participantes','cursos'));
     }
 
     public function update(Request $request, $id)

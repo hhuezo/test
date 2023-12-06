@@ -19,7 +19,7 @@
 
                         <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
                             <thead>
-                                <tr class="td-table">
+                                <tr class="td-table" align="left">
                                     <th>Iglesia</th>
                                     <th>Grupo</th>
                                     <th>Plan de estudio</th>

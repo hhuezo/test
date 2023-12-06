@@ -4,7 +4,7 @@ namespace App\Models\administracion;
 
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
-use App\Models\catalog\PlanEstudio;
+use App\Models\catalog\StudyPlan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,7 +34,7 @@ class IglesiaPlanEstudio extends Model
 
     public function plan_estudio()
     {
-        return $this->belongsTo(PlanEstudio::class, 'study_plan_id', 'id');
+        return $this->belongsTo(StudyPlan::class, 'study_plan_id', 'id');
 
     }
 
