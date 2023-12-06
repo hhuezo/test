@@ -89,13 +89,26 @@ class StudyPlanController extends Controller
     public function edit($id)
     {
         $plan_estudio = StudyPlan::findOrFail($id);
-        $plan_cursos=$plan_estudio->plan_cursos;
-       // dd($plan_cursos);
 
 
+$plandetalle = StudyPlanDetail::join('course', 'study_plan_detail.course_id', '=', 'course.id')
+->where('study_plan_detail.study_plan_id', $plan_estudio->id)
+->select('course.id','course.name_es', 'course.description_es')
+->get();
+
+ //dd($plandetalle);
+        //  $StudyPlandetail=  StudyPlandetail::where('study_plan_id','=', $plan_estudio->id)->get();
+         // dd($StudyPlandetail);
+          // $plandetalle=   $plan_estudio->detalles;
+         // $StudyPlandetail->pluck('course_id')->toArray();
+          //  $StudyPlandetail;
+        //$plan_estudio->detalles;
+ //$plandetalle= $StudyPlandetail;
+      //  $plan_estudio_detalles=StudyPlanDetail::findOrFail($plandetalle);               //StudyPlanDetail::where('study_plan_id','=',$plan_estudio->id);
+       // $plan_cursos= $plan_estudio_detalles->curso;       // dd($plan_cursos);
         //dd($plan_cursos );
         $cursos = Course::get();
-        return view('catalog.plan_estudios.edit', compact('plan_estudio','cursos','plan_cursos'));
+        return view('catalog.plan_estudios.edit', compact('plan_estudio','cursos','plandetalle'));
 
     }
 
@@ -144,4 +157,25 @@ class StudyPlanController extends Controller
         alert()->error('El registro ha sido eliminado correctamente');
         return back();
     }
+
+    public function attach_cursos(Request $request)
+    {
+
+        $StudyPlandetail =  StudyPlandetail::findOrFail($request->study_plan_id);
+        $StudyPlandetail->plan_estudio()->attach($request->course_id);
+        alert()->success('El registro ha sido agregado correctamente');
+        return back();
+    }
+    public function dettach_cursos(Request $request)
+    {
+
+        $StudyPlandetail =  StudyPlandetail::findOrFail($request->study_plan_id);
+        $StudyPlandetail->curso()->detach($request->course_id);
+        alert()->error('El registro ha sido eliminado correctamente');
+        return back();
+    }
+
+
+
+
 }

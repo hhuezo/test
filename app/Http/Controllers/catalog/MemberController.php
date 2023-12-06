@@ -54,18 +54,18 @@ class MemberController extends Controller
 
         $member_status = MemberStatus::get();
 
-        $groupperchuchplan = GroupPerchuchPlan::get();
+       // $groupperchuchplan = GroupPerchuchPlan::get();
 
         $departamentos = Departamento::get();
         //$municipios = Municipio::where('departamento_id', '=', 1)->get();
         //  //$organizations = Organization::get();
-        $iglesia = Iglesia::where('status_id', '!=', 3)->get();
+        $iglesias = Iglesia::where('status_id', '!=', 3)->get();
         $grupos = Grupo::get();
         $generos = Gender::get();
         $municipios = Municipio::get();
 
 
-        return view('catalog.member.create', compact('generos', 'departamentos', 'iglesia', 'grupos', 'member_status', 'groupperchuchplan', 'municipios'));
+        return view('catalog.member.create', compact('generos', 'departamentos', 'iglesias', 'grupos', 'member_status',  'municipios'));
     }
 
     /**
@@ -178,7 +178,7 @@ class MemberController extends Controller
 
         $member_status = MemberStatus::get();
 
-        $groupperchuchplan = GroupPerchuchPlan::get();
+       // $groupperchuchplan = GroupPerchuchPlan::get();
 
         $departamentos = Departamento::get();
         $municipios = Municipio::get();

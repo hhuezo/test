@@ -22,7 +22,7 @@ class StudyPlanDetail extends Model
 
     public function plan_estudio()
     {
-        return $this->belongsTo(StudyPlan::class, 'study_plan_id', );
+        return $this->belongsTo(StudyPlan::class, 'study_plan_id','id' );
     }
 
     public function curso()

@@ -11,7 +11,7 @@
                         <div class="flex-1">
                             <div class="card-title text-slate-900 dark:text-white">Crear Plan de Estudios
 
-                                <a href="{{ url('catalog/estudios') }}">
+                                <a href="{{ url('catalog/plan_estudios') }}">
                                     <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
@@ -37,7 +37,7 @@
                                                 </ul>
                                             </div>
                                         @endif
-                                        <form method="POST" action="{{ url('catalog/estudios') }}">
+                                        <form method="POST" action="{{ url('catalog/plan_estudios') }}">
                                             @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
@@ -46,7 +46,7 @@
                                                     <input type="text" name="description_es" id="description_es" required class="form-control"
                                                         value="{{ old('description_es') }}" autofocus="true">
                                                 </div>
-                                                <div></div>
+                                                <div>
 
 
                                                 <div class="input-area relative">

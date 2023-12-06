@@ -11,7 +11,7 @@
                         <div class="flex-1">
                             <div class="card-title text-slate-900 dark:text-white">Modificar plan de Estudio
 
-                                <a href="{{ url('catalog/estudios')}}">
+                                <a href="{{ url('catalog/plan_estudios') }}">
                                     <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
@@ -38,37 +38,45 @@
                                             </div>
                                         @endif
 
-                                            <form method="POST" action="{{ route('plan_estudios.update', $plan_estudio->id) }}">
-                                                @method('PUT')
-                                                @csrf
+                                        <form method="POST"
+                                            action="{{ route('plan_estudios.update', $plan_estudio->id) }}">
+                                            @method('PUT')
+                                            @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">Descripcion</label>
-                                                    <input type="text" name="description_es" id="description_es" required class="form-control"
-                                                        value="{{ $plan_estudio->description_es }}" autofocus="true">
+                                                    <label for="largeInput" class="form-label">Descripcion</label>
+                                                    <input type="text" name="description_es" id="description_es" required
+                                                        class="form-control" value="{{ $plan_estudio->description_es }}"
+                                                        autofocus="true">
                                                 </div>
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">Cursos</label>
-                                                    <select name="course_id" id="course_id"
-                                                        class="form-control select">
-                                                        @foreach ($cursos as $obj2)
-                                                                <option value="{{ $obj2->id }}" selected>{{ $obj2->name_es }}
-                                                                </option>
+                                                    <label for="largeInput" class="form-label">Cursos</label>
+                                                    <select name="course_id" id="course_id" class="form-control select">
+                                                        @foreach ( $cursos as $obj2)
+                                                                <option value="{{ $obj2->id }}">{{ $obj2->name_es }}
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                      &nbsp;
-                                      <div></div>
-                                                <div class="input-area relative">
-                                                    <table id="myTable"
+
+                                                <div></div>
+
+
+                                                &nbsp;
+                                            </div>
+                                            <div style="text-align: right;">
+                                                <button type="submit"
+                                                    class="btn inline-flex justify-center btn-dark">{{ 'Aceptar' }}</button>
+                                            </div>
+                                            &nbsp;
+                                        </form>
+                                        <div class="input-area relative">
+                                            <table id="myTable"
                                                 class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700"
                                                 cellspacing="0" width="100%">
                                                 <thead class="bg-slate-200 dark:bg-slate-700">
                                                     <tr class="even:bg-slate-50 dark:even:bg-slate-700">
-
-                                                        <th style="text-align: center">curso</th>
+                                                        <th style="text-align: center">id</th>
+                                                        <th style="text-align: center">Curso</th>
                                                         <th style="text-align: center">Descripcion</th>
                                                         <th style="text-align: center">Opciones</th>
 
@@ -76,32 +84,29 @@
                                                 </thead>
                                                 <tbody
                                                     class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
-                                                    @foreach ($plan_cursos as $obj)
-
-                                                        <td align="center">{{$obj->name_es }}</td>
-                                                        <td align="center"> {{$obj->description_es }}</td>
+                                                    @foreach ($plandetalle as $obj)
+                                                    <td align="center">{{ $obj->id }}</td>
+                                                        <td align="center">{{ $obj->name_es }}</td>
+                                                        <td align="center"> {{ $obj->description_es }}</td>
                                                         <td align="center">
                                                             <iconify-icon data-bs-toggle="modal"
-                                                                data-bs-target="#modal-preg-{{ $obj->id }}"
-                                                                icon="mdi:trash" style="color: #1769aa;"
+                                                            data-bs-target="#modal-createcourse-{{ $plan_estudio->id }}"
+                                                            icon="mdi:plus" style="color:#0e0f10;"
+                                                            width="40"></iconify-icon>
+                                                            &nbsp;&nbsp;
+                                                            <iconify-icon data-bs-toggle="modal"
+                                                                data-bs-target="#modal-delcourse-{{ $obj->id }}"
+                                                                icon="mdi:trash" style="color: #0e0f10;"
                                                                 width="40"></iconify-icon>
 
                                                         </td>
                                                         </tr>
-
+                                                        @include('catalog.plan_estudios.del_curso')
+                                                        @include('catalog.plan_estudios.add_curso')
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                                </div>
-
-                                                &nbsp;
-                                            </div>
-                                            <div style="text-align: right;">
-                                                <button type="submit"
-                                                    class="btn inline-flex justify-center btn-dark">{{('Aceptar') }}</button>
-                                            </div>
-                                        </form>
-
+                                        </div>
 
                                     </div>
 

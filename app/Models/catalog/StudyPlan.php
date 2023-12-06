@@ -20,6 +20,8 @@ class StudyPlan extends Model
 
     public function detalles()
     {
-        return $this->hasMany(Course::class, 'study_plan_id');
+        return $this->hasMany(StudyPlanDetail::class, 'study_plan_id');
     }
+
+
 }
