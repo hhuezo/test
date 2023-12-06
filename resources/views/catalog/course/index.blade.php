@@ -17,9 +17,9 @@
             <span class="  col-span-4 hidden"></span>
             <div class="inline-block min-w-full align-middle">
                 <div class="overflow-hidden " style=" margin-bottom:20px ">
-                    <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
-                        <thead class="bg-slate-200 dark:bg-slate-700">
-                            <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
+                    <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed black:divide-slate-700" cellspacing="0" width="100%">
+                        <thead class="bg-slate-200 black:bg-slate-700">
+                            <tr  class="even:bg-slate-50 black:even:bg-slate-700">
                                 <th style="text-align: center">Id</th>
                                 <td style="text-align: center">Nombre español</td>
                                 <td style="text-align: center">Nombre ingles</td>
@@ -29,10 +29,10 @@
 
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
+                        <tbody class="bg-white divide-y divide-slate-100 black:bg-slate-800 black:divide-slate-700">
                             @if ($Course->count() > 0)
                             @foreach ($Course as $obj)
-                            <tr class="even:bg-slate-50 dark:even:bg-slate-700">
+                            <tr class="even:bg-slate-50 black:even:bg-slate-700">
                                 <td align="center">{{ $obj->id }}</td>
                                 <td>{{ $obj->name_es }}</td>
                                 <td>{{ $obj->name_en }}</td>
@@ -41,10 +41,10 @@
 
                                 <td align="center">
                                     <a href="{{ url('catalog/course') }}/{{ $obj->id }}/edit">
-                                        <iconify-icon icon="mdi:pencil" style="color:#1769aa;" width="40"></iconify-icon>
+                                        <iconify-icon icon="mdi:pencil" style="color:#0c0d0f;" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;&nbsp;
-                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
+                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #0c0d0f;" width="40"></iconify-icon>
                                 </td>
                             </tr>
                             @include('catalog.course.modal')
