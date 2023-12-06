@@ -228,6 +228,9 @@
                                 <a href="{{ url('catalog/course') }}">Cursos</a>
                             </li>
                             <li>
+                                <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('catalog/question') }}">Preguntas</a>
                             </li>
                             <li>

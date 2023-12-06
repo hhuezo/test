@@ -45,7 +45,7 @@ class CourseController extends Controller
     public function store(Request $request)  {
 
         $messages = [
-            'name.required' => 'ingresar Nombre del curso',
+            'name_es.required' => 'ingresar Nombre del curso',
 
         ];
 
@@ -53,16 +53,17 @@ class CourseController extends Controller
 
         $request->validate([
 
-            'name' => 'required',
+            'name_es' => 'required',
 
 
         ], $messages);
         $courses = new Course();
-        $courses->name = $request->name;
+        $courses->name =  $request->name_es;
         $courses->name_es = $request->name_es;
-        $courses->description = $request->description;
+        $courses->description = $request->description_es;
         $courses->description_es= $request->description_es;
         $courses->image = $request->image;
+
         $courses->save();
 
         alert()->success('El registro ha sido agregado correctamente');

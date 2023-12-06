@@ -110,7 +110,7 @@ class CohorteController extends Controller
         $cohorte= Cohorte::findOrFail($id);
         $cohorte->nombre = $request->nombre;
         $cohorte->region_id = $request->region_id;
-        $cohorte->save();
+        $cohorte->update();
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
     }

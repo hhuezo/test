@@ -4,6 +4,7 @@ use App\Http\Controllers\administracion\DatosIglesiaController;
 use App\Http\Controllers\administracion\IglesiaPlanEstudioController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\catalog\MemberController;
+use App\Http\Controllers\catalog\StudyPlanController;
 use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -245,3 +246,6 @@ Route::resource('catalog/member', MemberController::class);
 Route::resource('catalog/FilePerCourse', FilePerCourseController::class);
 
 Route::resource('catalog/grupo', GrupoController::class);
+
+Route::resource('catalog/plan_estudios', StudyPlanController::class);
+
