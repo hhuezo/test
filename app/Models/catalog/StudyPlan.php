@@ -15,15 +15,11 @@ class StudyPlan extends Model
     protected $fillable = [
         'description',
         'description_es',
-   ];
-protected $guarded = [];
+    ];
+    protected $guarded = [];
 
-public function plan_cursos()
+    public function detalles()
     {
-        return $this->belongsToMany(Course::class, 'study_plan_detail', 'study_plan_id');
-
+        return $this->hasMany(Course::class, 'study_plan_id');
     }
-
-
-
 }
