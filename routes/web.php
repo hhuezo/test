@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\administracion\DatosIglesiaController;
+use App\Http\Controllers\administracion\IglesiaPlanEstudioController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\catalog\MemberController;
 use App\Http\Controllers\CourseController;
@@ -133,6 +134,8 @@ Route::post('administracion/datos_iglesia/set_estado', [DatosIglesiaController::
 Route::get('administracion/datos_iglesia/get_participantes/{iglesia}', [DatosIglesiaController::class, 'get_participantes']);
 Route::resource('administracion/datos_iglesia', DatosIglesiaController::class);
 Route::get('catalog/iglesia/set_grupo/{participante}/{grupo}', [IglesiaController::class, 'set_grupo']);
+
+Route::resource('administracion/iglesia_plan_estudio', IglesiaPlanEstudioController::class);
 
 Route::get('reporte_grupos/{iglesia}/{grupo}', [IglesiaController::class, 'reporte_grupos']);
 

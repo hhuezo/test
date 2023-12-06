@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Models\catalog;
+namespace App\Models\administracion;
 
+use App\Models\catalog\Grupo;
+use App\Models\catalog\Iglesia;
+use App\Models\catalog\PlanEstudio;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GroupPerchuchPlan extends Model
+class IglesiaPlanEstudio extends Model
 {
     use HasFactory;
 
@@ -22,12 +25,6 @@ class GroupPerchuchPlan extends Model
         'end_date',
         'closed',
     ];
-
-
-    // public function miembro_grupo()
-    // {
-    //     return $this->belongsToMany(Member::class, 'user_has_group', 'group_per_church_id', 'member_id');
-    // }
 
     public function iglesia()
     {
@@ -46,5 +43,4 @@ class GroupPerchuchPlan extends Model
         return $this->belongsTo(Grupo::class, 'group_id', 'id');
 
     }
-
 }
