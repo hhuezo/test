@@ -49,14 +49,6 @@
                                                         class="form-control" value="{{ $plan_estudio->description_es }}"
                                                         autofocus="true">
                                                 </div>
-                                                <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">Cursos</label>
-                                                    <select name="course_id" id="course_id" class="form-control select">
-                                                        @foreach ( $cursos as $obj2)
-                                                                <option value="{{ $obj2->id }}">{{ $obj2->name_es }}
-                                                        @endforeach
-                                                    </select>
-                                                </div>
 
                                                 <div></div>
 
@@ -69,13 +61,20 @@
                                             </div>
                                             &nbsp;
                                         </form>
+                                        Agregar Cursos
+                                            <iconify-icon data-bs-toggle="modal"
+                                            data-bs-target="#modal-createcourse-{{ $plan_estudio->id }}"
+                                            icon="mdi:plus" style="color:#0e0f10;"
+                                            width="40"></iconify-icon>
+                                            &nbsp;&nbsp;
                                         <div class="input-area relative">
                                             <table id="myTable"
                                                 class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700"
                                                 cellspacing="0" width="100%">
                                                 <thead class="bg-slate-200 dark:bg-slate-700">
                                                     <tr class="even:bg-slate-50 dark:even:bg-slate-700">
-                                                        <th style="text-align: center">id</th>
+
+                                                        <th style="text-align: center">idcurso</th>
                                                         <th style="text-align: center">Curso</th>
                                                         <th style="text-align: center">Descripcion</th>
                                                         <th style="text-align: center">Opciones</th>
@@ -88,28 +87,22 @@
                                                     <td align="center">{{ $obj->id }}</td>
                                                         <td align="center">{{ $obj->name_es }}</td>
                                                         <td align="center"> {{ $obj->description_es }}</td>
-                                                        <td align="center">
-                                                            <iconify-icon data-bs-toggle="modal"
-                                                            data-bs-target="#modal-createcourse-{{ $plan_estudio->id }}"
-                                                            icon="mdi:plus" style="color:#0e0f10;"
-                                                            width="40"></iconify-icon>
-                                                            &nbsp;&nbsp;
-                                                            <iconify-icon data-bs-toggle="modal"
-                                                                data-bs-target="#modal-delcourse-{{ $obj->id }}"
+                                                        <td align="center">  <iconify-icon data-bs-toggle="modal"
+                                                                data-bs-target="#modal-delcourse-{{ $obj->id}}"
                                                                 icon="mdi:trash" style="color: #0e0f10;"
                                                                 width="40"></iconify-icon>
 
                                                         </td>
                                                         </tr>
                                                         @include('catalog.plan_estudios.del_curso')
-                                                        @include('catalog.plan_estudios.add_curso')
+
                                                     @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
 
                                     </div>
-
+                                    @include('catalog.plan_estudios.add_curso')
 
 
                                 </div>

@@ -49,19 +49,6 @@
                                                 <div>
 
 
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">Cursos</label>
-                                                    <select name="course_id" id="course_id"
-                                                        class="form-control select">
-                                                        @foreach ($cursos as $obj2)
-                                                                <option value="{{ $obj2->id }}" selected>{{ $obj2->name_es }}
-                                                                </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-
 
 
 

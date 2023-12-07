@@ -118,7 +118,7 @@ class MemberController extends Controller
         $member->lastname_member = $request->lastname_member;
         $member->birthdate = $request->birthdate;
         $member->document_number = $request->document_number;
-        $member->catalog_gender_id = $request->genero;
+        $member->catalog_gender_id = $request->catalog_gender_id;
         $member->email = $request->email;
         $member->cell_phone_number = $request->cell_phone_number;
         $member->address = $request->address;
@@ -128,7 +128,7 @@ class MemberController extends Controller
         $member->municipio_id = $request->municipio_id;
         $member->status_id = 1;
         $member->users_id = $user->id;
-        $member->departamento_id =   $deptos->id;
+       // $member->departamento_id =   $deptos->id;
         $member->address = $request->address;
       //  if ($request->get('is_pastor') == 'on') {
         //    $member->is_pastor = 1;   // si es pastor
