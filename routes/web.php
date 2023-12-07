@@ -248,5 +248,8 @@ Route::resource('catalog/FilePerCourse', FilePerCourseController::class);
 
 Route::resource('catalog/grupo', GrupoController::class);
 
+Route::post('catalog/plan_estudios/attach_cursos', [StudyPlanController::class, 'attach_cursos']);
+Route::post('catalog/plan_estudios/dettach_cursos', [StudyPlanController::class, 'dettach_cursos']);
+
 Route::resource('catalog/plan_estudios', StudyPlanController::class);
 

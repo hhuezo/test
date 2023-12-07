@@ -20,15 +20,19 @@
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden " style=" margin-bottom:20px ">
 
-                      <table class="min-w-full divide-y divide-slate-100 table-fixed black:divide-slate-700">
-                        <thead class="bg-slate-200 black:bg-slate-700">
+                            <div class="input-area relative">
+                                <table id="myTable"
+                            class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700"
+                            cellspacing="0" width="100%">
+                            <thead class="bg-slate-200 dark:bg-slate-700">
+                                <tr class="even:bg-slate-50 dark:even:bg-slate-700">
 
-                                    <tr  class="even:bg-slate-50 black:even:bg-slate-700">
-                                        <th style="text-align: center">Id</th>
-                                        <th style="text-align: center">Plan de Estudio</th>
-                                        <th style="text-align: center">Opciones</th>
-                                    </tr>
-                                </thead>
+                                    <th style="text-align: center">Id</th>
+                                    <th style="text-align: center">Descripcion</th>
+                                    <th style="text-align: center">Opciones</th>
+
+                                </tr>
+                            </thead>
                                 <tbody class="bg-white divide-y divide-slate-100 black:bg-slate-800 black:divide-slate-700">
                                     @if ($plan_estudio->count() > 0)
                                         @foreach ($plan_estudio as $obj)

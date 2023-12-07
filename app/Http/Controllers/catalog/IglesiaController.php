@@ -90,6 +90,8 @@ class IglesiaController extends Controller
 
 
 
+
+
         foreach ($grupos as $obj) {
             $organizations->iglesia_has_grupo()->attach($obj->id);
         }

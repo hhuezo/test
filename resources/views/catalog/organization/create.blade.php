@@ -42,7 +42,7 @@
                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">{{ __('Nombre Español') }}</label>
-                                                <input type="text" name="name" required class="form-control" value="{{ old('name') }}" autofocus="true">
+                                                <input type="text" name="name" id= required class="form-control" value="{{ old('name') }}" autofocus="true">
                                             </div>
 
 

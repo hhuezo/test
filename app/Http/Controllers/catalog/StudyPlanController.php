@@ -21,7 +21,6 @@ class StudyPlanController extends Controller
         $plan_estudio = StudyPlan::get();
 
         return view('catalog.plan_estudios.index', compact('plan_estudio'));
-
     }
 
     /**
@@ -34,9 +33,7 @@ class StudyPlanController extends Controller
         $cursos = Course::get();
 
 
-        return view('catalog.plan_estudios.create',compact('cursos'));
-
-
+        return view('catalog.plan_estudios.create', compact('cursos'));
     }
 
     /**
@@ -59,12 +56,9 @@ class StudyPlanController extends Controller
 
         $StudyPlan = new StudyPlan();
         $StudyPlan->description = $request->description;
-        $StudyPlan->description_es= $request->description_es;
+        $StudyPlan->description_es = $request->description_es;
         $StudyPlan->save();
-        $StudyPlandetail=new StudyPlanDetail();
-        $StudyPlandetail->course_id = $request->course_id;
-        $StudyPlandetail->study_plan_id =   $StudyPlan->id;
-        $StudyPlandetail->save();
+       // $StudyPlandetail = new StudyPlanDetail();        $StudyPlandetail->course_id = $request->course_id;        $StudyPlandetail->study_plan_id =   $StudyPlan->id;        $StudyPlandetail->save();
         alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
@@ -89,14 +83,26 @@ class StudyPlanController extends Controller
     public function edit($id)
     {
         $plan_estudio = StudyPlan::findOrFail($id);
-        $plan_cursos=$plan_estudio->plan_cursos;
-       // dd($plan_cursos);
 
 
+        $plandetalle = StudyPlanDetail::join('course', 'study_plan_detail.course_id', '=', 'course.id')
+            ->where('study_plan_detail.study_plan_id', $plan_estudio->id)
+            ->select('study_plan_detail.id', 'course.name_es', 'course.description_es')
+            ->get();
+
+        //dd($plandetalle);
+        //  $StudyPlandetail=  StudyPlandetail::where('study_plan_id','=', $plan_estudio->id)->get();
+        // dd($StudyPlandetail);
+        // $plandetalle=   $plan_estudio->detalles;
+        // $StudyPlandetail->pluck('course_id')->toArray();
+        //  $StudyPlandetail;
+        //$plan_estudio->detalles;
+        //$plandetalle= $StudyPlandetail;
+        //  $plan_estudio_detalles=StudyPlanDetail::findOrFail($plandetalle);               //StudyPlanDetail::where('study_plan_id','=',$plan_estudio->id);
+        // $plan_cursos= $plan_estudio_detalles->curso;       // dd($plan_cursos);
         //dd($plan_cursos );
         $cursos = Course::get();
-        return view('catalog.plan_estudios.edit', compact('plan_estudio','cursos','plan_cursos'));
-
+        return view('catalog.plan_estudios.edit', compact('plan_estudio', 'cursos', 'plandetalle'));
     }
 
     /**
@@ -120,12 +126,12 @@ class StudyPlanController extends Controller
 
         $StudyPlan =  StudyPlan::findOrFail($id);
         $StudyPlan->description = $request->description;
-        $StudyPlan->description_es= $request->description_es;
+        $StudyPlan->description_es = $request->description_es;
         $StudyPlan->update();
-        $StudyPlandetail=  StudyPlandetail::where('course_id','=',$request->course_id)::where('StudyPlandetail->study_plan_id','=', $request->plan_id)->get();
-        $StudyPlandetail->course_id = $request->course_id;
-        $StudyPlandetail->study_plan_id = $request->plan_id;
-        $StudyPlandetail->update();
+        //$StudyPlandetail=  StudyPlandetail::where('course_id','=',$request->course_id)::where('StudyPlandetail->study_plan_id','=', $request->plan_id)->get();
+        // $StudyPlandetail->course_id = $request->course_id;
+        // $StudyPlandetail->study_plan_id = $request->plan_id;
+        // $StudyPlandetail->update();
         alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
@@ -138,9 +144,36 @@ class StudyPlanController extends Controller
      */
     public function destroy($id)
     {
-        $StudyPlan= StudyPlan::findOrFail($id);
+        $StudyPlan = StudyPlan::findOrFail($id);
         //dd($question);
         $StudyPlan->delete();
+        alert()->error('El registro ha sido eliminado correctamente');
+        return back();
+    }
+
+    public function attach_cursos(Request $request)
+    {
+
+        $StudyPlan =  StudyPlan::findOrFail($request->study_plan_id);
+        $StudyPlandetail = new StudyPlandetail();
+        $StudyPlandetail->study_plan_id =  $StudyPlan->id;
+        $StudyPlandetail->course_id =  $request->course_id;
+        $StudyPlandetail->save();
+        //      $StudyPlandetail =  StudyPlandetail::findOrFail($StudyPlan);
+        //        $StudyPlandetail->plan_estudio()->attach($request->course_id);
+        alert()->success('El registro ha sido agregado correctamente');
+        return back();
+    }
+    public function dettach_cursos(Request $request)
+    {
+        //dd($request->id);        dd($request->study_plan_id, $request->course_id);
+
+        $StudyPlan = StudyPlandetail::findOrFail($request->id);
+         //StudyPlan::findOrFail($request->study_plan_id);
+        $StudyPlan->delete();
+        //  $StudyPlandetail=  StudyPlandetail::where('course_id','=',$request->course_id)::where('study_plan_id','=',  $StudyPlan->id)->get();
+        //  dd($StudyPlandetail);
+        // $StudyPlandetail->delete();
         alert()->error('El registro ha sido eliminado correctamente');
         return back();
     }
