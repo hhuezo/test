@@ -16,11 +16,10 @@ class CourseController extends Controller
     public function index()
     {
 
-        $Course =Course::get();
+        $Course = Course::get();
 
 
         return view('catalog.course.index', compact('Course'));
-
     }
 
     /**
@@ -42,7 +41,10 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)  {
+    public function store(Request $request)
+    {
+
+
 
         $messages = [
             'name_es.required' => 'ingresar Nombre del curso',
@@ -61,15 +63,19 @@ class CourseController extends Controller
         $courses->name =  $request->name_es;
         $courses->name_es = $request->name_es;
         $courses->description = $request->description_es;
-        $courses->description_es= $request->description_es;
+        $courses->description_es = $request->description_es;
         $courses->image = $request->image;
 
+        $archivo = $request->file('imagen');
+        $filename = $archivo->getClientOriginalName();
+        $path = $filename;
+        $destinationPath = public_path('/images');
+        $archivo->move($destinationPath, $path);
+        $courses->image = "./images";
+        $courses->image = $courses->image . $filename;
         $courses->save();
-
         alert()->success('El registro ha sido agregado correctamente');
         return back();
-
-
     }
 
     /**
@@ -91,12 +97,10 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $courses=  Course::findOrFail($id);
+
+        $courses =  Course::findOrFail($id);
 
         return view('catalog.course.edit', compact('courses'));
-
-        alert()->success('El registro ha sido Modificado correctamente');
-        return back();
     }
 
     /**
@@ -108,26 +112,37 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $messages = [
-            'course.name.required' => 'ingresar nombre del curso',
-        ];
 
-        $request->validate([
+        // //dd($request->file('imagen'));
+        // $messages = [
+        //     'course.name_es.required' => 'ingresar nombre del curso',
+        // ];
 
-            'course.name' => 'required',
+        // $request->validate([
 
-        ], $messages);
+        //     'course.name_es' => 'required',
+
+        // ], $messages);
 
 
 
-        $courses =  Course::findOrFail($id);
-        $courses->name = $request->name;
+        $courses = Course::findOrFail($id);
+        $courses->name = $request->name_es;
         $courses->name_es = $request->name_es;
-        $courses->description = $request->description;
-        $courses->description_es= $request->description_es;
-        $courses->image = $request->image;
-        $courses->save();
+        $courses->description = $request->description_es;
+        $courses->description_es = $request->description_es;
 
+
+        $id_file = uniqid();
+
+        $archivo = $request->file('imagen');
+        $filename = $id_file . ' ' .  $archivo->getClientOriginalName();
+        $path = $filename;
+        $destinationPath = public_path('/images');
+        $archivo->move($destinationPath, $path);
+        $courses->image = "./images";
+        $courses->image = $request->image . $filename;
+        $courses->update();
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
     }
@@ -140,7 +155,7 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        $courses= course::findOrFail($id);
+        $courses = course::findOrFail($id);
         //dd($question);
         $courses->delete();
         alert()->info('El registro ha sido eliminado correctamente');
