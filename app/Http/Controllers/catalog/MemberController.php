@@ -64,7 +64,6 @@ class MemberController extends Controller
         $generos = Gender::get();
         $municipios = Municipio::get();
 
-
         return view('catalog.member.create', compact('generos', 'departamentos', 'iglesias', 'grupos', 'member_status',  'municipios'));
     }
 
@@ -76,6 +75,7 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
+
 
         $messages = [
             'name_member.required' => 'ingresar nombre',
@@ -92,30 +92,30 @@ class MemberController extends Controller
 
 
         $user = new User();
-        $user->name = $request->name . ' ' . $request->last_name;
+        $user->name = $request->name_member . ' ' . $request->name_member;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->status = 0;
         $user->save();
-        if ($request->get('is_pastor') == 'on') {
+       // if ($request->get('is_pastor') == 'on') {
             // si es pastor
-            $user->assignRole('encargado');
+       //     $user->assignRole('encargado');
 
-      } else {
+     // } else {
         $user->assignRole('participante');
-        }
+        //}
 
 
         //asign role
-        $iglesia = Iglesia::findorfail($request->iglesia_id);
+        $iglesia = Iglesia::findorfail($request->organization_id);
 
         $iglesia->users_has_iglesia()->attach($user->id);
 
         $deptos = Departamento::findorfail($iglesia->catalog_departamento_id);
 
         $member = new Member();
-        $member->name_member = $request->name;
-        $member->lastname_member = $request->last_name;
+        $member->name_member = $request->name_member;
+        $member->lastname_member = $request->lastname_member;
         $member->birthdate = $request->birthdate;
         $member->document_number = $request->document_number;
         $member->catalog_gender_id = $request->genero;
@@ -130,15 +130,18 @@ class MemberController extends Controller
         $member->users_id = $user->id;
         $member->departamento_id =   $deptos->id;
         $member->address = $request->address;
-        if ($request->get('is_pastor') == 'on') {
-            $member->is_pastor = 1;   // si es pastor
-        } else {
+      //  if ($request->get('is_pastor') == 'on') {
+        //    $member->is_pastor = 1;   // si es pastor
+        //} else {
             $member->is_pastor = 0;
-        }
+       // }
         $member->save();
 
         $member->member_has_group()->attach($request->group_id);
 
+
+        alert()->success('El registro ha sido agregado correctamente');
+        return back();
         // $GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
         // dd( $GroupPerchuchPlan->id);
         // $GroupPerchuchPlan->miembro_grupo()->attach($member->id);
@@ -159,8 +162,7 @@ class MemberController extends Controller
         // $result = $objeto->sendMail($email, $subject, $content);
 
 
-        alert()->success('El registro ha sido agregado correctamente');
-        return back();
+
     }
 
     /**

@@ -135,10 +135,10 @@ $plandetalle = StudyPlanDetail::join('course', 'study_plan_detail.course_id', '=
         $StudyPlan->description = $request->description;
         $StudyPlan->description_es= $request->description_es;
         $StudyPlan->update();
-        $StudyPlandetail=  StudyPlandetail::where('course_id','=',$request->course_id)::where('StudyPlandetail->study_plan_id','=', $request->plan_id)->get();
-        $StudyPlandetail->course_id = $request->course_id;
-        $StudyPlandetail->study_plan_id = $request->plan_id;
-        $StudyPlandetail->update();
+        //$StudyPlandetail=  StudyPlandetail::where('course_id','=',$request->course_id)::where('StudyPlandetail->study_plan_id','=', $request->plan_id)->get();
+       // $StudyPlandetail->course_id = $request->course_id;
+       // $StudyPlandetail->study_plan_id = $request->plan_id;
+       // $StudyPlandetail->update();
         alert()->success('El registro ha sido agregado correctamente');
         return back();
     }

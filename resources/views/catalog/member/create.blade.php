@@ -36,9 +36,7 @@
                                         @endif
 
 
-                                            <form method="POST" action="{{ url('catalog/member') }}"
-                                            class="space-y-4">
-                                            @method('PUT')
+                                            <form method="POST" action="{{ url('catalog/member') }}">
                                             @csrf
 
                                             <div class="input-area relative">
@@ -68,8 +66,7 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">{{ __('Apellido') }}</label>
                                                     <input type="text" id="lastname_member" name="lastname_member"
-                                                      " required
-                                                        class="form-control" value="{{ old('lastname_member') }}">
+                                                      required class="form-control" value="{{ old('lastname_member') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
@@ -82,7 +79,7 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Genero</label>
-                                                    <select name="catalog_gender_id" class="form-control" required>
+                                                    <select name="catalog_gender_id" id="catalog_gender_id" class="form-control" required>
                                                         @foreach ($generos as $obj)
 
                                                         <option value="{{ $obj->id }}">
@@ -113,7 +110,7 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Grupos</label>
-                                                    <select name="group_id" class="form-control select2">
+                                                    <select name="group_id" id="group_id" class="form-control select2">
                                                        @foreach ($grupos as $obj)
 
                                                                 <option value="{{ $obj->id }}">
@@ -198,7 +195,7 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Estatus</label>
-                                                    <select name="status" class="form-control select2">
+                                                    <select name="status" id="status" class="form-control select2">
                                                         @foreach ($member_status as $obj)
 
                                                                 <option value="{{ $obj->id }}">
