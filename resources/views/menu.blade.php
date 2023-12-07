@@ -215,7 +215,7 @@
                         </ul>
                     </li>
 
-                    <li class="">
+                    {{-- <li class="">
                         <a href="#" class="navItem">
                             <span class="flex items-center">
                                 <iconify-icon class=" nav-icon" icon="ic:outline-book"></iconify-icon>
@@ -237,7 +237,7 @@
                                 <a href="{{ url('catalog/answer') }}">Respuesta</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
 
                     <li class="">
                         <a href="#" class="navItem">
@@ -279,7 +279,34 @@
 
                     @endcan
 
-                    @can('read course')
+
+                    <li class="">
+                        <a href="#" class="navItem">
+                            <span class="flex items-center">
+                                <iconify-icon class=" nav-icon" icon="ic:outline-book"></iconify-icon>
+                                <span>Cursos</span>
+                            </span>
+                            <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ url('catalog/course') }}">plan de estudio</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/question') }}">Preguntas</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/answer') }}">Respuesta</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    {{-- @can('read course')
                     <li>
                         <a href="{{ url('courses') }}" class="navItem">
                             <span class="flex items-center">
@@ -288,9 +315,8 @@
                             </span>
                         </a>
                     </li>
-                    @endcan
-                    <!-- Icons -->
-                    <li class="">
+                    @endcan --}}
+
                 </ul>
 
             </div>
