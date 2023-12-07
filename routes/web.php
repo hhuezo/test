@@ -136,6 +136,7 @@ Route::get('administracion/datos_iglesia/get_participantes/{iglesia}', [DatosIgl
 Route::resource('administracion/datos_iglesia', DatosIglesiaController::class);
 Route::get('catalog/iglesia/set_grupo/{participante}/{grupo}', [IglesiaController::class, 'set_grupo']);
 
+Route::post('administracion/iglesia_plan_estudio/add_sesion', [IglesiaPlanEstudioController::class,'add_sesion']);
 Route::resource('administracion/iglesia_plan_estudio', IglesiaPlanEstudioController::class);
 
 Route::get('reporte_grupos/{iglesia}/{grupo}', [IglesiaController::class, 'reporte_grupos']);
