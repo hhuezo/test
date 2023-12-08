@@ -17,7 +17,10 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use DateTime;
 
+use Illuminate\Validation\ValidationException;
 class MemberController extends Controller
 {
     /**
@@ -76,23 +79,60 @@ class MemberController extends Controller
     public function store(Request $request)
     {
 
-
         $messages = [
-            'name_member.required' => 'ingresar nombre',
+            'name.required' => 'El nombre es un valor requerido',
+            'lastname_member.required' => 'El apellido es un valor requerido',
+            'email.required' => 'El Correo electronico es un valor requerido',
+            'email.unique' => 'El correo ingresado ya existe',
+            'password.required' => 'La Contraseña es un valor obligatorio',
+            'password.confirmed' => 'Las claves no coinciden.',
+            'password.min' => 'La contraseña debe tener un minimo de 8 caracteres',
+            'cell_phone_number.required' => 'El Numero de telefono es un valor requerido',
+            'address.required' => 'La dirección es un valor requerido'
+
         ];
 
 
 
         $request->validate([
-
-            'name_member.required' => 'ingresar nombre miembro',
+            'name_member' => ['required', 'string', 'max:255'],
+            'lastname_member' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'cell_phone_number' => ['required', 'string', 'max:9'],
+            'address' => ['required', 'string', 'max:255'],
 
         ], $messages);
 
+        if ($request->grupo_id != 1) {
+            $request->validate([
+                'name_member' => ['required', 'string', 'max:255'],
+            'lastname_member' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'cell_phone_number' => ['required', 'string', 'max:9'],
+            'address' => ['required', 'string', 'max:255'],
+              //  'phone_number' => ['required', 'string', 'regex:/^\d{4}-\d{4}$/'],
+            ], $messages);
+        }
 
+
+        $fechaNacimientoObj = new DateTime($request->birthdate);
+        $fechaActual = new DateTime();
+        $edad = $fechaNacimientoObj->diff($fechaActual);
+        $edad->y;
+
+        if ($edad->y >= 18  &&  $request->grupo_id == 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+        }
+
+
+        if ($edad->y < 18  &&  $request->grupo_id != 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+        }
 
         $user = new User();
-        $user->name = $request->name_member . ' ' . $request->name_member;
+        $user->name = $request->name_member . ' ' . $request->lastname_member;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->status = 0;
@@ -250,17 +290,56 @@ class MemberController extends Controller
     public function update(Request $request, $id)
     {
         $messages = [
-            'name_member.required' => 'ingresar nombre',
+            'name.required' => 'El nombre es un valor requerido',
+            'lastname_member.required' => 'El apellido es un valor requerido',
+            'email.required' => 'El Correo electronico es un valor requerido',
+            'email.unique' => 'El correo ingresado ya existe',
+            'password.required' => 'La Contraseña es un valor obligatorio',
+            'password.confirmed' => 'Las claves no coinciden.',
+            'password.min' => 'La contraseña debe tener un minimo de 8 caracteres',
+            'cell_phone_number.required' => 'El Numero de telefono es un valor requerido',
+            'address.required' => 'La dirección es un valor requerido'
+
         ];
 
 
 
         $request->validate([
-
-            'name_member.required' => 'ingresar nombre miembro',
+            'name_member' => ['required', 'string', 'max:255'],
+            'lastname_member' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'cell_phone_number' => ['required', 'string', 'max:9'],
+            'address' => ['required', 'string', 'max:255'],
 
         ], $messages);
 
+        if ($request->grupo_id != 1) {
+            $request->validate([
+                'name_member' => ['required', 'string', 'max:255'],
+            'lastname_member' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'cell_phone_number' => ['required', 'string', 'max:9'],
+            'address' => ['required', 'string', 'max:255'],
+              //  'phone_number' => ['required', 'string', 'regex:/^\d{4}-\d{4}$/'],
+            ], $messages);
+        }
+
+
+        $fechaNacimientoObj = new DateTime($request->birthdate);
+        $fechaActual = new DateTime();
+        $edad = $fechaNacimientoObj->diff($fechaActual);
+        $edad->y;
+
+        if ($edad->y >= 18  &&  $request->grupo_id == 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+        }
+
+
+        if ($edad->y < 18  &&  $request->grupo_id != 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
+        }
 
 
         $member =  Member::findOrFail($id);

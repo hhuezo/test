@@ -8,7 +8,7 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Crear datos participantes
+                            <div class="card-title text-slate-900 dark:text-white">Crear datos del Participantes
 
                                 <a href="{{ url('catalog/member') }}">
                                     <button class="btn btn-dark btn-sm float-right">
@@ -139,20 +139,26 @@
                                                         class="form-control">
                                                 </div>
 
+                                                <div class="input-area relative">
+                                                    <label for="largeInput"
+                                                        class="form-label"> Telefono  </label>
+                                                    <input type="text" name="cell_phone_number"
+                                                        id="cell_phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']"
+                                                        value="{{ old('cell_phone_number') }}">
+                                                </div>
 
 
 
 
 
 
-
-                                              {{--   <div class="input-area relative">
+                                                <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Contraseña</label>
-                                                    <input type="password" name="password" required class="form-control">
+                                                    <input type="password" id="password"  name="password" required class="form-control">
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Confirme Contraseña</label>
-                                                    <input type="password" name="password_confirmation" required class="form-control">
+                                                    <input type="password" id="password_confirmation" name="password_confirmation" required class="form-control">
                                                 </div>
 
 
@@ -163,7 +169,7 @@
                                                         <label for="btn-switch" class="lbl-switch"></label>
                                                     </div>
                                                 </div> --}}
-<div></div>
+
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Departamento</label>
                                                     <select id="departamento_id" name="departamento_id" class="form-control"
