@@ -5,13 +5,11 @@ namespace App\Http\Controllers\administracion;
 use App\Http\Controllers\Controller;
 use App\Models\administracion\IglesiaPlanEstudio;
 use App\Models\administracion\Sesion;
-use App\Models\administracion\SesionDetalle;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\StudyPlan;
 use App\Models\catalog\StudyPlanDetail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class IglesiaPlanEstudioController extends Controller
 {
@@ -70,77 +68,24 @@ class IglesiaPlanEstudioController extends Controller
     {
         $plan = IglesiaPlanEstudio::findOrFail($id);
         $iglesia = Iglesia::findOrFail($plan->iglesia_id);
-        $grupos = Grupo::where('active', '=', 1)->get();
 
         $participantes = $plan->iglesia->participantes($plan->iglesia_id)->where('group_id', '=', $plan->group_id)->where('status_id', '=', 2);
         $sesiones = Sesion::where('group_per_church_id', '=', $plan->id)->get();
 
-        $cursosId = DB::table('session_per_group_detail AS spgd')
-            ->join('sessions AS s', 'spgd.session_id', '=', 's.id')
-            ->select('spgd.course_id')
-            ->where('s.group_per_church_id', '=', $plan->id)
-            ->pluck('spgd.course_id')->toArray();
-
-
-        $cursos = StudyPlanDetail::where('study_plan_id', '=', $plan->study_plan_id)->whereNotIn('course_id',$cursosId)->get();
-
-
         return view('administracion.iglesia_plan_estudio.show', compact(
             'plan',
             'iglesia',
-            'grupos',
             'sesiones',
             'participantes',
-            'cursos'
         ));
     }
 
-    public function add_sesion(Request $request)
-    {
-
-        $messages = [
-            'id.required' => 'El registro debe pertenecer a un plan de estudio',
-            'session_name.required' => 'El nombre es un valor requerido',
-            'meeting_date.required' => 'La fecha es un valor requerido',
-            'meeting_date.date_format' => 'La fecha no es válida',
-            'course_1.required' => 'El tema 1 es un valor requerido',
-            'course_2.required' => 'El tema 2 es un valor requerido',
-            'course_1.different' => 'Los valores no son permitidos. el Tema 1 no puede ser igual a Tema 2.',
-        ];
-
-        $request->validate([
-            'id' => ['required'],
-            'session_name' => ['required'],
-            'meeting_date' => ['required', 'date_format:Y-m-d'],
-            'course_1' => ['required', 'different:course_2'],
-            'course_2' => ['required'],
-        ], $messages);
-
-        $sesion = new Sesion();
-        $sesion->group_per_church_id = $request->id;
-        $sesion->session_name = $request->session_name;
-        $sesion->meeting_date = $request->meeting_date;
-        $sesion->save();
-
-        $detalle = new SesionDetalle();
-        $detalle->session_id = $sesion->id;
-        $detalle->course_id = $request->course_1;
-        $detalle->save();
-
-        $detalle2 = new SesionDetalle();
-        $detalle2->session_id = $sesion->id;
-        $detalle2->course_id = $request->course_2;
-        $detalle2->save();
 
 
-        alert()->success('El registro ha sido agregado correctamente');
-        return back();
-    }
-
-    public function array_temas(Request $request)
+   /* public function array_temas(Request $request)
     {
         return $request->temaArray;
-    }
+    }*/
 
     public function edit($id)
     {
