@@ -290,7 +290,7 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="{{ url('catalog/course') }}">plan de estudio</a>
+                                <a href="{{ url('administracion/iglesia_plan_estudio') }}">plan de estudio</a>
                             </li>
                             <li>
                                 <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
