@@ -60,7 +60,7 @@
                             <select name="study_plan_id" class="form-control" required>
                                 <option value="" disabled selected>Seleccione</option>
                                 @foreach ($planes_estudio as $obj)
-                                    <option value="{{ $obj->id }}" {{old('study_plan_id') == $obj->id ? 'selected':''}}>
+                                    <option value="{{ $obj->id }}" {{old('group_id') == $obj->id ? 'selected':''}}>
                                         {{ $obj->description_es }}</option>
                                 @endforeach
                             </select>

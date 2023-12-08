@@ -41,9 +41,9 @@
                                         <td>
                                             <div class="flex space-x-3 rtl:space-x-reverse">
                                                 <a
-                                                    href="{{ url('administracion/iglesia_plan_estudio') }}/{{ $obj->id }}/edit">
-                                                    <iconify-icon icon="mdi:edit-circle" style="color: #1e293b;"
-                                                        width="40"></iconify-icon>
+                                                    href="{{ url('administracion/iglesia_plan_estudio') }}/{{ $obj->id }}">
+                                                    <iconify-icon icon="pepicons-pop:eye-circle-filled" style="color: #1e293b;"
+                                                        width="37"></iconify-icon>
                                                 </a>
 
                                                 &nbsp;&nbsp;

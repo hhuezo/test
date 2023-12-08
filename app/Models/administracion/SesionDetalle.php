@@ -1,32 +1,32 @@
 <?php
 
-namespace App\Models\catalog;
+namespace App\Models\administracion;
 
 use App\Models\catalog\Course;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StudyPlanDetail extends Model
+class SesionDetalle extends Model
 {
     use HasFactory;
-    protected $table = 'study_plan_detail';
+
+    protected $table = 'session_per_group_detail';
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
+        'session_id',
         'course_id',
-        'study_plan_id',
-        'date_added',
-
     ];
-    protected $guarded = [];
 
-    public function plan_estudio()
+    public function sesion()
     {
-        return $this->belongsTo(StudyPlan::class, 'study_plan_id','id' );
+        return $this->belongsTo(Sesion::class, 'session_id', 'id');
+
     }
 
     public function curso()
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
+
     }
 }
