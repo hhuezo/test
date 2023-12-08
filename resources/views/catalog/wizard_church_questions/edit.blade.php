@@ -12,7 +12,7 @@
                             <div class="card-title text-slate-900 dark:text-white">Preguntas modificar
 
                                 <a href="{{ url('catalog/wizard_church_questions') }}">
-                                    <button class="btn btn-dark btn-sm float-right">
+                                    <button class="btn btn-black btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
                                     </button>
@@ -64,8 +64,8 @@
                                                                             name="answer"
                                                                             value="1"   required class="form-control">
                                                                         <span
-                                                                            class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
-                                                                                                duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                            class="flex-none bg-black black:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                duration-150 h-[16px] w-[16px] border-slate-400 black:border-slate-600 black:ring-slate-700"></span>
                                                                         <span
                                                                             class="text-secondary-500 text-sm leading-6 capitalize">Si</span>
                                                                     </label>
@@ -81,8 +81,8 @@
                                                                             name="answer"
                                                                             value="0"   required class="form-control" >
                                                                         <span
-                                                                            class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
-                                                                                                duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
+                                                                            class="flex-none bg-black black:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                                duration-150 h-[16px] w-[16px] border-slate-400 black:border-slate-600 black:ring-slate-700"></span>
                                                                         <span
                                                                             class="text-secondary-500 text-sm leading-6 capitalize">No</span>
                                                                     </label>

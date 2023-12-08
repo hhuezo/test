@@ -6,12 +6,12 @@
         <div class="2xl:col-span-12 lg:col-span-12 col-span-12">
             <div class="card">
                 <div class="card-body flex flex-col p-6">
-                    <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
+                    <header class="flex mb-5 items-center border-b border-slate-100 black:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Crear datos del Participantes
+                            <div class="card-title text-slate-900 black:text-white">Crear datos del Participantes
 
                                 <a href="{{ url('catalog/member') }}">
-                                    <button class="btn btn-dark btn-sm float-right">
+                                    <button class="btn btn-black btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
                                     </button>
