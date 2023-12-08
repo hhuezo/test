@@ -7,12 +7,12 @@
     <div class="2xl:col-span-12 lg:col-span-12 col-span-12">
         <div class="card">
             <div class="card-body flex flex-col p-6">
-                <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
+                <header class="flex mb-5 items-center border-b border-slate-100 black:border-slate-700 pb-5 -mx-6 px-6">
                     <div class="flex-1">
-                        <div class="card-title text-slate-900 dark:text-white">Ingresar Datos de las  preguntas  de la Iglesia
+                        <div class="card-title text-slate-900 black:text-white">Ingresar Datos de las  preguntas  de la Iglesia
 
                             <a href="{{ url('catalog/answerreg') }}">
-                                <button class="btn btn-dark btn-sm float-right">
+                                <button class="btn btn-black btn-sm float-right">
                                     <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                     </iconify-icon>
                                 </button>
@@ -52,7 +52,7 @@
 
                                         </div>
                                                 <div>  &nbsp;&nbsp;</div>
-                                            <table id="myTable" class="bg-slate-200 dark:bg-slate-700" cellspacing="0" width="100%">
+                                            <table id="myTable" class="bg-slate-200 black:bg-slate-700" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr class="td-table">
                                                         <th style="text-align: center">Id</th>
@@ -63,7 +63,7 @@
                                                 <tbody>
 
                                                         @foreach ($wizzarquestion as $obj2)
-                                                        <tr class="even:bg-slate-50 dark:even:bg-slate-700">
+                                                        <tr class="even:bg-slate-50 black:even:bg-slate-700">
                                                                     <td align="center">{{ $obj2->id }}</td>
                                                                     <td align="center">{{ $obj2->question }}</td>
                                                                     <td align="center">
@@ -115,7 +115,7 @@
                                             </table>
                                             <div>  &nbsp;&nbsp;</div>
                                               <div style="text-align: right;">
-                                            <button type="submit" class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
+                                            <button type="submit" class="btn inline-flex justify-center btn-black">{{ __('Aceptar') }}</button>
                                         </div>
                                     </form>
 

@@ -54,6 +54,9 @@ class Member extends Model
         return $this->belongsTo(Gender::class, 'catalog_gender_id','id');
     }
 
+    public function municipio(){
+        return $this->belongsTo(Municipio::class,'municipio_id','id');
+    }
 
 
 };

@@ -17,7 +17,7 @@
             <span class="  col-span-4 hidden"></span>
             <div class="inline-block min-w-full align-middle">
                 <div class="overflow-hidden " style=" margin-bottom:20px ">
-                    <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
+                    <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed bl:divide-slate-700" cellspacing="0" width="100%">
                         <thead class="bg-slate-200 dark:bg-slate-700">
                             <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
 
@@ -42,10 +42,10 @@
                                 @endif
                                 <td align="center">
                                     <a href="{{ url('catalog/wizard_church_questions') }}/{{ $obj->id }}/edit">
-                                        <iconify-icon icon="mdi:pencil" style="color: #1769aa;" width="40"></iconify-icon>
+                                        <iconify-icon icon="mdi:pencil" style="color:  #080808;" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;&nbsp;
-                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
+                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #080808;" width="40"></iconify-icon>
                                 </td>
                             </tr>
                             @include('catalog.wizard_church_questions.modal')

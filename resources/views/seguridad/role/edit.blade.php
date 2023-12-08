@@ -5,15 +5,15 @@
     <div class="grid xl:grid-cols-2 grid-cols-1 gap-6">
 
         <!-- Sized Inputs -->
-        <div class="card xl:col-span-2 rounded-md bg-white dark:bg-slate-800 lg:h-full shadow-base">
+        <div class="card xl:col-span-2 rounded-md bg-white black:bg-slate-800 lg:h-full shadow-base">
             <div class="card">
                 <div class="p-6">
-                    <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
+                    <header class="flex mb-5 items-center border-b border-slate-100 black:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Modificar Rol</div>
+                            <div class="card-title text-slate-900 black:text-white">Modificar Rol</div>
                         </div>
                         <a href="{{ url('seguridad/role')}}">
-                            <button class="btn btn-dark btn-sm float-right">
+                            <button class="btn btn-black btn-sm float-right">
                                 <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                 </iconify-icon>
                             </button>
@@ -30,9 +30,9 @@
                                 <input type="text" name="name" value="{{ $role->name }}" class="form-control">
                             </div>
                             <div
-                                class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
+                                class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b black:border-slate-600">
                                 <button style="margin-bottom: 15px"
-                                    class="btn inline-flex justify-center btn-dark ml-28 float-right">Aceptar</button>
+                                    class="btn inline-flex justify-center btn-black ml-28 float-right">Aceptar</button>
                             </div>
                         </form>
                     </div>
@@ -61,9 +61,9 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
+                        <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b black:border-slate-600">
                             <button style="margin-bottom: 15px"
-                                class="btn inline-flex justify-center btn-dark ml-28 float-right">Agregar</button>
+                                class="btn inline-flex justify-center btn-black ml-28 float-right">Agregar</button>
                         </div>
                     </form>
                 </div>

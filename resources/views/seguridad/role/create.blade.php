@@ -34,7 +34,7 @@
                             &nbsp;
                             <div style="text-align: right;">
                                 <button type="submit"
-                                    class="btn inline-flex justify-center btn-dark">Aceptar</button>
+                                    class="btn inline-flex justify-center btn-black">Aceptar</button>
                             </div>
                         </div>
                     </form>
