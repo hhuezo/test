@@ -72,7 +72,7 @@ class WelcomeController extends Controller
             'phone_number.required' => 'El número de telefono es un valor requerido',
             'phone_number.regex' => 'El número de teléfono no es válido',
             'address.required' => 'La dirección es un valor requerido',
-            'document_number.required' => 'El número de documento es un valor requerido',
+          //  'document_number.required' => 'El número de documento es un valor requerido',
             'document_number.min' => 'El número de documento no es válido',
             'document_number.regex' => 'El número de documento no es válido',
             'birthdate.before' => 'El grupo seleccionado no es válido',
@@ -98,7 +98,7 @@ class WelcomeController extends Controller
                 'phone_number' => ['required', 'string', 'max:9'],
                 'address' => ['required', 'string', 'max:255'],
                 'document_number' => ['required', 'string', 'regex:/^\d{8}-\d$/'],
-                'phone_number' => ['required', 'string', 'regex:/^\d{4}-\d{4}$/'],
+              //  'phone_number' => ['required', 'string', 'regex:/^\d{4}-\d{4}$/'],
             ], $messages);
         }
 

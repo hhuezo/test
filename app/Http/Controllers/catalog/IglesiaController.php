@@ -41,7 +41,7 @@ class IglesiaController extends Controller
         $municipio = Municipio::get();
         $sede = Sede::get();
         $estatuorg = OrganizationStatus::get();
-        return view('catalog.iglesia.create', compact('sede', 'depto', 'municipio', 'sede', 'estatuorg',));
+        return view('catalog.iglesia.create', compact('sede', 'depto', 'municipio', 'sede', 'estatuorg'));
     }
 
     public function store(Request $request)
