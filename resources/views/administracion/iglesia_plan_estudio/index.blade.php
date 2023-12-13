@@ -7,7 +7,7 @@
             <h4 class="card-title">Planes de estudio para iglesias
             </h4>
             <a href="{{ url('administracion/iglesia_plan_estudio/create') }}">
-                <button class="btn btn-black">Nuevo</button>
+                <button class="btn btn-dark">Nuevo</button>
             </a>
         </header>
         <div class="card-body px-6 pb-6">

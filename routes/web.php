@@ -94,7 +94,7 @@ Route::post('seguridad/role/link_permission', [RoleController::class, 'link_perm
 
 
 
-Route::get('register_member_leader', [MemberControllers::class, 'register_member_leader']);
+//Route::get('register_member_leader', [MemberControllers::class, 'register_member_leader']);
 Route::post('attach_new_member', [WelcomeController::class, 'attach_new_member']);
 
 
@@ -102,7 +102,7 @@ Route::post('attach_new_member', [WelcomeController::class, 'attach_new_member']
 
 
 Route::get('reasigna_grupos/{idpersona}', [GrupoController::class, 'reasigna_grupos']);
-Route::post('update_group_member/{idpersona}', [MemberControllers::class, 'update_member_group']);
+//Route::post('update_group_member/{idpersona}', [MemberControllers::class, 'update_member_group']);
 
 
 
@@ -148,6 +148,10 @@ Route::post('catalog/iglesia/add_preguntaresp', [IglesiaController::class, 'add_
 Route::post('catalog/iglesia/attach_preguntas', [IglesiaController::class, 'attach_preguntas']);
 Route::post('catalog/iglesia/dettach_preguntas', [IglesiaController::class, 'dettach_preguntas']);
 
+Route::get('admin/import',[IglesiaPlanEstudioController::class,'import']);
+Route::post('admin/asistencia',[IglesiaPlanEstudioController::class,'asistencia']);
+Route::post('admin/import_excel',[IglesiaPlanEstudioController::class,'importExcel']);
+Route::get('admin/asistencia/mostrar',[IglesiaPlanEstudioController::class,'mostrar']);
 
 Route::post('catalog/Iglesiauser/dettach_iglesiauser', [UserController::class, 'dettach_iglesiauser']);
 Route::post('catalog/Iglesiauser/attach_iglesiauser', [UserController::class, 'attach_iglesiauser']);
@@ -177,14 +181,14 @@ Route::get('/get_municipio/{id}', [WelcomeController::class, 'get_municipio'])->
 
 
 
-
+/*
 Route::post('organization/decline', [OrganizationController::class, 'decline']);
 Route::post('organization/activate', [OrganizationController::class, 'activate']);
 Route::resource('organizations', OrganizationController::class);
 
 
 Route::post('member/decline', [MemberControllers::class, 'decline']);
-Route::post('member/activate', [MemberControllers::class, 'activate']);
+Route::post('member/activate', [MemberControllers::class, 'activate']);*/
 //Route::resource('catalog/member', MemberController::class);
 
 
@@ -192,7 +196,7 @@ Route::post('member/activate', [MemberControllers::class, 'activate']);
 
 
 
-
+/*
 Route::resource('courses', CourseController::class);
 Route::post('course/upload_file', [CourseController::class, 'upload_file']);
 
@@ -203,19 +207,19 @@ Route::post('catalog/question/correct_answer', [QuestionController::class, 'corr
 Route::post('catalog/question/delete_correct_answer', [QuestionController::class, 'delete_correct_answer']);
 Route::post('catalog/add_answer', [AnswersController::class, 'store']);
 
-Route::resource('Quiz', QuizController::class);
+Route::resource('Quiz', QuizController::class);*/
 
 // //section
 // Route::resource('section',SectionCourse::class);
 
 //catalogo
-Route::resource('catalog/question', QuestionController::class);
+//Route::resource('catalog/question', QuestionController::class);
 
 Route::resource('catalog/organization_status', OrganizationStatusController::class);
 
-Route::resource('catalog/answer', AnswersController::class);
+//Route::resource('catalog/answer', AnswersController::class);
 
-Route::resource('catalog/organization', CatalogOrganizationController::class);
+//Route::resource('catalog/organization', CatalogOrganizationController::class);
 
 //Route::resource('catalog/Quiz', CatalogQuizController::class);
 
@@ -244,7 +248,7 @@ Route::resource('catalog/member_status', MemberStatusController::class);
 
 Route::resource('catalog/member', MemberController::class);
 
-Route::resource('catalog/FilePerCourse', FilePerCourseController::class);
+//Route::resource('catalog/FilePerCourse', FilePerCourseController::class);
 
 Route::resource('catalog/grupo', GrupoController::class);
 
