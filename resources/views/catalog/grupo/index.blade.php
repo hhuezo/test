@@ -41,7 +41,7 @@
                                                     &nbsp;&nbsp;
                                                     <iconify-icon data-bs-toggle="modal"
                                                         data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
-                                                        style="color: #1769aa;" width="40"></iconify-icon>
+                                                        style="color:black;" width="40"></iconify-icon>
                                                 </td>
                                             </tr>
                                             @include('catalog/grupo/modal')

@@ -34,13 +34,13 @@
                                         <td align="center">{{ $obj->name }}</td>
                                         <td align="center">
                                             <a href="{{ url('catalog/answerreg') }}/{{ $obj->id }}/edit">
-                                                <iconify-icon icon="mdi:pencil" style="color: #1769aa;"
+                                                <iconify-icon icon="mdi:pencil" style="color:black;"
                                                     width="40"></iconify-icon>
                                             </a>
                                             &nbsp;&nbsp;
                                             <iconify-icon data-bs-toggle="modal"
                                                 data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
-                                                style="color: #1769aa;" width="40"></iconify-icon>
+                                                style="color: black;" width="40"></iconify-icon>
                                         </td>
                                     </tr>
                                 @endforeach

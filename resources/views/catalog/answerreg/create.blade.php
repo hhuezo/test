@@ -12,7 +12,7 @@
                         <div class="card-title text-slate-900 black:text-white">Ingresar Datos de las  preguntas  de la Iglesia
 
                             <a href="{{ url('catalog/answerreg') }}">
-                                <button class="btn btn-black btn-sm float-right">
+                                <button class="btn btn-dark btn-sm float-right">
                                     <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                     </iconify-icon>
                                 </button>
@@ -97,7 +97,7 @@
                                                                                             name="answer"
                                                                                             value="No">
                                                                                         <span
-                                                                                            class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
+                                                                                            class="flex-none bg-black black:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
                                                                                                                 duration-150 h-[16px] w-[16px] border-slate-400 dark:border-slate-600 dark:ring-slate-700"></span>
                                                                                         <span
                                                                                             class="text-primary-500 text-sm leading-6 capitalize">No</span>
@@ -115,7 +115,7 @@
                                             </table>
                                             <div>  &nbsp;&nbsp;</div>
                                               <div style="text-align: right;">
-                                            <button type="submit" class="btn inline-flex justify-center btn-black">{{ __('Aceptar') }}</button>
+                                            <button type="submit" class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
                                         </div>
                                     </form>
 
