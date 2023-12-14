@@ -13,7 +13,10 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DatosIglesiaController extends Controller
 {
-    public function __construct()    {        $this->middleware('auth');    }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(Request $request)
     {
@@ -63,7 +66,7 @@ class DatosIglesiaController extends Controller
 
         $iglesia = Iglesia::findOrFail($id);
 
-        $participantes = $iglesia->participantes($id)->where('status_id','=',2);
+        $participantes = $iglesia->participantes($id)->where('status_id', '=', 2);
         $grupos = $iglesia->iglesia_has_grupo;
 
         return view('datos_iglesia.participantes_contenedor', compact('iglesia', 'participantes', 'grupos'));

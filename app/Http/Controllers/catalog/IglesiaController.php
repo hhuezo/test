@@ -29,9 +29,11 @@ class IglesiaController extends Controller
 
     public function index()
     {
-        $iglesia = Iglesia::get();
+        $iglesia = Iglesia::where('status_id','<>',3)->get();
+        $iglesias_rechazadas = Iglesia::where('status_id','=',3)->get();
+     //   dd($iglesia);   
         $estatuorg = OrganizationStatus::get();
-        return view('catalog.iglesia.index', compact('iglesia', 'estatuorg'));
+        return view('catalog.iglesia.index', compact('iglesia', 'estatuorg','iglesias_rechazadas'));
     }
 
     public function create()
@@ -99,7 +101,7 @@ class IglesiaController extends Controller
 
         $user = new User();
         $user->name = $request->pastor_name;
-        $user->email = $request->emailpastor;
+        $user->email = $request->email_contact;
         $user->password = Hash::make($request->password);
         $user->status = 1;
         $user->save();
@@ -125,67 +127,6 @@ class IglesiaController extends Controller
         return back();
     }
 
-
-
-    /*
-    public function show($id)
-    {
-
-
-
-        $userfaclitator = User::get();
-
-
-        $iglesia = Iglesia::findOrFail($id);
-        $cohorte = Cohorte::get();
-        $depto = Departamento::where('id', '=', $iglesia->catalog_departamento_id)->get();
-        $deptos = Departamento::get();
-        $municipio = Municipio::get();
-        $sede = Sede::get();
-
-        $estatuorg = OrganizationStatus::get();
-        $organizacion = Organization::get();
-        $wizzaranswer = ChurchQuestionWizard::where('iglesia_id', '=', $iglesia->id)->get();
-        //plural
-
-        $questionArray = $wizzaranswer->pluck('question_id')->toArray();
-
-        $wizzarquestion = WizardQuestions::whereNotIn('id', $questionArray)->get();
-
-
-        $grupo_iglesias =  $iglesia->iglesia_grupo;
-
-        //$grupos= Grupo::whereNotIn('id', $iglesiaArray)->get();
-        //dd(   $grupo_iglesias);
-
-        $grupoArray =  $grupo_iglesias->pluck('id')->toArray();
-
-        $grupos_noasignados = Grupo::whereNotIn('id', $grupoArray)->get();
-        $grupos_asignados = Grupo::where('id', $grupoArray)->get();
-
-
-        // return view('catalog.grupo.edit', compact('grupos',   'grupo_iglesias','grupos_noasignados'));
-
-        //   dd($wizzarquestion);
-        //where('id' ,'=', $wizzaranswer->question_id)->get();
-        //return view('catalog.iglesia.show', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion','deptos',  'grupo_iglesias' , 'grupos_asignados','grupos_noasignados'));
-
-
-
-
-
-
-        //generando QR
-        // QrCode::format('png')->size(200)->generate( (string)$iglesia->id, public_path('img/qrcode.png'));
-
-
-
-
-
-        $pdf = \PDF::loadView('catalog.iglesia.show', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg', 'organizacion', 'wizzaranswer', 'wizzarquestion', 'deptos',  'grupo_iglesias', 'grupos_asignados', 'grupos_noasignados'))->setWarnings(false)->setPaper('letter');
-        return $pdf->stream('Info.pdf');
-    }
-*/
 
     public function edit($id)
     {

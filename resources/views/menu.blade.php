@@ -210,6 +210,9 @@
                             <li>
                                 <a href="{{ url('catalog/sede') }}">Sede</a>
                             </li>
+                            <li>
+                                <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
+                            </li>
 
 
                         </ul>
@@ -230,12 +233,12 @@
                             <li>
                                 <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
                             </li>
-                          <!--  <li>
+                            <li>
                                 <a href="{{ url('catalog/question') }}">Preguntas</a>
                             </li>
                             <li>
                                 <a href="{{ url('catalog/answer') }}">Respuesta</a>
-                            </li>-->
+                            </li>
                         </ul>
                     </li> --}}
 
@@ -292,15 +295,12 @@
                             <li>
                                 <a href="{{ url('administracion/iglesia_plan_estudio') }}">plan de estudio</a>
                             </li>
-                            <li>
-                                <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
-                            </li>
-                            <li>
+                            <!-- <li>
                                 <a href="{{ url('catalog/question') }}">Preguntas</a>
                             </li>
                             <li>
                                 <a href="{{ url('catalog/answer') }}">Respuesta</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
 

@@ -17,18 +17,17 @@
                             <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                 @php($i = 1)
                                 @foreach ($cursos as $curso)
-                                    <tr class="even:bg-slate-50 dark:even:bg-slate-700">
-                                        <td class="table-td">
-                                            {{ $i }} {{ $curso->curso->name }}
-                                        </td>
-                                        <td class="table-td">
-                                            <button wire:click="addTema({{ $curso->course_id }})">
-                                                <iconify-icon icon="emojione-monotone:right-arrow"
-                                                    width="30"></iconify-icon>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @php($i++)
+                                <tr class="even:bg-slate-50 dark:even:bg-slate-700">
+                                    <td class="table-td">
+                                        {{ $i }} {{ $curso->curso->name }}
+                                    </td>
+                                    <td class="table-td">
+                                        <button wire:click="addTema({{ $curso->course_id }})">
+                                            <iconify-icon icon="emojione-monotone:right-arrow" width="30"></iconify-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @php($i++)
                                 @endforeach
 
                             </tbody>
@@ -50,14 +49,14 @@
                     <form wire:submit.prevent="saveData()">
                         <div class="card-body flex flex-col p-6">
                             @if (count($errors) > 0)
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                <br>
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <br>
                             @endif
                             <div class="input-area relative">
                                 <label for="largeInput" class="form-label">Nombre</label>
@@ -66,8 +65,7 @@
                             <br>
                             <div class="input-area relative">
                                 <label for="largeInput" class="form-label">Fecha</label>
-                                <input type="date" wire:model="meeting_date" value="{{ old('meeting_date') }}"
-                                    required class="form-control">
+                                <input type="date" wire:model="meeting_date" value="{{ old('meeting_date') }}" required class="form-control">
                             </div>
                             <br>
 
@@ -75,27 +73,23 @@
                                 <label for="largeInput" class="form-label">Temas</label>
 
                                 <div class="lg:col-span-3 col-span-6 column">
-                                    <table
-                                        class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
+                                    <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
 
-                                        <tbody
-                                            class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
+                                        <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                                             @if ($cursos_en_sesion)
 
-                                                @foreach ($cursos_en_sesion as $curso)
-                                                    <tr class="even:bg-slate-50 dark:even:bg-slate-700">
-                                                        <td class="table-td">
-                                                            {{ $curso->curso->name }}
-                                                        </td>
-                                                        <td class="table-td">
-                                                            <button type="button"
-                                                                wire:click="delTema({{ $curso->course_id }})">
-                                                                <iconify-icon icon="pepicons-pop:trash-circle-filled"
-                                                                    width="30"></iconify-icon></button>
+                                            @foreach ($cursos_en_sesion as $curso)
+                                            <tr class="even:bg-slate-50 dark:even:bg-slate-700">
+                                                <td class="table-td">
+                                                    {{ $curso->curso->name }}
+                                                </td>
+                                                <td class="table-td">
+                                                    <button type="button" wire:click="delTema({{ $curso->course_id }})">
+                                                        <iconify-icon icon="pepicons-pop:trash-circle-filled" width="30"></iconify-icon></button>
 
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                </td>
+                                            </tr>
+                                            @endforeach
                                             @endif
 
 
@@ -112,11 +106,11 @@
                             </div>
                             <br>
                             <div class="input-area relative">
-                                <button type="submit"
-                                    class="btn inline-flex justify-center text-white bg-black-500 float-right"
-                                    style="margin-bottom: 15px">Aceptar</button>&nbsp; &nbsp;
+                                <button type="submit" class="btn inline-flex justify-center text-white bg-black-500 float-right" style="margin-bottom: 15px">Aceptar</button>&nbsp; &nbsp;
                             </div>
                         </div>
+
+                    </form>
                 </div>
             </div>
 

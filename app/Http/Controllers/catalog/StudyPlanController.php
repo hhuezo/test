@@ -19,7 +19,6 @@ class StudyPlanController extends Controller
     public function index()
     {
         $plan_estudio = StudyPlan::get();
-
         return view('catalog.plan_estudios.index', compact('plan_estudio'));
     }
 
@@ -30,10 +29,8 @@ class StudyPlanController extends Controller
      */
     public function create()
     {
-        $cursos = Course::get();
-
-
-        return view('catalog.plan_estudios.create', compact('cursos'));
+       // $cursos = Course::get();
+        return view('catalog.plan_estudios.create');
     }
 
     /**
@@ -54,13 +51,13 @@ class StudyPlanController extends Controller
 
         ], $messages);
 
-        $StudyPlan = new StudyPlan();
-        $StudyPlan->description = $request->description;
-        $StudyPlan->description_es = $request->description_es;
-        $StudyPlan->save();
-       // $StudyPlandetail = new StudyPlanDetail();        $StudyPlandetail->course_id = $request->course_id;        $StudyPlandetail->study_plan_id =   $StudyPlan->id;        $StudyPlandetail->save();
+        $studyPlan = new StudyPlan();
+        $studyPlan->description = $request->description;
+        $studyPlan->description_es = $request->description_es;
+        $studyPlan->save();
+       
         alert()->success('El registro ha sido agregado correctamente');
-        return back();
+        return redirect('catalog/plan_estudios/'. $studyPlan->id.'/edit');
     }
 
     /**
@@ -90,17 +87,6 @@ class StudyPlanController extends Controller
             ->select('study_plan_detail.id', 'course.name_es', 'course.description_es')
             ->get();
 
-        //dd($plandetalle);
-        //  $StudyPlandetail=  StudyPlandetail::where('study_plan_id','=', $plan_estudio->id)->get();
-        // dd($StudyPlandetail);
-        // $plandetalle=   $plan_estudio->detalles;
-        // $StudyPlandetail->pluck('course_id')->toArray();
-        //  $StudyPlandetail;
-        //$plan_estudio->detalles;
-        //$plandetalle= $StudyPlandetail;
-        //  $plan_estudio_detalles=StudyPlanDetail::findOrFail($plandetalle);               //StudyPlanDetail::where('study_plan_id','=',$plan_estudio->id);
-        // $plan_cursos= $plan_estudio_detalles->curso;       // dd($plan_cursos);
-        //dd($plan_cursos );
         $cursos = Course::get();
         return view('catalog.plan_estudios.edit', compact('plan_estudio', 'cursos', 'plandetalle'));
     }
