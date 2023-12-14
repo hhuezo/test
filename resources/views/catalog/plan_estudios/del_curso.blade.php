@@ -23,7 +23,7 @@
              <!-- Modal body -->
              <div class="p-6 space-y-4">
                <h6 class="text-base text-slate-900 dark:text-white leading-6">
-                 Confirme si desea Eliminar Curso del Plan de Estudios
+                 ¿Confirme si desea eliminar el registro?
                </h6>
              </div>
              <!-- Modal footer -->

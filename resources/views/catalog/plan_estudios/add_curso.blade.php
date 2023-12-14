@@ -10,7 +10,7 @@
              <!-- Modal header -->
              <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-black-500">
                <h3 class="text-base font-medium text-white dark:text-white capitalize">
-                Agregar cursos
+                Agregar Temas
                </h3>
                <button type="button" class="text-slate-400 bg-transparent hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center
                                    dark:hover:bg-slate-600 dark:hover:text-white" data-bs-dismiss="modal">
@@ -23,13 +23,10 @@
              </div>
              <!-- Modal body -->
              <div class="p-6 space-y-4">
-               <h6 class="text-base text-slate-900 dark:text-white leading-6">
-                 Confirme si desea Agregar Curso a Plan de Estudios
-               </h6>
 
                <div class="input-area relative">
                 <label for="largeInput"
-                    class="form-label">Cursos</label>
+                    class="form-label">Temas</label>
                 <select name="course_id" class="form-control select" required>
                     @foreach ($cursos as $obj)
                             <option value="{{ $obj->id }}">{{ $obj->name_es }}
