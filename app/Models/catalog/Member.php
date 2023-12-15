@@ -29,7 +29,8 @@ class Member extends Model
         'address',
         'data_created',
         'status_id',
-        'user_id'
+        'user_id',
+        'organization_id'
     ];
     protected $guarded = [];
 

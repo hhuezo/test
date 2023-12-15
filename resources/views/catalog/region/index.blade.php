@@ -44,9 +44,6 @@
                             @include('catalog.region.modal')
                             @endforeach
                             @endif
-
-
-
                         </tbody>
                     </table>
                 </div>

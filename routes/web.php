@@ -135,6 +135,7 @@ Route::post('administracion/datos_iglesia/set_estado', [DatosIglesiaController::
 Route::get('administracion/datos_iglesia/get_participantes/{iglesia}', [DatosIglesiaController::class, 'get_participantes']);
 Route::resource('administracion/datos_iglesia', DatosIglesiaController::class);
 Route::get('catalog/iglesia/set_grupo/{participante}/{grupo}', [IglesiaController::class, 'set_grupo']);
+Route::get('download/image',[DatosIglesiaController::class, 'download']);
 
 Route::post('administracion/iglesia_plan_estudio/add_sesion', [IglesiaPlanEstudioController::class,'add_sesion']);
 Route::resource('administracion/iglesia_plan_estudio', IglesiaPlanEstudioController::class);

@@ -14,8 +14,8 @@
 
     function drawRegionsMap() {
         var data = google.visualization.arrayToDataTable([
-            ['Country', 'Workers'],
-            ['{{ $dep }}', 1], // San salvador
+            ['Country'],
+            ['{{ $dep }}'], // San salvador
             //['HN', 0], //honduras
             // ['SV-SM',2]// Add more countries and worker data as needed
         ]);

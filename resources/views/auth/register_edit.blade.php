@@ -177,7 +177,7 @@
                                                         <div class="input-area">
                                                             <label for="fullname" class="form-label" align="center">Seleccione
                                                                 en el mapa el Departamento en la que esta ubicado su Iglesia</label>
-                                                            <div id="div_result">
+                                                            <div id="div_result" >
 
                                                             </div>
                                                         </div>
@@ -356,11 +356,11 @@
 
                                                         <div class="input-area relative" id="FotoUrl">
                                                             <label for="Telefono" class="form-label">Logo</label>
-                                                             <!-- <input type="file" name="logo" id="logo" class="form-control"> -->
+                                                            <!-- <input type="file" name="logo" id="logo" class="form-control"> -->
 
 
 
-                                                           <input type="file" name="logo" id="fileInput" style="display: none;">
+                                                            <input type="file" name="logo" id="fileInput" style="display: none;">
                                                             <div id="avatar" name="avatar" class="dropzone"> </div>
                                                         </div>
                                                     </div>
@@ -410,20 +410,20 @@
 
     <script type="text/javascript">
         // Configura Dropzone para el campo de entrada 'avatar'
-       const avatarDropzone = new Dropzone('#avatar', {
-           url: "{{ route('dropzone.store') }}", // Ruta de carga de avatar en Laravel
-           paramName: 'avatar', // Nombre del campo que Laravel espera
-           maxFilesize: 2, // Tamaño máximo de archivo en MB
-           acceptedFiles: 'image/*', // Permitir cualquier tipo de archivo
-           addRemoveLinks: true, // Mostrar el botón para quitar el archivo
-           dictRemoveFile: "<br><button class='btn btn-danger'>Remover</button>", // Texto del botón para quitar el archivo
-           dictDefaultMessage: "Arrastra aquí o haz clic para subir tu logo", // Cambia el título por defecto
-           maxFile: 1,
+        const avatarDropzone = new Dropzone('#avatar', {
+            url: "{{ route('dropzone.store') }}", // Ruta de carga de avatar en Laravel
+            paramName: 'avatar', // Nombre del campo que Laravel espera
+            maxFilesize: 2, // Tamaño máximo de archivo en MB
+            acceptedFiles: 'image/*', // Permitir cualquier tipo de archivo
+            addRemoveLinks: true, // Mostrar el botón para quitar el archivo
+            dictRemoveFile: "<br><button class='btn btn-danger'>Remover</button>", // Texto del botón para quitar el archivo
+            dictDefaultMessage: "Arrastra aquí o haz clic para subir tu logo", // Cambia el título por defecto
+            maxFile: 1,
         });
 
         document.getElementById('avatar').addEventListener('click', function() {
             // Simula un clic en el input para abrir el selector de archivos
-           // document.getElementById('fileInput').click();
+            // document.getElementById('fileInput').click();
             //   console.log(document.getElementById('avatar'));
         });
 

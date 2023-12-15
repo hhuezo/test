@@ -52,6 +52,11 @@ class DatosIglesiaController extends Controller
         }
     }
 
+    public function download(){
+        $pathtoFile = public_path().'/img/qrcodeiglesia.png';
+        return response()->download($pathtoFile);
+    }
+
 
     public function show($id)
     {

@@ -20,8 +20,8 @@
                             <thead class="bg-slate-200 dark:bg-slate-700">
                                 <tr class="td-table">
                                     <th style="text-align: center">Id</th>
-                                    <th style="text-align: center">Nombre</th>
-                                    <th style="text-align: center">iglesia</th>
+                                    <th style="text-align: left">Nombre</th>
+                                    <th style="text-align: left">Iglesia</th>
                                     <th style="text-align: center">opciones</th>
                                 </tr>
                             </thead>
@@ -30,8 +30,8 @@
                                 @foreach ($participantes as $obj)
                                     <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                         <td align="center">{{ $obj->id }}</td>
-                                        <td align="center">{{ $obj->nombre }}</td>
-                                        <td align="center">{{ $obj->iglesia }}</td>
+                                        <td>{{ $obj->nombre }} {{ $obj->apellido }} </td>
+                                        <td >{{ $obj->iglesia }}</td>
                                         <td align="center">
                                             <a href="{{ url('catalog/member') }}/{{ $obj->id }}/edit">
                                                 <iconify-icon icon="mdi:edit-circle" style="color: #1e293b;"

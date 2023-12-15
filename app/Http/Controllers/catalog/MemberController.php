@@ -39,8 +39,8 @@ class MemberController extends Controller
         $member_status = MemberStatus::get();
         $participantes =  DB::select("select  q.id id, q.name_member as nombre , q.lastname_member as apellido , i.name iglesia
         from iglesia i
-         join member q
-         join  users_has_iglesia r on        r.iglesia_id=i.id and r.user_id=q.users_id ");
+        join member q
+        join  users_has_iglesia r on        r.iglesia_id=i.id and r.user_id=q.users_id ");  
 
         return view('catalog.member.index', compact('member', 'member_status', 'participantes'));
     }
