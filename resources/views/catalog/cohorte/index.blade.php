@@ -36,10 +36,10 @@
                                 <td  align="center">{{ $obj->region->nombre }}</td>
                                 <td align="center">
                                     <a href="{{ url('catalog/cohorte') }}/{{ $obj->id }}/edit">
-                                        <iconify-icon icon="mdi:pencil" style="color: #1769aa;" width="40"></iconify-icon>
+                                        <iconify-icon icon="mdi:pencil" style="color: black;" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;&nbsp;
-                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
+                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: black;" width="40"></iconify-icon>
                                 </td>
                             </tr>
                             @include('catalog.cohorte.modal')

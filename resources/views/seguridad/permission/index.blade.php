@@ -35,12 +35,12 @@
                                                 <td align="center">
                                                     <iconify-icon icon="mdi:pencil"
                                                         onclick="modal_edit({{ $obj->id }},'{{ $obj->name }}')"
-                                                        style="color: #1769aa;" width="40"></iconify-icon>
+                                                        style="color:black;" width="40"></iconify-icon>
 
                                                     &nbsp;&nbsp;
                                                     <iconify-icon data-bs-toggle="modal"
                                                         data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
-                                                        style="color: #1769aa;" width="40"></iconify-icon>
+                                                        style="color: black;" width="40"></iconify-icon>
                                                 </td>
                                             </tr>
                                             @include('seguridad.permission.modal')

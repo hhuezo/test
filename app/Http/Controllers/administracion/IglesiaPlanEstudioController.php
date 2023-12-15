@@ -84,18 +84,19 @@ class IglesiaPlanEstudioController extends Controller
     public function show($id)
     {
         $plan = IglesiaPlanEstudio::findOrFail($id);
+    ///    dd($plan);
         $iglesia = Iglesia::findOrFail($plan->iglesia_id);
 
         $participantes = $plan->iglesia->participantes($plan->iglesia_id)->where('group_id', '=', $plan->group_id)->where('status_id', '=', 2);
         $sesiones = Sesion::where('group_per_church_id', '=', $plan->id)->get();
-        
+
         //dd((!session()->has('show')));
         if (!session()->has('show')) {
             session_start();
         session(['show' => '1']);
-            
+
         }
-        
+
         return view('administracion.iglesia_plan_estudio.show', compact(
             'plan',
             'iglesia',

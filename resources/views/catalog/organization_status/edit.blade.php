@@ -41,7 +41,7 @@
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Nombre_español') }}</label>
+                                                        class="form-label">{{ __('Nombre Español') }}</label>
                                                     <input type="text" name="name_es" value="{{ $OrganizationStatus->description }}"
                                                         required class="form-control" value="{{ old('name_es') }}"
                                                         autofocus="true">
@@ -58,7 +58,7 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('fecha') }}</label>
+                                                        class="form-label">{{ __('Fecha') }}</label>
                                                     <input type="text" name="adding_date" value="{{ $OrganizationStatus->adding_date }}"
                                                         required class="form-control">
                                                 </div>
@@ -72,13 +72,13 @@
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('modificar fecha ') }}</label>
+                                                        class="form-label">{{ __('Modificar fecha ') }}</label>
                                                     <input type="text" name="modifying_date" value="{{ $OrganizationStatus->modifying_date }}"
                                                         required class="form-control" value="{{ old('modifying_date') }}">
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('estatus') }}</label>
+                                                        class="form-label">{{ __('Estatus') }}</label>
                                                     <input type="text" name="status" value="{{ $OrganizationStatus->status }}"
                                                         required class="form-control" value="{{ old('status') }}">
                                                 </div>

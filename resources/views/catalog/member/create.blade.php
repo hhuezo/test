@@ -11,7 +11,7 @@
                             <div class="card-title text-slate-900 black:text-white">Crear datos del Participantes
 
                                 <a href="{{ url('catalog/member') }}">
-                                    <button class="btn btn-black btn-sm float-right">
+                                    <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
                                     </button>
