@@ -180,11 +180,14 @@
                                                             <div id="div_result" >
 
                                                             </div>
+                                                            <div> <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p></div>
                                                         </div>
 
                                                     </div>
 
                                                 </div>
+                                                <div> <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p></div>
+                                                <div> <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p></div>
                                                 <div class="flex items-center justify-end p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
 
                                                     <button class="btn inline-flex justify-center text-white bg-black-500" type="button" onclick="validar_departamento()">Siguiente</button>
@@ -326,8 +329,9 @@
                                                         </div>
                                                         <div class="input-area relative">
                                                             <label class="form-label">Teléfono de Pastor</label>
-                                                            <input type="text" name="pastor_phone_number" id="pastor_phone_number" value="{{ old('pastor_phone_number') }}" class="form-control">
+                                                            <input type="text" name="pastor_phone_number" id="pastor_phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']" placeholder="9999-99999"  value="{{ old('pastor_phone_number') }}"  >
                                                         </div>
+
                                                         <div class="input-area relative">
                                                             <label class="form-label">Contraseña</label>
                                                             <input type="password" name="password" class="form-control" required>
@@ -367,6 +371,7 @@
 
 
                                                 </div>
+                                                &nbsp; &nbsp; &nbsp;
                                                 <div class="mt-6 space-x-3 text-right">
                                                     <a href="{{ url('iglesia/back_page') }}">
                                                         <button class="btn btn-secondary" type="button">Anterior</button>
@@ -405,9 +410,10 @@
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
     <script type="text/javascript">
         // Configura Dropzone para el campo de entrada 'avatar'
         const avatarDropzone = new Dropzone('#avatar', {
@@ -479,6 +485,13 @@
         });
     </script>
     <script>
+        jQuery(function($){
+
+             $("#pastor_phone_number").mask("9999-9999");
+
+        });
+        </script>
+    <script>
         google.charts.load('current', {
             'packages': ['geochart']
         });
@@ -489,8 +502,8 @@
             } else {
                 get_map('A');
             }
-            $('#pastor_phone_number').inputmask('9999-9999');
-
+           // $('#pastor_phone_number').inputmask('9999-9999');
+           $('#pastor_phone_number').mask('9999-9999');
         });
 
 

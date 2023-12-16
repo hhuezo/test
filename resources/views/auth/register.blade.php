@@ -43,6 +43,9 @@
         <div class="page-content">
             <div class="transition-all duration-150 container-fluid" id="page_layout">
                 <div id="content_layout">
+                    <div class="transition-all duration-150 container-fluid" id="page_layout">
+                        <div id="content_layout">
+
 
                     <div class="space-y-5">
                         <div class="grid grid-cols-12 gap-5">
@@ -56,6 +59,15 @@
                                             <h4 class="card-title"  align="center">Registro de Iglesia</h4>
                                         </div>
                                         <div class="card-body p-6">
+                                            @if (count($errors) > 0)
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            @endif
                                             <!-- inicio de step -->
                                             <div
                                                 class="wizard-steps flex z-[5] items-center relative justify-center md:mx-8">
@@ -109,6 +121,7 @@
                                                                 Nombre de la Iglesia</h4>
                                                         </div>
                                                         <div class="input-area">
+
                                                           <center>  <label for="username" class="form-label" >Ingrese el nombre de la
                                                                 Iglesia a la que pertence</label></center>
                                                             <input id="nombre" name="nombre" type="text"

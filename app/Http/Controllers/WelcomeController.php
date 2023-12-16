@@ -113,6 +113,9 @@ class WelcomeController extends Controller
         $edad = $fechaNacimientoObj->diff($fechaActual);
         $edad->y;
 
+
+
+
         if ($edad->y >= 18  &&  $request->grupo_id == 1) {
             throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
         }

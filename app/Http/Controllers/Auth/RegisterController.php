@@ -118,6 +118,20 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+
+        $messages = [
+            'nombre.required' => 'El nombre es requerido no dejar espacios en blanco',
+          //  'pastor_phone_number' => 'El fomato de telefono de contacto 2 no es válido',
+        ];
+
+        $request->validate([
+            'nombre' => 'required',
+
+
+
+        ], $messages);
+
+
         $iglesia  = new Iglesia();
         $iglesia->name = $request->nombre;
         $iglesia->save();

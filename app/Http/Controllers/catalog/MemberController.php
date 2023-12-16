@@ -21,6 +21,7 @@ use Carbon\Carbon;
 use DateTime;
 
 use Illuminate\Validation\ValidationException;
+
 class MemberController extends Controller
 {
     /**
@@ -40,7 +41,7 @@ class MemberController extends Controller
         $participantes =  DB::select("select  q.id id, q.name_member as nombre , q.lastname_member as apellido , i.name iglesia
         from iglesia i
         join member q
-        join  users_has_iglesia r on        r.iglesia_id=i.id and r.user_id=q.users_id ");  
+        join  users_has_iglesia r on        r.iglesia_id=i.id and r.user_id=q.users_id ");
 
         return view('catalog.member.index', compact('member', 'member_status', 'participantes'));
     }
@@ -57,7 +58,7 @@ class MemberController extends Controller
 
         $member_status = MemberStatus::get();
 
-       // $groupperchuchplan = GroupPerchuchPlan::get();
+        // $groupperchuchplan = GroupPerchuchPlan::get();
 
         $departamentos = Departamento::get();
         //$municipios = Municipio::where('departamento_id', '=', 1)->get();
@@ -107,12 +108,12 @@ class MemberController extends Controller
         if ($request->grupo_id != 1) {
             $request->validate([
                 'name_member' => ['required', 'string', 'max:255'],
-            'lastname_member' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'cell_phone_number' => ['required', 'string', 'max:9'],
-            'address' => ['required', 'string', 'max:255'],
-              //  'phone_number' => ['required', 'string', 'regex:/^\d{4}-\d{4}$/'],
+                'lastname_member' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'cell_phone_number' => ['required', 'string', 'max:9'],
+                'address' => ['required', 'string', 'max:255'],
+                //  'phone_number' => ['required', 'string', 'regex:/^\d{4}-\d{4}$/'],
             ], $messages);
         }
 
@@ -121,6 +122,19 @@ class MemberController extends Controller
         $fechaActual = new DateTime();
         $edad = $fechaNacimientoObj->diff($fechaActual);
         $edad->y;
+
+        /*agregado */
+        if ($edad->y <= 17  &&  $request->grupo_id == 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
+        }
+
+
+        if ($edad->y <= 17  &&  $request->grupo_id != 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
+        }
+
+
+
 
         if ($edad->y >= 18  &&  $request->grupo_id == 1) {
             throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
@@ -137,11 +151,11 @@ class MemberController extends Controller
         $user->password = Hash::make($request->password);
         $user->status = 0;
         $user->save();
-       // if ($request->get('is_pastor') == 'on') {
-            // si es pastor
-       //     $user->assignRole('encargado');
+        // if ($request->get('is_pastor') == 'on') {
+        // si es pastor
+        //     $user->assignRole('encargado');
 
-     // } else {
+        // } else {
         $user->assignRole('participante');
         //}
 
@@ -168,13 +182,13 @@ class MemberController extends Controller
         $member->municipio_id = $request->municipio_id;
         $member->status_id = 1;
         $member->users_id = $user->id;
-       // $member->departamento_id =   $deptos->id;
+        // $member->departamento_id =   $deptos->id;
         $member->address = $request->address;
-      //  if ($request->get('is_pastor') == 'on') {
+        //  if ($request->get('is_pastor') == 'on') {
         //    $member->is_pastor = 1;   // si es pastor
         //} else {
-            $member->is_pastor = 0;
-       // }
+        $member->is_pastor = 0;
+        // }
         $member->save();
 
         $member->member_has_group()->attach($request->group_id);
@@ -215,12 +229,12 @@ class MemberController extends Controller
     {
 
         $iglesia = Iglesia::findorfail($id);
-       // $iglesia = Iglesia::where('status_id', '!=', 3)->get();
+        // $iglesia = Iglesia::where('status_id', '!=', 3)->get();
         $member = Member::get();
 
         $member_status = MemberStatus::get();
 
-       // $groupperchuchplan = GroupPerchuchPlan::get();
+        // $groupperchuchplan = GroupPerchuchPlan::get();
 
         $departamentos = Departamento::get();
         $municipios = Municipio::get();
@@ -265,19 +279,19 @@ class MemberController extends Controller
         $member = member::findOrFail($id);
 
         $grupo = $member->member_has_group->first();
-
+        //dd($grupo);
         $usuario = User::findOrFail($member->users_id);
 
         $iglesia = $usuario->user_has_iglesia->first();
 
         $generos = Gender::get();
         $grupos = Grupo::get();
-       // $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
+        // $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
         $departamentos = Departamento::get();
         $municipios = Municipio::get();
         $iglesias = Iglesia::where('status_id', '<>', 3)->get();
 
-        return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'grupo',  'generos', 'departamentos', 'municipios', 'iglesia','iglesias'));
+        return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'grupo',  'generos', 'departamentos', 'municipios', 'iglesia', 'iglesias'));
     }
 
     /**
@@ -293,10 +307,7 @@ class MemberController extends Controller
             'name.required' => 'El nombre es un valor requerido',
             'lastname_member.required' => 'El apellido es un valor requerido',
             'email.required' => 'El Correo electronico es un valor requerido',
-            'email.unique' => 'El correo ingresado ya existe',
-            'password.required' => 'La Contraseña es un valor obligatorio',
-            'password.confirmed' => 'Las claves no coinciden.',
-            'password.min' => 'La contraseña debe tener un minimo de 8 caracteres',
+           // 'email.unique' => 'El correo ingresado ya existe',
             'cell_phone_number.required' => 'El Numero de telefono es un valor requerido',
             'address.required' => 'La dirección es un valor requerido'
 
@@ -307,8 +318,7 @@ class MemberController extends Controller
         $request->validate([
             'name_member' => ['required', 'string', 'max:255'],
             'lastname_member' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+           // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'cell_phone_number' => ['required', 'string', 'max:9'],
             'address' => ['required', 'string', 'max:255'],
 
@@ -317,12 +327,12 @@ class MemberController extends Controller
         if ($request->grupo_id != 1) {
             $request->validate([
                 'name_member' => ['required', 'string', 'max:255'],
-            'lastname_member' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'cell_phone_number' => ['required', 'string', 'max:9'],
-            'address' => ['required', 'string', 'max:255'],
-              //  'phone_number' => ['required', 'string', 'regex:/^\d{4}-\d{4}$/'],
+                'lastname_member' => ['required', 'string', 'max:255'],
+              //  'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                //'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'cell_phone_number' => ['required', 'string', 'max:9'],
+                'address' => ['required', 'string', 'max:255'],
+                //  'phone_number' => ['required', 'string', 'regex:/^\d{4}-\d{4}$/'],
             ], $messages);
         }
 
@@ -331,6 +341,18 @@ class MemberController extends Controller
         $fechaActual = new DateTime();
         $edad = $fechaNacimientoObj->diff($fechaActual);
         $edad->y;
+
+
+        /*agregado */
+        if ($edad->y <= 17  &&  $request->grupo_id == 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
+        }
+
+
+        if ($edad->y <= 17  &&  $request->grupo_id != 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
+        }
+
 
         if ($edad->y >= 18  &&  $request->grupo_id == 1) {
             throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
@@ -342,11 +364,23 @@ class MemberController extends Controller
         }
 
 
+
+
         $member =  Member::findOrFail($id);
         //borrando el grupo anterior
         $group = $member->member_has_group->first();
         $member->member_has_group()->detach($group);
         $user = User::findOrFail($member->users_id);
+ /*agregado */
+ if ( $user->email ==$request->email) {
+    throw ValidationException::withMessages(['email' => ['El Correo ya existe ']]);
+}
+
+        if ($request->password != '') {
+            $user->password = Hash::make($request->password);
+            $user->update();
+        }
+
         // dd( $user);
         $iglesia = $user->user_has_iglesia->first();
 
