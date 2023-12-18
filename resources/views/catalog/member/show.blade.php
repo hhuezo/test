@@ -125,7 +125,7 @@
                                                 <input type="password" name="password_confirmation" required class="form-control">
                                             </div>
 
-                                            
+
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Teléfono</label>
                                                 <input type="text" name="phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']" value="{{ old('phone_number') }}">
@@ -142,7 +142,7 @@
                                                 <label for="largeInput" class="form-label">Iglesia</label>
                                                 <input type="text" name="iglesia" required class="form-control" value=" {{ $iglesia->name }}" disabled>
                                             </div>
-                                           
+
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">grupo</label>
                                                 <select id="grupo_id" name="grupo_id" class="form-control" required>
