@@ -150,7 +150,7 @@
                                     </div>
                                 </div>
 
-                                <div class="lg:col-span-8 col-span-12" >
+                                <div class="lg:col-span-8 col-span-12">
                                     <div class="card" id="card-sesion">
                                         <header class="card-header">
                                             <strong>Sesiones</strong>
@@ -160,7 +160,7 @@
                                     <div class="grid xl:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5">
                                         @foreach ($sesiones as $sesion)
                                         <div class="card">
-                                            <div class="card-body" id="datos_generales">
+                                            <div class="card-body" id="datos_generales-{{$sesion->id}}">
                                                 <div class="card-text h-full">
                                                     <header class="border-b px-4 pt-4 pb-3 flex items-center border-info-500">
                                                         <iconify-icon class="text-3xl inline-block ltr:mr-2 rtl:ml-2 text-info-500" icon="ph:info"></iconify-icon>
@@ -168,7 +168,7 @@
                                                             {{ $sesion->session_name }}
                                                         </h3>
 
-                                                        <button class="ml-auto btn-dark btn btn-sm" id="btn_siguiente" onclick="btn_next({{$sesion->id}});">
+                                                        <button class="ml-auto btn-dark btn btn-sm" id="btn_siguiente-{{$sesion->id}}" onclick="btn_next({{$sesion->id}});">
                                                             <iconify-icon icon="el:arrow-right" style="color: white;" width="20"></iconify-icon>
                                                         </button>
 
@@ -196,7 +196,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="card-body" id="asistencia" style="display: none;">
+                                            <div class="card-body" id="asistencia-{{$sesion->id}}" style="display: none">
                                                 <div class="card-text h-full">
                                                     <header class="border-b px-4 pt-4 pb-3 flex items-center border-info-500">
                                                         <iconify-icon class="text-3xl inline-block ltr:mr-2 rtl:ml-2 text-info-500" icon="ph:info"></iconify-icon>
@@ -204,7 +204,7 @@
                                                             {{ $sesion->session_name }}
                                                         </h3>
 
-                                                        <button class="ml-auto btn-dark btn btn-sm" id="btn_cerrar" onclick="btn_close();" style="display: none;"> cerrar
+                                                        <button class="ml-auto btn-dark btn btn-sm" id="btn_cerrar-{{$sesion->id}}" onclick="btn_close({{$sesion->id}});" style="display: none;"> cerrar
                                                             <iconify-icon icon="el:close" style="color: white;" width="20"></iconify-icon>
                                                         </button>
 
@@ -230,58 +230,57 @@
                                                         </p>
                                                     </div>
                                                     <div class="py-3 px-5" align="right">
-                                                        <a href="" class="btn ml-auto btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal-importar"> <iconify-icon icon="ri:file-excel-2-fill" width="13"></iconify-icon> Importar Archivo</a>
+                                                        <a href="" class="btn ml-auto btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal-importar" onclick="modal_importar({{$sesion->id}})"> <iconify-icon icon="ri:file-excel-2-fill" width="13"></iconify-icon> Importar Archivo</a>
                                                     </div>
 
                                                 </div>
                                                 <div class="card-text h-full">
-                                                    <div id="response"></div>
+                                                    <div id="response-{{$sesion->id}}"></div>
                                                 </div>
                                             </div>
-                                            <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-importar">
-
-                                                <form method="POST" action="{{ url('admin/import_excel') }}" enctype="multipart/form-data">
-                                                    @method('POST')
-                                                    @csrf
-
-
-                                                    <div class="modal-dialog relative w-auto pointer-events-none">
-                                                        <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                                                            <div class="relative bg-white rounded-lg shadow black:bg-slate-700">
-                                                                <!-- Modal header -->
-                                                                <div class="flex items-center justify-between p-5 border-b rounded-t black:border-slate-600 bg-black-500">
-                                                                    <h3 class="text-base font-medium text-white dark:text-white capitalize">
-                                                                        Importar Archivo
-                                                                    </h3>
-                                                                    <button type="button" class="text-slate-400 bg-transparent hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-slate-600 dark:hover:text-white" data-bs-dismiss="modal">
-                                                                        <svg aria-hidden="true" class="w-5 h-5" fill="#ffffff" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                                                        </svg>
-                                                                        <span class="sr-only">Close modal</span>
-                                                                    </button>
-                                                                </div>
-                                                                <!-- Modal body -->
-                                                                <div class="p-6 space-y-4">
-                                                                    <div class="input-area relative">
-                                                                        <input type="hidden" name="sesion" value="{{$sesion->id}}">
-                                                                        <label for="largeInput" class="form-label">Subir archivo</label>
-                                                                        <input type="file" name="fileExcel" class="form-control" accept=".xlsx, .xls">
-                                                                    </div>
-
-                                                                </div>
-                                                                <!-- Modal footer -->
-                                                                <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
-                                                                    <button type="submit" class="btn inline-flex justify-center text-white bg-black-500 float-right" style="margin-bottom: 15px">Aceptar</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-
-                                            </div>
-
                                         </div>
                                         @endforeach
+                                    </div>
+                                    <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" aria-hidden="true" role="dialog" tabindex="-1" id="modal-importar">
+
+                                        <form method="POST" action="{{ url('admin/import_excel') }}" enctype="multipart/form-data">
+                                            @method('POST')
+                                            @csrf
+
+
+                                            <div class="modal-dialog relative w-auto pointer-events-none">
+                                                <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                                                    <div class="relative bg-white rounded-lg shadow black:bg-slate-700">
+                                                        <!-- Modal header -->
+                                                        <div class="flex items-center justify-between p-5 border-b rounded-t black:border-slate-600 bg-black-500">
+                                                            <h3 class="text-base font-medium text-white dark:text-white capitalize">
+                                                                Importar Archivo
+                                                            </h3>
+                                                            <button type="button" class="text-slate-400 bg-transparent hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-slate-600 dark:hover:text-white" data-bs-dismiss="modal">
+                                                                <svg aria-hidden="true" class="w-5 h-5" fill="#ffffff" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                                                </svg>
+                                                                <span class="sr-only">Close modal</span>
+                                                            </button>
+                                                        </div>
+                                                        <!-- Modal body -->
+                                                        <div class="p-6 space-y-4">
+                                                            <div class="input-area relative">
+                                                                <input type="hidden" name="sesion" id="sesion">
+                                                                <label for="largeInput" class="form-label">Subir archivo</label>
+                                                                <input type="file" name="fileExcel" class="form-control" accept=".xlsx, .xls">
+                                                            </div>
+
+                                                        </div>
+                                                        <!-- Modal footer -->
+                                                        <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b dark:border-slate-600">
+                                                            <button type="submit" class="btn inline-flex justify-center text-white bg-black-500 float-right" style="margin-bottom: 15px">Aceptar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
                                     </div>
                                 </div>
 
@@ -321,13 +320,18 @@
 
     });
 
-    function btn_next(sesion_id) {
-        $("#btn_cerrar").show();
-        $("#btn_siguiente").hide();
+    function modal_importar(session_id){
+        $("#modal-importar").modal('show');
+        document.getElementById('sesion').value = session_id;
+    }
 
-        $("#asistencia").show();
-        $("#datos_generales").hide();
-        $("#btn-agregar").hide();
+    function btn_next(sesion_id) {
+        $("#btn_cerrar-" + sesion_id).show();
+        $("#btn_siguiente-" + sesion_id).hide();
+
+        $("#asistencia-" + sesion_id).show();
+        $("#datos_generales-" + sesion_id).hide();
+        $("#btn-agregar-" + sesion_id).hide();
 
 
         var parametros = {
@@ -339,7 +343,7 @@
             data: parametros,
             success: function(data) {
                 console.log(data);
-                $('#response').html(data);
+                $('#response-' + sesion_id).html(data);
 
             }
 
@@ -349,13 +353,13 @@
 
     }
 
-    function btn_close() {
-        $("#btn_cerrar").hide();
-        $("#btn_siguiente").show();
-        $("#btn-agregar").show();
+    function btn_close(sesion_id) {
+        $("#btn_cerrar-" + sesion_id).hide();
+        $("#btn_siguiente-" + sesion_id).show();
+        $("#btn-agregar-" + sesion_id).show();
 
-        $("#asistencia").hide();
-        $("#datos_generales").show();
+        $("#asistencia-" + sesion_id).hide();
+        $("#datos_generales-" + sesion_id).show();
     }
 
     function show_add_sesion() {

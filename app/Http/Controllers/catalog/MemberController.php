@@ -151,15 +151,8 @@ class MemberController extends Controller
         $user->password = Hash::make($request->password);
         $user->status = 0;
         $user->save();
-        // if ($request->get('is_pastor') == 'on') {
-        // si es pastor
-        //     $user->assignRole('encargado');
-
-        // } else {
         $user->assignRole('participante');
-        //}
-
-
+        
         //asign role
         $iglesia = Iglesia::findorfail($request->organization_id);
 
@@ -196,26 +189,7 @@ class MemberController extends Controller
 
         alert()->success('El registro ha sido agregado correctamente');
         return back();
-        // $GroupPerchuchPlan = GroupPerchuchPlan::where('iglesia_id', '=', $request->iglesia_id)->where('group_id', '=', $request->grupo_id)->first();
-        // dd( $GroupPerchuchPlan->id);
-        // $GroupPerchuchPlan->miembro_grupo()->attach($member->id);
-        //$grupoiglesia =iglesia::where('id', '=',(int)$request->iglesia_id)->get();
-        //$grupoiglesia->iglesia_grupo()->attach($request->group_id);
-        // alert()->success('El registro ha sido agregado correctamente');
-
-
-
-
-
-        //Envio de correo usando metodo sendMail de MailController
-        // $objeto = new  MailController();
-        // $email = $request->email;
-        //$email = $request->get('email');
-        // $subject = "Notificación: Datos registrados correctamente";
-        // $content = "Sus datos han sido registrados, nuestro equipo revisará la información y le notificará cuando sean aprobados";
-        // $result = $objeto->sendMail($email, $subject, $content);
-
-
+     
 
     }
 
@@ -307,7 +281,7 @@ class MemberController extends Controller
             'name.required' => 'El nombre es un valor requerido',
             'lastname_member.required' => 'El apellido es un valor requerido',
             'email.required' => 'El Correo electronico es un valor requerido',
-           // 'email.unique' => 'El correo ingresado ya existe',
+            // 'email.unique' => 'El correo ingresado ya existe',
             'cell_phone_number.required' => 'El Numero de telefono es un valor requerido',
             'address.required' => 'La dirección es un valor requerido'
 
@@ -318,7 +292,7 @@ class MemberController extends Controller
         $request->validate([
             'name_member' => ['required', 'string', 'max:255'],
             'lastname_member' => ['required', 'string', 'max:255'],
-           // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'cell_phone_number' => ['required', 'string', 'max:9'],
             'address' => ['required', 'string', 'max:255'],
 
@@ -328,7 +302,7 @@ class MemberController extends Controller
             $request->validate([
                 'name_member' => ['required', 'string', 'max:255'],
                 'lastname_member' => ['required', 'string', 'max:255'],
-              //  'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                //  'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 //'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'cell_phone_number' => ['required', 'string', 'max:9'],
                 'address' => ['required', 'string', 'max:255'],
@@ -371,10 +345,11 @@ class MemberController extends Controller
         $group = $member->member_has_group->first();
         $member->member_has_group()->detach($group);
         $user = User::findOrFail($member->users_id);
- /*agregado */
- if ( $user->email ==$request->email) {
-    throw ValidationException::withMessages(['email' => ['El Correo ya existe ']]);
-}
+        /*agregado */
+        if ($user->email != $request->email) {
+            //buscar si existe el correo 
+            throw ValidationException::withMessages(['email' => ['El Correo ya existe ']]);
+        }
 
         if ($request->password != '') {
             $user->password = Hash::make($request->password);
@@ -398,7 +373,7 @@ class MemberController extends Controller
         $member->organization_id = (int)$request->iglesia_id;
         $member->departamento_id = $request->departamento_id;
         $member->municipio_id = $request->municipio_id;
-        $member->catalog_gender_id = $request->genero;
+        $member->catalog_gender_id = $request->catalog_gender_id;
         $member->email = $request->email;
         $member->cell_phone_number = $request->cell_phone_number;
         //$group = $member->member_has_group->first();
