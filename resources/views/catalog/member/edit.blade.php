@@ -98,7 +98,7 @@
                                                     <label for="largeInput" class="form-label">Grupos</label>
                                                     <select name="group_id" class="form-control select2">
                                                         @foreach ($grupos as $obj)
-                                                        @if ($obj->id == $grupo->group_id)
+                                                        @if ($obj->id == $grupo->id)
                                                         <option value="{{ $obj->id }}" selected>
                                                             {{ $obj->nombre  }}
                                                         </option>

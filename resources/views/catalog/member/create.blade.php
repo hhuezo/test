@@ -41,82 +41,51 @@
                                     <form method="POST" action="{{ url('catalog/member') }}">
                                         @csrf
 
-                                        <div class="input-area relative">
-                                            <label for="largeInput" class="form-label">Iglesia</label>
-                                            <select id="organization_id" name="organization_id" class="form-control"
-                                                required>
-                                                @foreach ($iglesias as $obj)
-                                                        <option value="{{ $obj->id }}">
-                                                            {{ $obj->name }}</option>
-
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-
-
                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                             <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">{{ __('Nombre') }}</label>
-                                                <input type="text" name="name_member" id="name_member"
-                                                  required class="form-control"
-                                                    value="{{ old('name_member') }}" autofocus="true">
+                                                <label for="largeInput" class="form-label">Iglesia</label>
+                                                <select id="organization_id" name="organization_id" class="form-control select2" required>
+                                                    @foreach ($iglesias as $obj)
+                                                    <option value="{{ $obj->id }}">
+                                                        {{ $obj->name }}
+                                                    </option>
+
+                                                    @endforeach
+                                                </select>
                                             </div>
-
-
-
+                                            <div class="input-area relative">
+                                                <label for="largeInput" class="form-label">{{ __('Nombre') }}</label>
+                                                <input type="text" name="name_member" id="name_member" required class="form-control" value="{{ old('name_member') }}" autofocus="true">
+                                            </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">{{ __('Apellido') }}</label>
-                                                <input type="text" id="lastname_member" name="lastname_member"
-                                                  required class="form-control" value="{{ old('lastname_member') }}">
+                                                <input type="text" id="lastname_member" name="lastname_member" required class="form-control" value="{{ old('lastname_member') }}">
                                             </div>
 
                                             <div class="input-area relative">
-                                                <label for="largeInput"
-                                                    class="form-label">fecha nacimiento</label>
-                                                <input type="date" name="birthdate" id="birthdate"
-                                                   required class="form-control">
+                                                <label for="largeInput" class="form-label">Fecha Nacimiento</label>
+                                                <input type="date" name="birthdate" id="birthdate" required class="form-control">
                                             </div>
-
-
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Genero</label>
                                                 <select name="catalog_gender_id" id="catalog_gender_id" class="form-control" required>
                                                     @foreach ($generos as $obj)
-
                                                     <option value="{{ $obj->id }}">
-                                                        {{ $obj->description }}</option>
-
+                                                        {{ $obj->description }}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </div>
 
 
-
-                                          {{---  <div class="input-area relative">
-                                                <label for="largeInput" class="form-label">Iglesia</label>
-                                                <select id="organization_id" name="organization_id" class="form-control" required>
-                                                    @foreach ($iglesias as $obj)
-                                                    @if ($obj->id == $member->organization_id)
-                                                        <option value="{{ $obj->id }}" selected>
-                                                            {{ $obj->name }}
-                                                        </option>
-                                                    @else
-                                                        <option value="{{ $obj->id }}">
-                                                            {{ $obj->name }}</option>
-                                                    @endif
-                                                @endforeach
-                                                </select>
-                                            </div>--}}
-
-
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Grupos</label>
-                                                <select name="group_id" id="group_id" class="form-control select2">
-                                                   @foreach ($grupos as $obj)
+                                                <select name="group_id" id="group_id" class="form-control">
+                                                    @foreach ($grupos as $obj)
 
-                                                            <option value="{{ $obj->id }}">
-                                                                {{  $obj->nombre  }} </option>
+                                                    <option value="{{ $obj->id }}">
+                                                        {{ $obj->nombre  }}
+                                                    </option>
 
                                                     @endforeach
 
@@ -127,26 +96,18 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Correo</label>
-                                                <input type="email" id="email" name="email"
-                                                   class="form-control"
-                                                    value="{{ old('email') }}">
+                                                <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}">
                                             </div>
 
 
                                             <div class="input-area relative">
-                                                <label for="largeInput"
-                                                    class="form-label">{{ __('numero de documento') }}</label>
-                                                <input type="text" id="document_number" name="document_number"    data-inputmask="'mask': ['99999999-9']"
-                                                    required
-                                                    class="form-control">
+                                                <label for="largeInput" class="form-label">Numero de documento</label>
+                                                <input type="text" id="document_number" name="document_number" data-inputmask="'mask': ['99999999-9']" required class="form-control">
                                             </div>
 
                                             <div class="input-area relative">
-                                                <label for="largeInput"
-                                                    class="form-label"> Telefono  </label>
-                                                <input type="text" name="cell_phone_number"
-                                                    id="cell_phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']"
-                                                    value="{{ old('cell_phone_number') }}">
+                                                <label for="largeInput" class="form-label"> Telefono </label>
+                                                <input type="text" name="cell_phone_number" id="cell_phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']" value="{{ old('cell_phone_number') }}">
                                             </div>
 
 
@@ -156,7 +117,7 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Contraseña</label>
-                                                <input type="password" id="password"  name="password" required class="form-control">
+                                                <input type="password" id="password" name="password" required class="form-control">
                                             </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Confirme Contraseña</label>
@@ -164,7 +125,7 @@
                                             </div>
 
 
-                                          {{--  <div class="input-area relative">
+                                            {{-- <div class="input-area relative">
                                             <label for="largeInput" class="form-label">¿Es Pastor? </label>
                                                 <div class="boton">
                                                     <input type="checkbox" id="btn-switch" name="is_pastor">
@@ -174,12 +135,12 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Departamento</label>
-                                                <select id="departamento_id" name="departamento_id" class="form-control"
-                                                    required>
+                                                <select id="departamento_id" name="departamento_id" class="form-control" required>
                                                     @foreach ($departamentos as $obj)
 
-                                                            <option value="{{ $obj->id }}">
-                                                                {{ $obj->nombre }}</option>
+                                                    <option value="{{ $obj->id }}">
+                                                        {{ $obj->nombre }}
+                                                    </option>
 
                                                     @endforeach
                                                 </select>
@@ -187,13 +148,13 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Municipio</label>
-                                                <select id="municipio_id" name="municipio_id" class="form-control"
-                                                    required>
+                                                <select id="municipio_id" name="municipio_id" class="form-control" required>
                                                     @foreach ($municipios as $obj)
 
 
-                                                            <option value="{{ $obj->id }}">
-                                                                {{ $obj->nombre }}</option>
+                                                    <option value="{{ $obj->id }}">
+                                                        {{ $obj->nombre }}
+                                                    </option>
 
                                                     @endforeach
 
@@ -206,8 +167,9 @@
                                                 <select name="status" id="status" class="form-control select2">
                                                     @foreach ($member_status as $obj)
 
-                                                            <option value="{{ $obj->id }}">
-                                                                {{ $obj->description_es }}</option>
+                                                    <option value="{{ $obj->id }}">
+                                                        {{ $obj->description_es }}
+                                                    </option>
 
                                                     @endforeach
                                                 </select>
@@ -219,13 +181,12 @@
                                             </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Acerca de mi</label>
-                                                <textarea name="about_me" id= "about_me" class="form-control" rows="5"></textarea>
+                                                <textarea name="about_me" id="about_me" class="form-control" rows="5"></textarea>
                                             </div>
 
                                         </div>&nbsp;
                                         <div style="text-align: right;">
-                                            <button type="submit"
-                                                class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
+                                            <button type="submit" class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
                                         </div>
                                     </form>
 
@@ -249,7 +210,7 @@
     $(document).ready(function() {
         $(":input").inputmask();
         $("#departamento_id").change(function() {
-            console.log( $(this).val());
+            console.log($(this).val());
             var Departamento = $(this).val();
 
             $.get("{{ url('get_municipio/') }}" + '/' + Departamento, function(data) {
@@ -294,14 +255,14 @@
             $("#grupo_id").html(_select);
         });
 
-}
+    }
 </script>
 <script type="text/javascript">
-function modal_edit(id, name) {
-//alert(id);
-document.getElementById('id').value = id;
-document.getElementById('name').value = name;
-$('#usuario_edit_modal').modal('show');
-};
+    function modal_edit(id, name) {
+        //alert(id);
+        document.getElementById('id').value = id;
+        document.getElementById('name').value = name;
+        $('#usuario_edit_modal').modal('show');
+    };
 </script>
 @endsection

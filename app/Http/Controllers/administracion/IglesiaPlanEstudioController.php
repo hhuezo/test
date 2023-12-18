@@ -83,8 +83,10 @@ class IglesiaPlanEstudioController extends Controller
 
     public function show($id)
     {
+
+        //dd($id);
         $plan = IglesiaPlanEstudio::findOrFail($id);
-    ///    dd($plan);
+        ///    dd($plan);
         $iglesia = Iglesia::findOrFail($plan->iglesia_id);
 
         $participantes = $plan->iglesia->participantes($plan->iglesia_id)->where('group_id', '=', $plan->group_id)->where('status_id', '=', 2);
@@ -93,8 +95,8 @@ class IglesiaPlanEstudioController extends Controller
         //dd((!session()->has('show')));
         if (!session()->has('show')) {
             session_start();
-        session(['show' => '1']);
-
+            session(['show' => '1']);
+            session(['id' => $id]);
         }
 
         return view('administracion.iglesia_plan_estudio.show', compact(
@@ -189,6 +191,7 @@ class IglesiaPlanEstudioController extends Controller
 
         alert()->success('Las asistencias se agregaron correctamente correctamenteeee');
         //        return redirect('administracion/iglesia_plan_estudio/'.$request->sesion, ['show' => $show]);
+        session(['id' => $request->sesion]);
         session(['show' => '0']);
         return back();
     }
