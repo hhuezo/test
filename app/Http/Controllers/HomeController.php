@@ -24,17 +24,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('test');
-        if (auth()->user()->status == 0) {
-            return view('home2');
+        $user = User::findOrFail(auth()->user()->id);
+        if ($user->hasRole('participante') == true) {
+
+            return redirect('administracion/iglesia_plan_estudio/control_participante');
+
+        } else {
+            return view('test');
+
+            if (auth()->user()->status == 0) {
+                return view('home2');
+            }
+            if ($user->hasRole('member')) {
+                return redirect('course');
+            }
         }
 
-        //role members
-        $user = User::findOrFail(auth()->user()->id);
-        if ($user->hasRole('member')) {
-            return redirect('course');
-        }
-        return view('home');
     }
 
     public function test()
@@ -48,8 +53,4 @@ class HomeController extends Controller
         dd('redireccionado');
         return view('confirma');
     }
-
-
-
-
 }

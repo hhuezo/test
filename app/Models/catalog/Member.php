@@ -29,7 +29,7 @@ class Member extends Model
         'address',
         'data_created',
         'status_id',
-        'user_id',
+        'users_id',
         'organization_id'
     ];
     protected $guarded = [];
@@ -52,6 +52,7 @@ class Member extends Model
     public function member_has_group()
     {
         //return $this->belongsToMany(Member::class, 'member_has_group', 'group_id', 'member_id');
+
         return $this->belongsToMany(Grupo::class, 'member_has_group','member_id', 'group_id');
     }
 
@@ -62,6 +63,9 @@ class Member extends Model
     public function municipio(){
         return $this->belongsTo(Municipio::class,'municipio_id','id');
     }
+
+
+
 
 
 };

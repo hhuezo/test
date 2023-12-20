@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\catalog\Iglesia;
+use App\Models\catalog\Member;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -54,6 +55,12 @@ class User extends Authenticatable
     public function user_rol()
     {
         return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id');
+    }
+
+    public function usuario_participante()
+    {
+        return $this->hasMany(Member::class,'users_id' );
+       // return $this->belongsTo(Member::class, ');
     }
 
     protected $guarded = [];

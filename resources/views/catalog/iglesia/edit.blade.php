@@ -81,7 +81,7 @@
                                             </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Teléfono de Iglesia</label>
-                                                <input type="text" id="phone_number" name="phone_number" value="{{ $iglesia->phone_number }}" class="form-control" >
+                                                <input type="text" id="phone_number" name="phone_number" value="{{ $iglesia->phone_number }}"  class="form-control" data-inputmask="'mask': ['9999-9999']">
                                             </div>
 
                                             <div class="input-area relative">
@@ -114,7 +114,7 @@
                                                         @endforeach
                                                 </select>
                                             </div>
-                                            
+
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Direccion</label>
                                                 <input type="text" id="address" name="address" value="{{ $iglesia->address }}" required class="form-control" >
@@ -135,7 +135,7 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Telefonico del contacto</label>
-                                                <input type="text" id="contact_phone_number" name="contact_phone_number" value="{{ $iglesia->contact_phone_number }}" class="form-control" >
+                                                <input type="text" id="contact_phone_number" name="contact_phone_number" value="{{ $iglesia->contact_phone_number }}" class="form-control" data-inputmask="'mask': ['9999-9999']" >
                                             </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label" >Email del contacto</label>
@@ -162,7 +162,7 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Telefono del contacto</label>
-                                                <input type="text" id="secondary_contact_phone_number" name="secondary_contact_phone_number" value="{{ $iglesia->contact_phone_number }}" class="form-control" >
+                                                <input type="text" id="secondary_contact_phone_number" name="secondary_contact_phone_number" value="{{ $iglesia->contact_phone_number }}" class="form-control" data-inputmask="'mask': ['9999-9999']">
                                             </div>
 
                                         </div>
@@ -176,7 +176,7 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Telefono de Pastor</label>
-                                                <input type="text" name="pastor_phone_number" value="{{ $iglesia->pastor_phone_number }}" class="form-control" >
+                                                <input type="text" name="pastor_phone_number" value="{{ $iglesia->pastor_phone_number }}"  class="form-control" data-inputmask="'mask': ['9999-9999']">
                                             </div>
 
                                             <div class="input-area relative">
@@ -433,9 +433,25 @@
     </div>
 </div>
 
+
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+<script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $(":input").inputmask();
+    });
+</script>
+<script>
+    jQuery(function($){
+
+         $("#pastor_phone_number").mask("9999-9999");
+
+    });
+    </script>
 <script type="text/javascript">
     $(document).ready(function() {
         //combo para Departamento

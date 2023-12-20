@@ -146,7 +146,7 @@
                                             </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label"> Teléfono de Lider Religioso </label>
-                                                <input type="text" name="pastor_phone_number" id="pastor_phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']" value="{{ old('pastor_phone_number') }}">
+                                                <input type="text" name="pastor_phone_number" id="pastor_phone_number" required class="form-control" data-inputmask="'mask': ['9999-9999']"  value="{{ old('pastor_phone_number') }}"  >
                                             </div>
 
                                             <div class="input-area relative">
@@ -211,17 +211,18 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
-<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        $(":input").inputmask();
-    });
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+
+<script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
+        $(":input").inputmask();
         //combo para Departamento
         //combo para Departamento
         //$("#departamento_id").change();
@@ -243,7 +244,6 @@
             });
 
         });
-
 
     });
 </script>
