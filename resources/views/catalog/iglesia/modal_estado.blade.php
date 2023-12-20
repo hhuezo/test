@@ -32,8 +32,7 @@
                     <label for="largeInput" class="form-label">{{ __('Estado') }}</label>
                     <select name="status_id" class="form-control ">
                         @foreach ($estatuorg as $estado)
-                            <option value="{{ $estado->id }}" {{$estado->id == $obj->status_id ? 'selected':''}}>{{ $estado->description_es }}
-                            </option>
+                            <option value="{{ $estado->id }}">{{ $estado->description_es }}  </option>
                         @endforeach
                     </select>
                 </div>

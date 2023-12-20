@@ -29,7 +29,7 @@ class StudyPlanController extends Controller
      */
     public function create()
     {
-       // $cursos = Course::get();
+        // $cursos = Course::get();
         return view('catalog.plan_estudios.create');
     }
 
@@ -55,9 +55,9 @@ class StudyPlanController extends Controller
         $studyPlan->description = $request->description;
         $studyPlan->description_es = $request->description_es;
         $studyPlan->save();
-       
+
         alert()->success('El registro ha sido agregado correctamente');
-        return redirect('catalog/plan_estudios/'. $studyPlan->id.'/edit');
+        return redirect('catalog/plan_estudios/' . $studyPlan->id . '/edit');
     }
 
     /**
@@ -84,10 +84,11 @@ class StudyPlanController extends Controller
 
         $plandetalle = StudyPlanDetail::join('course', 'study_plan_detail.course_id', '=', 'course.id')
             ->where('study_plan_detail.study_plan_id', $plan_estudio->id)
-            ->select('study_plan_detail.id', 'course.name_es', 'course.description_es')
+            ->select('study_plan_detail.id', 'course.name_es', 'course.description_es', 'course.id as course_id')
             ->get();
 
-        $cursos = Course::get();
+        $cursos_id = $plandetalle->pluck('course_id')->toArray();
+        $cursos = Course::whereNotIn('id', $cursos_id)->get();
         return view('catalog.plan_estudios.edit', compact('plan_estudio', 'cursos', 'plandetalle'));
     }
 
@@ -139,23 +140,25 @@ class StudyPlanController extends Controller
 
     public function attach_cursos(Request $request)
     {
-
         $StudyPlan =  StudyPlan::findOrFail($request->study_plan_id);
-        $StudyPlandetail = new StudyPlandetail();
-        $StudyPlandetail->study_plan_id =  $StudyPlan->id;
-        $StudyPlandetail->course_id =  $request->course_id;
-        $StudyPlandetail->save();
-        //      $StudyPlandetail =  StudyPlandetail::findOrFail($StudyPlan);
-        //        $StudyPlandetail->plan_estudio()->attach($request->course_id);
+
+        foreach ($request->course_id as $obj) {
+            $StudyPlandetail = new StudyPlanDetail();
+            $StudyPlandetail->study_plan_id =  $StudyPlan->id;
+            $StudyPlandetail->course_id =  $obj;
+            $StudyPlandetail->save();
+        }
+
         alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
+
     public function dettach_cursos(Request $request)
     {
         //dd($request->id);        dd($request->study_plan_id, $request->course_id);
 
-        $StudyPlan = StudyPlandetail::findOrFail($request->id);
-         //StudyPlan::findOrFail($request->study_plan_id);
+        $StudyPlan = StudyPlanDetail::findOrFail($request->id);
+        //StudyPlan::findOrFail($request->study_plan_id);
         $StudyPlan->delete();
         //  $StudyPlandetail=  StudyPlandetail::where('course_id','=',$request->course_id)::where('study_plan_id','=',  $StudyPlan->id)->get();
         //  dd($StudyPlandetail);

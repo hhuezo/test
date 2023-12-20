@@ -44,6 +44,10 @@ class Member extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function iglesias(){
+        return $this->belongsTo(Iglesia::class,'organization_id');
+    }
+
 
     public function member_has_group()
     {

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+
 class IglesiaController extends Controller
 {
 
@@ -29,11 +30,11 @@ class IglesiaController extends Controller
 
     public function index()
     {
-        $iglesia = Iglesia::where('status_id','<>',3)->get();
-        $iglesias_rechazadas = Iglesia::where('status_id','=',3)->get();
-     //   dd($iglesia);   
-        $estatuorg = OrganizationStatus::get();
-        return view('catalog.iglesia.index', compact('iglesia', 'estatuorg','iglesias_rechazadas'));
+        $iglesia = Iglesia::where('status_id', '<>', 3)->get();
+        $iglesias_rechazadas = Iglesia::where('status_id', '=', 3)->get();
+        //   dd($iglesia);   
+        $estatuorg = OrganizationStatus::where('id','<=',3)->get();
+        return view('catalog.iglesia.index', compact('iglesia', 'estatuorg', 'iglesias_rechazadas'));
     }
 
     public function create()
@@ -109,21 +110,23 @@ class IglesiaController extends Controller
 
         $user->user_has_iglesia()->attach($organizations->id);
 
-        $preguntas =  WizardQuestions::where('active','=','1')->get() ;
+        $preguntas =  WizardQuestions::where('active', '=', '1')->get();
 
         $time = Carbon::now('America/El_Salvador');
         foreach ($preguntas as $obj) {
 
             $repuestas = new ChurchQuestionWizard;
-            $repuestas->question_id=$obj->id;
-            $repuestas->iglesia_id=$organizations->id;
-            $repuestas->answer=1;
-            $repuestas->date_added=$time->toDateTimeString();
+            $repuestas->question_id = $obj->id;
+            $repuestas->iglesia_id = $organizations->id;
+            $repuestas->answer = 1;
+            $repuestas->date_added = $time->toDateTimeString();
             $repuestas->save();
+        }
 
-              }
 
-       alert()->success('El registro ha sido agregado correctamente');
+
+
+        alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
 
