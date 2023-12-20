@@ -12,6 +12,7 @@ use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
 use App\Models\catalog\StudyPlan;
 use App\Models\catalog\StudyPlanDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -242,5 +243,42 @@ class IglesiaPlanEstudioController extends Controller
         //     dd($participantes);
 
         return view('administracion.iglesia_plan_estudio.asistencia', compact('participant'));
+    }
+
+
+
+    public function control_participante()
+    {
+
+
+        $user = User::findOrFail(auth()->user()->id);
+        $participante = $user->usuario_participante->first();
+
+        $grupo_id = $participante->member_has_group->first()->id;
+        $iglesia_id = $user->user_has_iglesia()->first()->id;
+
+
+        $iglesia_plan = Iglesia::findorfail($iglesia_id);
+
+        $iglesia = Iglesia::findorfail($iglesia_id);
+
+        $plan = IglesiaPlanEstudio::where('group_id', '=', $grupo_id)->where('iglesia_id', '=',   $iglesia_id)->first();
+
+
+        $participantes = $plan->iglesia->participantes($plan->iglesia_id)->where('group_id', '=', $plan->group_id)->where('status_id', '=', 2);
+
+        $sesiones = Sesion::where('group_per_church_id', '=', $plan->id)->get();
+
+
+
+
+
+
+        return view('administracion.iglesia_plan_estudio.participante_lista', compact(
+            'plan',
+            'iglesia',
+            'sesiones',
+            'participantes',
+        ));
     }
 }

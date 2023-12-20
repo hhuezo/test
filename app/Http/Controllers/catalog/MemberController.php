@@ -152,7 +152,7 @@ class MemberController extends Controller
         $user->status = 0;
         $user->save();
         $user->assignRole('participante');
-        
+
         //asign role
         $iglesia = Iglesia::findorfail($request->organization_id);
 
@@ -189,7 +189,7 @@ class MemberController extends Controller
 
         alert()->success('El registro ha sido agregado correctamente');
         return back();
-     
+
 
     }
 
@@ -267,6 +267,52 @@ class MemberController extends Controller
 
         return view('catalog.member.edit', compact('member', 'member_status', 'grupos', 'grupo',  'generos', 'departamentos', 'municipios', 'iglesia', 'iglesias'));
     }
+
+
+
+    public function modificar_datos_participante()
+    {
+
+       // dd('llegue');
+        $user = User::findOrFail(auth()->user()->id);
+
+        $participante =$user->usuario_participante->first()->id;
+       // dd($participante);
+
+        $member_status = MemberStatus::get();
+
+        $member = member::findOrFail($participante);
+
+        $grupo = $member->member_has_group->first();
+        //dd($grupo);
+        $usuario = User::findOrFail($member->users_id);
+
+        $iglesia = $usuario->user_has_iglesia->first();
+
+        $generos = Gender::get();
+        $grupos = Grupo::get();
+
+        // $group_church = GroupPerchuchPlan::where('iglesia_id', '=', $member->organization_id)->get();
+        $departamentos = Departamento::get();
+        $municipios = Municipio::get();
+        $iglesias = Iglesia::where('status_id', '<>', 3)->get();
+
+        return view('catalog.member.modificar', compact('member', 'member_status', 'grupos', 'grupo',  'generos', 'departamentos', 'municipios', 'iglesia', 'iglesias'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -347,7 +393,7 @@ class MemberController extends Controller
         $user = User::findOrFail($member->users_id);
         /*agregado */
         if ($user->email != $request->email) {
-            //buscar si existe el correo 
+            //buscar si existe el correo
             throw ValidationException::withMessages(['email' => ['El Correo ya existe ']]);
         }
 

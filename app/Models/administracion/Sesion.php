@@ -32,4 +32,9 @@ class Sesion extends Model
         return $this->hasMany(SesionDetalle::class, 'session_id');
     }
 
+    public function asistencias()
+    {
+        return $this->hasMany(AsistenciaSesion::class, 'sessions_id');
+    }
+
 }

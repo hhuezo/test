@@ -211,9 +211,11 @@
                                 <a href="{{ url('catalog/sede') }}">Sede</a>
                             </li>
                             <li>
-                                <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
+                                <a href="{{ url('catalog/plan_estudios') }}">Cursos para Plan de Estudios</a>
                             </li>
-
+                            <li>
+                                <a href="{{ url('administracion/iglesia_plan_estudio') }}">Plan de estudio</a>
+                            </li>
 
                         </ul>
                     </li>
@@ -287,15 +289,19 @@
                         <a href="#" class="navItem">
                             <span class="flex items-center">
                                 <iconify-icon class=" nav-icon" icon="ic:outline-book"></iconify-icon>
-                                <span>Cursos</span>
+                                <span>Asistencias</span>
                             </span>
                             <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
                         </a>
                         <ul class="sidebar-submenu">
+
                             <li>
-                                <a href="{{ url('administracion/iglesia_plan_estudio') }}">plan de estudio</a>
+                                <a href="{{ url('administracion/iglesia_plan_estudio/control_participante') }}">Control de Asitencia </a>
                             </li>
-                            <!-- <li>
+                            <li>
+                                <a href="{{ url('catalog/modificar_datos_participante') }}">Modificar Datos Personales </a>
+                            </li>
+                           <!--  <li>
                                 <a href="{{ url('catalog/question') }}">Preguntas</a>
                             </li>
                             <li>
