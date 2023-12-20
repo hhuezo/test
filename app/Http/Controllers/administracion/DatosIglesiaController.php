@@ -53,6 +53,12 @@ class DatosIglesiaController extends Controller
         }
     }
 
+    public function datos_cohort(){
+        //$iglesias = Iglesia::where('status_id',2)->get();
+
+        
+    }
+
     public function download(){
         $pathtoFile = public_path().'/img/qrcodeiglesia.png';
         return response()->download($pathtoFile);

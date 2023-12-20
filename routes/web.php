@@ -75,7 +75,7 @@ Route::resource('seguridad/role', RoleController::class);
 
 Route::post('seguridad/role/unlink_permission', [RoleController::class, 'unlink_permission']);
 Route::post('seguridad/role/link_permission', [RoleController::class, 'link_permission']);
-
+Route::get('datos_cohort',[DatosIglesiaController::class, 'datos_cohort']);
 
 
 
