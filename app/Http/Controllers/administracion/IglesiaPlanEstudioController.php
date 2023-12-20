@@ -29,7 +29,6 @@ class IglesiaPlanEstudioController extends Controller
             $planes = IglesiaPlanEstudio::get();
         } else {
             $user = User::findOrFail(auth()->user()->id);
-            // dd($user->user_has_iglesia->first()->id);
             $planes = IglesiaPlanEstudio::where('iglesia_id', $user->user_has_iglesia->first()->id)->get();
         }
         
@@ -39,7 +38,7 @@ class IglesiaPlanEstudioController extends Controller
     public function certificacion(){
         //dd('hli');
         $planes_estudio = IglesiaPlanEstudio::where('end_date','<=', Carbon::now('America/El_Salvador')->format('Y-m-d'))->get();
-        dd( $planes_estudio);
+        
     }
 
     public function asistencia(Request $request)
