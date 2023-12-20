@@ -183,7 +183,7 @@
                                                                                 </th>
 
                                                                                 <th scope="col" class=" table-th ">
-                                                                                    Aprobado
+                                                                                    Aprobado <small> (consultar)</small>
                                                                                 </th>
 
                                                                             </tr>

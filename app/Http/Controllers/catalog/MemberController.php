@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\catalog;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ParticipantesImport;
 use App\Models\catalog\Departamento;
 use App\Models\catalog\Gender;
 use App\Models\catalog\GroupPerchuchPlan;
@@ -19,8 +20,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use DateTime;
-
+use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MemberController extends Controller
 {
@@ -43,7 +45,16 @@ class MemberController extends Controller
         join member q
         join  users_has_iglesia r on        r.iglesia_id=i.id and r.user_id=q.users_id ");
 
-        return view('catalog.member.index', compact('member', 'member_status', 'participantes'));
+
+        if (auth()->user()->hasRole('administrador')) {
+            $iglesias = Iglesia::where('status_id', '<>', 3)->get();
+        } else {
+            $user = User::findOrFail(auth()->user()->id);
+            $iglesias = $user->user_has_iglesia;
+        }
+
+        // dd($iglesias);
+        return view('catalog.member.index', compact('member', 'member_status', 'participantes', 'iglesias'));
     }
 
 
@@ -52,6 +63,175 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function importar_excel(Request $request)
+    {
+        $imports = Excel::toArray(new ParticipantesImport, $request->file('fileExcel'));
+        foreach ($imports as $import) {
+            unset($import[0]);  //descartar los encabezados
+            unset($import[1]);
+            $asistencia = array_values($import);
+        }
+        $iglesia = $request->iglesia;
+        $noparticipantes = array();
+        $agregados = array();
+        $no_agregados = array();
+        $add = '';
+        $no_add = '';
+        foreach ($asistencia as $obj) {
+          //  dd($obj);
+         //   dd(self::convertDate($obj[4]));
+            if (isset($obj[1])) {   //es mayor de edad
+                //validacion de correo
+                if (isset($obj[3])) {
+                    $email_existe = Member::where('email', '=', $obj[3])->first();
+                    if ($email_existe) {
+                        // dd('correo ya existo');
+                        $nota = 'El email ya existe';
+                        $no_add = $this->no_agregar($obj, $nota);
+                    } else {
+                        $add = $this->agregar_participante($obj, $iglesia);
+                        // dd('agregar participante');
+                    }
+                    // validacion de dui
+                } elseif (strlen($obj[1]) == 10 && is_numeric(str_replace('-', '', $obj[1])) == true) {
+                    $dui_existe = Member::where('document_number', '=', $obj[1])->first();
+                    if ($dui_existe) {
+                        //dd('el dui ya existe');
+                        $nota = 'El dui ya existe';
+                        $no_add = $this->no_agregar($obj, $nota);
+                        //  $this->no_agregar($obj);
+                    } else {
+                        $add = $this->agregar_participante($obj, $iglesia);
+                        //dd('agregar participante');
+                    }
+                    //validacion telefono
+                } elseif (strlen($obj[2]) == 9 && is_numeric(str_replace('-', '', $obj[2])) == true) {
+                    $telefono_existe = Member::where('cell_phone_number', '=', $obj[1])->first();
+                    if ($telefono_existe) {
+                        $nota = 'El telefono ya existe';
+                        $no_add = $this->no_agregar($obj, $nota);
+                    } else {
+                        $add = $this->agregar_participante($obj, $iglesia);
+                        //dd('agregar participante');
+                    }
+                } else {
+                    //  dd('datos nos valido, no se agrego');
+                    $nota = 'Tiene datos erroneos';
+                    $no_add = $this->no_agregar($obj, $nota);
+                }
+            } else {  //joven
+                if (isset($obj[3])) {
+                    $email_existe = Member::where('email', '=', $obj[3])->first();
+                    if ($email_existe) {
+                        $nota = 'El email ya existe';
+                        $no_add = $this->no_agregar($obj, $nota);
+                    } else {
+                        $add = $this->agregar_participante($obj, $iglesia);
+                        // dd('agregar participante');
+                    }
+                    // validacion de telefono
+                } elseif (strlen($obj[2]) == 9 && is_numeric(str_replace('-', '', $obj[2])) == true) {
+                    $telefono_existe = Member::where('cell_phone_number', '=', $obj[1])->first();
+                    if ($telefono_existe) {
+                        $nota = 'El telefono ya existe';
+                        $no_add = $this->no_agregar($obj, $nota);
+                    } else {
+                        $add = $this->agregar_participante($obj, $iglesia);
+                        //dd('agregar participante');
+                    }
+                } else {
+                    $nota = 'Tiene datos erroneos';
+                    $no_add = $this->no_agregar($obj, $nota);
+                }
+            }
+            array_push($agregados,$add);
+            array_push($no_agregados,$no_add);
+        }
+        
+      //  dd($agregados,$no_agregados);
+        return view('catalog.member.importar', compact('agregados','no_agregados'));
+    }
+
+    public function agregar_participante($participante, $iglesia)
+    {
+        //  dd($participante);
+
+        $user = new User();
+        $user->name = $participante[0];
+        $user->email = $participante[3];
+        $user->password = Hash::make('12345678');
+        $user->assignRole("participante");
+        $user->save();
+
+        $user->user_has_iglesia()->attach($iglesia);
+        $cadena = $participante[0];
+        // Dividir la cadena en palabras
+        $palabras = explode(' ', $cadena);
+
+        // Tomar las dos primeras palabras
+        $nombre = implode(' ', array_slice($palabras, 0, 2));
+        $apellido = implode(' ', array_slice($palabras, 2, 4));
+
+        // dd($nombre, $apellido);
+        $member = new Member();
+        $member->name_member = $nombre;
+        $member->lastname_member = $apellido;
+        $member->birthdate = self::convertDate($participante[4]);
+        $member->document_number = $participante[1];
+        if ($participante[5] == 'F') {
+            $member->catalog_gender_id = 1;
+        } else {
+            $member->catalog_gender_id = 2;
+        }
+        $member->email = $participante[3];
+        $member->cell_phone_number = $participante[2];
+        $member->organization_id = $iglesia;
+        $member->users_id = $user->id;
+        $member->is_pastor = 0;
+        $member->save();
+
+        //grupos
+        $fechaNacimiento = Carbon::parse($member->birthdate);
+        $edad = $fechaNacimiento->age;
+        if (!isset($participante[1]) && $edad >= 18) {
+            $member->member_has_group()->attach(1);  //jovenes
+        } elseif ($participante[6] == 'Si') {
+            $member->member_has_group()->attach(4);   //lider
+        } elseif ($participante[5] == 'F') {
+            $member->member_has_group()->attach(3); //mujer
+        } else {
+            $member->member_has_group()->attach(2);  //hombre
+        }
+        $nota = "Agregado existosamente";
+        $agregar = array();
+            array_push($agregar,$participante[0]);
+            array_push($agregar,$participante[1]);
+            array_push($agregar,$participante[2]);
+            array_push($agregar,$participante[3]);
+            array_push($agregar,$nota);
+        return $agregar;
+    }
+
+    public function convertDate($dateValue)
+    { //función para convertir fechas  excel a fechas unix(que reconoce php)
+
+        $unixDate = ($dateValue - 25569) * 86400;
+        return $unixDate = gmdate("Y-m-d", $unixDate);
+    }
+
+    public function no_agregar($participante, $nota)
+    {
+        $no_agregar = array();
+      
+            array_push($no_agregar,$participante[0]);
+            array_push($no_agregar,$participante[1]);
+            array_push($no_agregar,$participante[2]);
+            array_push($no_agregar,$participante[3]);
+            array_push($no_agregar,$nota);
+        return $no_agregar;
+    }
+
     public function create()
     {
         $member = Member::get();
@@ -149,10 +329,9 @@ class MemberController extends Controller
         $user->name = $request->name_member . ' ' . $request->lastname_member;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->status = 0;
         $user->save();
         $user->assignRole('participante');
-        
+
         //asign role
         $iglesia = Iglesia::findorfail($request->organization_id);
 
@@ -175,13 +354,8 @@ class MemberController extends Controller
         $member->municipio_id = $request->municipio_id;
         $member->status_id = 1;
         $member->users_id = $user->id;
-        // $member->departamento_id =   $deptos->id;
         $member->address = $request->address;
-        //  if ($request->get('is_pastor') == 'on') {
-        //    $member->is_pastor = 1;   // si es pastor
-        //} else {
         $member->is_pastor = 0;
-        // }
         $member->save();
 
         $member->member_has_group()->attach($request->group_id);
@@ -189,8 +363,6 @@ class MemberController extends Controller
 
         alert()->success('El registro ha sido agregado correctamente');
         return back();
-     
-
     }
 
     /**

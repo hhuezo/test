@@ -25,6 +25,7 @@ class DatosIglesiaController extends Controller
             $iglesia = $user->user_has_iglesia->first();
 
             $participantes = $iglesia->participantes($iglesia->id);
+          //  dd($participantes);
             $departamentos = Departamento::get();
             $grupos_iglesia = $iglesia->iglesia_has_grupo;
 

@@ -222,7 +222,7 @@ class RegisterController extends Controller
             'address.required' => 'La dirección  es requerida',
             'password.required' => 'La contraseña es requerida',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres',
-            'password.confirmed' => 'Las contraseñas ingresadas no coinsiden',
+            'password.confirmed' => 'Las contraseñas ingresadas no coinciden',
             'pastor_name.required' => 'El nombre del pastor es requerido',
           //  'pastor_phone_number' => 'El fomato de telefono de contacto 2 no es válido',
         ];
