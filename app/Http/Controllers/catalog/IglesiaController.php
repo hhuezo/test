@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+
 class IglesiaController extends Controller
 {
 
@@ -29,11 +30,11 @@ class IglesiaController extends Controller
 
     public function index()
     {
-        $iglesia = Iglesia::where('status_id','<>',3)->get();
-        $iglesias_rechazadas = Iglesia::where('status_id','=',3)->get();
-     //   dd($iglesia);   
-        $estatuorg = OrganizationStatus::get();
-        return view('catalog.iglesia.index', compact('iglesia', 'estatuorg','iglesias_rechazadas'));
+        $iglesia = Iglesia::where('status_id', '<>', 3)->get();
+        $iglesias_rechazadas = Iglesia::where('status_id', '=', 3)->get();
+        //   dd($iglesia);   
+        $estatuorg = OrganizationStatus::where('id','<=',3)->get();
+        return view('catalog.iglesia.index', compact('iglesia', 'estatuorg', 'iglesias_rechazadas'));
     }
 
     public function create()
@@ -109,21 +110,23 @@ class IglesiaController extends Controller
 
         $user->user_has_iglesia()->attach($organizations->id);
 
-        $preguntas =  WizardQuestions::where('active','=','1')->get() ;
+        $preguntas =  WizardQuestions::where('active', '=', '1')->get();
 
         $time = Carbon::now('America/El_Salvador');
         foreach ($preguntas as $obj) {
 
             $repuestas = new ChurchQuestionWizard;
-            $repuestas->question_id=$obj->id;
-            $repuestas->iglesia_id=$organizations->id;
-            $repuestas->answer=1;
-            $repuestas->date_added=$time->toDateTimeString();
+            $repuestas->question_id = $obj->id;
+            $repuestas->iglesia_id = $organizations->id;
+            $repuestas->answer = 1;
+            $repuestas->date_added = $time->toDateTimeString();
             $repuestas->save();
+        }
 
-              }
 
-       alert()->success('El registro ha sido agregado correctamente');
+
+
+        alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
 
@@ -263,9 +266,44 @@ class IglesiaController extends Controller
 
     public function modificar_estado(Request $request)
     {
-        // dd($request->status_id,$request->iglesia_id);
-
+    ///     dd($request->status_id,$request->iglesia_id);
         $iglesia = iglesia::findOrFail($request->iglesia_id);
+        if($request->status_id == 2){
+            $sede = DB::table('sede as s')
+                ->join('cohorte as c', 'c.id', '=', 's.cohorte_id')
+                ->where('c.region_id', $iglesia->departamento->region_id)
+                ->select('s.id', DB::raw('(SELECT COUNT(*) FROM iglesia i WHERE i.sede_id = s.id) AS conteo'))
+                ->having('conteo', '<', 5)
+                ->first();
+    
+            if ($sede) {
+                $sede_id = $sede->id;
+            } else {
+                $cohort = Cohorte::where('region_id', '=', $iglesia->departamento->region_id)
+                    ->select('id', DB::raw('(COUNT(*)) AS conteo'))
+                    ->groupBy('id')
+                    ->having('conteo', '<', 20)->first();
+    
+                if ($cohort) {
+                    $cohort_id = $cohort->id;
+                } else {
+                    $cohort_new = new Cohorte();
+                    $cohort_new->nombre = "congregación";
+                    $cohort_new->region_id = $iglesia->departamento->region_id;
+                    $cohort_new->save();
+    
+                    $cohort_id = $cohort_new->id;
+                }
+    
+                $sede_new = new Sede();
+                $sede_new->nombre =  "Sede";
+                $sede_new->cohorte_id = $cohort_id;
+                $sede_new->save();
+    
+                $sede_id = $sede_new->id;
+            }
+        }
+        $iglesia->sede_id = $sede_id;
         $iglesia->status_id = $request->status_id;
         $iglesia->update();
         alert()->success('El Estado ha sido Modificado correctamente');

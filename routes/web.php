@@ -5,29 +5,20 @@ use App\Http\Controllers\administracion\IglesiaPlanEstudioController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\catalog\MemberController;
 use App\Http\Controllers\catalog\StudyPlanController;
-use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\MemberControllers;
-use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\catalog\AnswersController;
 use App\Http\Controllers\catalog\ChurchQuestionController;
 use App\Http\Controllers\catalog\CohorteController;
 use App\Http\Controllers\catalog\CourseController as CatalogCourseController;
 use App\Http\Controllers\catalog\OrganizationStatusController;
-use App\Http\Controllers\catalog\QuestionController;
 use App\Http\Controllers\catalog\MemberStatusController;
-use App\Http\Controllers\catalog\FilePerCourseController;
 use App\Http\Controllers\catalog\GrupoController;
 use App\Http\Controllers\catalog\IglesiaController;
-//use App\Http\Controllers\catalog\MemberController ;
-use App\Http\Controllers\catalog\OrganizationController as CatalogOrganizationController;
 use App\Http\Controllers\catalog\RegionController;
 use App\Http\Controllers\catalog\SedeController;
 use App\Http\Controllers\catalog\UserController;
@@ -84,7 +75,7 @@ Route::resource('seguridad/role', RoleController::class);
 
 Route::post('seguridad/role/unlink_permission', [RoleController::class, 'unlink_permission']);
 Route::post('seguridad/role/link_permission', [RoleController::class, 'link_permission']);
-
+Route::get('datos_cohort',[DatosIglesiaController::class, 'datos_cohort']);
 
 
 
@@ -146,6 +137,7 @@ Route::get('catalog/modificar_datos_participante',[MemberController::class,'modi
 
 
 Route::post('administracion/iglesia_plan_estudio/add_sesion', [IglesiaPlanEstudioController::class,'add_sesion']);
+Route::get('administracion/iglesia_plan_estudio/certificacion',[IglesiaPlanEstudioController::class,'certificacion']);
 Route::resource('administracion/iglesia_plan_estudio', IglesiaPlanEstudioController::class);
 
 Route::get('reporte_grupos/{iglesia}/{grupo}', [IglesiaController::class, 'reporte_grupos']);
@@ -254,7 +246,8 @@ Route::resource('catalog/grupo', GrupoController::class);
 
 Route::resource('catalog/member_status', MemberStatusController::class);
 
-
+Route::get('catalog/member/importar',[MemberController::class, 'importar']);
+Route::post('catalog/member/import_excel',[MemberController::class,'importar_excel']);
 Route::resource('catalog/member', MemberController::class);
 
 //Route::resource('catalog/FilePerCourse', FilePerCourseController::class);

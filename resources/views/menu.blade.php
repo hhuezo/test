@@ -309,7 +309,14 @@
                             </li> -->
                         </ul>
                     </li>
-
+                    <li>
+                        <a href="{{ url('datos_cohort') }}" class="navItem">
+                            <span class="flex items-center">
+                                <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
+                                <span>Cohorts</span>
+                            </span>
+                        </a>
+                    </li>
 
 
                     {{-- @can('read course')
