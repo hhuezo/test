@@ -37,4 +37,13 @@ class Sesion extends Model
         return $this->hasMany(AsistenciaSesion::class, 'sessions_id');
     }
 
+    public function asistencia($sessions_id,$member_id)
+    {
+      $data =  AsistenciaSesion::where('sessions_id', $sessions_id)        ->where('member_id', $member_id)  ->select('attended')->first();
+
+      return $data->attended;
+
+
+    }
+
 }

@@ -10,12 +10,21 @@
         </h4>
         <div align="rigth">
 
+<<<<<<< HEAD
+            <button class="btn btn-outline-dark" onclick="rechazadas()" id="btn_rechazadas"><iconify-icon icon="ic:outline-church" width="16" ></iconify-icon> &nbsp;Iglesias Rechazadas</button>
+            <button class="btn btn-outline-dark" onclick="aceptadas()" id="btn_aceptadas" style="display: none;" ><iconify-icon icon="ic:outline-church" width="16" ></iconify-icon> &nbsp;Iglesias Aceptadas</button>
+
+        <a href="{{ url('catalog/iglesia/create') }}">
+            <button class="btn btn-dark">Nuevo</button>
+        </a>
+=======
             <button class="btn btn-outline-dark" onclick="rechazadas()" id="btn_rechazadas"><iconify-icon icon="ic:outline-church" width="16"></iconify-icon> &nbsp;Iglesias Rechazadas</button>
             <button class="btn btn-outline-dark" onclick="aceptadas()" id="btn_aceptadas" style="display: none;"><iconify-icon icon="ic:outline-church" width="16"></iconify-icon> &nbsp;Iglesias Aceptadas</button>
 
             <a href="{{ url('catalog/iglesia/create') }}">
                 <button class="btn btn-dark">Nuevo</button>
             </a>
+>>>>>>> 08496391bbd948dfb75e0d4c6a531a46d4021983
         </div>
     </header>
     <div class="card-body px-6 pb-6" id="aceptadas" style="display: block;">
@@ -48,12 +57,18 @@
                                         <iconify-icon icon="mdi:edit-circle" style="color: #1e293b;" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;&nbsp;
+                                    <a href="{{ url('iglesia/reporte_asistencias/') }}/{{ $obj->id }}">
+                                        <iconify-icon icon="material-symbols:location-home" style="color: #1e293b;" width="40"></iconify-icon>
+                                    </a>
+                                    &nbsp;&nbsp;
+
                                     <iconify-icon icon="mdi:delete-circle" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
                                     &nbsp;&nbsp;
                                     @if($obj->status_id != 2)
                                     <iconify-icon icon="lets-icons:check-fill" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-estado-{{ $obj->id }}" ></iconify-icon>
                                     @endif
                                     &nbsp;&nbsp;
+
                                 </td>
                             </tr>
                             @include('catalog.iglesia.modal')
