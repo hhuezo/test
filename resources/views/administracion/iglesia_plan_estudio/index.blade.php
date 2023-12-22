@@ -7,9 +7,9 @@
         <h4 class="card-title">Planes de estudio para iglesias
         </h4>
         <div align="right">
-        
+
             @if(auth()->user()->hasRole('administrador'))
-            <a href="{{ url('administracion/iglesia_plan_estudio/certificacion') }}" style="display: none;">
+            <a href="{{ url('administracion/iglesia_plan_estudio/certificacion') }}" >
                 <button class="btn btn-outline-dark">Certificación</button>
             </a>
             <a href="{{ url('administracion/iglesia_plan_estudio/create') }}">
@@ -69,6 +69,6 @@
             </div>
         </div>
     </div>
-   
+
 </div>
 @endsection

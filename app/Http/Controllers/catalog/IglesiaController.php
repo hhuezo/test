@@ -36,13 +36,8 @@ class IglesiaController extends Controller
     {
         $iglesia = Iglesia::where('status_id', '<>', 3)->get();
         $iglesias_rechazadas = Iglesia::where('status_id', '=', 3)->get();
-<<<<<<< HEAD
-        //   dd($iglesia);
-        $estatuorg = OrganizationStatus::get();
-=======
         //   dd($iglesia);   
         $estatuorg = OrganizationStatus::where('id','<=',3)->get();
->>>>>>> 08496391bbd948dfb75e0d4c6a531a46d4021983
         return view('catalog.iglesia.index', compact('iglesia', 'estatuorg', 'iglesias_rechazadas'));
     }
 
@@ -131,14 +126,7 @@ class IglesiaController extends Controller
             $repuestas->date_added = $time->toDateTimeString();
             $repuestas->save();
         }
-<<<<<<< HEAD
 
-=======
-
-
-
-
->>>>>>> 08496391bbd948dfb75e0d4c6a531a46d4021983
         alert()->success('El registro ha sido agregado correctamente');
         return back();
     }

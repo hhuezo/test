@@ -152,9 +152,12 @@
 
                                 <div class="lg:col-span-8 col-span-12">
                                     <div class="card" id="card-sesion">
+                                        
                                         <header class="card-header">
                                             <strong>Sesiones</strong>
+                                            <a href="{{asset('plantilla_asistencia.xlsx')}}" class="btn ml-auto btn-outline-success btn-sm" > <iconify-icon icon="material-symbols-light:download-sharp" width="13" style="vertical-align: middle;"></iconify-icon> Download Plantilla</a>
                                         </header>
+                                        
                                     </div>
                                     <br>
                                     <div class="grid xl:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5">
