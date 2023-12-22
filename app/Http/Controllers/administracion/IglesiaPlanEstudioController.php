@@ -271,7 +271,7 @@ class IglesiaPlanEstudioController extends Controller
         $grupo_id = $participante->member_has_group->first()->id;
         $iglesia_id = $user->user_has_iglesia()->first()->id;
 
-
+        $member = Member::where('users_id','=',$user->id)->first();
         $iglesia_plan = Iglesia::findorfail($iglesia_id);
 
         $iglesia = Iglesia::findorfail($iglesia_id);
@@ -292,7 +292,7 @@ class IglesiaPlanEstudioController extends Controller
             'plan',
             'iglesia',
             'sesiones',
-            'participantes',
+            'participantes','member'
         ));
     }
 }
