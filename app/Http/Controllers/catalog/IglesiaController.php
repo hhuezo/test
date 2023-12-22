@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\catalog;
 
 use App\Http\Controllers\Controller;
+use App\Models\administracion\AsistenciaSesion;
+use App\Models\administracion\IglesiaPlanEstudio;
+use App\Models\administracion\Sesion;
 use App\Models\catalog\ChurchQuestionWizard;
 use App\Models\catalog\Cohorte;
 use App\Models\catalog\Departamento;
+use App\Models\catalog\Gender;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
@@ -19,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+
 class IglesiaController extends Controller
 {
 
@@ -29,11 +34,11 @@ class IglesiaController extends Controller
 
     public function index()
     {
-        $iglesia = Iglesia::where('status_id','<>',3)->get();
-        $iglesias_rechazadas = Iglesia::where('status_id','=',3)->get();
-     //   dd($iglesia);   
+        $iglesia = Iglesia::where('status_id', '<>', 3)->get();
+        $iglesias_rechazadas = Iglesia::where('status_id', '=', 3)->get();
+        //   dd($iglesia);
         $estatuorg = OrganizationStatus::get();
-        return view('catalog.iglesia.index', compact('iglesia', 'estatuorg','iglesias_rechazadas'));
+        return view('catalog.iglesia.index', compact('iglesia', 'estatuorg', 'iglesias_rechazadas'));
     }
 
     public function create()
@@ -109,21 +114,20 @@ class IglesiaController extends Controller
 
         $user->user_has_iglesia()->attach($organizations->id);
 
-        $preguntas =  WizardQuestions::where('active','=','1')->get() ;
+        $preguntas =  WizardQuestions::where('active', '=', '1')->get();
 
         $time = Carbon::now('America/El_Salvador');
         foreach ($preguntas as $obj) {
 
             $repuestas = new ChurchQuestionWizard;
-            $repuestas->question_id=$obj->id;
-            $repuestas->iglesia_id=$organizations->id;
-            $repuestas->answer=1;
-            $repuestas->date_added=$time->toDateTimeString();
+            $repuestas->question_id = $obj->id;
+            $repuestas->iglesia_id = $organizations->id;
+            $repuestas->answer = 1;
+            $repuestas->date_added = $time->toDateTimeString();
             $repuestas->save();
+        }
 
-              }
-
-       alert()->success('El registro ha sido agregado correctamente');
+        alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
 
@@ -320,6 +324,38 @@ class IglesiaController extends Controller
 
         return view('catalog.iglesia.show', compact('iglesia', 'participantes', 'grupos'));
     }
+
+
+    public function reporte_asistencias($id)
+    {
+
+        $iglesia = Iglesia::findOrFail($id);
+
+        $plan_estudio = IglesiaPlanEstudio::where('iglesia_id', '=', $iglesia->id)->get();
+        $plan_estudio_array = $plan_estudio->pluck('id')->toArray();
+        $sessiones = Sesion::whereIn('group_per_church_id',  $plan_estudio_array)->get();
+        $genero = Gender::get();
+        $sessiones_array = $sessiones->pluck('id')->toArray();
+
+        $asistencia_sesion = AsistenciaSesion::whereIn('sessions_id', $sessiones_array)->get();
+
+
+
+
+
+        $participantes_array = $asistencia_sesion->pluck('member_id')->unique()->values()->toArray();
+
+
+        $participantes =  Member::whereIn('id', $participantes_array)->get();
+
+       // $attended = AttendancePerSession::where('sessions_id', $sessionId)        ->where('member_id', $memberId)        ->value('attended');
+
+
+
+        return view('catalog.iglesia.reporte_asistencias', compact('iglesia', 'sessiones', 'participantes', 'genero'));
+    }
+
+
 
 
 

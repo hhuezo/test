@@ -152,6 +152,10 @@ Route::get('reporte_grupos/{iglesia}/{grupo}', [IglesiaController::class, 'repor
 
 Route::post('/iglesia/modificar_estado', [IglesiaController::class, 'modificar_estado']);
 
+Route::get('/iglesia/reporte_asistencias/{id}', [IglesiaController::class, 'reporte_asistencias']);
+
+
+
 
 Route::post('catalog/iglesia/add_preguntaresp', [IglesiaController::class, 'add_preguntaresp']);
 Route::post('catalog/iglesia/attach_preguntas', [IglesiaController::class, 'attach_preguntas']);

@@ -111,4 +111,17 @@ class Iglesia extends Model
             ->select('m.id', DB::raw('CONCAT(m.name_member, " ", m.lastname_member) as nombre'), 'member_has_group.group_id', 'g.nombre as grupo','m.status_id')
             ->get();
     }
+
+
+
+    public function participantes_iglesia($iglesiaId)
+    {
+        return DB::table('member_has_group')->join('member as m', 'member_has_group.member_id', '=', 'm.id')
+            ->join('users as u', 'm.users_id', '=', 'u.id')
+            ->join('grupo as g', 'member_has_group.group_id', '=', 'g.id')
+            ->join('users_has_iglesia as uhi', 'u.id', '=', 'uhi.user_id')
+            ->where('uhi.iglesia_id', $iglesiaId)
+            ->select('m.id','m.document_number',DB::raw('CONCAT(name_member, " ", lastname_member) as nombre'),'m.cell_phone_number','m.email','m.catalog_gender_id')
+            ->get();
+    }
 }
