@@ -38,8 +38,9 @@ class IglesiaPlanEstudioController extends Controller
 
     public function certificacion()
     {
-        //dd('hli');
-        $planes_estudio = IglesiaPlanEstudio::where('end_date', '<=', Carbon::now('America/El_Salvador')->format('Y-m-d'))->get();
+        
+        //$planes_estudio = IglesiaPlanEstudio::where('end_date', '<=', Carbon::now('America/El_Salvador')->format('Y-m-d'))->get();
+        
     }
 
     public function asistencia(Request $request)

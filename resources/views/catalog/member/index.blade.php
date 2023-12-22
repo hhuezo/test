@@ -6,7 +6,9 @@
     <header class=" card-header noborder">
         <h4 class="card-title"> Participantes </h4>
         <div align="rigth">
-
+        <a href="{{ asset('plantilla_participantes.xlsx') }}">
+                <button class="btn btn-outline-success"><iconify-icon icon="material-symbols-light:download-sharp" width="23" style="vertical-align: middle;"></iconify-icon>   Descargar Plantilla</button>
+            </a>
             <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modal-import">Importar Participantes</button>
 
             <a href="{{ url('catalog/member/create') }}">

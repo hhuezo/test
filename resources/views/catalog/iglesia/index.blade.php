@@ -10,21 +10,12 @@
         </h4>
         <div align="rigth">
 
-<<<<<<< HEAD
-            <button class="btn btn-outline-dark" onclick="rechazadas()" id="btn_rechazadas"><iconify-icon icon="ic:outline-church" width="16" ></iconify-icon> &nbsp;Iglesias Rechazadas</button>
-            <button class="btn btn-outline-dark" onclick="aceptadas()" id="btn_aceptadas" style="display: none;" ><iconify-icon icon="ic:outline-church" width="16" ></iconify-icon> &nbsp;Iglesias Aceptadas</button>
-
-        <a href="{{ url('catalog/iglesia/create') }}">
-            <button class="btn btn-dark">Nuevo</button>
-        </a>
-=======
             <button class="btn btn-outline-dark" onclick="rechazadas()" id="btn_rechazadas"><iconify-icon icon="ic:outline-church" width="16"></iconify-icon> &nbsp;Iglesias Rechazadas</button>
             <button class="btn btn-outline-dark" onclick="aceptadas()" id="btn_aceptadas" style="display: none;"><iconify-icon icon="ic:outline-church" width="16"></iconify-icon> &nbsp;Iglesias Aceptadas</button>
 
             <a href="{{ url('catalog/iglesia/create') }}">
                 <button class="btn btn-dark">Nuevo</button>
             </a>
->>>>>>> 08496391bbd948dfb75e0d4c6a531a46d4021983
         </div>
     </header>
     <div class="card-body px-6 pb-6" id="aceptadas" style="display: block;">
