@@ -34,7 +34,8 @@
     </script>
 
     <style>
-        .card-title , .form-label{
+        .card-title,
+        .form-label {
             text-transform: none;
         }
 
@@ -231,104 +232,113 @@
                         <ul class="sidebar-submenu">
                             <li>
                                 <a href="{{ url('catalog/course') }}">Cursos</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('catalog/question') }}">Preguntas</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('catalog/answer') }}">Respuesta</a>
-                            </li>
-                        </ul>
-                    </li> --}}
-
-                    <li class="">
-                        <a href="#" class="navItem">
-                            <span class="flex items-center">
-                                <iconify-icon class=" nav-icon" icon="lucide:church"></iconify-icon>
-                                <span>Iglesias</span>
-                            </span>
-                            <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li>
-                                <a href="{{ url('catalog/iglesia') }}">Iglesias</a>
-                            </li>
-                            {{-- <li>
-                                <a href="{{ url('catalog/Iglesiauser') }}">Usuario Iglesias</a>
-                            </li> --}}
-                            <li>
-                                <a href="{{ url('catalog/grupo') }}">Grupo Iglesias</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('catalog/member') }}">Participantes</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('catalog/answerreg') }}">Respuestas del Registro <br> de la iglesia</a>
-                            </li>
-                        </ul>
                     </li>
-
-                    @endcan
-                    @can('datos iglesia')
                     <li>
-                        <a href="{{ url('administracion/datos_iglesia') }}" class="navItem">
-                            <span class="flex items-center">
-                                <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
-                                <span>Datos Generales Iglesia</span>
-                            </span>
-                        </a>
+                        <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
                     </li>
+                    <li>
+                        <a href="{{ url('catalog/question') }}">Preguntas</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('catalog/answer') }}">Respuesta</a>
+                    </li>
+                </ul>
+                </li> --}}
 
-                    @endcan
+                <li class="">
+                    <a href="#" class="navItem">
+                        <span class="flex items-center">
+                            <iconify-icon class=" nav-icon" icon="lucide:church"></iconify-icon>
+                            <span>Iglesias</span>
+                        </span>
+                        <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
+                    </a>
+                    <ul class="sidebar-submenu">
+                        <li>
+                            <a href="{{ url('catalog/iglesia') }}">Iglesias</a>
+                        </li>
+                        {{-- <li>
+                                <a href="{{ url('catalog/Iglesiauser') }}">Usuario Iglesias</a>
+                </li> --}}
+                <li>
+                    <a href="{{ url('catalog/grupo') }}">Grupo Iglesias</a>
+                </li>
+                <li>
+                    <a href="{{ url('catalog/member') }}">Participantes</a>
+                </li>
+                <li>
+                    <a href="{{ url('catalog/answerreg') }}">Respuestas del Registro <br> de la iglesia</a>
+                </li>
+                </ul>
+                </li>
 
+                @endcan
+                @can('datos iglesia')
+                <li>
+                    <a href="{{ url('administracion/datos_iglesia') }}" class="navItem">
+                        <span class="flex items-center">
+                            <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
+                            <span>Datos Generales Iglesia</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('administracion/iglesia_plan_estudio') }}" class="navItem">
+                        <span class="flex items-center">
+                            <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
+                            <span>Plan de Estudio</span>
+                        </span>
+                    </a>
+                </li>
 
-                    <li class="">
-                        <a href="#" class="navItem">
-                            <span class="flex items-center">
-                                <iconify-icon class=" nav-icon" icon="ic:outline-book"></iconify-icon>
-                                <span>Asistencias</span>
-                            </span>
-                            <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
-                        </a>
-                        <ul class="sidebar-submenu">
+                @endcan
 
-                            <li>
-                                <a href="{{ url('administracion/iglesia_plan_estudio/control_participante') }}">Control de Asitencia </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('catalog/modificar_datos_participante') }}">Modificar Datos Personales </a>
-                            </li>
-                           <!--  <li>
+                @can('participante')
+                <li class="">
+                    <a href="#" class="navItem">
+                        <span class="flex items-center">
+                            <iconify-icon class=" nav-icon" icon="ic:outline-book"></iconify-icon>
+                            <span>Asistencias</span>
+                        </span>
+                        <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
+                    </a>
+                    <ul class="sidebar-submenu">
+
+                        <li>
+                            <a href="{{ url('administracion/iglesia_plan_estudio/control_participante') }}">Control de Asitencia </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('catalog/modificar_datos_participante') }}">Modificar Datos Personales </a>
+                        </li>
+                        <!--  <li>
                                 <a href="{{ url('catalog/question') }}">Preguntas</a>
                             </li>
                             <li>
                                 <a href="{{ url('catalog/answer') }}">Respuesta</a>
                             </li> -->
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{{ url('datos_cohort') }}" class="navItem">
-                            <span class="flex items-center">
-                                <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
-                                <span>Cohorts</span>
-                            </span>
-                        </a>
-                    </li>
+                    </ul>
+                </li>
+                @endcan
+                <li>
+                    <a href="{{ url('datos_cohort') }}" class="navItem">
+                        <span class="flex items-center">
+                            <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
+                            <span>Cohorts</span>
+                        </span>
+                    </a>
+                </li>
 
 
-                    {{-- @can('read course')
+                {{-- @can('read course')
                     <li>
                         <a href="{{ url('courses') }}" class="navItem">
-                            <span class="flex items-center">
-                                <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
-                                <span>Cursos</span>
-                            </span>
-                        </a>
-                    </li>
-                    @endcan --}}
+                <span class="flex items-center">
+                    <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
+                    <span>Cursos</span>
+                </span>
+                </a>
+                </li>
+                @endcan --}}
 
                 </ul>
 

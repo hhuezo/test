@@ -79,8 +79,8 @@ class MemberController extends Controller
         $add = '';
         $no_add = '';
         foreach ($asistencia as $obj) {
-          //  dd($obj);
-         //   dd(self::convertDate($obj[4]));
+            //  dd($obj);
+            //   dd(self::convertDate($obj[4]));
             if (isset($obj[1])) {   //es mayor de edad
                 //validacion de correo
                 if (isset($obj[3])) {
@@ -145,12 +145,12 @@ class MemberController extends Controller
                     $no_add = $this->no_agregar($obj, $nota);
                 }
             }
-            array_push($agregados,$add);
-            array_push($no_agregados,$no_add);
+            array_push($agregados, $add);
+            array_push($no_agregados, $no_add);
         }
-        
-      //  dd($agregados,$no_agregados);
-        return view('catalog.member.importar', compact('agregados','no_agregados'));
+
+        //  dd($agregados,$no_agregados);
+        return view('catalog.member.importar', compact('agregados', 'no_agregados'));
     }
 
     public function agregar_participante($participante, $iglesia)
@@ -205,11 +205,11 @@ class MemberController extends Controller
         }
         $nota = "Agregado existosamente";
         $agregar = array();
-            array_push($agregar,$participante[0]);
-            array_push($agregar,$participante[1]);
-            array_push($agregar,$participante[2]);
-            array_push($agregar,$participante[3]);
-            array_push($agregar,$nota);
+        array_push($agregar, $participante[0]);
+        array_push($agregar, $participante[1]);
+        array_push($agregar, $participante[2]);
+        array_push($agregar, $participante[3]);
+        array_push($agregar, $nota);
         return $agregar;
     }
 
@@ -223,12 +223,12 @@ class MemberController extends Controller
     public function no_agregar($participante, $nota)
     {
         $no_agregar = array();
-      
-            array_push($no_agregar,$participante[0]);
-            array_push($no_agregar,$participante[1]);
-            array_push($no_agregar,$participante[2]);
-            array_push($no_agregar,$participante[3]);
-            array_push($no_agregar,$nota);
+
+        array_push($no_agregar, $participante[0]);
+        array_push($no_agregar, $participante[1]);
+        array_push($no_agregar, $participante[2]);
+        array_push($no_agregar, $participante[3]);
+        array_push($no_agregar, $nota);
         return $no_agregar;
     }
 
@@ -338,30 +338,34 @@ class MemberController extends Controller
         $iglesia->users_has_iglesia()->attach($user->id);
 
         $deptos = Departamento::findorfail($iglesia->catalog_departamento_id);
+        $member_existe = Member::where('document_number', '=', $request->document_number)->orWhere('cell_phone_number','=',$request->cell_phone_number)->first();
+        if ($member_existe) {
+            alert()->error('Error de ingreso de participante');
+        } else {
+            $member = new Member();
+            $member->name_member = $request->name_member;
+            $member->lastname_member = $request->lastname_member;
+            $member->birthdate = $request->birthdate;
+            $member->document_number = $request->document_number;
+            $member->catalog_gender_id = $request->catalog_gender_id;
+            $member->email = $request->email;
+            $member->cell_phone_number = $request->cell_phone_number;
+            $member->address = $request->address;
+            $member->about_me = $request->about_me;
+            $member->organization_id = (int)$request->iglesia_id;
+            $member->departamento_id = $request->departamento_id;
+            $member->municipio_id = $request->municipio_id;
+            $member->status_id = 1;
+            $member->users_id = $user->id;
+            $member->address = $request->address;
+            $member->is_pastor = 0;
+            $member->save();
 
-        $member = new Member();
-        $member->name_member = $request->name_member;
-        $member->lastname_member = $request->lastname_member;
-        $member->birthdate = $request->birthdate;
-        $member->document_number = $request->document_number;
-        $member->catalog_gender_id = $request->catalog_gender_id;
-        $member->email = $request->email;
-        $member->cell_phone_number = $request->cell_phone_number;
-        $member->address = $request->address;
-        $member->about_me = $request->about_me;
-        $member->organization_id = (int)$request->iglesia_id;
-        $member->departamento_id = $request->departamento_id;
-        $member->municipio_id = $request->municipio_id;
-        $member->status_id = 1;
-        $member->users_id = $user->id;
-        $member->address = $request->address;
-        $member->is_pastor = 0;
-        $member->save();
 
-        $member->member_has_group()->attach($request->group_id);
+            $member->member_has_group()->attach($request->group_id);
+            alert()->success('El registro ha sido agregado correctamente');
+        }
 
-
-        alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
 
@@ -445,11 +449,11 @@ class MemberController extends Controller
     public function modificar_datos_participante()
     {
 
-       // dd('llegue');
+        // dd('llegue');
         $user = User::findOrFail(auth()->user()->id);
 
-        $participante =$user->usuario_participante->first()->id;
-       // dd($participante);
+        $participante = $user->usuario_participante->first()->id;
+        // dd($participante);
 
         $member_status = MemberStatus::get();
 
@@ -546,55 +550,168 @@ class MemberController extends Controller
 
 
         $member =  Member::findOrFail($id);
-        //borrando el grupo anterior
-        $group = $member->member_has_group->first();
-        $member->member_has_group()->detach($group);
-        $user = User::findOrFail($member->users_id);
-        /*agregado */
-        if ($user->email != $request->email) {
-            //buscar si existe el correo
-            throw ValidationException::withMessages(['email' => ['El Correo ya existe ']]);
+        if ($member->document_number != $request->document_number) {
+            $member_existe = Member::where('document_number', '=', $request->document_number)->where('id', '<>', $member->id)->first();
+            if ($member_existe) {
+                alert()->error('El registro no ha sido modificado');
+            } else {
+                //borrando el grupo anterior
+                $group = $member->member_has_group->first();
+                $member->member_has_group()->detach($group);
+                $user = User::findOrFail($member->users_id);
+                /*agregado */
+                if ($user->email != $request->email) {
+                    //buscar si existe el correo
+                    throw ValidationException::withMessages(['email' => ['El Correo ya existe ']]);
+                }
+
+                if ($request->password != '') {
+                    $user->password = Hash::make($request->password);
+                    $user->update();
+                }
+
+                // dd( $user);
+                $iglesia = $user->user_has_iglesia->first();
+
+                try {
+                    $user->user_has_iglesia()->detach($iglesia->id);
+                } catch (Exception $e) {
+                }
+
+
+                $member->name_member = $request->name_member;
+                $member->lastname_member = $request->lastname_member;
+                $member->birthdate = $request->birthdate;
+                $member->document_number = $request->document_number;
+                $member->document_type_id = $request->document_type_id;
+                $member->organization_id = (int)$request->iglesia_id;
+                $member->departamento_id = $request->departamento_id;
+                $member->municipio_id = $request->municipio_id;
+                $member->catalog_gender_id = $request->catalog_gender_id;
+                $member->email = $request->email;
+                $member->cell_phone_number = $request->cell_phone_number;
+                //$group = $member->member_has_group->first();
+                $group_id = $request->group_id;
+                $member->address = $request->address;
+                $member->update();
+                //agregando nuevo grupo
+                $member->member_has_group()->attach($group_id);
+                $iglesia = Iglesia::findOrFail($request->organization_id);
+
+
+                try {
+                    $iglesia->users_has_iglesia()->attach($member->users_id);
+                } catch (Exception $e) {
+                }
+                alert()->success('El registro ha sido modificado correctamente');
+            }
+        } elseif($member->cell_phone_number != $request->cell_phone_number){
+            $member_existe = Member::where('cell_phone_number', '=', $request->cell_phone_number)->where('id', '<>', $member->id)->first();
+            if ($member_existe) {
+                alert()->error('El registro no ha sido modificado');
+            } else {
+                //borrando el grupo anterior
+                $group = $member->member_has_group->first();
+                $member->member_has_group()->detach($group);
+                $user = User::findOrFail($member->users_id);
+                /*agregado */
+                if ($user->email != $request->email) {
+                    //buscar si existe el correo
+                    throw ValidationException::withMessages(['email' => ['El Correo ya existe ']]);
+                }
+
+                if ($request->password != '') {
+                    $user->password = Hash::make($request->password);
+                    $user->update();
+                }
+
+                // dd( $user);
+                $iglesia = $user->user_has_iglesia->first();
+
+                try {
+                    $user->user_has_iglesia()->detach($iglesia->id);
+                } catch (Exception $e) {
+                }
+
+
+                $member->name_member = $request->name_member;
+                $member->lastname_member = $request->lastname_member;
+                $member->birthdate = $request->birthdate;
+                $member->document_number = $request->document_number;
+                $member->document_type_id = $request->document_type_id;
+                $member->organization_id = (int)$request->iglesia_id;
+                $member->departamento_id = $request->departamento_id;
+                $member->municipio_id = $request->municipio_id;
+                $member->catalog_gender_id = $request->catalog_gender_id;
+                $member->email = $request->email;
+                $member->cell_phone_number = $request->cell_phone_number;
+                //$group = $member->member_has_group->first();
+                $group_id = $request->group_id;
+                $member->address = $request->address;
+                $member->update();
+                //agregando nuevo grupo
+                $member->member_has_group()->attach($group_id);
+                $iglesia = Iglesia::findOrFail($request->organization_id);
+
+
+                try {
+                    $iglesia->users_has_iglesia()->attach($member->users_id);
+                } catch (Exception $e) {
+                }
+                alert()->success('El registro ha sido modificado correctamente');
+            }
+        }else {
+            //borrando el grupo anterior
+            $group = $member->member_has_group->first();
+            $member->member_has_group()->detach($group);
+            $user = User::findOrFail($member->users_id);
+            /*agregado */
+            if ($user->email != $request->email) {
+                //buscar si existe el correo
+                throw ValidationException::withMessages(['email' => ['El Correo ya existe ']]);
+            }
+
+            if ($request->password != '') {
+                $user->password = Hash::make($request->password);
+                $user->update();
+            }
+
+            // dd( $user);
+            $iglesia = $user->user_has_iglesia->first();
+
+            try {
+                $user->user_has_iglesia()->detach($iglesia->id);
+            } catch (Exception $e) {
+            }
+
+
+            $member->name_member = $request->name_member;
+            $member->lastname_member = $request->lastname_member;
+            $member->birthdate = $request->birthdate;
+            $member->document_number = $request->document_number;
+            $member->document_type_id = $request->document_type_id;
+            $member->organization_id = (int)$request->iglesia_id;
+            $member->departamento_id = $request->departamento_id;
+            $member->municipio_id = $request->municipio_id;
+            $member->catalog_gender_id = $request->catalog_gender_id;
+            $member->email = $request->email;
+            $member->cell_phone_number = $request->cell_phone_number;
+            //$group = $member->member_has_group->first();
+            $group_id = $request->group_id;
+            $member->address = $request->address;
+            $member->update();
+            //agregando nuevo grupo
+            $member->member_has_group()->attach($group_id);
+            $iglesia = Iglesia::findOrFail($request->organization_id);
+
+
+            try {
+                $iglesia->users_has_iglesia()->attach($member->users_id);
+            } catch (Exception $e) {
+            }
+            alert()->success('El registro ha sido modificado correctamente');
         }
 
-        if ($request->password != '') {
-            $user->password = Hash::make($request->password);
-            $user->update();
-        }
-
-        // dd( $user);
-        $iglesia = $user->user_has_iglesia->first();
-
-        try {
-            $user->user_has_iglesia()->detach($iglesia->id);
-        } catch (Exception $e) {
-        }
-
-
-        $member->name_member = $request->name_member;
-        $member->lastname_member = $request->lastname_member;
-        $member->birthdate = $request->birthdate;
-        $member->document_number = $request->document_number;
-        $member->document_type_id = $request->document_type_id;
-        $member->organization_id = (int)$request->iglesia_id;
-        $member->departamento_id = $request->departamento_id;
-        $member->municipio_id = $request->municipio_id;
-        $member->catalog_gender_id = $request->catalog_gender_id;
-        $member->email = $request->email;
-        $member->cell_phone_number = $request->cell_phone_number;
-        //$group = $member->member_has_group->first();
-        $group_id = $request->group_id;
-        $member->address = $request->address;
-        $member->update();
-        //agregando nuevo grupo
-        $member->member_has_group()->attach($group_id);
-        $iglesia = Iglesia::findOrFail($request->organization_id);
-
-
-        try {
-            $iglesia->users_has_iglesia()->attach($member->users_id);
-        } catch (Exception $e) {
-        }
-        alert()->success('El registro ha sido modificado correctamente');
         return back();
     }
 

@@ -13,6 +13,19 @@ class Region extends Model
     public $timestamps = false;
     protected $fillable = [
         'nombre',
-   ];
-protected $guarded = [];
+    ];
+    protected $guarded = [];
+
+
+
+    public function departamentos()
+    {
+        return $this->hasMany(Departamento::class, 'region_id');
+    }
+
+    public function cohortes()
+    {
+        return $this->hasMany(Cohorte::class, 'region_id');
+    }
+
 }

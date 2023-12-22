@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         $user = User::findOrFail(auth()->user()->id);
         if ($user->hasRole('participante') == true) {
-
+            
             return redirect('administracion/iglesia_plan_estudio/control_participante');
 
         } else {

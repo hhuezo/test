@@ -16,4 +16,9 @@ class Departamento extends Model
         'region_id',
         'abbrev'
     ];
+
+    // public function cohortes()
+    // {
+    //     return $this->hasMany(Cohorte::class, 'region_id');
+    // }
 }

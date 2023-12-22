@@ -9,6 +9,7 @@ use App\Models\catalog\Member;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DatosIglesiaController extends Controller
@@ -25,7 +26,7 @@ class DatosIglesiaController extends Controller
             $iglesia = $user->user_has_iglesia->first();
 
             $participantes = $iglesia->participantes($iglesia->id);
-          //  dd($participantes);
+            //  dd($participantes);
             $departamentos = Departamento::get();
             $grupos_iglesia = $iglesia->iglesia_has_grupo;
 
@@ -53,14 +54,16 @@ class DatosIglesiaController extends Controller
         }
     }
 
-    public function datos_cohort(){
+    public function datos_cohort()
+    {
         //$iglesias = Iglesia::where('status_id',2)->get();
 
-        
+
     }
 
-    public function download(){
-        $pathtoFile = public_path().'/img/qrcodeiglesia.png';
+    public function download()
+    {
+        $pathtoFile = public_path() . '/img/qrcodeiglesia.png';
         return response()->download($pathtoFile);
     }
 
@@ -87,19 +90,28 @@ class DatosIglesiaController extends Controller
     public function set_estado(Request $request)
     {
         $member = Member::findOrFail($request->id);
-
         $response = ["val" => 0, "mensaje" => "Error"];
-        if ($member) {
-            if ($member->status_id == 2) {
-                $member->status_id = 1;
-            } else {
-                $member->status_id = 2;
+
+        $user = User::findOrFail($member->users_id);
+        $iglesia = $user->user_has_iglesia->first()->id;
+        $count = DB::select("select count(*) from member m, users_has_iglesia i where m.users_id = i.user_id and m.status_id = 2 and i.iglesia_id =" . $iglesia);
+        if ($count > 25) {
+            $response = ["val" => 3, "mensaje" => "Ya no hay cupo"];
+        } else {
+            if ($member) {
+                if ($member->status_id == 2) {
+                    $member->status_id = 1;
+                } else {
+                    $member->status_id = 2;
+                }
+
+                $member->update();
+
+                $response = ["val" => 1, "mensaje" => "Registro modificado correctamente"];
             }
-
-            $member->update();
-
-            $response = ["val" => 1, "mensaje" => "Registro modificado correctamente"];
         }
+
+
         return  $response;
     }
 }

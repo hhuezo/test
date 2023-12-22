@@ -42,7 +42,10 @@ Route::get('/', function () {
 */
 
 Route::get('/', [WelcomeController::class, 'index']);
+//routes public
 
+Route::get('/register_member', [WelcomeController::class, 'register_member'])->name('register_member');
+Route::post('/store_member', [WelcomeController::class, 'store_member'])->name('store_member');
 
 //registro iglesia
 
@@ -53,10 +56,11 @@ Route::post('/iglesia/registro_respuesta', [RegisterController::class, 'registro
 Route::post('/iglesia/registro_iglesia', [RegisterController::class, 'registro_iglesia']);
 Route::get('/iglesia/back_page', [RegisterController::class, 'back_page'])->name('back_page');
 
+Auth::routes();
+
 
 //registro participante
-Route::get('/register_member', [WelcomeController::class, 'register_member'])->name('register_member');
-Route::post('/store_member', [WelcomeController::class, 'store_member'])->name('store_member');
+
 Route::get('registro_participantes/{iglesia}/{grupo}', [WelcomeController::class, 'registro_participantes']);
 Route::get('/get_grupo/{fecha}', [WelcomeController::class, 'get_grupo'])->name('get_grupo');
 
@@ -76,12 +80,6 @@ Route::resource('seguridad/role', RoleController::class);
 Route::post('seguridad/role/unlink_permission', [RoleController::class, 'unlink_permission']);
 Route::post('seguridad/role/link_permission', [RoleController::class, 'link_permission']);
 Route::get('datos_cohort',[DatosIglesiaController::class, 'datos_cohort']);
-
-
-
-
-
-
 
 
 
@@ -168,7 +166,7 @@ Route::post('catalog/iglesia/dettach_grupos', [IglesiaController::class, 'dettac
 Route::post('catalog/iglesia/attach_grupos', [IglesiaController::class, 'attach_grupos']);
 
 
-Auth::routes();
+
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/confirma', [HomeController::class, 'confirmacion'])->name('confirma');

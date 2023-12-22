@@ -26,7 +26,6 @@ class Cohorte extends Model
 
     public function sedes()
     {
-        return $this->belongsTo('App\Models\catalog\sede', 'corte_id','id' );
-
+        return $this->hasMany(Sede::class, 'cohorte_id');
     }
 }

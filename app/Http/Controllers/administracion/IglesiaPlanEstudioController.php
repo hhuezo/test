@@ -14,6 +14,7 @@ use App\Models\catalog\StudyPlan;
 use App\Models\catalog\StudyPlanDetail;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -31,14 +32,14 @@ class IglesiaPlanEstudioController extends Controller
             $user = User::findOrFail(auth()->user()->id);
             $planes = IglesiaPlanEstudio::where('iglesia_id', $user->user_has_iglesia->first()->id)->get();
         }
-        
+
         return view('administracion.iglesia_plan_estudio.index', compact('planes'));
     }
 
-    public function certificacion(){
+    public function certificacion()
+    {
         //dd('hli');
-        $planes_estudio = IglesiaPlanEstudio::where('end_date','<=', Carbon::now('America/El_Salvador')->format('Y-m-d'))->get();
-        
+        $planes_estudio = IglesiaPlanEstudio::where('end_date', '<=', Carbon::now('America/El_Salvador')->format('Y-m-d'))->get();
     }
 
     public function asistencia(Request $request)
@@ -57,7 +58,7 @@ class IglesiaPlanEstudioController extends Controller
     public function create()
     {
         $iglesias = Iglesia::where('status_id', '=', '2')->get();
-     //   $count =  auth()->user()->user_has_iglesia->first()->id;
+        //   $count =  auth()->user()->user_has_iglesia->first()->id;
         $grupos = Grupo::where('active', '=', 1)->get();
         $planes_estudio = StudyPlan::get();
         return view('administracion.iglesia_plan_estudio.create', compact('iglesias', 'grupos', 'planes_estudio'));
@@ -263,36 +264,36 @@ class IglesiaPlanEstudioController extends Controller
 
     public function control_participante()
     {
+        try {
+            $user = User::findOrFail(auth()->user()->id);
+            $participante = $user->usuario_participante->first();
+
+            $grupo_id = $participante->member_has_group->first()->id;
+            $iglesia_id = $user->user_has_iglesia()->first()->id;
+
+            $member = Member::where('users_id', '=', $user->id)->first();
+            $iglesia_plan = Iglesia::findorfail($iglesia_id);
+
+            $iglesia = Iglesia::findorfail($iglesia_id);
+
+            $plan = IglesiaPlanEstudio::where('group_id', '=', $grupo_id)->where('iglesia_id', '=',   $iglesia_id)->first();
 
 
-        $user = User::findOrFail(auth()->user()->id);
-        $participante = $user->usuario_participante->first();
+            $participantes = $plan->iglesia->participantes($plan->iglesia_id)->where('group_id', '=', $plan->group_id)->where('status_id', '=', 2);
 
-        $grupo_id = $participante->member_has_group->first()->id;
-        $iglesia_id = $user->user_has_iglesia()->first()->id;
+            $sesiones = Sesion::where('group_per_church_id', '=', $plan->id)->get();
 
-
-        $iglesia_plan = Iglesia::findorfail($iglesia_id);
-
-        $iglesia = Iglesia::findorfail($iglesia_id);
-
-        $plan = IglesiaPlanEstudio::where('group_id', '=', $grupo_id)->where('iglesia_id', '=',   $iglesia_id)->first();
-
-
-        $participantes = $plan->iglesia->participantes($plan->iglesia_id)->where('group_id', '=', $plan->group_id)->where('status_id', '=', 2);
-
-        $sesiones = Sesion::where('group_per_church_id', '=', $plan->id)->get();
-
-
-
-
-
-
-        return view('administracion.iglesia_plan_estudio.participante_lista', compact(
-            'plan',
-            'iglesia',
-            'sesiones',
-            'participantes',
-        ));
+            return view('administracion.iglesia_plan_estudio.participante_lista', compact(
+                'plan',
+                'iglesia',
+                'sesiones',
+                'participantes',
+                'member'
+            ));
+        } catch (Exception $e) {
+            $member = Member::where('users_id', '=', $user->id)->first();
+            $member->status_id = 1;
+            return view('administracion.iglesia_plan_estudio.participante_lista', compact('member'));
+        }
     }
 }

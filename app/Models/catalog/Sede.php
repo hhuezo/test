@@ -14,12 +14,15 @@ class Sede extends Model
     protected $fillable = [
         'nombre',
         'cohorte_id',
-   ];
-protected $guarded = [];
-public function cohorte()
+    ];
+    protected $guarded = [];
+    public function cohorte()
     {
-        return $this->belongsTo('App\Models\catalog\Cohorte', 'cohorte_id','id' );
-
+        return $this->belongsTo('App\Models\catalog\Cohorte', 'cohorte_id', 'id');
     }
 
+    public function iglesias()
+    {
+        return $this->hasMany(Iglesia::class, 'sede_id');
+    }
 }
