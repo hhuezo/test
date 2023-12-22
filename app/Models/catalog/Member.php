@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model
 {
     use HasFactory;
+
     protected $table = 'member';
     protected $primaryKey = 'id';
     public $timestamps = false;
@@ -36,7 +37,7 @@ class Member extends Model
 
     public function organizacionestado()
     {
-        return $this->belongsTo('App\Models\catalog\OrganizationStatus', 'id', 'status');
+        return $this->belongsTo(OrganizationStatus::class, 'id', 'status');
     }
 
     public function usuario()

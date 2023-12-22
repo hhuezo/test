@@ -44,41 +44,40 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request)
+    public function login(Request $request, User $userModel, Member $memberModel)
     {
-        // dd($request->email, Hash::make($request->password), $request->password,'$2y$10$hk800y/5ljFzc3fji4D.iOmqhVU3yDmCTqOe5T7CISixTAoYA8scq');
-        if ($request->email) {
-            $user = User::where('email', '=', $request->email)->first();
-            // dd($user);
-            Auth::login($user);
-        } elseif ($request->document_number) {
-            $user = Member::where('document_number', '=', $request->document_number)->first();
+        if ($request->document_number || $request->phone) {
+            $field = $request->document_number ? 'document_number' : 'cell_phone_number';
+            $user = $memberModel->where($field, '=', $request->input)->first();
 
             if ($user && Auth::attempt(['id' => $user->users_id, 'password' => $request->password])) {
-                // La autenticación fue exitosa
-                $usuario = User::findOrFail($user->users_id);
-                // dd($usuario);
+                // Autenticación exitosa
+                $usuario = $userModel->findOrFail($user->users_id);
                 Auth::login($usuario);
-                return response()->json(['message' => 'Autenticación exitosa'], 200);
+                return redirect()->intended(RouteServiceProvider::HOME);
             } else {
-                // La autenticación falló
+                // Autenticación fallida
                 Auth::logout();
-                return response()->json(['message' => 'Credenciales incorrectas'], 401);
+                return redirect()->route('login')->withErrors(['error' => 'Credenciales incorrectas']);
             }
-        } elseif ($request->phone) {
-            $user = Member::where('cell_phone_number', '=', $request->phone)->first();
+        } elseif ($request->email) {
+            // Inicio de sesión con correo electrónico
+            $user = $userModel->where('email', '=', $request->email)->first();
 
-            if ($user && Auth::attempt(['id' => $user->users_id, 'password' => $request->password])) {
-                // La autenticación fue exitosa
-                $usuario = User::findOrFail($user->users_id);
-                // dd($usuario);
-                Auth::login($usuario);
-                return response()->json(['message' => 'Autenticación exitosa'], 200);
+            if ($user && Auth::attempt(['id' => $user->id, 'password' => $request->password])) {
+                // Autenticación exitosa
+                Auth::login($user);
+                return redirect()->intended(RouteServiceProvider::HOME);
             } else {
-                // La autenticación falló
+                // Autenticación fallida
                 Auth::logout();
-                return response()->json(['message' => 'Credenciales incorrectas'], 401);
+                return redirect()->route('login')->withErrors(['error' => 'Credenciales incorrectas']);
             }
+        } else {
+            // Manejar el caso en el que no se proporciona ni document_number ni phone ni email
+            return redirect()->route('login')->withErrors(['email' => 'Credenciales incorrectas']);
         }
+
+
     }
 }
