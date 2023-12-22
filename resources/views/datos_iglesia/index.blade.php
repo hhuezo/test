@@ -234,7 +234,7 @@
                                                                                         </td>
                                                                                         <td class="table-td "><label
                                                                                                 class="switch">
-                                                                                                <input type="checkbox"
+                                                                                                <input type="checkbox" {{$participante->status_id == 2 ? 'checked':''}}
                                                                                                     id="switch{{ $participante->id }}"
                                                                                                     onchange="setEstado({{ $participante->id }})">
                                                                                                 <span
