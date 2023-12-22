@@ -25,6 +25,7 @@ class DatosIglesiaController extends Controller
             $iglesia = $user->user_has_iglesia->first();
 
             $participantes = $iglesia->participantes($iglesia->id);
+          //  dd($participantes);
             $departamentos = Departamento::get();
             $grupos_iglesia = $iglesia->iglesia_has_grupo;
 
@@ -50,6 +51,12 @@ class DatosIglesiaController extends Controller
             alert()->error('Error Datos No Coinciden');
             return back();
         }
+    }
+
+    public function datos_cohort(){
+        //$iglesias = Iglesia::where('status_id',2)->get();
+
+        
     }
 
     public function download(){

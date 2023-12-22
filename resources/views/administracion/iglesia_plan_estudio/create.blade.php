@@ -1,99 +1,104 @@
 @extends ('menu')
 @section('contenido')
-    @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
+@include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
 
 
-    <div class="grid xl:grid-cols-1 grid-cols-1 gap-6">
-        <!-- Basic Inputs -->
-        <div class="card">
-            <div class="card-body flex flex-col p-6">
-                <header class="flex items-center border-b border-slate-100 black:border-slate-700">
-                    <div class="flex-1">
-                        <div class="card-title text-slate-900 black:text-white">Plan de estudio para iglesia
+<div class="grid xl:grid-cols-1 grid-cols-1 gap-6">
+    <!-- Basic Inputs -->
+    <div class="card">
+        <div class="card-body flex flex-col p-6">
+            <header class="flex items-center border-b border-slate-100 black:border-slate-700">
+                <div class="flex-1">
+                    <div class="card-title text-slate-900 black:text-white">Plan de estudio para iglesia
 
-                            <a href="{{ url('administracion/iglesia_plan_estudio') }}">
-                                <button class="btn btn-black btn-sm float-right">
-                                    <iconify-icon icon="icon-park-solid:black" style="color: white;" width="18">
-                                    </iconify-icon>
-                                </button>
-                            </a>
-                        </div>
-                        <br>
-                    </div>
-
-                </header>
-
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                        <a href="{{ url('administracion/iglesia_plan_estudio') }}">
+                            <button class="btn btn-black btn-sm float-right">
+                                <iconify-icon icon="icon-park-solid:black" style="color: white;" width="18">
+                                </iconify-icon>
+                            </button>
+                        </a>
                     </div>
                     <br>
-                @endif
-                <form method="POST" action="{{ route('iglesia_plan_estudio.store') }}">
-                    @csrf
-                    <br>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
-                        <div class="input-area relative">
-                            <label for="largeInput" class="form-label">Iglesia</label>
-                            <select name="iglesia_id" class="form-control" required>
-                                @foreach ($iglesias as $obj)
-                                    <option value="{{ $obj->id }}" {{old('iglesia_id') == $obj->id ? 'selected':''}}>{{ $obj->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="input-area relative">
-                            <label for="largeInput" class="form-label">Grupo</label>
-                            <select name="group_id" class="form-control" required>
-                                @foreach ($grupos as $obj)
-                                    <option value="{{ $obj->id }}" {{old('group_id') == $obj->id ? 'selected':''}}>{{ $obj->nombre }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="input-area relative">
-                            <label for="largeInput" class="form-label">Plan de estudio</label>
-                            <select name="study_plan_id" class="form-control" required>
-                                <option value="" disabled selected>Seleccione</option>
-                                @foreach ($planes_estudio as $obj)
-                                    <option value="{{ $obj->id }}" {{old('group_id') == $obj->id ? 'selected':''}}>
-                                        {{ $obj->description_es }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="input-area relative">
-                            <label for="largeInput" class="form-label">Nombre</label>
-                            <input type="text" name="name" value="{{ old('name') }}" required class="form-control">
-                        </div>
+                </div>
 
-                        <div class="input-area relative">
-                            <label for="largeInput" class="form-label">Fecha inicio</label>
-                            <input type="date" name="start_date" value="{{ old('start_date') }}" required
-                                class="form-control">
-                        </div>
+            </header>
 
-
-                        <div class="input-area relative">
-                            <label for="end_date" class="form-label">Fecha final</label>
-                            <input type="date" name="end_date" value="{{ old('end_date') }}" required class="form-control">
-                        </div>
-
-                    </div>
-                    <br>
-                    <div style="text-align: right;">
-                        <button type="submit" class="btn inline-flex justify-center btn-dark">Guardar</button>
-                    </div>
-
-
-                </form>
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-        </div>
+            <br>
+            @endif
+            <form method="POST" action="{{ route('iglesia_plan_estudio.store') }}">
+                @csrf
+                <br>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
+                    <div class="input-area relative">
+                        <label for="largeInput" class="form-label">Iglesia</label>
+                        <select name="iglesia_id" class="form-control" required>
+                            @foreach ($iglesias as $obj)
+                            @if(auth()->user()->hasRole('administrador'))
+                            <option value="{{ $obj->id }}" selected>{{ $obj->name }}
+                            </option>
+                            @elseif($obj->id == auth()->user()->user_has_iglesia->first()->id)
+                            <option value="{{ $obj->id }}">{{ $obj->name }}
+                            </option>
+                            @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="input-area relative">
+                        <label for="largeInput" class="form-label">Grupo</label>
+                        <select name="group_id" class="form-control" required>
+                            @foreach ($grupos as $obj)
+                            <option value="{{ $obj->id }}" {{old('group_id') == $obj->id ? 'selected':''}}>{{ $obj->nombre }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="input-area relative">
+                        <label for="largeInput" class="form-label">Plan de estudio</label>
+                        <select name="study_plan_id" class="form-control" required>
+                            <option value="" disabled selected>Seleccione</option>
+                            @foreach ($planes_estudio as $obj)
+                            <option value="{{ $obj->id }}" {{old('group_id') == $obj->id ? 'selected':''}}>
+                                {{ $obj->description_es }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="input-area relative">
+                        <label for="largeInput" class="form-label">Nombre</label>
+                        <input type="text" name="name" value="{{ old('name') }}" required class="form-control">
+                    </div>
 
+                    <div class="input-area relative">
+                        <label for="largeInput" class="form-label">Fecha inicio</label>
+                        <input type="date" name="start_date" value="{{ old('start_date') }}" required class="form-control">
+                    </div>
+
+
+                    <div class="input-area relative">
+                        <label for="end_date" class="form-label">Fecha final</label>
+                        <input type="date" name="end_date" value="{{ old('end_date') }}" required class="form-control">
+                    </div>
+
+                </div>
+                <br>
+                <div style="text-align: right;">
+                    <button type="submit" class="btn inline-flex justify-center btn-dark">Guardar</button>
+                </div>
+
+
+            </form>
+        </div>
     </div>
+
+</div>
 
 
 

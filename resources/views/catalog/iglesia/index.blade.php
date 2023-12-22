@@ -10,12 +10,21 @@
         </h4>
         <div align="rigth">
 
+<<<<<<< HEAD
             <button class="btn btn-outline-dark" onclick="rechazadas()" id="btn_rechazadas"><iconify-icon icon="ic:outline-church" width="16" ></iconify-icon> &nbsp;Iglesias Rechazadas</button>
             <button class="btn btn-outline-dark" onclick="aceptadas()" id="btn_aceptadas" style="display: none;" ><iconify-icon icon="ic:outline-church" width="16" ></iconify-icon> &nbsp;Iglesias Aceptadas</button>
 
         <a href="{{ url('catalog/iglesia/create') }}">
             <button class="btn btn-dark">Nuevo</button>
         </a>
+=======
+            <button class="btn btn-outline-dark" onclick="rechazadas()" id="btn_rechazadas"><iconify-icon icon="ic:outline-church" width="16"></iconify-icon> &nbsp;Iglesias Rechazadas</button>
+            <button class="btn btn-outline-dark" onclick="aceptadas()" id="btn_aceptadas" style="display: none;"><iconify-icon icon="ic:outline-church" width="16"></iconify-icon> &nbsp;Iglesias Aceptadas</button>
+
+            <a href="{{ url('catalog/iglesia/create') }}">
+                <button class="btn btn-dark">Nuevo</button>
+            </a>
+>>>>>>> 08496391bbd948dfb75e0d4c6a531a46d4021983
         </div>
     </header>
     <div class="card-body px-6 pb-6" id="aceptadas" style="display: block;">
@@ -42,15 +51,7 @@
                                 <td align="center" class="table-td">{{ $obj->name }}</td>
                                 <td align="center" class="table-td">{{ $obj->address }}</td>
                                 <td align="center" class="table-td">{{ $obj->contact_name }}</td>
-                                <td align="center" class="table-td">
-                                    @foreach ($estatuorg as $obj2)
-                                    @if ($obj2->id == $obj->status_id)
-                                    <option value="{{ $obj2->id }}" selected>
-                                        {{ $obj2->description_es }}
-                                    </option>
-                                    @endif
-                                    @endforeach
-                                </td>
+                                <td align="center" class="table-td">{{ $obj->iglesia_estatus->description_es}} </td>
                                 <td align="center" class="table-td">
                                     <a href="{{ url('catalog/iglesia') }}/{{ $obj->id }}/edit">
                                         <iconify-icon icon="mdi:edit-circle" style="color: #1e293b;" width="40"></iconify-icon>
@@ -63,8 +64,9 @@
 
                                     <iconify-icon icon="mdi:delete-circle" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
                                     &nbsp;&nbsp;
-
-                                    <iconify-icon icon="lets-icons:check-fill" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-estado-{{ $obj->id }}"></iconify-icon>
+                                    @if($obj->status_id != 2)
+                                    <iconify-icon icon="lets-icons:check-fill" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-estado-{{ $obj->id }}" ></iconify-icon>
+                                    @endif
                                     &nbsp;&nbsp;
 
                                 </td>
@@ -146,13 +148,15 @@
         document.getElementById('name').value = name;
         $('#usuario_edit_modal').modal('show');
     };
-    function rechazadas(){
+
+    function rechazadas() {
         $("#aceptadas").hide();
         $("#rechazadas").show();
         $("#btn_rechazadas").hide();
         $("#btn_aceptadas").show();
     }
-    function aceptadas(){
+
+    function aceptadas() {
         $("#aceptadas").show();
         $("#rechazadas").hide();
         $("#btn_rechazadas").show();

@@ -13,6 +13,7 @@ use App\Models\catalog\Member;
 use App\Models\catalog\StudyPlan;
 use App\Models\catalog\StudyPlanDetail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -24,8 +25,20 @@ class IglesiaPlanEstudioController extends Controller
     }
     public function index()
     {
-        $planes = IglesiaPlanEstudio::get();
+        if (auth()->user()->hasRole('administrador') == true) {
+            $planes = IglesiaPlanEstudio::get();
+        } else {
+            $user = User::findOrFail(auth()->user()->id);
+            $planes = IglesiaPlanEstudio::where('iglesia_id', $user->user_has_iglesia->first()->id)->get();
+        }
+        
         return view('administracion.iglesia_plan_estudio.index', compact('planes'));
+    }
+
+    public function certificacion(){
+        //dd('hli');
+        $planes_estudio = IglesiaPlanEstudio::where('end_date','<=', Carbon::now('America/El_Salvador')->format('Y-m-d'))->get();
+        
     }
 
     public function asistencia(Request $request)
@@ -44,6 +57,7 @@ class IglesiaPlanEstudioController extends Controller
     public function create()
     {
         $iglesias = Iglesia::where('status_id', '=', '2')->get();
+     //   $count =  auth()->user()->user_has_iglesia->first()->id;
         $grupos = Grupo::where('active', '=', 1)->get();
         $planes_estudio = StudyPlan::get();
         return view('administracion.iglesia_plan_estudio.create', compact('iglesias', 'grupos', 'planes_estudio'));
