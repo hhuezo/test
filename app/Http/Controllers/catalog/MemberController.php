@@ -40,7 +40,7 @@ class MemberController extends Controller
     {
         $member = Member::get();
         $member_status = MemberStatus::get();
-        $participantes =  DB::select("select  q.id id, q.name_member as nombre , q.lastname_member as apellido , i.name iglesia
+        $participantes =  DB::select("select  q.id id, q.name_member as nombre , q.lastname_member as apellido , i.name iglesia,q.document_number
         from iglesia i
         join member q
         join  users_has_iglesia r on        r.iglesia_id=i.id and r.user_id=q.users_id ");
