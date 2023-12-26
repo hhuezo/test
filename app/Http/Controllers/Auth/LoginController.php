@@ -44,15 +44,20 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request, User $userModel, Member $memberModel)
+    public function login(Request $request )
     {
         if ($request->document_number || $request->phone) {
+
             $field = $request->document_number ? 'document_number' : 'cell_phone_number';
-            $user = $memberModel->where($field, '=', $request->input)->first();
+            $input = $request->document_number ? $request->document_number : $request->phone ;
+
+            $user = Member::where($field, '=', $input)->first();
+
+
 
             if ($user && Auth::attempt(['id' => $user->users_id, 'password' => $request->password])) {
                 // Autenticación exitosa
-                $usuario = $userModel->findOrFail($user->users_id);
+                $usuario = User::findOrFail($user->users_id);
                 Auth::login($usuario);
                 return redirect()->intended(RouteServiceProvider::HOME);
             } else {
@@ -62,7 +67,7 @@ class LoginController extends Controller
             }
         } elseif ($request->email) {
             // Inicio de sesión con correo electrónico
-            $user = $userModel->where('email', '=', $request->email)->first();
+            $user = User::where('email', '=', $request->email)->first();
 
             if ($user && Auth::attempt(['id' => $user->id, 'password' => $request->password])) {
                 // Autenticación exitosa
