@@ -1,90 +1,116 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Listado de Asistencia de  Participantes de Grupos de la Iglesia</title>
+    <title>Listado de Asistencia de Participantes de Grupos de la Iglesia</title>
 </head>
 <style>
     img {
-  height: 10%;
-  width: 20%;
-}
+        height: 10%;
+        width: 20%;
+    }
+
+    th{
+        text-transform: capitalize;
+    }
+    td {
+        border: 1px solid;
+        width: 100px;
+        word-wrap: break-word;
+        text-transform: capitalize;
+    }
+
+
 </style>
+
 <body>
-    <form >
-        &nbsp;  &nbsp;  &nbsp;
 
-<center>Nombre de Iglesia: {{ $iglesia->name}}   </center>
-&nbsp;
-<center>
-<table border="1">
-<tr><td colspan="5"><center>Informacion del Participante </center></td><td colspan=" {{ $sessiones->count() +1 }}"><center>Asistencia</center></td></tr>
-    <tr>
-        <td>DUI </td>
-        <td> Nombre Completo </td>
-        <td> telefono </td>
-        <td> Correo electronico </td>
-        <td> Genero </td>
-        @foreach ($sessiones as $session)
-            <td>
-                {{ $session->session_name }}
-            </td>
-        @endforeach
+    &nbsp; &nbsp; &nbsp;
+    <CENTER> <img src="{{ $iglesia->logo_url }}{{ $iglesia->logo }}"></CENTER>
 
-        <td>
-            Total
-        </td>
-    </tr>
-    <?php
-    $i=0;
-    ?>
+    <center><h3><b>Nombre de Iglesia: {{ $iglesia->name }} </b></h3></center>
+    &nbsp;
 
-    <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
 
-        @foreach ($participantes as $obj)
-        <?php
-        $i=0;
-        ?>
-            <tr class="even:bg-slate-50 dark:even:bg-slate-700">
-                <td class="table-td">
-                    {{ $obj->document_number }}
+    @foreach ($grupos_iglesia as $grupos)
+        &nbsp; &nbsp; &nbsp;
+        <table border="1" cellspacing="0" width="100%"><h3><b>Grupos {{ $grupos->nombre }}</b></h3>
+            &nbsp; &nbsp; &nbsp;
+            <tr>
+                <td colspan="5">
+                    <center>Informacion del Participante </center>
                 </td>
-                <td>
-                    {{ $obj->name_member }} {{ $obj->lastname_member }}
+                <td colspan=" {{ $sessiones->count() + 1 }}">
+                    <center>Asistencia</center>
                 </td>
-                <td>
-                    {{ $obj->cell_phone_number }}
-                </td>
-                <td>
-                    {{ $obj->email }}
-                </td>
-                <td>
-                    {{ $obj->genders ? $obj->genders->description : '' }}
-                </td>
-
-                @foreach ($sessiones as $session)
-                <td>
-                    {{ $session-> asistencia($session->id,$obj->id) }}
-                    <?php
-                     $i= $i +  $session-> asistencia($session->id,$obj->id)  ;
-                    ?>
-                </td>
-
-            @endforeach
-            <td>  <?php echo $i
-                ?></td>
             </tr>
-        @endforeach
+            <tr>
+                <th> DUI </th>
+                <th> Nombre Completo </th>
+                <th> telefono </th>
+                <th> Correo electronico </th>
+                <th> Genero </th>
+                @foreach ($sessiones as $session)
+                    <th>
+                        {{ $session->session_name }}
+                    </th>
+                @endforeach
 
-    </tbody>
+                <th>
+                    Total
+                </th>
+            </tr>
 
 
-</table>
-</center>
-</form>
+
+            <tbody>
+
+                @foreach ($participantes as $obj)
+                    {{-- {{ $obj->grupo_first($obj->id) }} --}}
+                    @php($total = 0)
+
+                    @if ($obj->grupo_first($obj->id) == $grupos->id)
+                        <tr>
+                            <td>
+                                {{ $obj->document_number }}
+                            </td>
+                            <td>
+                                {{ $obj->name_member }} {{ $obj->lastname_member }}
+                            </td>
+                            <td>
+                                {{ $obj->cell_phone_number }}
+                            </td>
+                            <td style="text-transform: lowercase">
+                                {{ $obj->email }}
+                            </td>
+                            <td>
+                                {{ $obj->genders ? $obj->genders->description : '' }}
+                            </td>
+
+                            @foreach ($sessiones as $session)
+                                <td>
+                                    @php($asistencia = $session->asistencia($session->id, $obj->id))
+                                    {{ $asistencia }}
+
+                                    @if ($asistencia == 1)
+                                        @php($total++)
+                                    @endif
+                                </td>
+                            @endforeach
+                            <td>{{ $total }}</td>
+                        </tr>
+                    @endif
+                @endforeach
+            </tbody>
+
+
+        </table>
+    @endforeach
+
 
 </body>
+
 </html>

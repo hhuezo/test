@@ -52,9 +52,19 @@ class Member extends Model
 
     public function member_has_group()
     {
-        //return $this->belongsToMany(Member::class, 'member_has_group', 'group_id', 'member_id');
-
         return $this->belongsToMany(Grupo::class, 'member_has_group','member_id', 'group_id');
+    }
+
+    public function grupo_first($id)
+    {
+        $participante = Member::findOrFail($id);
+        $grupo = $participante->member_has_group->first();
+        if($grupo)
+        {
+            return $grupo->id;
+        }
+
+        return 0;
     }
 
     public function genders(){

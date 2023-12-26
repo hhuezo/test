@@ -27,6 +27,7 @@
                             <tr class="td-table">
                                 <th style="text-align: center">Id</th>
                                 <th style="text-align: left">Nombre</th>
+                                <th style="text-align: left">documento</th>
                                 <th style="text-align: left">Iglesia</th>
                                 <th style="text-align: center">opciones</th>
                             </tr>
@@ -37,6 +38,7 @@
                             <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                 <td align="center">{{ $obj->id }}</td>
                                 <td>{{ $obj->nombre }} {{ $obj->apellido }} </td>
+                                <td>{{ $obj->document_number}}  </td>
                                 <td>{{ $obj->iglesia }}</td>
                                 <td align="center">
                                     <a href="{{ url('catalog/member') }}/{{ $obj->id }}/edit">

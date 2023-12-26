@@ -36,7 +36,7 @@ class IglesiaController extends Controller
     {
         $iglesia = Iglesia::where('status_id', '<>', 3)->get();
         $iglesias_rechazadas = Iglesia::where('status_id', '=', 3)->get();
-        //   dd($iglesia);   
+        //   dd($iglesia);
         $estatuorg = OrganizationStatus::where('id','<=',3)->get();
         return view('catalog.iglesia.index', compact('iglesia', 'estatuorg', 'iglesias_rechazadas'));
     }
@@ -276,7 +276,7 @@ class IglesiaController extends Controller
                 ->select('s.id', DB::raw('(SELECT COUNT(*) FROM iglesia i WHERE i.sede_id = s.id) AS conteo'))
                 ->having('conteo', '<', 5)
                 ->first();
-    
+
             if ($sede) {
                 $sede_id = $sede->id;
             } else {
@@ -284,7 +284,7 @@ class IglesiaController extends Controller
                     ->select('id', DB::raw('(COUNT(*)) AS conteo'))
                     ->groupBy('id')
                     ->having('conteo', '<', 20)->first();
-    
+
                 if ($cohort) {
                     $cohort_id = $cohort->id;
                 } else {
@@ -292,15 +292,15 @@ class IglesiaController extends Controller
                     $cohort_new->nombre = "congregación";
                     $cohort_new->region_id = $iglesia->departamento->region_id;
                     $cohort_new->save();
-    
+
                     $cohort_id = $cohort_new->id;
                 }
-    
+
                 $sede_new = new Sede();
                 $sede_new->nombre =  "Sede";
                 $sede_new->cohorte_id = $cohort_id;
                 $sede_new->save();
-    
+
                 $sede_id = $sede_new->id;
             }
         }
@@ -375,19 +375,22 @@ class IglesiaController extends Controller
         $asistencia_sesion = AsistenciaSesion::whereIn('sessions_id', $sessiones_array)->get();
 
 
+        $grupos_iglesia=$iglesia->iglesia_has_grupo;
+      //  dd($grupos_iglesia);
 
+       $gruposall= $iglesia->participantes_iglesia( $iglesia->id);
 
+     //   dd( $gruposall);
 
         $participantes_array = $asistencia_sesion->pluck('member_id')->unique()->values()->toArray();
 
 
         $participantes =  Member::whereIn('id', $participantes_array)->get();
 
-       // $attended = AttendancePerSession::where('sessions_id', $sessionId)        ->where('member_id', $memberId)        ->value('attended');
+        return view('catalog.iglesia.reporte_asistencias', compact('gruposall','grupos_iglesia','iglesia', 'sessiones', 'participantes', 'genero'));
 
-
-
-        return view('catalog.iglesia.reporte_asistencias', compact('iglesia', 'sessiones', 'participantes', 'genero'));
+       // $pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('gruposall','grupos_iglesia','iglesia', 'sessiones', 'participantes', 'genero'));
+       // return $pdf->stream('Info.pdf');
     }
 
 
@@ -468,6 +471,8 @@ class IglesiaController extends Controller
         $iglesia = Iglesia::findOrFail($iglesiaId);
 
         $participantes =  $iglesia->participantes($iglesiaId)->where('group_id', '=', $grupoId);
+
+
         // dd($participantes);
 
 
