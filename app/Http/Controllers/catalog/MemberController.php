@@ -260,6 +260,8 @@ class MemberController extends Controller
     public function store(Request $request)
     {
 
+
+
         $messages = [
             'name.required' => 'El nombre es un valor requerido',
             'lastname_member.required' => 'El apellido es un valor requerido',
@@ -283,6 +285,7 @@ class MemberController extends Controller
             'cell_phone_number' => ['required', 'string', 'max:9'],
             'address' => ['required', 'string', 'max:255'],
 
+
         ], $messages);
 
         if ($request->grupo_id != 1) {
@@ -303,15 +306,16 @@ class MemberController extends Controller
         $edad = $fechaNacimientoObj->diff($fechaActual);
         $edad->y;
 
-        /*agregado */
-        if ($edad->y <= 17  &&  $request->grupo_id == 1) {
-            throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
-        }
+
+             /*agregado */
+             if ($edad->y <=0   &&  $request->grupo_id == 1) {
+                throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
+            }
 
 
-        if ($edad->y <= 17  &&  $request->grupo_id != 1) {
-            throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
-        }
+            if ($edad->y <=0  &&  $request->grupo_id != 1) {
+                throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
+            }
 
 
 
@@ -429,7 +433,7 @@ class MemberController extends Controller
         $member = member::findOrFail($id);
 
         $grupo = $member->member_has_group->first();
-        //dd($grupo);
+       // dd($grupo);
         $usuario = User::findOrFail($member->users_id);
 
         $iglesia = $usuario->user_has_iglesia->first();
@@ -526,23 +530,28 @@ class MemberController extends Controller
         $edad->y;
 
 
-        /*agregado */
-        if ($edad->y <= 17  &&  $request->grupo_id == 1) {
-            throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
-        }
 
 
-        if ($edad->y <= 17  &&  $request->grupo_id != 1) {
-            throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
-        }
+             /*agregado */
+             if ($edad->y <=0  &&  $request->grupo_id == "1") {
+                throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
+            }
 
 
-        if ($edad->y >= 18  &&  $request->grupo_id == 1) {
+            if ($edad->y <=0  &&  $request->grupo_id <>  "1") {
+                throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
+            }
+
+
+        if ($edad->y >= 18  &&  $request->grupo_id == "1") {
+
             throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
         }
 
 
-        if ($edad->y < 18  &&  $request->grupo_id != 1) {
+        if ($edad->y < 18  &&  $request->grupo_id <> "1") {
+
+            //dd($edad->y ,$request->grupo_id);//
             throw ValidationException::withMessages(['grupo_id' => ['El grupo no es válido']]);
         }
 
@@ -550,16 +559,27 @@ class MemberController extends Controller
 
 
         $member =  Member::findOrFail($id);
+
+
         if ($member->document_number != $request->document_number) {
             $member_existe = Member::where('document_number', '=', $request->document_number)->where('id', '<>', $member->id)->first();
             if ($member_existe) {
                 alert()->error('El registro no ha sido modificado');
             } else {
+
+
+
+
+               // $member->attach_grupoactualizado($request);
+
                 //borrando el grupo anterior
                 $group = $member->member_has_group->first();
                 $member->member_has_group()->detach($group);
+                $group_id = $request->grupo_id;
+                $member->member_has_group()->attach($group_id);
                 $user = User::findOrFail($member->users_id);
                 /*agregado */
+
                 if ($user->email != $request->email) {
                     //buscar si existe el correo
                     throw ValidationException::withMessages(['email' => ['El Correo ya existe ']]);
@@ -591,11 +611,13 @@ class MemberController extends Controller
                 $member->email = $request->email;
                 $member->cell_phone_number = $request->cell_phone_number;
                 //$group = $member->member_has_group->first();
-                $group_id = $request->group_id;
+                $group_id = $request->grupo_id;
                 $member->address = $request->address;
                 $member->update();
                 //agregando nuevo grupo
-                $member->member_has_group()->attach($group_id);
+               // $member->member_has_group()->attach($group_id);
+               $group_id = $request->grupo_id;
+               $member->member_has_group()->attach($group_id);
                 $iglesia = Iglesia::findOrFail($request->organization_id);
 
 
@@ -610,9 +632,12 @@ class MemberController extends Controller
             if ($member_existe) {
                 alert()->error('El registro no ha sido modificado');
             } else {
+
+                $group_id = $request->grupo_id;
+                $member->member_has_group()->attach($group_id);
                 //borrando el grupo anterior
                 $group = $member->member_has_group->first();
-                $member->member_has_group()->detach($group);
+               // $member->member_has_group()->detach($group);
                 $user = User::findOrFail($member->users_id);
                 /*agregado */
                 if ($user->email != $request->email) {
@@ -646,11 +671,11 @@ class MemberController extends Controller
                 $member->email = $request->email;
                 $member->cell_phone_number = $request->cell_phone_number;
                 //$group = $member->member_has_group->first();
-                $group_id = $request->group_id;
+                $group_id =$request->grupo_id;
                 $member->address = $request->address;
                 $member->update();
                 //agregando nuevo grupo
-                $member->member_has_group()->attach($group_id);
+             //   $member->member_has_group()->attach($group_id);
                 $iglesia = Iglesia::findOrFail($request->organization_id);
 
 
@@ -663,7 +688,7 @@ class MemberController extends Controller
         }else {
             //borrando el grupo anterior
             $group = $member->member_has_group->first();
-            $member->member_has_group()->detach($group);
+           // $member->member_has_group()->detach($group);
             $user = User::findOrFail($member->users_id);
             /*agregado */
             if ($user->email != $request->email) {
@@ -709,10 +734,14 @@ class MemberController extends Controller
                 $iglesia->users_has_iglesia()->attach($member->users_id);
             } catch (Exception $e) {
             }
+            $group = $member->member_has_group->first();
+            $member->member_has_group()->detach($group);
+            $group_id = $request->grupo_id;
+            $member->member_has_group()->attach($group_id);
             alert()->success('El registro ha sido modificado correctamente');
         }
 
-        return back();
+              return back();
     }
 
     /**
@@ -729,4 +758,15 @@ class MemberController extends Controller
         alert()->error('El registro ha sido eliminado correctamente');
         return back();
     }
+
+    public function attach_grupoactualizado(Request $request)
+    {
+
+
+        $member_group = member::findOrFail($request->member_id);
+        $member_group->member_has_group()->attach($request->grupo_id);
+       // alert()->success('El registro ha sido agregada correctamente');
+       // return back();
+    }
+
 }

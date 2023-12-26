@@ -333,63 +333,57 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            //combo para Departamento
-            $("#Departamento").change();
-            $("#Departamento").change(function() {
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(":input").inputmask();
+        $("#departamento_id").change(function() {
+            console.log($(this).val());
+            var Departamento = $(this).val();
 
-                // var para la Departamento
-                var Departamento = $(this).val();
-
-                $.get("{{ url('get_municipio/') }}" + '/' + Departamento, function(data) {
-
-                    console.log(data);
-                    var _select = ''
-                    for (var i = 0; i < data.length; i++)
-                        _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
-                        '</option>';
-
-                    $("#Municipio").html(_select);
-
-                });
-
+            $.get("{{ url('get_municipio/') }}" + '/' + Departamento, function(data) {
+                console.log(data);
+                var _select = ''
+                for (var i = 0; i < data.length; i++)
+                    _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
+                    '</option>';
+                $("#municipio_id").html(_select);
             });
 
         });
 
-        function calcularEdad(fechaNacimiento) {
-            var fechaNac = new Date(fechaNacimiento);
-            var fechaActual = new Date();
 
-            var edad = fechaActual.getFullYear() - fechaNac.getFullYear();
-            var mes = fechaActual.getMonth() - fechaNac.getMonth();
+    });
 
-            if (mes < 0 || (mes === 0 && fechaActual.getDate() < fechaNac.getDate())) {
-                edad--;
-            }
+    function calcularEdad(fechaNacimiento) {
+        var fechaNac = new Date(fechaNacimiento);
+        var fechaActual = new Date();
 
-            if (edad >= 18) {
-                $("#document_number").prop("required", true);
-            } else {
-                $("#document_number").prop("required", false);
-            }
+        var edad = fechaActual.getFullYear() - fechaNac.getFullYear();
+        var mes = fechaActual.getMonth() - fechaNac.getMonth();
 
-            @if ($grupo == 0)
-                $.get('{{ url('/get_grupo') }}/' + fechaNacimiento, function(data) {
-                    // Manejar la respuesta aquí
-                    var _select = ''
-                    for (var i = 0; i < data.length; i++)
-                        _select += '<option value="' + data[i].id + '" >' + data[i].nombre +
-                        '</option>';
-
-                    $("#grupo_id").html(_select);
-                });
-            @endif
-
-
+        if (mes < 0 || (mes === 0 && fechaActual.getDate() < fechaNac.getDate())) {
+            edad--;
         }
-    </script>
+
+        if (edad >= 18) {
+            $("#document_number").prop("required", true);
+        } else {
+            $("#document_number").prop("required", false);
+        }
+
+
+        $.get("{{url('/get_grupo')}}/" + fechaNacimiento, function(data) {
+            // Manejar la respuesta aquí
+            var _select = ''
+            for (var i = 0; i < data.length; i++)
+                _select += '<option value="' + data[i].id + '"  >' + data[i].nombre +
+                '</option>';
+
+            $("#grupo_id").html(_select);
+        });
+
+    }
+</script>
 
 </body>
 
