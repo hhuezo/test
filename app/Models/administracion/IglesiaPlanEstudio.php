@@ -26,6 +26,8 @@ class IglesiaPlanEstudio extends Model
         'closed',
     ];
 
+
+
     public function iglesia()
     {
         return $this->belongsTo(Iglesia::class, 'iglesia_id', 'id');

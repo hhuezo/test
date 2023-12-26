@@ -80,7 +80,7 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Grupos</label>
-                                                <select name="group_id" id="group_id" class="form-control">
+                                                <select name="group_id" id="grupo_id" class="form-control">
                                                     @foreach ($grupos as $obj)
 
                                                     <option value="{{ $obj->id }}">

@@ -32,4 +32,6 @@ class AsistenciaSesion extends Model
     }
 
 
+
+
 }

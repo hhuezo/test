@@ -113,7 +113,19 @@ class WelcomeController extends Controller
         $edad = $fechaNacimientoObj->diff($fechaActual);
         $edad->y;
 
+    //    dd($edad->y, $edad, $request->birthdate, $edad->y <= 0);
 
+
+
+         /*agregado */
+         if ($edad->y <=0   &&  $request->grupo_id == 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
+        }
+
+
+        if ($edad->y <=0  &&  $request->grupo_id != 1) {
+            throw ValidationException::withMessages(['grupo_id' => ['La edad no es Coherente con el participante']]);
+        }
 
 
         if ($edad->y >= 18  &&  $request->grupo_id == 1) {

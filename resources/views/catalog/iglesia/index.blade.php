@@ -48,12 +48,18 @@
                                         <iconify-icon icon="mdi:edit-circle" style="color: #1e293b;" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;&nbsp;
+                                    <a href="{{ url('iglesia/reporte_asistencias/') }}/{{ $obj->id }}">
+                                        <iconify-icon icon="material-symbols:location-home" style="color: #1e293b;" width="40"></iconify-icon>
+                                    </a>
+                                    &nbsp;&nbsp;
+
                                     <iconify-icon icon="mdi:delete-circle" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
                                     &nbsp;&nbsp;
                                     @if($obj->status_id != 2)
                                     <iconify-icon icon="lets-icons:check-fill" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-estado-{{ $obj->id }}" ></iconify-icon>
                                     @endif
                                     &nbsp;&nbsp;
+
                                 </td>
                             </tr>
                             @include('catalog.iglesia.modal')
