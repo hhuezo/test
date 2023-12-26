@@ -369,6 +369,10 @@ class IglesiaController extends Controller
         $plan_estudio = IglesiaPlanEstudio::where('iglesia_id', '=', $iglesia->id)->get();
         $plan_estudio_array = $plan_estudio->pluck('id')->toArray();
         $sessiones = Sesion::whereIn('group_per_church_id',  $plan_estudio_array)->get();
+
+       // foreach ($sessiones as $obj) {
+            //dd($obj->iglesia_plan_estudio->group_id);        }
+
         $genero = Gender::get();
         $sessiones_array = $sessiones->pluck('id')->toArray();
 

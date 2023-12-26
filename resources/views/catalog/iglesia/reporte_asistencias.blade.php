@@ -13,17 +13,16 @@
         width: 20%;
     }
 
-    th{
+    th {
         text-transform: capitalize;
     }
+
     td {
         border: 1px solid;
         width: 100px;
         word-wrap: break-word;
         text-transform: capitalize;
     }
-
-
 </style>
 
 <body>
@@ -31,13 +30,16 @@
     &nbsp; &nbsp; &nbsp;
     <CENTER> <img src="{{ $iglesia->logo_url }}{{ $iglesia->logo }}"></CENTER>
 
-    <center><h3><b>Nombre de Iglesia: {{ $iglesia->name }} </b></h3></center>
+    <center>
+        <h3><b>Nombre de Iglesia: {{ $iglesia->name }} </b></h3>
+    </center>
     &nbsp;
 
 
     @foreach ($grupos_iglesia as $grupos)
         &nbsp; &nbsp; &nbsp;
-        <table border="1" cellspacing="0" width="100%"><h3><b>Grupos {{ $grupos->nombre }}</b></h3>
+        <table border="1" cellspacing="0" width="100%">
+            <h3><b>Grupos {{ $grupos->nombre }}</b></h3>
             &nbsp; &nbsp; &nbsp;
             <tr>
                 <td colspan="5">
@@ -54,9 +56,11 @@
                 <th> Correo electronico </th>
                 <th> Genero </th>
                 @foreach ($sessiones as $session)
-                    <th>
-                        {{ $session->session_name }}
-                    </th>
+                    @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                        <th>
+                            {{ $session->session_name }}
+                        </th>
+                    @endif
                 @endforeach
 
                 <th>
@@ -91,14 +95,16 @@
                             </td>
 
                             @foreach ($sessiones as $session)
-                                <td>
-                                    @php($asistencia = $session->asistencia($session->id, $obj->id))
-                                    {{ $asistencia }}
+                                @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                                    <td>
+                                        @php($asistencia = $session->asistencia($session->id, $obj->id))
+                                        {{ $asistencia }}
 
-                                    @if ($asistencia == 1)
-                                        @php($total++)
-                                    @endif
-                                </td>
+                                        @if ($asistencia == 1)
+                                            @php($total++)
+                                        @endif
+                                    </td>
+                                @endif
                             @endforeach
                             <td>{{ $total }}</td>
                         </tr>
