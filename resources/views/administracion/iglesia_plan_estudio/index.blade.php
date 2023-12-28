@@ -8,18 +8,15 @@
         </h4>
         <div align="right">
 
-            @if(auth()->user()->hasRole('administrador'))
-            <a href="{{ url('administracion/iglesia_plan_estudio/certificacion') }}" >
+         
+            <a href="{{ url('administracion/iglesia_plan_estudio/certificacion/') }}/{{$iglesia_id}}" >
                 <button class="btn btn-outline-dark">Certificación</button>
             </a>
-            <a href="{{ url('administracion/iglesia_plan_estudio/create') }}">
-                <button class="btn btn-dark">Nuevo</button>
-            </a>
 
-            @elseif($planes->count() <= 3) <a href="{{ url('administracion/iglesia_plan_estudio/create') }}">
+             <a href="{{ url('administracion/iglesia_plan_estudio/create') }}">
                 <button class="btn btn-dark">Nuevo</button>
                 </a>
-                @endif
+                
 
         </div>
     </header>

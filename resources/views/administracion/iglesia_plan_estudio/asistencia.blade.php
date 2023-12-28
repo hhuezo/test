@@ -6,6 +6,7 @@
                 <tr class="even:bg-slate-50 black:even:bg-slate-700">
                     <th style="text-align: left;padding-top: 1%; padding-bottom:1%">Nombre de Participante</th>
                     <th style="text-align: center">¿Asistio?</th>
+                    <th>Notas</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-slate-100 black:bg-slate-800 black:divide-slate-700">
@@ -13,13 +14,13 @@
                 @foreach ($participant as $obj)
                 <tr class="even:bg-slate-50 black:even:bg-slate-700">
                     @if($obj->member_id)
-                    <td class="pt-25 pb-25" style=" padding-top: 1%; padding-bottom:1%">{{ $obj->participante->name_member }} {{ $obj->participante->lastname_member }}</td>
+                    <td class="pt-25 pb-25" style=" padding-top: 1%; padding-bottom:1%">{{ $obj->participante->name_member }} {{ $obj->participante->lastname_member }} </td>
                     @else
                     <td></td>
                     @endif
-                    <td align="center">
+                    <td align="center"> 
                         <div class="checkbox-area">
-                            <label class="inline-flex items-center cursor-pointer">
+                            <label class="inline-flex items-center cursor-pointer" style="pointer-events: {{$obj->sesion->completed == 1 ? 'none':''}};">
                                 <input type="checkbox" class="hidden" name="checkbox" {{ $obj->attended == 1 ? 'checked' : '' }}>
                                 <span class="h-4 w-4 border flex-none border-slate-100 dark:border-slate-800 rounded inline-flex ltr:mr-3 rtl:ml-3 relative transition-all duration-150 bg-slate-100 dark:bg-slate-900" 
                                 onclick="asistencia({{ $obj->id }})">
@@ -27,6 +28,9 @@
                                 
                             </label>
                         </div>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="notes-{{$obj->id}}" onblur="add_notes({{$obj->id}})" value="{{$obj->notes}}">
                     </td>
                 </tr>
 
@@ -39,6 +43,25 @@
 </div>
 
 <script>
+    function add_notes(id){
+        $.ajax({
+            url:"{{url('admin/asistencia/add_notes')}}",
+            type: 'POST',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "id": id,
+                "notes": document.getElementById("notes-"+id).value
+            },
+            success: function(response) {
+                // Manejar la respuesta exitosa si es necesario
+                console.log(response);
+            },
+            error: function(error) {
+                // Manejar el error si es necesario
+                console.error(error);
+            }
+        })
+    }
     function asistencia(id) {
         // Enviar la solicitud POST usando jQuery
         $.ajax({

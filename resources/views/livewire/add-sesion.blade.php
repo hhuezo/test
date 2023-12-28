@@ -64,8 +64,8 @@
                             </div>
                             <br>
                             <div class="input-area relative">
-                                <label for="largeInput" class="form-label">Fecha</label>
-                                <input type="date" wire:model="meeting_date" value="{{ old('meeting_date') }}" required class="form-control">
+                                <label for="largeInput" class="form-label">Fecha </label>
+                                <input type="date" wire:model="meeting_date" min="{{$plan->start_date}}" max="{{$plan->end_date}}" value="{{ old('meeting_date') }}" required class="form-control">
                             </div>
                             <br>
 

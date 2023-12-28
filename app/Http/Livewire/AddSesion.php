@@ -69,7 +69,6 @@ class AddSesion extends Component
             'arrayCursos' => 'required|array|min:1',
         ], $messages);
 
-
         $sesion = new Sesion();
         $sesion->group_per_church_id = $this->plan_id;
         $sesion->session_name =  $this->session_name;

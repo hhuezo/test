@@ -90,12 +90,28 @@ class DatosIglesiaController extends Controller
     public function set_estado(Request $request)
     {
         $member = Member::findOrFail($request->id);
-        $response = ["val" => 0, "mensaje" => "Error"];
+        if ($member->status_id == 2) {
+            $member->status_id = 1;
+            $member->update();
+
+            $user = User::findOrFail($member->users_id);
+            $iglesia = $user->user_has_iglesia->first();
+
+            $members = $iglesia->participantes($iglesia->id)->where('status_id', '=', 2);
+            $count = $members->count();
+
+            $response = ["val" => 1, "mensaje" => "Registro modificado correctamente"];
+            return  $response;
+        }
 
         $user = User::findOrFail($member->users_id);
-        $iglesia = $user->user_has_iglesia->first()->id;
-        $count = DB::select("select count(*) from member m, users_has_iglesia i where m.users_id = i.user_id and m.status_id = 2 and i.iglesia_id =" . $iglesia);
-        if ($count > 25) {
+        $iglesia = $user->user_has_iglesia->first();
+
+        $members = $iglesia->participantes($iglesia->id)->where('status_id', '=', 2);
+        $count = $members->count();
+
+        //   $response = ["vsal" => 0, "mensaje" => "Error"];
+        if ($members->count() >= 25) {
             $response = ["val" => 3, "mensaje" => "Ya no hay cupo"];
         } else {
             if ($member) {
