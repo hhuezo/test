@@ -45,4 +45,9 @@ class IglesiaPlanEstudio extends Model
         return $this->belongsTo(Grupo::class, 'group_id', 'id');
 
     }
+
+    public function sesiones()
+    {
+        return $this->hasMany(Sesion::class, 'group_per_church_id');
+    }
 }

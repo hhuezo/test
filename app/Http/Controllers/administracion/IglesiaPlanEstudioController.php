@@ -7,6 +7,7 @@ use App\Imports\AsistenciaImport;
 use App\Models\administracion\AsistenciaSesion;
 use App\Models\administracion\IglesiaPlanEstudio;
 use App\Models\administracion\Sesion;
+use App\Models\administracion\SesionDetalle;
 use App\Models\catalog\Grupo;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
@@ -16,6 +17,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 
 class IglesiaPlanEstudioController extends Controller
@@ -30,17 +32,106 @@ class IglesiaPlanEstudioController extends Controller
             $planes = IglesiaPlanEstudio::get();
         } else {
             $user = User::findOrFail(auth()->user()->id);
+            $iglesia_id = $user->user_has_iglesia->first()->id;
             $planes = IglesiaPlanEstudio::where('iglesia_id', $user->user_has_iglesia->first()->id)->get();
         }
 
-        return view('administracion.iglesia_plan_estudio.index', compact('planes'));
+        return view('administracion.iglesia_plan_estudio.index', compact('planes', 'iglesia_id'));
     }
 
-    public function certificacion()
+    public function certificacion($id)
     {
-        
+        dd("hombres trabajando");
+        $now = Carbon::now('America/El_Salvador');
+        $iglesia = Iglesia::findOrFail($id);
+        $planes = IglesiaPlanEstudio::where('iglesia_id', '=', $iglesia->id)//->where('end_date','<=', $now->format('Y-m-d'))
+        ->get();
+
+        $valida_jovenes = 0;
+
+        $plan_jovenes = $planes->where('group_id', '=', 1)->first();
+        $sesiones_jovenes = $plan_jovenes->sesiones;
+        if ($sesiones_jovenes->count() != $sesiones_jovenes->where('completed', '=', 1)->count()) {
+            //return view('')
+            dd("mostrara las sesiones que no estan completadas, plan de jovenes");
+        }
+        /*
+        $plan_hombres = $planes->where('group_id', '=', 2)->first();
+        $sesiones = $plan_hombres->sesiones;
+        if ($sesiones->count() != $sesiones->where('completed', '=', 1)->count()) {
+            //return view('')
+            dd("mostrara las sesiones que no estan completadas, plan de hombre");
+        }
+        $plan_mujeres = $planes->where('group_id', '=', 3)->first();
+        $sesiones = $plan_mujeres->sesiones;
+        if ($sesiones->count() != $sesiones->where('completed', '=', 1)->count()) {
+            //return view('')
+            dd("mostrara las sesiones que no estan completadas, plan de mujeres");
+        }
+        $plan_lideres = $planes->where('group_id', '=', 4)->first();
+        $sesiones = $plan_lideres->sesiones;
+        if ($sesiones->count() != $sesiones->where('completed', '=', 1)->count()) {
+            //return view('')
+            dd("mostrara las sesiones que no estan completadas, plan de lideres");
+        }*/
+
+        $array_planes = $planes->pluck('id')->toArray();
+     //   $sesiones = Sesion::whereIn('group_per_church_id', $array_planes)->get();
+
+        $sesiones_jovenes->where('completed', 1);
+       // dd($sesiones_jovenes);
+        foreach ($sesiones_jovenes->where('completed', 1) as $obj) {
+            $asistencia_jovenes = AsistenciaSesion::where('sessions_id', $obj->id)->get();
+            if($asistencia_jovenes->where('attended','=',1)->count() >= 9){
+                $valida_jovenes++; 
+            }
+
+        }
+        dd($valida_jovenes == $sesiones_jovenes->where('completed', 1)->count(), $sesiones_jovenes->where('completed', 1)->count());
+        $array_sesion = $sesiones_jovenes->pluck('id')->toArray();
+        $asistencia_jovenes = AsistenciaSesion::whereIn('sessions_id', $array_sesion)->get();
+        dd($asistencia_jovenes);
+ 
+
+
+
+
+        //mostrar las sesiones sin atestado o no completadas
+        /* si estan completas, validar asistencias*/
+
+        // $planes = IglesiaPlanEstudio::where('iglesia_id','='
+
+
+        //   dd($iglesias->sesiones());
+
         //$planes_estudio = IglesiaPlanEstudio::where('end_date', '<=', Carbon::now('America/El_Salvador')->format('Y-m-d'))->get();
-        
+
+    }
+
+    public function add_notes(Request $request){
+        $attended = AsistenciaSesion::findOrFail($request->id);
+        $attended->notes = $request->notes;
+        $attended->save();
+        $response = ["val" => 1, "mensaje" => "Registro modificado correctamente"];
+        return  $response;
+    }
+
+    public function subir_archivo(Request $request)
+    {
+        //    dd($request->sesion);
+        //  dd($request->file('fileDocument'));
+        $sesion = Sesion::findOrFail($request->sesion);
+        if ($request->file('fileDocument')) {
+            $file = $request->file('fileDocument');
+            $nombreArchivo = uniqid() . $file->getClientOriginalName();
+            $sesion->attendance_document = $nombreArchivo;
+            $carpetaDestino = public_path('./attendance');
+            $file->move($carpetaDestino, $nombreArchivo);
+        }
+        $sesion->completed = 1;
+        $sesion->update();
+        alert()->success('Se subio el archivo correctamente');
+        return back();
     }
 
     public function asistencia(Request $request)
@@ -54,6 +145,19 @@ class IglesiaPlanEstudioController extends Controller
         $attended->save();
         $response = ["val" => 1, "mensaje" => "Registro modificado correctamente"];
         return  $response;
+    }
+
+    public function delete_sesion(Request $request)
+    {
+        //dd($request->id_sesion);
+        AsistenciaSesion::where('sessions_id', '=', $request->id_sesion)->delete();
+        SesionDetalle::where('session_id', '=', $request->id_sesion)->delete();
+        $sesion = Sesion::findOrFail($request->id_sesion);
+        $sesion->delete();
+
+
+        alert()->success('El registro ha sido eliminado correctamente');
+        return back();
     }
 
     public function create()
@@ -85,17 +189,21 @@ class IglesiaPlanEstudioController extends Controller
             'end_date' => ['required'],
         ], $messages);
 
-        $plan = new IglesiaPlanEstudio();
-        $plan->iglesia_id = $request->iglesia_id;
-        $plan->group_id = $request->group_id;
-        $plan->study_plan_id = $request->study_plan_id;
-        $plan->name = $request->name;
-        $plan->start_date = $request->start_date;
-        $plan->end_date = $request->end_date;
-        $plan->save();
+        if ($request->start_date > $request->end_date) {
+            throw ValidationException::withMessages(['start_date' => ['Las fechas no son validas']]);
+        } else {
+            $plan = new IglesiaPlanEstudio();
+            $plan->iglesia_id = $request->iglesia_id;
+            $plan->group_id = $request->group_id;
+            $plan->study_plan_id = $request->study_plan_id;
+            $plan->name = $request->name;
+            $plan->start_date = $request->start_date;
+            $plan->end_date = $request->end_date;
+            $plan->save();
 
-        alert()->success('El registro ha sido agregado correctamente');
-        return back();
+            alert()->success('El registro ha sido agregado correctamente');
+            return back();
+        }
     }
 
     public function show($id)
@@ -224,13 +332,13 @@ class IglesiaPlanEstudioController extends Controller
             $name = $obj->name_member . ' ' . $obj->lastname_member;
             if ($number_dui == $dui_excel && $asistencia[10] == 1.0) {   //coinciden los duis
                 //dd("1");
-                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1]);
+                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1, 'notes' => $asistencia[11]]);
             } else if ($obj->email == $asistencia[3] && $asistencia[10] == 1.0) {  //coinciden los email
-                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1]);
+                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1, 'notes' => $asistencia[11]]);
             } elseif ($cell_phone == $cell_excel && $asistencia[10] == 1.0) { //coinciden los numeros de telefonos
-                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1]);
+                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1, 'notes' => $asistencia[11]]);
             } elseif ($name == $asistencia[0] && $asistencia[10] == 1.0) { //coinciden los nombres
-                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1]);
+                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1, 'notes' => $asistencia[11]]);
             }
         }
     }
@@ -243,11 +351,11 @@ class IglesiaPlanEstudioController extends Controller
             $cell_excel = str_replace('-', '', $asistencia[2]);
             $name = $obj->name_member . ' ' . $obj->lastname_member;
             if ($obj->email == $asistencia[3] && $asistencia[10] == 1.0) {  //coinciden los email
-                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1]);
+                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1, 'notes' => $asistencia[11]]);
             } elseif ($cell_phone == $cell_excel && $asistencia[10] == 1.0) { //coinciden los numeros de telefonos
-                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1]);
+                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1, 'notes' => $asistencia[11]]);
             } elseif ($name == $asistencia[0] && $asistencia[10] == 1.0) { //coinciden los nombres
-                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1]);
+                AsistenciaSesion::where('member_id', '=', $obj->member_id)->where('sessions_id', '=', $sesion)->update(['attended' => 1, 'notes' => $asistencia[11]]);
             }
         }
     }

@@ -135,7 +135,8 @@ Route::get('catalog/modificar_datos_participante',[MemberController::class,'modi
 
 
 Route::post('administracion/iglesia_plan_estudio/add_sesion', [IglesiaPlanEstudioController::class,'add_sesion']);
-Route::get('administracion/iglesia_plan_estudio/certificacion',[IglesiaPlanEstudioController::class,'certificacion']);
+Route::post('admin/delete_sesion',[IglesiaPlanEstudioController::class,'delete_sesion']);
+Route::get('administracion/iglesia_plan_estudio/certificacion/{id}',[IglesiaPlanEstudioController::class,'certificacion']);
 Route::resource('administracion/iglesia_plan_estudio', IglesiaPlanEstudioController::class);
 
 Route::get('reporte_grupos/{iglesia}/{grupo}', [IglesiaController::class, 'reporte_grupos']);
@@ -152,9 +153,11 @@ Route::post('catalog/iglesia/attach_preguntas', [IglesiaController::class, 'atta
 Route::post('catalog/iglesia/dettach_preguntas', [IglesiaController::class, 'dettach_preguntas']);
 
 Route::get('admin/import',[IglesiaPlanEstudioController::class,'import']);
+Route::post('admin/archivo',[IglesiaPlanEstudioController::class,'subir_archivo']);
 Route::post('admin/asistencia',[IglesiaPlanEstudioController::class,'asistencia']);
 Route::post('admin/import_excel',[IglesiaPlanEstudioController::class,'importExcel']);
 Route::get('admin/asistencia/mostrar',[IglesiaPlanEstudioController::class,'mostrar']);
+Route::post('admin/asistencia/add_notes',[IglesiaPlanEstudioController::class,'add_notes']);
 
 Route::post('catalog/Iglesiauser/dettach_iglesiauser', [UserController::class, 'dettach_iglesiauser']);
 Route::post('catalog/Iglesiauser/attach_iglesiauser', [UserController::class, 'attach_iglesiauser']);
