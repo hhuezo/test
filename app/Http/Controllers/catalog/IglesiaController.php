@@ -8,6 +8,7 @@ use App\Models\administracion\IglesiaPlanEstudio;
 use App\Models\administracion\Sesion;
 use App\Models\catalog\ChurchQuestionWizard;
 use App\Models\catalog\Cohorte;
+use App\Models\catalog\Course;
 use App\Models\catalog\Departamento;
 use App\Models\catalog\Gender;
 use App\Models\catalog\Grupo;
@@ -37,7 +38,7 @@ class IglesiaController extends Controller
         $iglesia = Iglesia::where('status_id', '<>', 3)->get();
         $iglesias_rechazadas = Iglesia::where('status_id', '=', 3)->get();
         //   dd($iglesia);
-        $estatuorg = OrganizationStatus::where('id','<=',3)->get();
+        $estatuorg = OrganizationStatus::where('id', '<=', 3)->get();
         return view('catalog.iglesia.index', compact('iglesia', 'estatuorg', 'iglesias_rechazadas'));
     }
 
@@ -267,9 +268,9 @@ class IglesiaController extends Controller
 
     public function modificar_estado(Request $request)
     {
-    ///     dd($request->status_id,$request->iglesia_id);
+        ///     dd($request->status_id,$request->iglesia_id);
         $iglesia = iglesia::findOrFail($request->iglesia_id);
-        if($request->status_id == 2){
+        if ($request->status_id == 2) {
             $sede = DB::table('sede as s')
                 ->join('cohorte as c', 'c.id', '=', 's.cohorte_id')
                 ->where('c.region_id', $iglesia->departamento->region_id)
@@ -369,9 +370,9 @@ class IglesiaController extends Controller
         $plan_estudio = IglesiaPlanEstudio::where('iglesia_id', '=', $iglesia->id)->get();
         $plan_estudio_array = $plan_estudio->pluck('id')->toArray();
         $sessiones = Sesion::whereIn('group_per_church_id',  $plan_estudio_array)->get();
-
-       // foreach ($sessiones as $obj) {
-            //dd($obj->iglesia_plan_estudio->group_id);        }
+        //dd( $sessiones
+        // foreach ($sessiones as $obj) {
+        //dd($obj->iglesia_plan_estudio->group_id);        }
 
         $genero = Gender::get();
         $sessiones_array = $sessiones->pluck('id')->toArray();
@@ -379,22 +380,31 @@ class IglesiaController extends Controller
         $asistencia_sesion = AsistenciaSesion::whereIn('sessions_id', $sessiones_array)->get();
 
 
-        $grupos_iglesia=$iglesia->iglesia_has_grupo;
-      //  dd($grupos_iglesia);
+        $grupos_iglesia = $iglesia->iglesia_has_grupo;
+        //  dd($grupos_iglesia);
 
-       $gruposall= $iglesia->participantes_iglesia( $iglesia->id);
+        $gruposall = $iglesia->participantes_iglesia($iglesia->id);
 
-     //   dd( $gruposall);
+        //   dd( $gruposall);
 
         $participantes_array = $asistencia_sesion->pluck('member_id')->unique()->values()->toArray();
 
 
         $participantes =  Member::whereIn('id', $participantes_array)->get();
 
-        return view('catalog.iglesia.reporte_asistencias', compact('gruposall','grupos_iglesia','iglesia', 'sessiones', 'participantes', 'genero'));
+        $cursos = Course::get();
 
-       // $pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('gruposall','grupos_iglesia','iglesia', 'sessiones', 'participantes', 'genero'));
-       // return $pdf->stream('Info.pdf');
+
+
+    //return view('catalog.iglesia.reporte_asistencias', compact('cursos', 'gruposall', 'grupos_iglesia', 'iglesia', 'sessiones', 'participantes', 'genero'));
+
+
+         $pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('cursos','gruposall','grupos_iglesia','iglesia', 'sessiones', 'participantes', 'genero'));
+
+         $pdf->setPaper('A4', 'landscape');
+         return $pdf->stream('test_pdf.pdf');
+
+
     }
 
 
