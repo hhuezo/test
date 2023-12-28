@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Listado de Asistencia de Participantes de Grupos de la Iglesia</title>
+    <style type="text/css">
+        #bold-text {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <style>
     img {
@@ -25,161 +30,138 @@
     }
 
     .small {
-  font-size: xx-small;
-}
+        font-size: xx-small;
+    }
 
+    .center-text {
+        text-align: center;
+    }
+
+    .body {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 12px;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
 </style>
 
-<body>
+<style>
+    .page-break {
+        page-break-before: always; /* También puedes usar "after" en lugar de "before" según tus necesidades */
+    }
+</style>
 
-    &nbsp; &nbsp; &nbsp;
-    <rigth>
-        <img src="{{ $iglesia->logo_url }}{{ $iglesia->logo }}"></rigth>
-
-    <rigth>
-        <h3><b>Nombre de Iglesia: {{ $iglesia->name }} </b></h3>
-    </rigth>
-    &nbsp;
-
-    @php($totalizado = 0)
-
+<body class="body">
+    <table width="100%" border="0">
+        <tr>
+            <td colspan="{{ $sessiones->count() + 8 }}">Nombre de Iglesia: {{ $iglesia->name }} </td>
+        </tr>
+    </table>
+    <br> <br>
 
     @foreach ($grupos_iglesia as $grupos)
-        &nbsp; &nbsp; &nbsp;
-
-        @php($validar = $sessiones->where('iglesia_plan_estudio.group_id', '=', $grupos->id)->count())
-        @if ($validar > 0)
-        <h3><b>Grupos {{ $grupos->nombre }}</b></h3>
-            <table border="1" id="grupostb" cellspacing="0"  >
-
-                &nbsp; &nbsp; &nbsp;
-                <tr>
-                    <td colspan="5"   class="small">
-                        <center>Informacion del Participante </center>
-                    </td>
-                    <td colspan=" {{ $sessiones->count() + 1 }}"   class="small">
-                        <center>Asistencia</center>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="small"> DUI </th>
-                    <th  class="small"> Nombre Completo </th>
-                    <th  class="small"> telefono </th>
-                    <th  class="small" > Correo electronico </th>
-                    <th  class="small"> Genero </th>
-
-                    @foreach ($sessiones as $session)
-                        @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
-                            <th  class="small">
-                                {{ $session->session_name }}
-                        @endif
-                    @endforeach
-
-                    <th  class="small" rowspan="3">
-                    Total
-                    </th>
+        <table border="1" cellspacing="0" cellpadding="0" width="100%">
 
 
-                </tr>
-                <tr style="background-color: gray">
-                    <td  class="small" colspan="5"> </td>
-                    @foreach ($sessiones as $session)
-                        @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
-                            <td  class="small">
-                                @foreach ($session->detalles as $clases)
-                                    <li> {{ $clases->curso->name_es }} </li>
-                                @endforeach
-                            </td>
-                        @endif
-                    @endforeach
-                </tr>
-                <tr style="background-color: rgb(84, 81, 81)">
-                    <td colspan="5"  class="small" > </td>
-                    @foreach ($sessiones as $session)
-                        @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
-                            <td  class="small" >
+            <tr>
+                <td colspan="5">Informacion del Participante <b>(Grupo {{ $grupos->nombre }}</b> ) </td>
+                <td width="100%" colspan="{{ $sessiones->count() + 1 }}" class="center-text"><span
+                        class="bold-text">Asistencia</span></td>
+            </tr>
+            <tr>
+                <td width="10%" rowspan="3" class="bold-text center-text">DUI</td>
+                <td width="10%" rowspan="3" class="bold-text center-text">Nombre Completo</td>
+                <td width="10%" rowspan="3" class="bold-text center-text">Télefono</td>
+                <td width="10%" rowspan="3" class="bold-text center-text">Correo Electronico</td>
+                <td width="10%" rowspan="3" class="bold-text center-text">Género</td>
+                @foreach ($sessiones as $session)
+                    @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                        <td class="center-text">
+                            {{ $session->session_name }}
+                        </td>
+                    @endif
+                @endforeach
+                <td width="3%" rowspan="3" class="center-text bold-text">Total</td>
+            </tr>
+            <tr>
+                @foreach ($sessiones as $session)
+                    @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                        <td>
+                            @foreach ($session->detalles as $clases)
+                                <li> {{ $clases->curso->name_es }} </li>
+                            @endforeach
+                        </td>
+                    @endif
+                @endforeach
+            </tr>
+            <tr>
+                @foreach ($sessiones as $session)
+                    @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                        <td>
+                            <li> {{ $session->meeting_date ? date('d/m/Y', strtotime($session->meeting_date)) : '' }}
+                            </li>
+                        </td>
+                    @endif
+                @endforeach
+            </tr>
+            @foreach ($participantes as $obj)
+                {{-- {{ $obj->grupo_first($obj->id) }} --}}
+                @php($total = 0)
 
-
-                                <li> {{ $session->meeting_date }}</li>
-
-
-                            </td>
-                        @endif
-                    @endforeach
-                </tr>
-
-
-
-                <tbody>
-
-
-                    @foreach ($participantes as $obj)
-                        {{-- {{ $obj->grupo_first($obj->id) }} --}}
-                        @php($total = 0)
-
-                        @if ($obj->grupo_first($obj->id) == $grupos->id)
-                            <tr>
-                                <td  class="small">
-                                    {{ $obj->document_number }}
-                                </td>
-                                <td  class="small">
-                                    {{ $obj->name_member }} {{ $obj->lastname_member }}
-                                </td>
-                                <td  class="small">
-                                    {{ $obj->cell_phone_number }}
-                                </td>
-                                <td style="text-transform: lowercase"  class="small">
-                                    {{ $obj->email }}
-                                </td>
-                                <td  class="small">
-                                    {{ $obj->genders ? $obj->genders->description : '' }}
-                                </td>
-
-                                @foreach ($sessiones as $session)
-                                    @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
-                                        <td align="center"   class="small">
-                                            @php($asistencia = $session->asistencia($session->id, $obj->id))
-                                            {{ $asistencia }}
-
-                                            @if ($asistencia == 1)
-                                                @php($total++)
-                                            @endif
-                                        </td>
-                                    @endif
-                                @endforeach
-                                <td   class="small">{{ $total }}</td>
-
-
-                            </tr>
-                        @endif
-
-                    @endforeach
+                @if ($obj->grupo_first($obj->id) == $grupos->id)
                     <tr>
-                        <td colspan="5"  class="small" ></td>
+                        <td class="center-text">
+                            {{ $obj->document_number }}
+                        </td>
+                        <td>
+                            {{ $obj->name_member }} {{ $obj->lastname_member }}
+                        </td>
+                        <td class="center-text">
+                            {{ $obj->cell_phone_number }}
+                        </td>
+                        <td style="text-transform: lowercase">
+                            {{ $obj->email }}
+                        </td>
+                        <td class="center-text">
+                            {{ $obj->genders ? $obj->genders->description : '' }}
+                        </td>
 
-                        @foreach($sessiones as $session)
-                        @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                        @foreach ($sessiones as $session)
+                            @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                                <td align="center">
+                                    @php($asistencia = $session->asistencia($session->id, $obj->id))
+                                    {{ $asistencia }}
 
-                        <td align="center"  class="small">{{$session->asistencias->where('attended',1)->count()}}</td>
-                        @endif
+                                    @if ($asistencia == 1)
+                                        @php($total++)
+                                    @endif
+                                </td>
+                            @endif
                         @endforeach
-                        <td></td>
+                        <td class="center-text">{{ $total }}</td>
+
+
                     </tr>
+                @endif
+            @endforeach
 
-                </tbody>
+            <tr id="bold-text">
+                <td colspan="5" align="right">TOTAL</td>
 
+                @foreach ($sessiones as $session)
+                    @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                        <td align="center">
+                            {{ $session->asistencias->where('attended', 1)->count() }}</td>
+                    @endif
+                @endforeach
+                <td></td>
+            </tr>
 
-            </table>
-        @endif
+        </table>
+        <div class="page-break"></div>
     @endforeach
-    <script>
-        // Función para ocultar la tabla
-        function ocultarTabla() {
-            var tabla = document.getElementById('grupostb');
-            tabla.style.display = 'none';
-        }
-    </script>
-
 </body>
 
 </html>
