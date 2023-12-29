@@ -39,7 +39,9 @@ class IglesiaController extends Controller
         $iglesias_rechazadas = Iglesia::where('status_id', '=', 3)->get();
         //   dd($iglesia);
         $estatuorg = OrganizationStatus::where('id', '<=', 3)->get();
-        return view('catalog.iglesia.index', compact('iglesia', 'estatuorg', 'iglesias_rechazadas'));
+
+        $sede=sede::get();
+        return view('catalog.iglesia.index', compact('sede','iglesia', 'estatuorg', 'iglesias_rechazadas'));
     }
 
     public function create()

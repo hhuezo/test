@@ -25,7 +25,8 @@
                     <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
                         <thead class="bg-slate-200 dark:bg-slate-700">
                             <tr>
-
+                                <th style="text-align: center">sede</th>
+                                <th style="text-align: center">cohorte</th>
                                 <th style="text-align: center">Iglesia</th>
                                 <th style="text-align: center">Dirección</th>
                                 <th style="text-align: center">Contacto</th>
@@ -39,6 +40,11 @@
                             @if ($iglesia->count() > 0)
                             @foreach ($iglesia as $obj)
                             <tr class="even:bg-slate-50 dark:even:bg-slate-700">
+                                <td align="center" class="table-td">{{ $obj->sedeiglesia->nombre }}</td>
+                                <td align="center" class="table-td">
+                                    {{ $obj->sedeiglesia->cohorte->nombre}}
+                                   </td>
+
                                 <td align="center" class="table-td">{{ $obj->name }}</td>
                                 <td align="center" class="table-td">{{ $obj->address }}</td>
                                 <td align="center" class="table-td">{{ $obj->contact_name }}</td>

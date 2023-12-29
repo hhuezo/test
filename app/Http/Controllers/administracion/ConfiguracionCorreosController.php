@@ -73,7 +73,25 @@ class ConfiguracionCorreosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $email =ConfiguracionCorreos::findOrFail($id);
+        $email->smtp_host= $request->smtp_host;
+        $email->smtp_port = $request->smtp_port;
+        $email-> smtp_username = $request->smtp_username;
+        $email->smtp_password =$request-> smtp_password;
+        $email-> from_address = $request->from_address;
+        $email->UsuarioCreacion= $request->UsuarioCreacion;
+        $email->UsuarioModificacion = $request-> UsuarioModificacion;
+        $email->CreatedAt  =$request->  CreatedAt ;
+        $email->UpdateAt = $request->UpdateAt;
+        $email-> smtp_encryption  =$request-> smtp_encryption ;
+        $email-> smtp_from_name = $request->smtp_from_name;
+        $email->update();
+        alert()->success('se han sido Actualizado correctamente');
+        return back();
+
+
+
     }
 
     /**
