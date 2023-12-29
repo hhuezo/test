@@ -33,7 +33,7 @@
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td align="center">{{ $obj->name }}</td>
                                                 <td align="center">
-                                                    <iconify-icon icon="mdi:pencil"
+                                                    <iconify-icon icon="mdi:pencil-circle"
                                                         onclick="modal_edit({{ $obj->id }},'{{ $obj->name }}')"
                                                         style="color:black;" width="40"></iconify-icon>
 

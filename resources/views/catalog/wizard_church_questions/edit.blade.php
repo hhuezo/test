@@ -12,7 +12,7 @@
                             <div class="card-title text-slate-900 dark:text-white">Preguntas modificar
 
                                 <a href="{{ url('catalog/wizard_church_questions') }}">
-                                    <button class="btn btn-black btn-sm float-right">
+                                    <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
                                     </button>
@@ -43,8 +43,8 @@
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('question') }}</label>
-                                                    <input type="text" name="question" value="{{ $wizzarquestion->question }}"
+                                                        class="form-label">Pregunta</label>
+                                                    <input type="text" name="question"   id= "question" value="{{ $wizzarquestion->question }}"
                                                         required class="form-control" value="{{ old('question') }}"
                                                         autofocus="true">
                                                 </div>

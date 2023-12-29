@@ -11,7 +11,7 @@
                             <div class="card-title text-slate-900 dark:text-white">Preguntas Crear
 
                                 <a href="{{ url('catalog/wizard_church_questions') }}">
-                                    <button class="btn btn-black btn-sm float-right">
+                                    <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
                                     </button>
@@ -42,7 +42,7 @@
                                             <div class="grid pt-4 pb-3 px-4">
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Pregunta</label>
-                                                    <input type="text" name="question" value="{{ old('question') }}" required class="form-control">
+                                                    <input type="text" name="question" id="question" value="{{ old('question') }}" required class="form-control">
                                                 </div>
 
                                                 <fieldset class="altura">

@@ -43,13 +43,13 @@
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('nombre') }}</label>
 
-                                                        <input  resize="true" name="nombre"  required    value="{{ $sede->nombre }}"   autofocus="true"    class="form-control">
+                                                        <input  resize="true" name="nombre"  id= "nombre" required    value="{{ $sede->nombre }}"   autofocus="true"    class="form-control">
 
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">cohortes</label>
-                                                    <select name="cohorte_id" class="form-control">
+                                                    <select name="cohorte_id" id="cohorte_id" class="form-control">
                                                         @foreach ($cohorte as $obj)
                                                         @if ($obj->id == $sede->corte_id)
                                                                 <option value="{{ $obj->id }}" selected>

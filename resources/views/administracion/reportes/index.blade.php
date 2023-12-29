@@ -6,9 +6,9 @@
 
     <div class="card">
         <header class=" card-header noborder">
-            <h4 class="card-title">Listado de respuestas de registro
+            <h4 class="card-title">Reportes
             </h4>
-            <a href="{{ url('catalog/answerreg/create') }}">
+            <a href="{{ url('administracion/reportes/create') }}">
                 <button class="btn btn-outline-primary">Nuevo</button>
             </a>
         </header>
@@ -34,7 +34,7 @@
                                         <td align="center">{{ $obj->name }}</td>
                                         <td align="center">
                                             <a href="{{ url('catalog/answerreg') }}/{{ $obj->id }}/edit">
-                                                <iconify-icon icon="mdi:edit-circle" style="color:black;"
+                                                <iconify-icon icon="mdi:pencil-circle" style="color:black;"
                                                     width="40"></iconify-icon>
                                             </a>
                                             &nbsp;&nbsp;

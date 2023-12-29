@@ -40,7 +40,7 @@
                                     <td align="center">{{ $obj->iglesia}}</td>
                                     <td align="center">
                                         <a href="{{ url('catalog/Iglesiauser') }}/{{ $obj->idusuario }}/edit">
-                                            <iconify-icon icon="mdi:pencil" style="color: #090a0b;" width="40"></iconify-icon>
+                                            <iconify-icon icon="mmdi:edit-circle" style="color: #090a0b;" width="40"></iconify-icon>
                                         </a>
                                         &nbsp;&nbsp;
                                         <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->idusuario }}" icon="mdi:trash" style="color: #0c0d0e;" width="40"></iconify-icon>

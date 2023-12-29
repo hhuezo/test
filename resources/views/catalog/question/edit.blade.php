@@ -52,7 +52,7 @@
                                     <div class="grid pt-4 pb-3 px-4">
                                         <div class="input-area relative">
                                             <label for="largeInput" class="form-label">Descripción</label>
-                                            <textarea resize="true" name="description" required class="form-control">{{ $questions->description }}</textarea>
+                                            <textarea resize="true" name="description"  id= "description" required class="form-control">{{ $questions->description }}</textarea>
                                         </div>
                                         &nbsp;
                                         <div style="text-align: right;">

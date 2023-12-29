@@ -27,7 +27,7 @@
                             <div class="space-y-5">
                                 <div class="grid grid-cols-12 gap-5">
 
-                                    <div class="xl:col-span-12 col-span-12 lg:col-span-12">
+                                <div class="xl:col-span-12 col-span-12 lg:col-span-12">
                                         @if (count($errors) > 0)
                                             <div class="alert alert-danger">
                                                 <ul>
@@ -39,18 +39,18 @@
                                         @endif
                                         <form method="POST" action="{{ url('catalog/region') }}">
                                             @csrf
-                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
+
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('nombre') }}</label>
-                                                    <input type="text" name="nombre" required class="form-control"
+                                                        class="form-label">Nombre</label>
+                                                    <input type="text" name="nombre" id="nombre"  required class="form-control"
                                                         value="{{ old('nombre') }}" autofocus="true">
                                                 </div>
 
-                                            </div>
+                                                &nbsp;&nbsp;  &nbsp;&nbsp;
                                             <div style="text-align: right;">
                                                 <button type="submit"
-                                                    class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
+                                                    class="btn inline-flex justify-center btn-dark">Aceptar</button>
                                             </div>
                                         </form>
 

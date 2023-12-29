@@ -50,7 +50,7 @@
                                                 <div class="grid pt-4 pb-3 px-4">
                                                     <div class="input-area relative">
                                                         <label for="largeInput" class="form-label">Descripción</label>
-                                                        <textarea  resize="true" name="description" value="{{old('description')}}" required
+                                                        <textarea  resize="true" name="description" id="description" value="{{old('description')}}" required
                                                             class="form-control"></textarea>
                                                     </div>
 

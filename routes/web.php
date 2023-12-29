@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\administracion\ConfiguracionCorreosController;
 use App\Http\Controllers\administracion\DatosIglesiaController;
 use App\Http\Controllers\administracion\IglesiaPlanEstudioController;
+use App\Http\Controllers\administracion\ReporteController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\catalog\MemberController;
 use App\Http\Controllers\catalog\StudyPlanController;
@@ -264,3 +266,13 @@ Route::post('catalog/plan_estudios/dettach_cursos', [StudyPlanController::class,
 
 Route::resource('catalog/plan_estudios', StudyPlanController::class);
 
+// correos
+
+Route::resource('administracion/configuracion_correos',ConfiguracionCorreosController ::class);
+
+
+
+//reporte
+
+Route::get('administracion/reportes/create', [ReporteController::class,'create']);
+Route::get('administracion/reportes', [ReporteController::class,'reportes_plantilla']);
