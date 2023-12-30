@@ -340,8 +340,8 @@
                                                     @endif
                                                 </td>
                                                 <td align="center">
-                                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-{{ $obj->id }}" icon="mdi:pencil" style="color: #1769aa;" width="40"></iconify-icon> &nbsp;&nbsp;
-                                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-preg-{{ $obj->question_id }}" icon="mdi:trash" style="color: #1769aa;" width="40"></iconify-icon>
+                                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-{{ $obj->id }}" icon="mdi:pencil" style="color: black;" width="40"></iconify-icon> &nbsp;&nbsp;
+                                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-preg-{{ $obj->question_id }}" icon="mdi:delete-circle" style="color: black;" width="40"></iconify-icon>
 
                                                 </td>
                                                 </tr>

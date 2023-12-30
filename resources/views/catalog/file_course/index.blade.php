@@ -49,7 +49,7 @@
                                         <iconify-icon icon="mdi:edit-circle" style="color: black;" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;&nbsp;
-                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: black;" width="40"></iconify-icon>
+                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle" style="color: black;" width="40"></iconify-icon>
                                 </td>
                             </tr>
                             @include('catalog.file_course.modal')

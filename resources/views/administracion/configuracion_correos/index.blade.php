@@ -65,6 +65,36 @@
                                                 </div>
 
 
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">from_address</label>
+                                                    <input type="text" name="from_address" id="from_address" value="{{  $configcorreo->from_address}}" required class="form-control">
+                                                </div>
+
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">UsuarioCreacion</label>
+                                                    <input type="text" name="UsuarioCreacion" id="UsuarioCreacion" value="{{  $configcorreo->UsuarioCreacion}}" required class="form-control">
+                                                </div>
+
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">UsuarioModificacion</label>
+                                                    <input type="text" name="UsuarioModificacion" id="UsuarioModificacion" value="{{  $configcorreo->UsuarioModificacion}}" required class="form-control">
+                                                </div>
+
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">smtp_from_name</label>
+                                                    <input type="text" name="smtp_from_name" id="smtp_from_name" value="{{  $configcorreo->smtp_from_name}}" required class="form-control">
+                                                </div>
+
+
+                                                <div class="input-area relative">
+                                                    <label for="largeInput" class="form-label">smtp_encryption</label>
+                                                    <input type="text" name="smtp_encryption" id="smtp_encryption" value="{{  $configcorreo->smtp_encryption}}" required class="form-control">
+                                                </div>
+
+
 
 
                                             </div>&nbsp;

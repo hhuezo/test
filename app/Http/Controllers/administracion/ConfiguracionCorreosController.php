@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\administracion\ConfiguracionCorreos;
 use App\Models\catalog\Iglesia;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class ConfiguracionCorreosController extends Controller
 {
@@ -74,6 +76,7 @@ class ConfiguracionCorreosController extends Controller
     public function update(Request $request, $id)
     {
 
+        $time = Carbon::now('America/El_Salvador');
         $email =ConfiguracionCorreos::findOrFail($id);
         $email->smtp_host= $request->smtp_host;
         $email->smtp_port = $request->smtp_port;
@@ -82,10 +85,10 @@ class ConfiguracionCorreosController extends Controller
         $email-> from_address = $request->from_address;
         $email->UsuarioCreacion= $request->UsuarioCreacion;
         $email->UsuarioModificacion = $request-> UsuarioModificacion;
-        $email->CreatedAt  =$request->  CreatedAt ;
-        $email->UpdateAt = $request->UpdateAt;
-        $email-> smtp_encryption  =$request-> smtp_encryption ;
-        $email-> smtp_from_name = $request->smtp_from_name;
+        $email->CreatedAt  = $time->toDateTimeString();
+        $email->UpdateAt = $time->toDateTimeString();
+        $email->smtp_encryption  =$request-> smtp_encryption ;
+        $email->smtp_from_name = Hash::make($request->smtp_from_name);
         $email->update();
         alert()->success('se han sido Actualizado correctamente');
         return back();

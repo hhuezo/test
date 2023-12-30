@@ -44,7 +44,7 @@ class OrganizationStatusController extends Controller
         //
 
         $messages = [
-            'description.required' => 'ingresar descripcion del estatus',
+            'description.required' => 'ingresar descripcion del estado',
 
         ];
 

@@ -45,7 +45,7 @@
                                         <iconify-icon icon="mdi:pencil-circle" style="color:  #080808;" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;&nbsp;
-                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #080808;" width="40"></iconify-icon>
+                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle" style="color: #080808;" width="40"></iconify-icon>
                                 </td>
                             </tr>
                             @include('catalog.wizard_church_questions.modal')

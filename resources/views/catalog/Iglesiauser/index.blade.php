@@ -43,7 +43,7 @@
                                             <iconify-icon icon="mmdi:edit-circle" style="color: #090a0b;" width="40"></iconify-icon>
                                         </a>
                                         &nbsp;&nbsp;
-                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->idusuario }}" icon="mdi:trash" style="color: #0c0d0e;" width="40"></iconify-icon>
+                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->idusuario }}" icon="mdi:delete-circle" style="color: #0c0d0e;" width="40"></iconify-icon>
                                     </td>
 
                                 </tr>

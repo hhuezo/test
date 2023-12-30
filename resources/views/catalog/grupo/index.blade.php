@@ -40,7 +40,7 @@
                                                     </a>--}}
                                                     &nbsp;&nbsp;
                                                     <iconify-icon data-bs-toggle="modal"
-                                                        data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
+                                                        data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle"
                                                         style="color:black;" width="40"></iconify-icon>
                                                 </td>
                                             </tr>
