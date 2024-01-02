@@ -13,7 +13,7 @@ class Cohorte extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'name',
+        'nombre',
         'region_id',
     ];
 

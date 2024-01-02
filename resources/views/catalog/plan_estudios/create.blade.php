@@ -39,14 +39,14 @@
                                     @endif
                                     <form method="POST" action="{{ url('catalog/plan_estudios') }}">
                                         @csrf
-                                        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-7">
+
                                             <div class="input-area relative"> &nbsp;
                                             </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Nombre </label>
                                                 <input type="text" name="description_es" id="description_es" required class="form-control" value="{{ old('description_es') }}" autofocus="true">
                                             </div>
-                                        </div>
+
                                         <br>
                                         <div class="input-area relative" style="text-align: right;">
                                             <button type="submit" class="btn inline-flex justify-center btn-dark">{{('Aceptar') }}</button>

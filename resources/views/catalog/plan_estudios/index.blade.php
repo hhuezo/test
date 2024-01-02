@@ -25,7 +25,7 @@
                             <thead class="bg-slate-200 dark:bg-slate-700">
                                 <tr class="even:bg-slate-50 dark:even:bg-slate-700">
 
-                               
+
                                     <th style="text-align: left; ">Descripción</th>
                                     <th style="text-align: left">Temas</th>
                                     <th style="text-align: center">Opciones</th>
@@ -36,7 +36,7 @@
                                 @if ($plan_estudio->count() > 0)
                                 @foreach ($plan_estudio as $obj)
                                 <tr class="even:bg-slate-50 black:even:bg-slate-700">
-                              
+
                                     <td style="vertical-align: top;">{{ $obj->description_es }}</td>
                                     <td>
                                         @foreach($obj->detalles as $tem)

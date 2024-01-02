@@ -8,7 +8,7 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">region modificar
+                            <div class="card-title text-slate-900 dark:text-white">Region Modificar
 
                                 <a href="{{ url('catalog/region') }}">
                                     <button class="btn btn-dark btn-sm float-right">
@@ -35,22 +35,25 @@
                                             </div>
                                         @endif
 
-                                        <form method="POST" action="{{ route('register') }}" class="space-y-4">
+
+                                            <form method="POST" action="{{ route('region.update', $region->id) }}">
+                                                @method('PUT')
                                             @csrf
-                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
+
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('nombre') }}</label>
+                                                        class="form-label">Nombre</label>
 
-                                                        <input  resize="true" name="nombre"  required    value="{{ $region->nombre }}"   autofocus="true"    class="form-control">
+                                                        <input  resize="true" name="nombre" id="nombre"  required    value="{{ $region->nombre }}"   autofocus="true"    class="form-control">
 
                                                 </div>
 
 
-                                            </div>
+
+                                            &nbsp;&nbsp;  &nbsp;&nbsp;
                                             <div style="text-align: right;">
                                                 <button type="submit"
-                                                    class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
+                                                    class="btn inline-flex justify-center btn-dark">Aceptar</button>
                                             </div>
                                         </form>
 

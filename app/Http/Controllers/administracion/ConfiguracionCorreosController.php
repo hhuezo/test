@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\catalog;
+namespace App\Http\Controllers\administracion;
 
 use App\Http\Controllers\Controller;
-use App\Models\catalog\OrganizationStatus;
+use App\Models\administracion\ConfiguracionCorreos;
+use App\Models\catalog\Iglesia;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
-class OrganizationStatusController extends Controller
+class ConfiguracionCorreosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +18,9 @@ class OrganizationStatusController extends Controller
      */
     public function index()
     {
-        $OrganizationStatus =OrganizationStatus::get();
+        $configcorreo = ConfiguracionCorreos::get()->first();
 
-        return view('catalog.organization_status.index', compact('OrganizationStatus'));
-        //
+        return view('administracion.configuracion_correos.index', compact('configcorreo'));
     }
 
     /**
@@ -29,8 +31,6 @@ class OrganizationStatusController extends Controller
     public function create()
     {
         //
-        return view('catalog.organization_status.create');
-
     }
 
     /**
@@ -42,26 +42,6 @@ class OrganizationStatusController extends Controller
     public function store(Request $request)
     {
         //
-
-        $messages = [
-            'description.required' => 'ingresar descripcion del estado',
-
-        ];
-
-
-
-        $request->validate([
-
-            'description' => 'required',
-
-
-        ], $messages);
-        $OrganizationStatus = new OrganizationStatus();
-        $OrganizationStatus->description = $request->description;
-        $OrganizationStatus->save();
-
-        alert()->success('El registro ha sido agregado correctamente');
-        return back();
     }
 
     /**
@@ -84,9 +64,6 @@ class OrganizationStatusController extends Controller
     public function edit($id)
     {
         //
-         $OrganizationStatus=  OrganizationStatus::findOrFail($id);
-
-        return view('catalog.organization_status.edit', compact('OrganizationStatus'));
     }
 
     /**
@@ -98,12 +75,26 @@ class OrganizationStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $OrganizationStatus= OrganizationStatus::findOrFail($id);
-        $OrganizationStatus->description = $request->description;
-        $OrganizationStatus->save();
 
-        alert()->success('El registro ha sido Modificado correctamente');
+        $time = Carbon::now('America/El_Salvador');
+        $email =ConfiguracionCorreos::findOrFail($id);
+        $email->smtp_host= $request->smtp_host;
+        $email->smtp_port = $request->smtp_port;
+        $email-> smtp_username = $request->smtp_username;
+        $email->smtp_password =$request-> smtp_password;
+        $email-> from_address = $request->from_address;
+        $email->UsuarioCreacion= $request->UsuarioCreacion;
+        $email->UsuarioModificacion = $request-> UsuarioModificacion;
+        $email->CreatedAt  = $time->toDateTimeString();
+        $email->UpdateAt = $time->toDateTimeString();
+        $email->smtp_encryption  =$request-> smtp_encryption ;
+        $email->smtp_from_name = Hash::make($request->smtp_from_name);
+        $email->update();
+        alert()->success('se han sido Actualizado correctamente');
         return back();
+
+
+
     }
 
     /**
@@ -115,10 +106,5 @@ class OrganizationStatusController extends Controller
     public function destroy($id)
     {
         //
-        $question= OrganizationStatus::findOrFail($id);
-        //dd($question);
-        $question->delete();
-        alert()->info('El registro ha sido eliminado correctamente');
-        return back();
     }
 }

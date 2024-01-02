@@ -16,70 +16,67 @@
                     style="display: none;"><iconify-icon icon="ic:outline-church" width="16"></iconify-icon>
                     &nbsp;Iglesias Aceptadas</button>
 
-                <a href="{{ url('catalog/iglesia/create') }}">
-                    <button class="btn btn-dark">Nuevo</button>
-                </a>
-            </div>
-        </header>
-        <div class="card-body px-6 pb-6" id="aceptadas" style="display: block;">
-            <div class="overflow-x-auto -mx-6">
-                <div class="inline-block min-w-full align-middle">
-                    <div class="overflow-hidden" style="width: 97%; margin-left: 1%;">
-                        <table id="myTable"
-                            class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
-                            <thead class="bg-slate-200 dark:bg-slate-700">
-                                <tr>
+            <a href="{{ url('catalog/iglesia/create') }}">
+                <button class="btn btn-dark">Nuevo</button>
+            </a>
+        </div>
+    </header>
+    <div class="card-body px-6 pb-6" id="aceptadas" style="display: block;">
+        <div class="overflow-x-auto -mx-6">
+            <div class="inline-block min-w-full align-middle">
+                <div class="overflow-hidden" style="width: 97%; margin-left: 1%;">
+                    <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
+                        <thead class="bg-slate-200 dark:bg-slate-700">
+                            <tr>
+                                <th style="text-align: center">sede</th>
+                                <th style="text-align: center">cohorte</th>
+                                <th style="text-align: center">Iglesia</th>
+                                <th style="text-align: center">Dirección</th>
+                                <th style="text-align: center">Contacto</th>
+                                <th style="text-align: center">Estado</th>
+                                <th style="text-align: center">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
 
-                                    <th style="text-align: center">Iglesia</th>
-                                    <th style="text-align: center">Dirección</th>
-                                    <th style="text-align: center">Contacto</th>
-                                    <th style="text-align: center">Estado</th>
-                                    <th style="text-align: center">Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
 
+                            @if ($iglesia->count() > 0)
+                            @foreach ($iglesia as $obj)
+                            <tr class="even:bg-slate-50 dark:even:bg-slate-700">
+                                <td align="center" class="table-td">{{ $obj->sedeiglesia->nombre }}</td>
+                                <td align="center" class="table-td">
+                                    {{ $obj->sedeiglesia->cohorte->nombre}}
+                                   </td>
 
-                                @if ($iglesia->count() > 0)
-                                    @foreach ($iglesia as $obj)
-                                        <tr class="even:bg-slate-50 dark:even:bg-slate-700">
-                                            <td align="center" class="table-td">{{ $obj->name }}</td>
-                                            <td align="center" class="table-td">{{ $obj->address }}</td>
-                                            <td align="center" class="table-td">{{ $obj->contact_name }}</td>
-                                            <td align="center" class="table-td">{{ $obj->iglesia_estatus->description_es }}
-                                            </td>
-                                            <td align="center" class="table-td">
-                                                <a href="{{ url('catalog/iglesia') }}/{{ $obj->id }}/edit">
-                                                    <iconify-icon icon="mdi:edit-circle" style="color: #1e293b;"
-                                                        width="40"></iconify-icon>
-                                                </a>
-                                                &nbsp;&nbsp;
-                                                <a href="{{ url('iglesia/reporte_asistencias/') }}/{{ $obj->id }}" target="_blank">
-                                                    <iconify-icon icon="material-symbols:location-home"
-                                                        style="color: #1e293b;" width="40"></iconify-icon>
-                                                </a>
-                                                &nbsp;&nbsp;
+                                <td align="center" class="table-td">{{ $obj->name }}</td>
+                                <td align="center" class="table-td">{{ $obj->address }}</td>
+                                <td align="center" class="table-td">{{ $obj->contact_name }}</td>
+                                <td align="center" class="table-td">{{ $obj->iglesia_estatus->description_es}} </td>
+                                <td align="center" class="table-td">
+                                    <a href="{{ url('catalog/iglesia') }}/{{ $obj->id }}/edit">
+                                        <iconify-icon icon="mdi:edit-circle" style="color: #1e293b;" width="40"></iconify-icon>
+                                    </a>
+                                    &nbsp;&nbsp;
+                                    <a href="{{ url('iglesia/reporte_asistencias/') }}/{{ $obj->id }}">
+                                        <iconify-icon icon="material-symbols:location-home" style="color: #1e293b;" width="40"></iconify-icon>
+                                    </a>
+                                    &nbsp;&nbsp;
 
-                                                <iconify-icon icon="mdi:delete-circle" style="color: #1e293b;"
-                                                    width="40" data-bs-toggle="modal"
-                                                    data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
-                                                &nbsp;&nbsp;
-                                                @if ($obj->status_id != 2)
-                                                    <iconify-icon icon="lets-icons:check-fill" style="color: #1e293b;"
-                                                        width="40" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-estado-{{ $obj->id }}"></iconify-icon>
-                                                @endif
-                                                &nbsp;&nbsp;
+                                    <iconify-icon icon="mdi:delete-circle" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
+                                    &nbsp;&nbsp;
+                                    @if($obj->status_id != 2)
+                                    <iconify-icon icon="lets-icons:check-fill" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-estado-{{ $obj->id }}"></iconify-icon>
+                                    @endif
+                                    &nbsp;&nbsp;
 
-                                            </td>
-                                        </tr>
-                                        @include('catalog.iglesia.modal')
-                                        @include('catalog.iglesia.modal_estado')
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
+                                </td>
+                            </tr>
+                            @include('catalog.iglesia.modal')
+                            @include('catalog.iglesia.modal_estado')
+                            @endforeach
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -146,6 +143,7 @@
             </div>
         </div>
     </div>
+
 
 
 

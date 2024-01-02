@@ -41,10 +41,10 @@
 
                                 <td align="center">
                                     <a href="{{ url('catalog/course') }}/{{ $obj->id }}/edit">
-                                        <iconify-icon icon="mdi:pencil" style="color:#0c0d0f;" width="40"></iconify-icon>
+                                        <iconify-icon icon="mdi:edit-circle" style="color:#0c0d0f;" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;&nbsp;
-                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash" style="color: #0c0d0f;" width="40"></iconify-icon>
+                                    <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle" style="color: #0c0d0f;" width="40"></iconify-icon>
                                 </td>
                             </tr>
                             @include('catalog.course.modal')
