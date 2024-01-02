@@ -268,7 +268,7 @@ Route::resource('catalog/plan_estudios', StudyPlanController::class);
 
 // correos
 
-Route::get('administracion/configuracion_correos',ConfiguracionCorreosController ::class);
+Route::resource('administracion/configuracion_correos',ConfiguracionCorreosController ::class);
 
 
 

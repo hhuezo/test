@@ -38,17 +38,19 @@
                                             <form method="POST" action="{{ route('configuracion_correos.update',  $configcorreo->id) }}">
                                                 @method('PUT')
                                                 @csrf
+                                                <input type="hidden" id="id" name="text" value="{{  $configcorreo->id }}" class="form-control" >
+
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">smtp_host</label>
-                                                    <input type="text" name="smtp_host" id="smtp_host" value="{{  $configcorreo->smtp_host}}" required class="form-control" value="{{ old('smtp_host') }}" autofocus="true">
+                                                    <input type="text" name="smtp_host" id="smtp_host" value="{{  $configcorreo->smtp_host}}" required class="form-control"  autofocus="true">
                                                 </div>
 
 
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">smtp_port</label>
-                                                    <input type="text" id="smtp_port" name="smtp_port" value="{{  $configcorreo->smtp_port }}" required class="form-control" value="{{ old('smtp_port') }}">
+                                                    <input type="text" id="smtp_port" name="smtp_port" value="{{  $configcorreo->smtp_port }}" required class="form-control"  >
                                                 </div>
 
                                                 <div class="input-area relative">
@@ -58,10 +60,10 @@
 
 
 
-                                                <input type="hidden" id="id" name="text" value="{{  $configcorreo->id }}" class="form-control" >
+
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">smtp_password</label>
-                                                    <input type="text" id="smtp_password" name="smtp_password" value="{{  $configcorreo->smtp_password }}" class="form-control" value="{{ old('smtp_password') }}">
+                                                    <input type="text" id="smtp_password" name="smtp_password" value="{{  $configcorreo->smtp_password }}" class="form-control"  >
                                                 </div>
 
 
