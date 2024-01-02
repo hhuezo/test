@@ -372,9 +372,6 @@ class IglesiaController extends Controller
         $plan_estudio = IglesiaPlanEstudio::where('iglesia_id', '=', $iglesia->id)->get();
         $plan_estudio_array = $plan_estudio->pluck('id')->toArray();
         $sessiones = Sesion::whereIn('group_per_church_id',  $plan_estudio_array)->get();
-        //dd( $sessiones
-        // foreach ($sessiones as $obj) {
-        //dd($obj->iglesia_plan_estudio->group_id);        }
 
         $genero = Gender::get();
         $sessiones_array = $sessiones->pluck('id')->toArray();
@@ -383,11 +380,8 @@ class IglesiaController extends Controller
 
 
         $grupos_iglesia = $iglesia->iglesia_has_grupo;
-        //  dd($grupos_iglesia);
 
         $gruposall = $iglesia->participantes_iglesia($iglesia->id);
-
-        //   dd( $gruposall);
 
         $participantes_array = $asistencia_sesion->pluck('member_id')->unique()->values()->toArray();
 
@@ -398,15 +392,18 @@ class IglesiaController extends Controller
 
 
 
-   return view('catalog.iglesia.reporte_asistencias', compact('cursos', 'gruposall', 'grupos_iglesia', 'iglesia', 'sessiones', 'participantes', 'genero'));
+
+        return view('catalog.iglesia.reporte_asistencias', compact('cursos', 'gruposall', 'grupos_iglesia', 'iglesia', 'sessiones', 'participantes', 'genero'));
 
 
          $pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('cursos','gruposall','grupos_iglesia','iglesia', 'sessiones', 'participantes', 'genero'));
 
-         $pdf->setPaper('A4', 'landscape');
-         return $pdf->stream('test_pdf.pdf');
 
 
+        $pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('cursos', 'gruposall', 'grupos_iglesia', 'iglesia', 'sessiones', 'participantes', 'genero'));
+
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('test_pdf.pdf');
     }
 
 
