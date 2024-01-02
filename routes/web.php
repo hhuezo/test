@@ -270,6 +270,7 @@ Route::resource('catalog/plan_estudios', StudyPlanController::class);
 
 // correos
 
+
 Route::resource('administracion/configuracion_correos',ConfiguracionCorreosController::class);
 
 
