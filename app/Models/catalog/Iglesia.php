@@ -28,7 +28,7 @@ class Iglesia extends Model
         'secondary_contact_job_title',
         'secondary_contact_phone_number',
         'secondary_contact_phone_number_2',
-        'pastor_name varchar',
+        'pastor_name',
         'pastor_phone_number',
         'facebook',
         'website',
@@ -61,6 +61,11 @@ class Iglesia extends Model
     public function departamento()
     {
         return $this->belongsTo(Departamento::class, 'catalog_departamento_id', 'id');
+    }
+
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class, 'catalog_municipio_id', 'id');
     }
 
     public function users()
