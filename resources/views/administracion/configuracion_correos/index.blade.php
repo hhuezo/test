@@ -8,7 +8,7 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white"> Modificar Servidor de Correos
+                            <div class="card-title text-slate-900 dark:text-white"> Configuración de correos
 
                                 <a href="{{ url('administracion/configuracion_correos') }}">
                                     <button class="btn btn-dark btn-sm float-right">
@@ -42,19 +42,19 @@
 
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">smtp_host</label>
+                                                    <label for="largeInput" class="form-label">Host</label>
                                                     <input type="text" name="smtp_host" id="smtp_host" value="{{  $configcorreo->smtp_host}}" required class="form-control"  autofocus="true">
                                                 </div>
 
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">smtp_port</label>
+                                                    <label for="largeInput" class="form-label">Puerto</label>
                                                     <input type="text" id="smtp_port" name="smtp_port" value="{{  $configcorreo->smtp_port }}" required class="form-control"  >
                                                 </div>
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">smtp_username</label>
+                                                    <label for="largeInput" class="form-label">Usuario</label>
                                                     <input type="text" name="smtp_username" id="smtp_username" value="{{  $configcorreo->smtp_username}}" required class="form-control">
                                                 </div>
 
@@ -62,37 +62,37 @@
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">smtp_password</label>
+                                                    <label for="largeInput" class="form-label">Password</label>
                                                     <input type="text" id="smtp_password" name="smtp_password" value="{{  $configcorreo->smtp_password }}" class="form-control"  >
                                                 </div>
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">from_address</label>
+                                                    <label for="largeInput" class="form-label">Dirección email</label>
                                                     <input type="text" name="from_address" id="from_address" value="{{  $configcorreo->from_address}}" required class="form-control">
                                                 </div>
 
 
-                                                <div class="input-area relative">
+                                                {{-- <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">UsuarioCreacion</label>
                                                     <input type="text" name="UsuarioCreacion" id="UsuarioCreacion" value="{{  $configcorreo->UsuarioCreacion}}" required class="form-control">
-                                                </div>
+                                                </div> --}}
 
-
+{{-- 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">UsuarioModificacion</label>
                                                     <input type="text" name="UsuarioModificacion" id="UsuarioModificacion" value="{{  $configcorreo->UsuarioModificacion}}" required class="form-control">
-                                                </div>
+                                                </div> --}}
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">smtp_from_name</label>
+                                                    <label for="largeInput" class="form-label">Usuario de envio</label>
                                                     <input type="text" name="smtp_from_name" id="smtp_from_name" value="{{  $configcorreo->smtp_from_name}}" required class="form-control">
                                                 </div>
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">smtp_encryption</label>
+                                                    <label for="largeInput" class="form-label">Encriptación</label>
                                                     <input type="text" name="smtp_encryption" id="smtp_encryption" value="{{  $configcorreo->smtp_encryption}}" required class="form-control">
                                                 </div>
 
@@ -101,7 +101,7 @@
 
                                             </div>&nbsp;
                                             <div style="text-align: right;">
-                                                <button type="submit" class="btn inline-flex justify-center btn-dark"> Aceptar' </button>
+                                                <button type="submit" class="btn inline-flex justify-center btn-dark"> Aceptar </button>
                                             </div>
                                         </form>
 

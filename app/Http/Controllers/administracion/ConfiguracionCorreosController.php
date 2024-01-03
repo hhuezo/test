@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\administracion;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\administracion\ConfiguracionCorreos;
-use App\Models\catalog\Iglesia;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class ConfiguracionCorreosController extends Controller
 {
@@ -16,9 +16,29 @@ class ConfiguracionCorreosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $configcorreo = ConfiguracionCorreos::get()->first();
+       // dd( $configcorreo );
+        config([
+            'mail.default' => 'smtp',
+            'mail.mailers.smtp.host' => $configcorreo->smtp_host,
+            'mail.mailers.smtp.port' => $configcorreo->smtp_port,
+            'mail.mailers.smtp.username' => $configcorreo->smtp_username,
+            'mail.mailers.smtp.password' => $configcorreo->smtp_password,
+            'mail.from.address' => $configcorreo->from_address,
+            'mail.mailers.smtp.encryption' => $configcorreo->smtp_encryption,
+            'mail.from.name' => $configcorreo->smtp_from_name,
+        ]);
+
+        $recipientEmail = "hugo.alex.huezo@gmail.com";
+        $subject = 'Correo de prueba';
+        $content = "¡Este es un correo de prueba!";
+
+        Mail::to($recipientEmail)->send(new SendMail($subject, $content));
+
+  
+
 
         return view('administracion.configuracion_correos.index', compact('configcorreo'));
     }
@@ -83,12 +103,12 @@ class ConfiguracionCorreosController extends Controller
         $email-> smtp_username = $request->smtp_username;
         $email->smtp_password =$request-> smtp_password;
         $email-> from_address = $request->from_address;
-        $email->UsuarioCreacion= $request->UsuarioCreacion;
-        $email->UsuarioModificacion = $request-> UsuarioModificacion;
+        //$email->UsuarioCreacion= $request->UsuarioCreacion;
+        //$email->UsuarioModificacion = $request-> UsuarioModificacion;
         $email->CreatedAt  = $time->toDateTimeString();
         $email->UpdateAt = $time->toDateTimeString();
         $email->smtp_encryption  =$request-> smtp_encryption ;
-        $email->smtp_from_name = Hash::make($request->smtp_from_name);
+        $email->smtp_from_name = $request->smtp_from_name;
         $email->update();
         alert()->success('se han sido Actualizado correctamente');
         return back();
