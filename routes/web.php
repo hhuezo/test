@@ -139,6 +139,8 @@ Route::get('catalog/modificar_datos_participante',[MemberController::class,'modi
 Route::post('administracion/iglesia_plan_estudio/add_sesion', [IglesiaPlanEstudioController::class,'add_sesion']);
 Route::post('admin/delete_sesion',[IglesiaPlanEstudioController::class,'delete_sesion']);
 Route::get('administracion/iglesia_plan_estudio/certificacion/{id}',[IglesiaPlanEstudioController::class,'certificacion']);
+Route::get('administracion/iglesia_plan_estudio/certificado/{id}',[IglesiaPlanEstudioController::class,'certificacion_iglesia']);
+Route::get('administracion/iglesia_plan_estudio/certificado_participante/{id}',[IglesiaPlanEstudioController::class,'certificacion_participante']);
 Route::resource('administracion/iglesia_plan_estudio', IglesiaPlanEstudioController::class);
 
 Route::get('reporte_grupos/{iglesia}/{grupo}', [IglesiaController::class, 'reporte_grupos']);
@@ -268,7 +270,8 @@ Route::resource('catalog/plan_estudios', StudyPlanController::class);
 
 // correos
 
-Route::resource('administracion/configuracion_correos',ConfiguracionCorreosController ::class);
+
+Route::resource('administracion/configuracion_correos',ConfiguracionCorreosController::class);
 
 
 
