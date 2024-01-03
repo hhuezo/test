@@ -218,12 +218,15 @@
                                 <a href="{{ url('administracion/iglesia_plan_estudio') }}">Plan de estudio</a>
                             </li>
 
-                            <li>
+                            <!-- <li>
                                 <a href="{{ url('administracion/reportes') }}">Reportes</a>
-                            </li>
+                            </li> -->
 
                             <li>
                                 <a href="{{ url('administracion/configuracion_correos') }}">Configuracion Correos</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('catalog/course') }}">Cursos</a>
                             </li>
                         </ul>
                     </li>
@@ -326,14 +329,14 @@
                     </ul>
                 </li>
                 @endcan
-                <li>
+                <!-- <li>
                     <a href="{{ url('datos_cohort') }}" class="navItem">
                         <span class="flex items-center">
                             <iconify-icon class="nav-icon" icon="heroicons-outline:document"></iconify-icon>
                             <span>Cohorts</span>
                         </span>
                     </a>
-                </li>
+                </li> -->
 
 
                 {{-- @can('read course')

@@ -32,12 +32,11 @@
 <body>
 
 
-    <div class="input-area relative">
+    <!-- <div class="input-area relative">
         <label for="largeInput" class="form-label"><B>Cohorte: Año 1 Plan Piloto</B></label>
     </div>
     <div class="input-area relative">
-        <label for="largeInput" class="form-label"><B>Código: CISS001 (Certificación Iglesia Segura Sede
-                001)</B></label>
+        <label for="largeInput" class="form-label"><B>Código: CISS001 (Certificación Iglesia Segura Sede 001)</B></label>
     </div>
     <div class="input-area relative">
         <label for="largeInput" class="form-label"><B> Departamento:: </B></label>
@@ -60,12 +59,12 @@
     </div>
     <div class="input-area relative">
         <label for="largeInput" class="form-label"><B> Nombre de Iglesia: {{ $iglesia->name }}</B></label>
-    </div>
+    </div> -->
 
     &nbsp; &nbsp; &nbsp;
 
 
-    <table border="1" cellspacing="0" cellpadding="0">
+    <!-- <table border="1" cellspacing="0" cellpadding="0" >
         <thead>
             <tr style="background-color: white; color:gray">
                 <td colspan="10">Urban Strategies - Equipo de Sed</td>
@@ -198,10 +197,10 @@
             </tr>
 
         </tbody>
-    </table>
+    </table> -->
 
     &nbsp; &nbsp; &nbsp;
-
+    <!-- 
 
     <table border="1" cellspacing="0" cellpadding="0">
         <thead>
@@ -262,103 +261,134 @@
 
 
         </tbody>
-    </table>
+    </table> -->
 
 
-    <div style="page-break-after:always"></div>
-    @foreach ($grupos_iglesia as $grupos)
-        @if ($grupos->id > 1)
-            <table border="1" cellspacing="0" cellpadding="0" width="100%">
+    @php($i=1)
+    @foreach ($grupos_iglesia->where('id','<>',1) as $grupos)
 
+        <div class="input-area relative">
+            <label for="largeInput" class="form-label"><B>Cohorte: {{$iglesia->sede_id == null ? '': $iglesia->sedeiglesia->cohorte->nombre}}</B></label>
+        </div>
+        <div class="input-area relative">
+            <label for="largeInput" class="form-label"><B>Código: CISS0{{$iglesia->id}} (Certificación Iglesia Segura Sede 0{{$iglesia->id}}) </B></label>
+        </div>
+        <div class="input-area relative">
+            <label for="largeInput" class="form-label"><B>Municipio: {{$iglesia->catalog_municipio_id == null ? '': $iglesia->municipio->nombre}} </B></label>
+        </div>
+        <div class="input-area relative">
+            <label for="largeInput" class="form-label"><B> Departamento: {{$iglesia->catalog_departamento_id == null ? '': $iglesia->departamento->nombre}}</B></label>
+        </div>
 
-                <tr>
-                    <td colspan="3">Informacion del Participante <b>(Grupo {{ $grupos->nombre }}</b> ) </td>
-                    <td width="100%" colspan="6" class="center-text"><span
-                            class="bold-text"><center>Asistencia</center></span></td>
-                </tr>
-                <tr>
+        <div class="input-area relative">
+            <label for="largeInput" class="form-label"><B>Zona de País: {{$iglesia->sede_id == null ? '': $iglesia->sedeiglesia->cohorte->region->nombre }} </B></label>
+        </div>
 
-                    <td width="10%" rowspan="2" class="bold-text center-text">Nombre Completo</td>
+        <div class="input-area relative">
+            <label for="largeInput" class="form-label"><B>Coordinador Encargado: {{ $iglesia->pastor_name }}</B></label>
+        </div>
 
-                    <td width="10%" rowspan="2" class="bold-text center-text">Firma</td>
-                    <td width="10%" rowspan="2" class="bold-text center-text"></td>
-                    @foreach ($sessiones as $session)
-                        @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
-                            <td class="center-text">
-                                <center> {{ $session->session_name }}</center>
-                            </td>
-                        @endif
-                    @endforeach
+        <div class="input-area relative">
+            <label for="largeInput" class="form-label"><B>Ubicación de Sede: {{ $iglesia->name }}</B></label>
+        </div>
+        <!-- <div class="input-area relative">
+            <label for="largeInput" class="form-label"><B> </B></label>
+        </div>
 
-                </tr>
+        <div class="input-area relative">
+            <label for="largeInput" class="form-label"><B> </B></label>
+        </div> -->
+        <br><br>
+        <table border="1" cellspacing="0" cellpadding="0" width="100%">
+            <tr>
+                <td> Nombre de Iglesia: </td>
+                <td colspan="7"><b>{{ $iglesia->name }}</b> IS10{{$iglesia->id}}</td>
 
-                <tr>
-                    @foreach ($sessiones as $session)
-                        @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
-                            @if ($session->iglesia_plan_estudio->group_id > 1)
-                                <td ><center>
-                                    {{ $session->meeting_date ? date('d/m/Y', strtotime($session->meeting_date)) : '' }}
-                                </center>
-                                </td>
-                            @endif
-                        @endif
-                    @endforeach
-                </tr>
-                @foreach ($participantes as $obj)
-                    {{-- {{ $obj->grupo_first($obj->id) }} --}}
-                    @php($total = 0)
+            </tr>
+            <tr>
+                <td>Nombre de Sede: </td>
+                <td colspan="7"><b>{{$iglesia->sede_id == null ? '': $iglesia->sedeiglesia->nombre}} </b> CISS0{{$iglesia->id}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"> <b>(Grupo {{ $grupos->nombre }}</b> ) </td>
+                <td width="100%" colspan="6" class="center-text"><span class="bold-text">
+                        <center>Asistencia</center>
+                    </span></td>
+            </tr>
+            <tr>
+                <td width="10%" rowspan="2" class="bold-text center-text">Nombre Completo</td>
 
-                    @if ($obj->grupo_first($obj->id) == $grupos->id)
-                        @if ($obj->grupo_first($obj->id) > 1)
-                            <tr>
+                <td width="10%" rowspan="2" class="bold-text center-text">Firma</td>
 
-                                <td>
-                                    {{ $obj->name_member }} {{ $obj->lastname_member }}
-                                </td>
-
-                                <td style="text-transform: lowercase">
-
-                                </td>
-                                <td class="center-text">
-
-                                </td>
-
-                                @foreach ($sessiones as $session)
-                                    @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
-                                        <td align="center">
-                                            @php($asistencia = $session->asistencia($session->id, $obj->id))
-
-
-                                            @if ($asistencia == 1)
-                                                @php($total++)
-                                            @endif
-                                        </td>
-                                    @endif
-                                @endforeach
-
-
-
-                            </tr>
-                        @endif
-                    @endif
+                @foreach ($sessiones as $session)
+                @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                <td class="center-text">
+                    <center> {{ $session->session_name }}</center>
+                </td>
+                @endif
                 @endforeach
-        @endif
+
+            </tr>
+
+            <tr>
+                @foreach ($sessiones as $session)
+                @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                @if ($session->iglesia_plan_estudio->group_id > 1)
+                <td>
+                    <center>
+                        {{ $session->meeting_date ? date('d/m/Y', strtotime($session->meeting_date)) : '' }}
+                    </center>
+                </td>
+                @endif
+                @endif
+                @endforeach
+            </tr>
+            @foreach ($participantes as $obj)
+            {{-- {{ $obj->grupo_first($obj->id) }} --}}
+            @php($total = 0)
+
+            @if ($obj->grupo_first($obj->id) == $grupos->id)
+            @if ($obj->grupo_first($obj->id) > 1)
+            <tr>
+
+                <td>
+                    {{ $obj->name_member }} {{ $obj->lastname_member }}
+                </td>
+
+                <td style="text-transform: lowercase">
+
+                </td>
+
+
+                @foreach ($sessiones as $session)
+                @if ($session->iglesia_plan_estudio->group_id == $grupos->id)
+                <td align="center">
+                    @php($asistencia = $session->asistencia($session->id, $obj->id))
+
+
+                    @if ($asistencia == 1)
+                    @php($total++)
+                    @endif
+                </td>
+                @endif
+                @endforeach
+
+
+
+            </tr>
+            @endif
+            @endif
+            @endforeach
+
 
 
         </table>
-        <div class="page-break"></div>
+        @if($i<$grupos_iglesia->where('id','<>',1)->count())
+        <div style="page-break-after: always;"></div>
+        @endif
         &nbsp; &nbsp; &nbsp;
-    @endforeach
-
-
-
-    <script>
-        // Función para ocultar la tabla
-        function ocultarTabla() {
-            var tabla = document.getElementById('grupostb');
-            tabla.style.display = 'none';
-        }
-    </script>
+        @php($i++)
+        @endforeach
 
 </body>
 

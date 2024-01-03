@@ -77,18 +77,19 @@ class ConfiguracionCorreosController extends Controller
     {
 
         $time = Carbon::now('America/El_Salvador');
-        $email =ConfiguracionCorreos::findOrFail($id);
+        $email = ConfiguracionCorreos::findOrFail($id);
         $email->smtp_host= $request->smtp_host;
         $email->smtp_port = $request->smtp_port;
-        $email-> smtp_username = $request->smtp_username;
-        $email->smtp_password =$request-> smtp_password;
-        $email-> from_address = $request->from_address;
+        $email->smtp_username = $request->smtp_username;
+        $email->smtp_password = $request-> smtp_password;
+        $email->from_address = $request->from_address;
         $email->UsuarioCreacion= $request->UsuarioCreacion;
         $email->UsuarioModificacion = $request-> UsuarioModificacion;
         $email->CreatedAt  = $time->toDateTimeString();
         $email->UpdateAt = $time->toDateTimeString();
-        $email->smtp_encryption  =$request-> smtp_encryption ;
-        $email->smtp_from_name = Hash::make($request->smtp_from_name);
+        $email->smtp_encryption = $request-> smtp_encryption;
+        $email->smtp_from_name = $request->smtp_from_name;
+        $email->smtp_mailer = $request->smtp_mailer;
         $email->update();
         alert()->success('se han sido Actualizado correctamente');
         return back();

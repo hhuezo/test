@@ -30,6 +30,7 @@ class IglesiaPlanEstudioController extends Controller
     {
         if (auth()->user()->hasRole('administrador') == true) {
             $planes = IglesiaPlanEstudio::get();
+            $iglesia_id = '';
         } else {
             $user = User::findOrFail(auth()->user()->id);
             $iglesia_id = $user->user_has_iglesia->first()->id;

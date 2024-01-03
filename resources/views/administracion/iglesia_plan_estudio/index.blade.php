@@ -8,16 +8,14 @@
         </h4>
         <div align="right">
 
-         
-            <a href="{{ url('administracion/iglesia_plan_estudio/certificacion/') }}/{{$iglesia_id}}" >
+            @if(auth()->user()->hasRole('administrador') == true)
+            <a href="{{ url('administracion/iglesia_plan_estudio/certificacion/') }}/{{$iglesia_id}}">
                 <button class="btn btn-outline-dark">Certificación</button>
             </a>
-
-             <a href="{{ url('administracion/iglesia_plan_estudio/create') }}">
+            @endif
+            <a href="{{ url('administracion/iglesia_plan_estudio/create') }}">
                 <button class="btn btn-dark">Nuevo</button>
-                </a>
-                
-
+            </a>
         </div>
     </header>
     <div class="card-body px-6 pb-6">
