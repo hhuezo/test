@@ -42,7 +42,7 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Nombre_español') }}</label>
-                                                    <input type="text" name="name_es"
+                                                    <input type="text" name="name_es" id="name_es"
                                                         required class="form-control" value="{{ old('name_es') }}"
                                                         autofocus="true">
                                                 </div>
@@ -52,28 +52,28 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Nombre Ingles') }}</label>
-                                                    <input type="name_en" name="name_en"
+                                                    <input type="name_en" name="name_en" id="name_en"
                                                         required class="form-control" value="{{ old('name_en') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Estatus') }}</label>
-                                                    <input type="status" name="status"
+                                                    <input type="text" name="status" id="status"
                                                         required class="form-control">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Fecha') }}</label>
-                                                    <input type="date" name="date_created"
+                                                    <input type="date" name="date_created" id="date_created"
                                                          required class="form-control"
                                                         value="{{ old('date_created') }}">
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Estado del Curso') }}</label>
-                                                    <input type="text" name="course_id"
+                                                    <input type="text" name="course_id" id="course_id"
                                                         required class="form-control" value="{{ old('course_id') }}">
                                                 </div>
                                             </div>

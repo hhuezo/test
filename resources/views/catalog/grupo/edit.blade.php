@@ -28,7 +28,7 @@
                         @csrf
                         <div class="input-area relative pl-28">
                             <label for="largeInput" class="inline-inputLabel">nombre</label>
-                            <input type="text" name="nombre" value="{{ $grupos->nombre }}" required class="form-control">
+                            <input type="text" name="nombre" id="nombre" value="{{ $grupos->nombre }}" required class="form-control">
                         </div> &nbsp;
                         <div>
 
@@ -41,7 +41,7 @@
                     </form>
                     <iconify-icon data-bs-toggle="modal"
                     data-bs-target="#modal-create-{{$grupos->id }}" icon="mdi:plus"
-                    style="color: #1769aa;" width="40"></iconify-icon>
+                    style="color: black;" width="40"></iconify-icon>
                 &nbsp;
 
                     &nbsp;&nbsp;

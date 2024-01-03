@@ -41,7 +41,7 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('description') }}</label>
-                                                    <input type="text" name="name_es" value="{{ $MemberStatus->description }}"
+                                                    <input type="text" name="name_es" id="name_es" value="{{ $MemberStatus->description }}"
                                                         required class="form-control" value="{{ old('description') }}"
                                                         autofocus="true">
                                                 </div>
@@ -51,14 +51,14 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('description_español') }}</label>
-                                                    <input type="text" name="name_en" value="{{ $MemberStatus->description_es }}"
+                                                    <input type="text" name="name_en" id= "name_en" value="{{ $MemberStatus->description_es }}"
                                                         required class="form-control" value="{{ old('description_es') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('fecha') }}</label>
-                                                    <input type="text" name="status" value= "{{ date('d/m/Y', strtotime($MemberStatus->adding_date)) }}"
+                                                    <input type="text" name="adding_date" id= "adding_date" value= "{{ date('d/m/Y', strtotime($MemberStatus->adding_date)) }}"
                                                                                        required class="form-control"    value="{{ old('adding_date') }}">
                                                 </div>
 

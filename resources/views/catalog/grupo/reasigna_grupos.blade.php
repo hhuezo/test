@@ -47,7 +47,7 @@
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">{{ __('Nombre') }}</label>
-                                                    <input type="text" name="name_member"
+                                                    <input type="text" name="name_member" id="name_member"
                                                         value="{{ $member->name_member }}" required class="form-control"
                                                         value="{{ old('name_member') }}" autofocus="true">
                                                 </div>
@@ -56,7 +56,7 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">{{ __('Apellido') }}</label>
-                                                    <input type="text" name="lastname_member"
+                                                    <input type="text" name="lastname_member" id="lastname_member"
                                                         value="{{ $member->lastname_member }}" required class="form-control"
                                                         value="{{ old('lastname_member') }}">
                                                 </div>
@@ -64,19 +64,19 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('fecha cumpleaños') }}</label>
-                                                    <input type="date" name="birthdate" value="{{ $member->birthdate }}"
+                                                    <input type="date" name="birthdate" id="birthdate" value="{{ $member->birthdate }}"
                                                         required class="form-control">
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('numero de documento') }}</label>
-                                                    <input type="text" name="document_number_type"
+                                                    <input type="text" name="document_number_type" id="document_number_type"
                                                         value="{{ $member->document_number_type }}" required
                                                         class="form-control">
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Status</label>
-                                                    <select name="status" class="form-control select2">
+                                                    <select name="status" id="status" class="form-control select2">
                                                         @foreach ($member_status as $obj)
                                                             @if ($obj->id == $member->status)
                                                                 <option value="{{ $obj->id }}" selected>
@@ -91,7 +91,7 @@
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Grupos</label>
-                                                    <select name="grupo_id" class="form-control select2">
+                                                    <select name="grupo_id" id="grupo_id" class="form-control select2">
                                                             @foreach ($group_church as $obj)
                                                              <option value="{{ $obj->grupo->id }}" {{  $obj->grupo->id == $group_id ? 'selected':''}}   >{{ $obj->grupo->nombre }}   </option>
                                                             @endforeach

@@ -42,7 +42,7 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Nombre Español') }}</label>
-                                                    <input type="text" name="name_es" value="{{ $OrganizationStatus->description }}"
+                                                    <input type="text" name="name_es" id= "name_es" value="{{ $OrganizationStatus->description }}"
                                                         required class="form-control" value="{{ old('name_es') }}"
                                                         autofocus="true">
                                                 </div>
@@ -52,21 +52,20 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Nombre Ingles') }}</label>
-                                                    <input type="name_en" name="name_en" value="{{ $OrganizationStatus->description_es }}"
+                                                    <input type="name_en" name="name_en" id="name_en" value="{{ $OrganizationStatus->description_es }}"
                                                         required class="form-control" value="{{ old('name_en') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Fecha') }}</label>
-                                                    <input type="text" name="adding_date" value="{{ $OrganizationStatus->adding_date }}"
-                                                        required class="form-control">
+                                                    <input type="text" name="adding_date" id= "adding_date" value="{{ $OrganizationStatus->adding_date }}"                                                        required class="form-control">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Modificacion usuario') }}</label>
-                                                    <input type="text" name="modifying_user"
+                                                    <input type="text" name="modifying_user" id="modifying_user"
                                                         value="{{ date('d/m/Y', strtotime( $OrganizationStatus->modifying_user )) }}" required class="form-control"
                                                         value="{{ old('modifying_user') }}">
                                                 </div>
@@ -79,7 +78,7 @@
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Estatus') }}</label>
-                                                    <input type="text" name="status" value="{{ $OrganizationStatus->status }}"
+                                                    <input type="text" name="status" id= "status" value="{{ $OrganizationStatus->status }}"
                                                         required class="form-control" value="{{ old('status') }}">
                                                 </div>
                                             </div>

@@ -48,7 +48,7 @@
                                             <div class="grid pt-4 pb-3 px-4">
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Nombre de Grupo</label>
-                                                    <input type="text" name="nombre" value="{{ old('nombre') }}" required class="form-control">
+                                                    <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" required class="form-control">
                                                 </div>
                                                 <p>
                                               <!--   <div class="input-area relative">

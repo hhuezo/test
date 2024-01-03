@@ -27,7 +27,7 @@
                             @csrf
                             <div class="input-area relative pl-28">
                                 <label for="largeInput" class="inline-inputLabel">Nombre</label>
-                                <input type="text" name="name" value="{{ $role->name }}" class="form-control">
+                                <input type="text" name="name" id="name" value="{{ $role->name }}" class="form-control">
                             </div>
                             <div
                                 class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b black:border-slate-600">
@@ -54,8 +54,8 @@
                         @csrf
                         <div class="input-area relative pl-28">
                             <label for="largeInput" class="inline-inputLabel">Permiso</label>
-                            <input type="hidden" name="role_id" value="{{ $role->id }}">
-                            <select name="permission_id" class="form-control select2">
+                            <input type="hidden" name="role_id" id="role_id" value="{{ $role->id }}">
+                            <select name="permission_id"id= "permission_id"  class="form-control select2">
                                 @foreach ($permissions as $obj)
                                     <option value="{{ $obj->id }}">{{ $obj->name }}</option>
                                 @endforeach

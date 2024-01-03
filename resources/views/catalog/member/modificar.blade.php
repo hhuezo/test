@@ -176,7 +176,7 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Estatus</label>
-                                                    <select name="status" class="form-control select2">
+                                                    <select name="status" id="status class="form-control select2">
                                                         @foreach ($member_status as $obj)
                                                         @if ($obj->id == $member->status_id)
                                                         <option value="{{ $obj->id }}" selected>

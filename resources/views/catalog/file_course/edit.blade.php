@@ -43,7 +43,7 @@
                                             @method('PUT')
                                                 <div class="input-area relative pl-28">
                                                     <label for="largeInput" class="inline-inputLabel">cursos</label>
-                                                    <select name="catalog_questions_id" class="form-control select2">
+                                                    <select name="catalog_questions_id" id="catalog_questions_id" class="form-control select2">
                                                         @foreach ($course as $obj)
                                                             @if ($obj->id == $Fcourse->course_id)
                                                                 <option value="{{ $obj->id }}" selected> {{ $obj->name }}
@@ -60,7 +60,7 @@
                                                         <div class="input-area relative">
 
                                                             <label for="largeInput" class="form-label">archivo Antiguo</label>
-                                                            <input type="tetx" name="route"
+                                                            <input type="tetx" name="route" id="route"
                                                                 value={{ $Fcourse->route}} required class="form-control">
 
                                                             </div>
