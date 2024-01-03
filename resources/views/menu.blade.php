@@ -218,9 +218,9 @@
                                 <a href="{{ url('administracion/iglesia_plan_estudio') }}">Plan de estudio</a>
                             </li>
 
-                            <li>
+                            <!-- <li>
                                 <a href="{{ url('administracion/reportes') }}">Reportes</a>
-                            </li>
+                            </li> -->
 
                             <li>
                                 <a href="{{ url('administracion/configuracion_correos') }}">Configuracion Correos</a>
