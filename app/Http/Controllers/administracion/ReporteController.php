@@ -25,7 +25,7 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        $iglesia=Iglesia::get();
+        $iglesia=Iglesia::where('status_id','<>',3)->get();
         return view('administracion.reportes.index',compact('iglesia'));
     }
 

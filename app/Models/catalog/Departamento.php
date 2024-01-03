@@ -12,7 +12,7 @@ class Departamento extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'nombre',
+        'Nombre',
         'region_id',
         'abbrev'
     ];

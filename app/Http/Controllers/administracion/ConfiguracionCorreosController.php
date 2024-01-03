@@ -35,9 +35,9 @@ class ConfiguracionCorreosController extends Controller
         $subject = 'Correo de prueba';
         $content = "¡Este es un correo de prueba!";
 
-        Mail::to($recipientEmail)->send(new SendMail($subject, $content));
+       // Mail::to($recipientEmail)->send(new SendMail($subject, $content));
 
-  
+
 
 
         return view('administracion.configuracion_correos.index', compact('configcorreo'));
@@ -97,7 +97,7 @@ class ConfiguracionCorreosController extends Controller
     {
 
         $time = Carbon::now('America/El_Salvador');
-        $email =ConfiguracionCorreos::findOrFail($id);
+        $email = ConfiguracionCorreos::findOrFail($id);
         $email->smtp_host= $request->smtp_host;
         $email->smtp_port = $request->smtp_port;
         $email-> smtp_username = $request->smtp_username;
