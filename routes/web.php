@@ -277,5 +277,5 @@ Route::resource('administracion/configuracion_correos',ConfiguracionCorreosContr
 
 //reporte
 
-Route::get('administracion/reportes/create', [ReporteController::class,'create']);
-Route::get('administracion/reportes', [ReporteController::class,'reportes_plantilla']);
+
+Route::resource('administracion/reportes', ReporteController::class);

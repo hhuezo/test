@@ -396,14 +396,14 @@ class IglesiaController extends Controller
         return view('catalog.iglesia.reporte_asistencias', compact('cursos', 'gruposall', 'grupos_iglesia', 'iglesia', 'sessiones', 'participantes', 'genero'));
 
 
-         $pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('cursos','gruposall','grupos_iglesia','iglesia', 'sessiones', 'participantes', 'genero'));
+     //$pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('cursos','gruposall','grupos_iglesia','iglesia', 'sessiones', 'participantes', 'genero'));
 
 
 
-        $pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('cursos', 'gruposall', 'grupos_iglesia', 'iglesia', 'sessiones', 'participantes', 'genero'));
+        //$pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('cursos', 'gruposall', 'grupos_iglesia', 'iglesia', 'sessiones', 'participantes', 'genero'));
 
-        $pdf->setPaper('A4', 'landscape');
-        return $pdf->stream('test_pdf.pdf');
+        //$pdf->setPaper('A4', 'landscape');
+        //return $pdf->stream('test_pdf.pdf');
     }
 
 
