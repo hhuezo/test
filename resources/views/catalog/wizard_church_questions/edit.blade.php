@@ -61,7 +61,7 @@
                                                                         class="flex items-center cursor-pointer">
                                                                         <input type="radio"
                                                                             class="hidden"
-                                                                            name="answer"
+                                                                            name="answer"   id="answer"
                                                                             value="1"   required class="form-control">
                                                                         <span
                                                                             class="flex-none bg-black black:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
@@ -78,7 +78,7 @@
                                                                         class="flex items-center cursor-pointer">
                                                                         <input type="radio"
                                                                             class="hidden"
-                                                                            name="answer"
+                                                                            name="answer"  id="answer"
                                                                             value="0"   required class="form-control" >
                                                                         <span
                                                                             class="flex-none bg-black black:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all

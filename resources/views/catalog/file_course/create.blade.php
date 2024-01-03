@@ -47,7 +47,7 @@
 
                                                     <div class="input-area relative">
                                                         <label for="largeInput" class="form-label">curso</label>
-                                                        <select name="course_id" class="form-control">
+                                                        <select name="course_id" id="course_id" class="form-control">
                                                             @foreach ($course as $obj)
                                                                 <option value="{{ $obj->id }}">{{ $obj->name }}
                                                                 </option>
