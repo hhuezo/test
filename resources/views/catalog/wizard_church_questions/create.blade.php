@@ -55,7 +55,7 @@
                                                                         class="flex items-center cursor-pointer">
                                                                         <input type="radio"
                                                                             class="hidden"
-                                                                            name="answer"
+                                                                            name="answer" id= "answer"
                                                                             value=1
                                                                             checked="checked">
                                                                         <span
@@ -73,7 +73,7 @@
                                                                         class="flex items-center cursor-pointer">
                                                                         <input type="radio"
                                                                             class="hidden"
-                                                                            name="answer"
+                                                                            name="answer"   id="answer"
                                                                             value=0>
                                                                         <span
                                                                             class="flex-none bg-black dark:bg-slate-500 rounded-full border inline-flex ltr:mr-2 rtl:ml-2 relative transition-all
