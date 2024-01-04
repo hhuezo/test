@@ -21,6 +21,11 @@ class Grupo extends Model
         return $this->belongsToMany(Member::class, 'member_has_group', 'group_id', 'member_id');
     }
 
+    public function iglesia_has_grupo()
+    {
+        return $this->belongsToMany(Iglesia::class, 'iglesia_has_grupo', 'grupo_id', 'iglesia_id');
+    }
+
     // public function iglesia_grupo()
     // {
     //     return $this->belongsToMany(Iglesia::class, 'group_per_chuch_plan', 'group_id', 'id');

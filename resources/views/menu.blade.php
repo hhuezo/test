@@ -177,6 +177,23 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="">
+                        <a href="#" class="navItem">
+                            <span class="flex items-center">
+                                <iconify-icon class=" nav-icon"  icon="ic:baseline-settings"></iconify-icon>
+                                <span>Configuración</span>
+                            </span>
+                            <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
+                        </a>
+                        <ul class="sidebar-submenu">
+
+                            <li>
+                                <a href="{{ url('administracion/configuracion_correos') }}">Correos SMTP</a>
+                            </li>
+
+                        </ul>
+                    </li>
                     @endcan
 
 
@@ -225,9 +242,6 @@
                             </li> -->
 
                             <li>
-                                <a href="{{ url('administracion/configuracion_correos') }}">Configuracion Correos</a>
-                            </li>
-                            <li>
                                 <a href="{{ url('catalog/course') }}">Temas</a>
                             </li>
                         </ul>
@@ -249,8 +263,8 @@
                         <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
                     </li>
                     <li>
-                    <a href="{{ url('catalog/grupo') }}">Grupo Iglesias</a>
-                </li>
+                        <a href="{{ url('catalog/grupo') }}">Grupo Iglesias</a>
+                    </li>
                     <li>
                         <a href="{{ url('catalog/question') }}">Preguntas</a>
                     </li>
