@@ -66,7 +66,10 @@ class RegionController extends Controller
      */
     public function show($id)
     {
-        //
+        $region = Region::findOrFail($id);
+
+       // dd("");
+        return view('catalog.region.show',compact('region'));
     }
 
     /**

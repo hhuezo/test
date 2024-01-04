@@ -15,7 +15,7 @@
                 &nbsp;Iglesias Aceptadas</button>
 
             <a href="{{ url('catalog/iglesia/create') }}">
-                <button class="btn btn-dark">Nuevo</button>
+                <button class="btn btn-outline-success">Nuevo</button>
             </a>
         </div>
     </header>
@@ -57,25 +57,25 @@
                                 <td align="center" class="table-td">{{ $obj->iglesia_estatus->description_es}} </td>
                                 <td align="center" class="table-td">
                                     <a href="{{ url('catalog/iglesia') }}/{{ $obj->id }}/edit">
-                                        <iconify-icon icon="mdi:edit-circle" style="color: #1e293b;" width="40"></iconify-icon>
+                                        <iconify-icon icon="mdi:edit-circle" class="success" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;
-                                    <iconify-icon icon="mdi:delete-circle" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
+                                    <iconify-icon icon="mdi:delete-circle" class="danger" width="40" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
                                     &nbsp;
                                     @if($obj->status_id != 2)
-                                    <iconify-icon icon="lets-icons:check-fill" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-estado-{{ $obj->id }}"></iconify-icon>
+                                    <iconify-icon icon="lets-icons:check-fill" class="info" width="40" data-bs-toggle="modal" data-bs-target="#modal-estado-{{ $obj->id }}"></iconify-icon>
                                     @else
                                     <a href="{{ url('iglesia/reporte_asistencias/') }}/{{ $obj->id }}" target="_blank">
-                                        <iconify-icon icon="material-symbols:location-home" style="color: #1e293b;" width="40"></iconify-icon>
+                                        <iconify-icon icon="material-symbols:location-home" class="info" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;
                                      <a href="{{ url('administracion/reportes') }}/{{ $obj->id }}/edit" target="_blank">
-                                        <iconify-icon icon="pepicons-pop:eye-circle-filled" style="color: #1e293b;" width="37"></iconify-icon>
+                                        <iconify-icon icon="pepicons-pop:eye-circle-filled" class="primary" width="37"></iconify-icon>
                                     </a>
                                     @endif
                                     &nbsp;
-                                   
-                                    
+
+
                                 </td>
                             </tr>
                             @include('catalog.iglesia.modal')

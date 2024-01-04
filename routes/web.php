@@ -14,7 +14,6 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\catalog\ChurchQuestionController;
 use App\Http\Controllers\catalog\CohorteController;
 use App\Http\Controllers\catalog\CourseController as CatalogCourseController;
 use App\Http\Controllers\catalog\OrganizationStatusController;
@@ -245,7 +244,7 @@ Route::resource('catalog/iglesia', IglesiaController::class);
 
 Route::resource('catalog/wizard_church_questions', WizardQuestionsController::class);
 
-Route::resource('catalog/answerreg', ChurchQuestionController::class);
+
 
 Route::resource('catalog/Iglesiauser', UserController::class);
 

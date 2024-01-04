@@ -20,41 +20,54 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use DateTime;
-use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MemberController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $member = Member::get();
-        $member_status = MemberStatus::get();
-        $participantes =  DB::select("select  q.id id, q.name_member as nombre , q.lastname_member as apellido , i.name iglesia,q.document_number
-        from iglesia i
-        join member q
-        join  users_has_iglesia r on        r.iglesia_id=i.id and r.user_id=q.users_id ");
-
-
+        $search = "";
+        if($request->search)
+        {
+            $search = $request->search;
+        }
         if (auth()->user()->hasRole('administrador')) {
             $iglesias = Iglesia::where('status_id', '<>', 3)->get();
+            $participantes = Iglesia::join('users_has_iglesia as r', 'r.iglesia_id', '=', 'iglesia.id')
+            ->join('member as m', 'm.users_id', '=', 'r.user_id')
+            ->select(
+                'm.id as id',
+                'm.name_member as nombre',
+                'm.lastname_member as apellido',
+                'iglesia.name as iglesia',
+                'm.document_number'
+            )->where('m.name_member', 'like', '%' . $search . '%')->orWhere('m.lastname_member', 'like', '%' . $search . '%')
+            ->orWhere('m.document_number', 'like', '%' . $search . '%')  ->paginate(10);
         } else {
             $user = User::findOrFail(auth()->user()->id);
             $iglesias = $user->user_has_iglesia;
+            $iglesias_array = $iglesias->pluck('id')->toArray();
+
+            $participantes = Iglesia::join('users_has_iglesia as r', 'r.iglesia_id', '=', 'iglesia.id')
+            ->join('member as m', 'm.users_id', '=', 'r.user_id')
+            ->select(
+                'm.id as id',
+                'm.name_member as nombre',
+                'm.lastname_member as apellido',
+                'iglesia.name as iglesia',
+                'm.document_number'
+            )->where('m.name_member', 'like', '%' . $search . '%')->orWhere('m.lastname_member', 'like', '%' . $search . '%')
+            ->orWhere('m.document_number', 'like', '%' . $search . '%')  ->paginate(10);
         }
 
-        // dd($iglesias);
-        return view('catalog.member.index', compact('member', 'member_status', 'participantes', 'iglesias'));
+        return view('catalog.member.index', compact(  'participantes', 'iglesias','search'));
     }
 
 
