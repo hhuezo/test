@@ -13,5 +13,11 @@ class Gender extends Model
     public $timestamps = false;
     protected $fillable = [
         'description',
+        'description_en',
+'adding_user',
+'adding_date',
+'modifying_user',
+'modifying_date',
+'status',
     ];
 }

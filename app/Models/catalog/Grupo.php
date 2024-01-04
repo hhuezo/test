@@ -14,6 +14,9 @@ class Grupo extends Model
     public $timestamps = false;
     protected $fillable = [
         'nombre',
+        'description',
+'date_created',
+'active',
     ];
 
     public function member_has_group()

@@ -5,7 +5,7 @@
 
 <div class="card">
     <header class=" card-header noborder">
-        <h4 class="card-title">Cursos
+        <h4 class="card-title">Temas
         </h4>
         <a href="{{ url('catalog/course/create') }}">
             <button class="btn btn-outline-primary">Nuevo</button>
@@ -20,12 +20,12 @@
                     <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed black:divide-slate-700" cellspacing="0" width="100%">
                         <thead class="bg-slate-200 black:bg-slate-700">
                             <tr  class="even:bg-slate-50 black:even:bg-slate-700">
-                                <th style="text-align: center">Id</th>
-                                <td style="text-align: center">Nombre español</td>
-                                <td style="text-align: center">Nombre ingles</td>
-                                <td style="text-align: center">descripcion</td>
-                                <td style="text-align: center">descripcion español</td>
-                                <td style="text-align: center">opciones</td>
+                           
+                                <td style="text-align: center">Nombre </td>
+                       
+                             
+                                <td style="text-align: center">Descripcion </td>
+                                <td style="text-align: center">Opciones</td>
 
                             </tr>
                         </thead>
@@ -33,10 +33,9 @@
                             @if ($Course->count() > 0)
                             @foreach ($Course as $obj)
                             <tr class="even:bg-slate-50 black:even:bg-slate-700">
-                                <td align="center">{{ $obj->id }}</td>
+                               
                                 <td>{{ $obj->name_es }}</td>
-                                <td>{{ $obj->name_en }}</td>
-                                <td>{{ $obj->description }}</td>
+                     
                                 <td>{{ $obj->description_es }}</td>
 
                                 <td align="center">

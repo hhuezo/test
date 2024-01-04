@@ -25,5 +25,6 @@ class ConfiguracionCorreos extends Model
         'UpdateAt',
         'smtp_encryption',
         'smtp_from_name',
+        'smtp_mailer',
     ];
 }
