@@ -1,0 +1,140 @@
+  .card-title,
+    .form-label {
+        text-transform: none;
+    }
+
+    /* .btn-dark {
+            background-color: #740816;
+        } */
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+
+    /* css para colores generales*/
+    .semiDark .logo-segment, .semiDark .sidebar-menus, .semiDark .sidebar-wrapper{
+        background-color: #5f0b18;
+    }
+
+    .semiDark .icon-arrow{
+        background-color: #B18A89;
+    }
+
+    .semiDark .navItem {
+        color: #ffff;
+        font-weight: bold;
+    }
+
+    .btn-dark{
+        background-color: #5f0b18;
+    }
+
+    .dark{
+        color: #5f0b18;
+    }
+
+     .btn-primary{
+        background-color: #5D6E83;
+    }
+
+    .primary , .btn-outline-primary{
+        color: #5D6E83;
+        border-color: #5D6E83;
+    }
+
+   .btn-info{
+        background-color: #5d1419;
+    }
+
+    .info , .btn-outline-info{
+        color: #5d1419;
+        border-color: #5d1419;
+    }
+
+
+    .btn-success{
+        background-color: #75924e;
+    }
+
+    .success, .btn-outline-success{
+        color: #75924e;
+        border-color: #75924e;
+    }
+
+    .btn-warning{
+        background-color: #f28216;
+    }
+
+    .warning , .btn-outline-warning{
+        color: #f28216;
+        border-color: #f28216;
+    }
+
+    .btn-danger{
+        background-color: #b92419;
+    }
+
+    .danger, .btn-outline-danger{
+        color: #b92419;
+        border-color: #b92419;
+    }
+
