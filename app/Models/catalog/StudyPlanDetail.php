@@ -25,7 +25,7 @@ class StudyPlanDetail extends Model
         return $this->belongsTo(StudyPlan::class, 'study_plan_id','id' );
     }
 
-    public function curso()
+    public function curso()   //tema
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
