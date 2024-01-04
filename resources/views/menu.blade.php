@@ -187,11 +187,9 @@
                             <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
                         </a>
                         <ul class="sidebar-submenu">
-
                             <li>
                                 <a href="{{ url('administracion/configuracion_correos') }}">Correos SMTP</a>
                             </li>
-
                         </ul>
                     </li>
                     @endcan
@@ -230,9 +228,7 @@
                             <li>
                                 <a href="{{ url('catalog/sede') }}">Sede</a>
                             </li>
-                            <li>
-                                <a href="{{ url('catalog/plan_estudios') }}">Cursos para Plan de Estudios</a>
-                            </li>
+
                             <li>
                                 <a href="{{ url('administracion/iglesia_plan_estudio') }}">Plan de estudio</a>
                             </li>
@@ -289,6 +285,10 @@
 
                         <li>
                             <a href="{{ url('catalog/wizard_church_questions') }}">Preguntas</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios (iglesias) </a>
                         </li>
                         {{-- <li>
                                 <a href="{{ url('catalog/Iglesiauser') }}">Usuario Iglesias</a>
