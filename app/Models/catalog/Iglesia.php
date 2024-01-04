@@ -34,10 +34,10 @@ class Iglesia extends Model
         'website',
         'personeria_juridica',
         'organization_type',
-        'status_id',
         'sede_id',
+        'logo',
         'logo_url',
-        'logo'
+        'status_id',
 
     ];
 
@@ -149,24 +149,24 @@ class Iglesia extends Model
         return $result;
     }
 
-    public function validar_asistencias_jovenes($iglesiaId) 
-    { 
- 
-        $result = 0; 
-        $data = DB::table('attendance_per_session as asistencia') 
-            ->join('sessions', 'asistencia.sessions_id', '=', 'sessions.id') 
-            ->join('group_per_chuch_plan as plan', 'plan.id', '=', 'sessions.group_per_church_id') 
-            ->where('plan.group_id', '=', 1) 
-            ->where('plan.iglesia_id', '=', $iglesiaId) 
-            ->where('asistencia.attended', '=', 1) 
-            ->groupBy('sessions.id') 
-            ->havingRaw('count(*) < 9') 
-            ->select('sessions.id', DB::raw('count(*) as conteo')) 
-            ->get(); 
- 
-        if ($data) { 
-            $result =  $data->count(); 
-        } 
-        return $result; 
+    public function validar_asistencias_jovenes($iglesiaId)
+    {
+
+        $result = 0;
+        $data = DB::table('attendance_per_session as asistencia')
+            ->join('sessions', 'asistencia.sessions_id', '=', 'sessions.id')
+            ->join('group_per_chuch_plan as plan', 'plan.id', '=', 'sessions.group_per_church_id')
+            ->where('plan.group_id', '=', 1)
+            ->where('plan.iglesia_id', '=', $iglesiaId)
+            ->where('asistencia.attended', '=', 1)
+            ->groupBy('sessions.id')
+            ->havingRaw('count(*) < 9')
+            ->select('sessions.id', DB::raw('count(*) as conteo'))
+            ->get();
+
+        if ($data) {
+            $result =  $data->count();
+        }
+        return $result;
     }
 }

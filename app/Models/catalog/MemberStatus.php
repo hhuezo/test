@@ -18,7 +18,7 @@ class MemberStatus extends Model
 'adding_date',
 'modifying_user',
 'modifying_date',
-'status'
+'status',
     ];
 
 }

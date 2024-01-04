@@ -35,6 +35,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'pin',
+        'created_at',
+        'updated_at',
+        'last_name',
+        'website',
+        'address',
+        'phone',
+        'fax',
+        'country_id',
+        'date_admission',
+        'status',
+        'document_number',
     ];
 
     /**
@@ -50,7 +62,7 @@ class User extends Authenticatable
 
     public function user_has_iglesia()
     {
-        return $this->belongsToMany(Iglesia::class,'users_has_iglesia','user_id','iglesia_id');
+        return $this->belongsToMany(Iglesia::class, 'users_has_iglesia', 'user_id', 'iglesia_id');
     }
     public function user_rol()
     {
@@ -59,13 +71,9 @@ class User extends Authenticatable
 
     public function usuario_participante()
     {
-        return $this->hasMany(Member::class,'users_id' );
-       // return $this->belongsTo(Member::class, ');
+        return $this->hasMany(Member::class, 'users_id');
+        // return $this->belongsTo(Member::class, ');
     }
 
     protected $guarded = [];
-
-
-
-
 }

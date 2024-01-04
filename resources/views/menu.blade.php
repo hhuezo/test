@@ -276,9 +276,7 @@
                 <li>
                     <a href="{{ url('catalog/member') }}">Participantes</a>
                 </li>
-                <li>
-                    <a href="{{ url('catalog/answerreg') }}">Respuestas del Registro <br> de la iglesia</a>
-                </li>
+
                 </ul>
                 </li>
 

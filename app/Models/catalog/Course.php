@@ -16,7 +16,8 @@ class Course extends Model
         'name_es',
         'description',
         'description_es',
-        'image'
+        'image',
+        'date_added',
     ];
 
     protected $guarded = [];

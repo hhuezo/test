@@ -18,6 +18,7 @@ class AsistenciaSesion extends Model
         'member_id',
         'attended',
         'date_added',
+        'notes',
     ];
 
     public function sesion()
