@@ -26,12 +26,12 @@ class Member extends Model
         'country_id',
         'departamento_id',
         'municipio_id',
-        'city_id',
         'address',
+        'is_pastor',
         'data_created',
-        'status_id',
+        'organization_id',
         'users_id',
-        'organization_id'
+        'status_id',
     ];
     protected $guarded = [];
 

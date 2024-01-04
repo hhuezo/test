@@ -14,10 +14,11 @@ class OrganizationStatus extends Model
     protected $fillable = [
         'description',
 'description_es',
+'color_hex',
 'adding_date',
 'modifying_user',
 'modifying_date',
-'status'
+'status',
     ];
 
 
