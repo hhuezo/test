@@ -5,6 +5,7 @@ namespace App\Http\Controllers\catalog;
 use App\Http\Controllers\Controller;
 use App\Models\administracion\AsistenciaSesion;
 use App\Models\administracion\IglesiaPlanEstudio;
+use App\Models\administracion\ReglasGenerales;
 use App\Models\administracion\Sesion;
 use App\Models\catalog\ChurchQuestionWizard;
 use App\Models\catalog\Cohorte;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class IglesiaController extends Controller
 {
@@ -134,6 +136,31 @@ class IglesiaController extends Controller
         return back();
     }
 
+    public function actualizar_imagen(Request $request){
+        //dd();
+
+        $iglesia = Iglesia::findOrFail($request->id_iglesia);
+        if ($request->file('logo_name')) {
+            try {
+                $url = public_path('/images/') . $iglesia->logo;
+
+                unlink($url);
+            } catch (Exception $e) {
+            }
+            $archivo = $request->file('logo_name');
+            $filename = $archivo->getClientOriginalName();
+            $path = $filename;
+            $destinationPath = public_path('/images');
+            $archivo->move($destinationPath, $path);
+            $iglesia->logo_url = "./images"; /// $destinationPath;
+            $iglesia->logo = $filename;
+        }
+        $iglesia->update();
+
+        alert()->success('El registro ha sido modificado correctamente');
+        return back();
+    }
+
 
     public function edit($id)
     {
@@ -154,12 +181,25 @@ class IglesiaController extends Controller
 
         $grupo_iglesias =  $iglesia->iglesia_has_grupo;
 
+        
+        $url =  url('/') . "/registro_participantes/" . $iglesia->id . '/';
+
+        foreach ($grupo_iglesias as $obj) {
+            $obj->conteo = $iglesia->countMembers($iglesia->id, $obj->id);
+            $obj->codigo_qr = 'qrcodeiglesiagrupo' . $obj->id . '.png';
+            QrCode::format('png')->size(200)->generate($url . '/' . $obj->id, public_path('img/qrcodeiglesiagrupo' . $obj->id . '.png'));
+        }
+
+
+        QrCode::format('png')->size(200)->generate($url . '0', public_path('img/qrcodeiglesia.png'));
+
         $grupoArray =  $grupo_iglesias->pluck('id')->toArray();
 
         $grupos_noasignados = Grupo::whereNotIn('id', $grupoArray)->get();
-        $grupos_asignados = Grupo::where('id', $grupoArray)->get();
+        $grupos_asignados = Grupo::whereIn('id', $grupoArray)->get();
+        $codigos = ReglasGenerales::get();
 
-        return view('catalog.iglesia.edit', compact('iglesia', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg',  'wizzaranswer', 'wizzarquestion', 'deptos',  'grupo_iglesias', 'grupos_asignados', 'grupos_noasignados'));
+        return view('catalog.iglesia.edit', compact('iglesia','codigos' ,'cohorte', 'depto', 'municipio', 'sede', 'estatuorg',  'wizzaranswer', 'wizzarquestion', 'deptos',  'grupo_iglesias', 'grupos_asignados', 'grupos_noasignados'));
     }
 
     public function update(Request $request, $id)
@@ -185,26 +225,7 @@ class IglesiaController extends Controller
         $organizations->organization_type = $request->organization_type;
         $organizations->status_id = $request->status_id;
         $organizations->sede_id = $request->sede_id;
-        if ($request->file('logo_name')) {
-
-
-            try {
-                $url = public_path('/images/') . $organizations->logo;
-
-                unlink($url);
-            } catch (Exception $e) {
-            }
-
-
-
-            $archivo = $request->file('logo_name');
-            $filename = $archivo->getClientOriginalName();
-            $path = $filename;
-            $destinationPath = public_path('/images');
-            $archivo->move($destinationPath, $path);
-            $organizations->logo_url = "./images"; /// $destinationPath;
-            $organizations->logo = $filename;
-        }
+      
 
         $organizations->update();
 

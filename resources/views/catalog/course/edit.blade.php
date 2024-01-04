@@ -43,7 +43,7 @@
 
                                 <div class="input-area relative">
 
-                                    <label for="largeInput" class="form-label">Imagen {{ $courses->image }}</label>
+                                    <label for="largeInput" class="form-label">Imagen </label>
 
                                     <input type="file" name="imagen" id="fileInput" style="display: none;">
                                     <div id="imagen" name="imagen" class="dropzone"> </div>

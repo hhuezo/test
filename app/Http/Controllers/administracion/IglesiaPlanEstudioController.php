@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\AsistenciaImport;
 use App\Models\administracion\AsistenciaSesion;
 use App\Models\administracion\IglesiaPlanEstudio;
+use App\Models\administracion\ReglasGenerales;
 use App\Models\administracion\Sesion;
 use App\Models\administracion\SesionDetalle;
 use App\Models\catalog\Grupo;
@@ -30,7 +31,7 @@ class IglesiaPlanEstudioController extends Controller
     {
         if (auth()->user()->hasRole('administrador') == true) {
             $planes = IglesiaPlanEstudio::get();
-            $iglesia_id = '';
+            $iglesia_id = 48;   //dato quemado
         } else {
             $user = User::findOrFail(auth()->user()->id);
             $iglesia_id = $user->user_has_iglesia->first()->id;

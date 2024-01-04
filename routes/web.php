@@ -127,6 +127,7 @@ Route::get('administracion/datos_iglesia/get_participantes/{iglesia}', [DatosIgl
 Route::resource('administracion/datos_iglesia', DatosIglesiaController::class);
 Route::get('catalog/iglesia/set_grupo/{participante}/{grupo}', [IglesiaController::class, 'set_grupo']);
 Route::get('download/image',[DatosIglesiaController::class, 'download']);
+Route::get('download/image_group/{id}',[DatosIglesiaController::class, 'download_group']);
 
 /*nueva para participantes*/
 Route::get('administracion/iglesia_plan_estudio/control_participante', [IglesiaPlanEstudioController::class,'control_participante']);
@@ -155,6 +156,7 @@ Route::get('/iglesia/reporte_asistencias/{id}', [IglesiaController::class, 'repo
 Route::post('catalog/iglesia/add_preguntaresp', [IglesiaController::class, 'add_preguntaresp']);
 Route::post('catalog/iglesia/attach_preguntas', [IglesiaController::class, 'attach_preguntas']);
 Route::post('catalog/iglesia/dettach_preguntas', [IglesiaController::class, 'dettach_preguntas']);
+Route::post('actualizar/imagen',[IglesiaController::class,'actualizar_imagen']);
 
 Route::get('admin/import',[IglesiaPlanEstudioController::class,'import']);
 Route::post('admin/archivo',[IglesiaPlanEstudioController::class,'subir_archivo']);
