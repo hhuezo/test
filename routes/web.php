@@ -123,6 +123,7 @@ Route::get('/get_departamento/{id}', [WelcomeController::class, 'get_departament
 
 Route::post('/upload', [WelcomeController::class, 'store_file'])->name('dropzone.store');
 
+Route::get('/genera_qr/{iglesia_id}/{grupo_id}', [IglesiaController::class, 'genera_qr']);
 Route::post('administracion/datos_iglesia/set_estado', [DatosIglesiaController::class, 'set_estado']);
 Route::get('administracion/datos_iglesia/get_participantes/{iglesia}', [DatosIglesiaController::class, 'get_participantes']);
 Route::resource('administracion/datos_iglesia', DatosIglesiaController::class);
@@ -140,7 +141,7 @@ Route::get('catalog/modificar_datos_participante',[MemberController::class,'modi
 
 Route::post('administracion/iglesia_plan_estudio/add_sesion', [IglesiaPlanEstudioController::class,'add_sesion']);
 Route::post('admin/delete_sesion',[IglesiaPlanEstudioController::class,'delete_sesion']);
-Route::get('administracion/iglesia_plan_estudio/certificacion/{id}',[IglesiaPlanEstudioController::class,'certificacion']);
+Route::get('administracion/iglesia_plan_estudio/certificacion',[IglesiaPlanEstudioController::class,'certificacion']);
 Route::get('administracion/iglesia_plan_estudio/certificado/{id}',[IglesiaPlanEstudioController::class,'certificacion_iglesia']);
 Route::get('administracion/iglesia_plan_estudio/certificado_participante/{id}',[IglesiaPlanEstudioController::class,'certificacion_participante']);
 Route::resource('administracion/iglesia_plan_estudio', IglesiaPlanEstudioController::class);

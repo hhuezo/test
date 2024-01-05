@@ -42,7 +42,7 @@
                         <div class="flex-1">
                             <div class="flex-none">
                                 <div class="md:h-[186px] md:w-[186px] h-[140px] w-[140px] md:ml-0 md:mr-0 ml-auto mr-auto md:mb-0 mb-4 rounded-full ring-4  ring-slate-100 relative" style="max-width: 80px; max-height: 80px;">
-                                    <a href="{{ url('download/image') }}" title="Descargar Imagen"><img src="{{ asset('img/qrcodeiglesia.png') }}" alt="" class="w-full h-full object-cover rounded-full"></a>
+                                    <a href="{{ url('genera_qr') }}/{{$iglesia->id}}/0" title="Descargar Imagen"><iconify-icon icon="icons8:qr-code" style="color: #475569;" width="80"></iconify-icon></a>
                                 </div>
                             </div>
                         </div>
@@ -352,13 +352,13 @@
                                                                     @foreach ($grupo_iglesias as $obj)
 
                                                                     <td align="center">{{ $obj->nombre }}{{$obj->qrcodeiglesiagrupo}}</td>
-                                                                    <td align="center"><a data-bs-toggle="modal" data-bs-target="#modal-viewqr-{{ $obj->id }}">
-                                                                            <img src="{{asset('img/qrcodeiglesiagrupo')}}{{$obj->id}}.png" width="60"></a></td>
+                                                                    <td align="center">
+                                                                      <a href="{{ url('genera_qr') }}/{{$iglesia->id}}/{{$obj->id}}"><iconify-icon  icon="icons8:qr-code" style="color: #475569;" width="40"></iconify-icon></a>
+                                                                    </td>
                                                                     <td align="center">
                                                                         <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle" class="danger" width="40"></iconify-icon>
                                                                     </td>
                                                                     @include('catalog.iglesia.modal_del_grupo')
-                                                                    @include('datos_iglesia.modal_viewqr')
                                                                 </tr>
                                                                 @endforeach
                                                             </tbody>

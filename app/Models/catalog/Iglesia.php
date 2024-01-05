@@ -105,6 +105,7 @@ class Iglesia extends Model
         return DB::table('member_has_group')->join('member as m', 'member_has_group.member_id', '=', 'm.id')
             ->join('users as u', 'm.users_id', '=', 'u.id')
             ->join('users_has_iglesia as uhi', 'u.id', '=', 'uhi.user_id')
+            ->whereIn('m.status_id',[2,4])
             ->where('uhi.iglesia_id', $iglesiaId)
             ->where('member_has_group.group_id', $groupId)
             ->count();

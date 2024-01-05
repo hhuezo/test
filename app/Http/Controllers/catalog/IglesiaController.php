@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Hash;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -42,8 +43,8 @@ class IglesiaController extends Controller
         //   dd($iglesia);
         $estatuorg = OrganizationStatus::where('id', '<=', 3)->get();
 
-        $sede=sede::get();
-        return view('catalog.iglesia.index', compact('sede','iglesia', 'estatuorg', 'iglesias_rechazadas'));
+        $sede = sede::get();
+        return view('catalog.iglesia.index', compact('sede', 'iglesia', 'estatuorg', 'iglesias_rechazadas'));
     }
 
     public function create()
@@ -136,7 +137,8 @@ class IglesiaController extends Controller
         return back();
     }
 
-    public function actualizar_imagen(Request $request){
+    public function actualizar_imagen(Request $request)
+    {
         //dd();
 
         $iglesia = Iglesia::findOrFail($request->id_iglesia);
@@ -182,16 +184,7 @@ class IglesiaController extends Controller
         $grupo_iglesias =  $iglesia->iglesia_has_grupo;
 
 
-        $url =  url('/') . "/registro_participantes/" . $iglesia->id . '/';
 
-        foreach ($grupo_iglesias as $obj) {
-            $obj->conteo = $iglesia->countMembers($iglesia->id, $obj->id);
-            $obj->codigo_qr = 'qrcodeiglesiagrupo' . $obj->id . '.png';
-            QrCode::format('png')->size(200)->generate($url . '/' . $obj->id, public_path('img/qrcodeiglesiagrupo' . $obj->id . '.png'));
-        }
-
-
-        QrCode::format('png')->size(200)->generate($url . '0', public_path('img/qrcodeiglesia.png'));
 
         $grupoArray =  $grupo_iglesias->pluck('id')->toArray();
 
@@ -199,7 +192,7 @@ class IglesiaController extends Controller
         $grupos_asignados = Grupo::whereIn('id', $grupoArray)->get();
         $codigos = ReglasGenerales::get();
 
-        return view('catalog.iglesia.edit', compact('iglesia','codigos' ,'cohorte', 'depto', 'municipio', 'sede', 'estatuorg',  'wizzaranswer', 'wizzarquestion', 'deptos',  'grupo_iglesias', 'grupos_asignados', 'grupos_noasignados'));
+        return view('catalog.iglesia.edit', compact('iglesia', 'codigos', 'cohorte', 'depto', 'municipio', 'sede', 'estatuorg',  'wizzaranswer', 'wizzarquestion', 'deptos',  'grupo_iglesias', 'grupos_asignados', 'grupos_noasignados'));
     }
 
     public function update(Request $request, $id)
@@ -417,7 +410,7 @@ class IglesiaController extends Controller
         return view('catalog.iglesia.reporte_asistencias', compact('cursos', 'gruposall', 'grupos_iglesia', 'iglesia', 'sessiones', 'participantes', 'genero'));
 
 
-     //$pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('cursos','gruposall','grupos_iglesia','iglesia', 'sessiones', 'participantes', 'genero'));
+        //$pdf = \Pdf::loadView('catalog.iglesia.reporte_asistencias', compact('cursos','gruposall','grupos_iglesia','iglesia', 'sessiones', 'participantes', 'genero'));
 
 
 
@@ -542,5 +535,40 @@ class IglesiaController extends Controller
 
         $pdf = \Pdf::loadView('catalog.grupo.reporte_grupos', compact('miembros', 'iglesia', 'usuarios', 'grupo', 'member_status'));
         return $pdf->stream('Info.pdf');*/
+    }
+
+    public function genera_qr($iglesiaId, $grupoId)
+    {
+        if($grupoId == 0)
+        {
+            $url_en_qr =  url('/') . "/registro_participantes/" . $iglesiaId . '/';
+            // Genera el código QR
+            QrCode::format('png')->size(200)->generate($url_en_qr . '0', public_path('img/qrcodeiglesia' . $iglesiaId . '.png'));
+
+            $file = public_path('img/qrcodeiglesia' . $iglesiaId . '.png');
+        }
+        else{
+            $url_en_qr =  url('/') . "/registro_participantes/" . $iglesiaId . '/';
+            // Genera el código QR
+            QrCode::format('png')->size(200)->generate($url_en_qr . $grupoId, public_path('img/qrcodeiglesiagrupo' . $iglesiaId.'-'.$grupoId . '.png'));
+            $file = public_path('img/qrcodeiglesiagrupo' . $iglesiaId.'-'.$grupoId . '.png');
+        }
+
+
+
+        //Inicia la descarga
+        $response = Response::download($file);
+
+
+        // Ignora si el usuario aborta la conexión (la descarga puede continuar)
+        ignore_user_abort(true);
+
+        // Elimina la imagen después de un retraso para permitir la descarga
+        register_shutdown_function(function () use ($file) {
+            sleep(5); // Espera 5 segundos
+            unlink($file);
+        });
+
+        return $response;
     }
 }
