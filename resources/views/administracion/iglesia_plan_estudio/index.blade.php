@@ -4,12 +4,12 @@
 
 <div class="card">
     <header class=" card-header noborder">
-        <h4 class="card-title">Planes de estudio para iglesias
+        <h4 class="card-title">Planes de Estudio para Iglesias
         </h4>
         <div align="right">
 
             @if(auth()->user()->hasRole('administrador') == true)
-            <a href="{{ url('administracion/iglesia_plan_estudio/certificacion/') }}/{{$iglesia_id}}">
+            <a href="{{ url('administracion/iglesia_plan_estudio/certificacion/') }}">
                 <button class="btn btn-outline-dark">Certificación</button>
             </a>
             @endif

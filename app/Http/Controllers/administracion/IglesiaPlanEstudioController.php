@@ -31,60 +31,77 @@ class IglesiaPlanEstudioController extends Controller
     {
         if (auth()->user()->hasRole('administrador') == true) {
             $planes = IglesiaPlanEstudio::get();
-            $iglesia_id = 48;   //dato quemado
+            // $iglesia_id = 48;   //dato quemado
         } else {
             $user = User::findOrFail(auth()->user()->id);
-            $iglesia_id = $user->user_has_iglesia->first()->id;
+            //   $iglesia_id = $user->user_has_iglesia->first()->id;
             $planes = IglesiaPlanEstudio::where('iglesia_id', $user->user_has_iglesia->first()->id)->get();
         }
 
-        return view('administracion.iglesia_plan_estudio.index', compact('planes', 'iglesia_id'));
+        return view('administracion.iglesia_plan_estudio.index', compact('planes'));
     }
 
-    public function certificacion($id)
+    public function certificacion()
     {
-        //    dd("hombres trabajando");
         $now = Carbon::now('America/El_Salvador');
-        $iglesia = Iglesia::findOrFail($id);
-        //dd($iglesia->validar_asistencias($id));
+        //listar iglesias listas para certificarse
+
+       //$iglesias = IglesiaPlanEstudio::join('iglesia','iglesia.id','=','group_per_chuch_plan.iglesia_id')
+        $iglesias = Iglesia::join('group_per_chuch_plan as p', 'p.iglesia_id', '=', 'iglesia.id')
+        ->where('iglesia.status_id', '=', 2)
+        ->where('p.closed', '=', 1)
+        ->where('p.end_date', '<=', now())
+        ->groupBy('p.iglesia_id', 'p.id')  // Agregar la columna a GROUP BY
+        ->get();
+
+        dd($iglesias);
+
+
+        
+
+
+
+        //    dd("hombres trabajando");
+
+        $iglesia = Iglesia::findOrFail(48); //dato quemado
         $planes = IglesiaPlanEstudio::where('iglesia_id', '=', $iglesia->id) //->where('end_date','<=', $now->format('Y-m-d'))
             ->get();
 
-        return view('administracion.iglesia_plan_estudio.certificacion', compact('planes','iglesia'));
-       
+        return view('administracion.iglesia_plan_estudio.certificacion', compact('iglesia','planes'));
     }
 
-    public function certificacion_participante($id){   //para solamente participantes
+    public function certificacion_participante($id)
+    {   //para solamente participantes
         $iglesia = Iglesia::findOrFail($id);
         //busca los participantes para cambiarlos de estado a certificados.
-        $members = $iglesia->participantes($iglesia->id)->where('status_id','=',2);
-        
-        foreach($members as $obj){
+        $members = $iglesia->participantes($iglesia->id)->where('status_id', '=', 2);
+
+        foreach ($members as $obj) {
             //consultar cuantas sesiones
-            $totalsesiones = AsistenciaSesion::where('member_id','=',$obj->id)->get();
-          //  $totalasistencias = AsistenciaSesion::where('member_id','=',$obj->id)->get();
-            
-            if($totalsesiones->count() == $totalsesiones->where('attended','=',1)->count()){
+            $totalsesiones = AsistenciaSesion::where('member_id', '=', $obj->id)->get();
+            //  $totalasistencias = AsistenciaSesion::where('member_id','=',$obj->id)->get();
+
+            if ($totalsesiones->count() == $totalsesiones->where('attended', '=', 1)->count()) {
                 $member = Member::findOrFail($obj->id);
                 $member->status_id = 4;  //certificado;
                 $member->update();
                 //envio de correo a participante
             }
-            
         }
         $iglesia->status_id = 8; //pendiente de certificacion
         $iglesia->update();
         alert()->success('Se han certificado los participantes de forma correcta');
         return back();
-    } 
+    }
 
-    public function certificacion_iglesia($id){  //para la iglesia y participantes
+    public function certificacion_iglesia($id)
+    {  //para la iglesia y participantes
         //dd($id);
 
         $iglesia = Iglesia::findOrFail($id);
         //busca los participantes para cambiarlos de estado a certificados.
-        $members = $iglesia->participantes($iglesia->id)->where('status_id','=',2);
-        foreach($members as $obj){
+        $members = $iglesia->participantes($iglesia->id)->where('status_id', '=', 2);
+        foreach ($members as $obj) {
             $member = Member::findOrFail($obj->id);
             $member->status_id = 4; //certificado;
             $member->update();
@@ -99,7 +116,6 @@ class IglesiaPlanEstudioController extends Controller
 
         alert()->success('Se ha certificado la iglesia de forma correcta');
         return back();
-
     }
 
     public function add_notes(Request $request)
@@ -125,6 +141,12 @@ class IglesiaPlanEstudioController extends Controller
         }
         $sesion->completed = 1;
         $sesion->update();
+        $plan = IglesiaPlanEstudio::findOrFail($sesion->group_per_church_id);
+        $sesiones = Sesion::where('group_per_church_id', '=', $sesion->group_per_church_id)->get();
+        if ($sesiones->where('completed', '=', 1)->count() == $sesiones->count()) {
+            $plan->closed = 1; /// plan cerrado
+            $plan->update();
+        }
         alert()->success('Se subio el archivo correctamente');
         return back();
     }
@@ -209,7 +231,7 @@ class IglesiaPlanEstudioController extends Controller
         ///    dd($plan);
         $iglesia = Iglesia::findOrFail($plan->iglesia_id);
 
-        $participantes = $plan->iglesia->participantes($plan->iglesia_id)->where('group_id', '=', $plan->group_id)->where('status_id', '=', 2);
+        $participantes = $plan->iglesia->participantes($plan->iglesia_id)->where('group_id', '=', $plan->group_id)->whereIn('status_id', [2, 4]);
         $sesiones = Sesion::where('group_per_church_id', '=', $plan->id)->get();
 
         //dd((!session()->has('show')));
