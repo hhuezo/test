@@ -359,7 +359,6 @@
                                                                         <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle" class="danger" width="40"></iconify-icon>
                                                                     </td>
                                                                     @include('catalog.iglesia.modal_del_grupo')
-                                                                    @include('datos_iglesia.modal_viewqr')
                                                                 </tr>
                                                                 @endforeach
                                                             </tbody>
