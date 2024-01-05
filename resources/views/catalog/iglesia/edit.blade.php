@@ -90,7 +90,7 @@
                         <!-- end single -->
                         <div class="flex-1">
                             <div class="text-base text-slate-900 dark:text-slate-300 font-medium mb-1" style="text-transform: capitalize;">
-                                {{$iglesia->sede_id == null ? '': $iglesia->sedeiglesia->cohorte->nombre}} <br>{{$codigos->where('id','=',2)->first()->abbrev}}{{str_pad($iglesia->sedeiglesia->cohorte_id, 3, "0", STR_PAD_LEFT);}}
+                                {{$iglesia->sede_id == null ? '': $iglesia->sedeiglesia->cohorte->nombre}} <br>{{$codigos->where('id','=',2)->first()->abbrev}}{{$iglesia->sede_id == null ? '': str_pad($iglesia->sedeiglesia->cohorte_id, 3, "0", STR_PAD_LEFT)}}
                             </div>
                             <div class="text-sm text-slate-600 font-light dark:text-slate-300">
                                 Cohort
@@ -449,8 +449,11 @@
                                                                 <tr>
                                                                     @foreach ($wizzaranswer as $obj)
 
-
-                                                                    <td align="center"> {{ $obj->pregunta->question }}</td>
+                                                                    @if($obj->pregunta )
+                                                                    <td align="center">{{$obj->pregunta->question}}</td>
+                                                                    @else
+                                                                    <td></td>
+                                                                    @endif
                                                                     <td align="center">
                                                                         @if ($obj->answer == 1)
 
