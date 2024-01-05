@@ -100,6 +100,9 @@
                                 <a href="{{ url('tree_view') }}">Estructura general</a>
                             </li>
                             <li>
+                                <a href="{{ url('informacion_general') }}">Informacion general</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('administracion/reglas_generales') }}">Reglas Generales</a>
                             </li>
                         </ul>
