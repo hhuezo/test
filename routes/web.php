@@ -107,6 +107,7 @@ Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap'
 Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
 Route::get('/get_dep/{id}', [WelcomeController::class, 'get_dep']);
 Route::get('/get_departamento/{id}', [WelcomeController::class, 'get_departamento']);
+Route::get('/tree_view', [WelcomeController::class, 'tree_view']);
 
 
 

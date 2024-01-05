@@ -119,6 +119,9 @@
                             <li>
                                 <a href="{{ url('administracion/configuracion_correos') }}">Correos SMTP</a>
                             </li>
+                            <li>
+                                <a href="{{ url('tree_view') }}">Estructura general</a>
+                            </li>
                         </ul>
                     </li>
                     @endcan
