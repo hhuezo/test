@@ -43,31 +43,41 @@ class IglesiaPlanEstudioController extends Controller
 
     public function certificacion()
     {
+
         $now = Carbon::now('America/El_Salvador');
-        //listar iglesias listas para certificarse
 
        //$iglesias = IglesiaPlanEstudio::join('iglesia','iglesia.id','=','group_per_chuch_plan.iglesia_id')
         $iglesias = Iglesia::join('group_per_chuch_plan as p', 'p.iglesia_id', '=', 'iglesia.id')
         ->where('iglesia.status_id', '=', 2)
         ->where('p.closed', '=', 1)
         ->where('p.end_date', '<=', now())
-        ->groupBy('p.iglesia_id', 'p.id')  // Agregar la columna a GROUP BY
+        ->groupBy('p.iglesia_id')  // Agregar la columna a GROUP BY
         ->get();
 
-        dd($iglesias);
 
+        foreach($iglesias as $iglesia)
+        {
+            $validar_jovenes = $iglesia->validar_asistencias_jovenes($iglesia->id);
+            $validar_adultos = $iglesia->validar_asistencias($iglesia->id);
 
-        
+            if($validar_jovenes == 1 && $validar_adultos == 1)
+            {
+                $iglesia->certificacion = 1;
+            }
+            else{
+                $iglesia->certificacion = 0;
+            }
 
+        }
 
 
         //    dd("hombres trabajando");
 
-        $iglesia = Iglesia::findOrFail(48); //dato quemado
-        $planes = IglesiaPlanEstudio::where('iglesia_id', '=', $iglesia->id) //->where('end_date','<=', $now->format('Y-m-d'))
-            ->get();
+        // $iglesia = Iglesia::findOrFail(48); //dato quemado
+        // $planes = IglesiaPlanEstudio::where('iglesia_id', '=', $iglesia->id) //->where('end_date','<=', $now->format('Y-m-d'))
+        //     ->get();
 
-        return view('administracion.iglesia_plan_estudio.certificacion', compact('iglesia','planes'));
+        return view('administracion.iglesia_plan_estudio.certificacion', compact('iglesias'));
     }
 
     public function certificacion_participante($id)
