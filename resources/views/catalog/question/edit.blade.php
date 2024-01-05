@@ -139,7 +139,7 @@
 
                                             <td align="center">
                                                 &nbsp;&nbsp;
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modal-dettach-{{ $obj->id }}"><iconify-icon icon="mdi:trash" style="color: #1769aa;" width="26"></iconify-icon></button>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modal-dettach-{{ $obj->id }}"><iconify-icon icon="mdi:delete-circle" style="color: black;" width="26"></iconify-icon></button>
                                             </td>
                                         </tr>
                                         @include('catalog.question.modal_delete')

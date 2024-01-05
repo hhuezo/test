@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\catalog;
+namespace App\Http\Controllers\administracion;
 
 use App\Http\Controllers\Controller;
-use App\Models\catalog\Cohorte;
-use App\Models\catalog\Region;
+use App\Models\administracion\ReglasGenerales;
 use Illuminate\Http\Request;
 
-class CohorteController extends Controller
+class ReglasGeneralesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +17,10 @@ class CohorteController extends Controller
     {
         $this->middleware('auth');
     }
-     public function index()
+    public function index()
     {
-        $cohorte =Cohorte::get();
-
-        return view('catalog.cohorte.index', compact('cohorte'));
-
+        $ReglasGenerales=ReglasGenerales::get();
+        return view('administracion.reglas_generales.index',compact('ReglasGenerales'));
     }
 
     /**
@@ -33,9 +30,8 @@ class CohorteController extends Controller
      */
     public function create()
     {
-        $region = Region::get();
-
-        return view('catalog.cohorte.create', compact('region'));
+        $ReglasGenerales=ReglasGenerales::get();
+        return view('administracion.reglas_generales.create',compact('ReglasGenerales'));
     }
 
     /**
@@ -47,19 +43,25 @@ class CohorteController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'nombre.required' => 'ingresar nombre la congregacion',
+            'rule_name.required' => 'ingresar nombre',
+            'abbrev' => 'ingresar abreviatura',
+
         ];
+
+
 
         $request->validate([
 
-            'nombre' => 'required',
+            'rule_name' => 'required',
+            'abbrev' => 'required',
 
         ], $messages);
 
-        $cohorte = new Cohorte();
-        $cohorte->nombre = $request->nombre;
-        $cohorte->region_id = $request->region_id;
-        $cohorte->save();
+        $ReglasGenerales = new ReglasGenerales();
+        $ReglasGenerales->rule_name = $request->rule_name;
+        $ReglasGenerales->abbrev = $request->abbrev;
+        $ReglasGenerales->quantity = $request->quantity;
+        $ReglasGenerales->save();
         alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
@@ -83,12 +85,9 @@ class CohorteController extends Controller
      */
     public function edit($id)
     {
-        $cohorte = Cohorte::findOrFail($id);
-        $region=Region::get();
-
-        return view('catalog.cohorte.edit', compact('cohorte','region'));
+        $ReglasGenerales=ReglasGenerales::findOrFail($id);
+        return view('administracion.reglas_generales.edit', compact('ReglasGenerales'));
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -100,22 +99,24 @@ class CohorteController extends Controller
     public function update(Request $request, $id)
     {
         $messages = [
-            'nombre.required' => 'ingresar nombre de congregacion',
+            'rule_name.required' => 'ingresar nombre',
+            'abbrev' => 'ingresar abreviatura',
         ];
-
 
 
         $request->validate([
 
-            'nombre' => 'required',
+            'rule_name' => 'required',
+            'abbrev' => 'required',
 
         ], $messages);
 
-        $cohorte= Cohorte::findOrFail($id);
-        $cohorte->nombre = $request->nombre;
-        $cohorte->region_id = $request->region_id;
-        $cohorte->update();
-        alert()->success('El registro ha sido Modificado correctamente');
+        $ReglasGenerales = ReglasGenerales::findOrFail($id);
+        $ReglasGenerales->rule_name = $request->rule_name;
+        $ReglasGenerales->abbrev = $request->abbrev;
+        $ReglasGenerales->quantity = $request->quantity;
+        $ReglasGenerales->update();
+        alert()->success('El registro ha sido agregado correctamente');
         return back();
     }
 
@@ -127,10 +128,9 @@ class CohorteController extends Controller
      */
     public function destroy($id)
     {
-        $cohorte= Cohorte::findOrFail($id);
-        //dd($question);
-        $cohorte->delete();
-        alert()->error('El registro ha sido eliminado correctamente');
+        $ReglasGenerales=ReglasGenerales::findOrFail($id);
+        $ReglasGenerales->delete();
+        alert()->success('El registro ha sido eliminado correctamente');
         return back();
     }
 }

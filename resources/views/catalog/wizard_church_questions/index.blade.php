@@ -24,7 +24,6 @@
                                 <td style="text-align: center">Id</td>
                                 <td style="text-align: center">Pregunta</td>
                                 <td style="text-align: center">Respuesta</td>
-
                                 <td style="text-align: center">opciones</td>
 
                             </tr>

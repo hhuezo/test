@@ -16,6 +16,10 @@ class StudyPlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $plan_estudio = StudyPlan::get();
@@ -53,7 +57,7 @@ class StudyPlanController extends Controller
 
         $studyPlan = new StudyPlan();
         $studyPlan->description = $request->description;
-        $studyPlan->description_es = $request->description_es;
+        $studyPlan->description_es = $request->description;
         $studyPlan->save();
 
         alert()->success('El registro ha sido agregado correctamente');

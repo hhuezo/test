@@ -44,7 +44,7 @@
                                             </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Nombre </label>
-                                                <input type="text" name="description_es" id="description_es" required class="form-control" value="{{ old('description_es') }}" autofocus="true">
+                                                <input type="text" name="description" id="description" required class="form-control" value="{{ old('description') }}" autofocus="true">
                                             </div>
 
                                         <br>

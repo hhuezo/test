@@ -90,7 +90,7 @@
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Nombre </label>
-                                                                        <input type="text" name="name"
+                                                                        <input type="text" name="name" id="name"
                                                                             onblur="this.value = this.value.toUpperCase()"
                                                                             required class="form-control"
                                                                             value="{{ old('name') }}"
@@ -100,7 +100,7 @@
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Apellido</label>
-                                                                        <input type="text" name="last_name"
+                                                                        <input type="text" name="last_name" id="last_name"
                                                                             onblur="this.value = this.value.toUpperCase()"
                                                                             required class="form-control"
                                                                             value="{{ old('last_name') }}"
@@ -121,14 +121,14 @@
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Email</label>
-                                                                        <input type="email" name="email"
+                                                                        <input type="email" name="email" id="email"
                                                                             class="form-control"
                                                                             value="{{ old('email') }}">
                                                                     </div>
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Password</label>
-                                                                        <input type="password" name="password"
+                                                                        <input type="password" name="password" id= "password"
                                                                             required class="form-control">
                                                                     </div>
                                                                     <div class="input-area relative">
@@ -153,7 +153,7 @@
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Género</label>
-                                                                        <select name="catalog_gender_id" class="form-control">
+                                                                        <select name="catalog_gender_id" id= "catalog_gender_id"  class="form-control">
                                                                             @foreach ($generos as $obj)
                                                                                 <option value="{{$obj->id}}" >{{$obj->description}}</option>
                                                                             @endforeach
@@ -164,7 +164,7 @@
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Telefono</label>
-                                                                        <input type="text" name="phone_number"
+                                                                        <input type="text" name="phone_number" id="phone_number"
                                                                             required class="form-control"
                                                                             data-inputmask="'mask': ['9999-9999']"
                                                                             value="{{ old('phone_number') }}">
@@ -227,12 +227,12 @@
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Direccion</label>
-                                                                        <textarea name="address" required class="form-control" rows="5">{{ old('address') }}</textarea>
+                                                                        <textarea name="address" id="address" required class="form-control" rows="5">{{ old('address') }}</textarea>
                                                                     </div>
                                                                     <div class="input-area relative">
                                                                         <label for="largeInput"
                                                                             class="form-label">Acerca de mi</label>
-                                                                        <textarea name="about_me" class="form-control" rows="5">{{ old('about_me') }}</textarea>
+                                                                        <textarea name="about_me" id="about_me" class="form-control" rows="5">{{ old('about_me') }}</textarea>
                                                                     </div>
 
 

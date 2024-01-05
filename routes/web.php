@@ -4,6 +4,7 @@ use App\Http\Controllers\administracion\ConfiguracionCorreosController;
 use App\Http\Controllers\administracion\DatosIglesiaController;
 use App\Http\Controllers\administracion\IglesiaPlanEstudioController;
 use App\Http\Controllers\administracion\InformacionGeneralController;
+use App\Http\Controllers\administracion\ReglasGeneralesController;
 use App\Http\Controllers\administracion\ReporteController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\catalog\MemberController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\catalog\ChurchQuestionController;
 use App\Http\Controllers\catalog\CohorteController;
 use App\Http\Controllers\catalog\CourseController as CatalogCourseController;
 use App\Http\Controllers\catalog\OrganizationStatusController;
@@ -113,6 +115,10 @@ Route::resource('/informacion_general', InformacionGeneralController::class);
 Route::get('/informacion_general/get_cohortes/{id}', [InformacionGeneralController::class,'get_cohortes']);
 Route::get('/informacion_general/get_sedes/{id}', [InformacionGeneralController::class,'get_sedes']);
 Route::get('/informacion_general/get_iglesias/{id}', [InformacionGeneralController::class,'get_iglesias']);
+
+
+
+
 
 
 
@@ -247,7 +253,7 @@ Route::resource('catalog/iglesia', IglesiaController::class);
 
 Route::resource('catalog/wizard_church_questions', WizardQuestionsController::class);
 
-
+//Route::resource('catalog/answerreg', ChurchQuestionController::class);
 
 Route::resource('catalog/Iglesiauser', UserController::class);
 
@@ -283,3 +289,6 @@ Route::resource('administracion/configuracion_correos',ConfiguracionCorreosContr
 
 
 Route::resource('administracion/reportes', ReporteController::class);
+//administracion
+Route::resource('administracion/reglas_generales', ReglasGeneralesController::class);
+

@@ -20,10 +20,8 @@
                     <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed black:divide-slate-700" cellspacing="0" width="100%">
                         <thead class="bg-slate-200 black:bg-slate-700">
                             <tr  class="even:bg-slate-50 black:even:bg-slate-700">
-                           
+                                <td style="text-align: center">Id </td>
                                 <td style="text-align: center">Nombre </td>
-                       
-                             
                                 <td style="text-align: center">Descripcion </td>
                                 <td style="text-align: center">Opciones</td>
 
@@ -33,11 +31,9 @@
                             @if ($Course->count() > 0)
                             @foreach ($Course as $obj)
                             <tr class="even:bg-slate-50 black:even:bg-slate-700">
-                               
-                                <td>{{ $obj->name_es }}</td>
-                     
-                                <td>{{ $obj->description_es }}</td>
-
+                                <td>{{ $obj->id }}</td>
+                                <td>{{ $obj->name }}</td>
+                                <td>{{ $obj->description }}</td>
                                 <td align="center">
                                     <a href="{{ url('catalog/course') }}/{{ $obj->id }}/edit">
                                         <iconify-icon icon="mdi:edit-circle" style="color:#0c0d0f;" width="40"></iconify-icon>

@@ -35,13 +35,13 @@
                                                     <td>{{ $obj->description }}</td>
                                                     <td align="center">
                                                         <a href="{{url('catalog/question')}}/{{$obj->id}}/edit">
-                                                        <iconify-icon icon="mdi:pencil"
-                                                            style="color: #1769aa;" width="40"></iconify-icon>
+                                                        <iconify-icon icon="mdi:pencil-circle"
+                                                            style="color: black;" width="40"></iconify-icon>
                                                         </a>
                                                         &nbsp;&nbsp;
                                                         <iconify-icon data-bs-toggle="modal"
                                                             data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle"
-                                                            style="color: #1769aa;" width="40"></iconify-icon>
+                                                            style="color:  black;" width="40"></iconify-icon>
                                                     </td>
                                                 </tr>
                                                 @include('catalog.question.modal')
