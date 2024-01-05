@@ -51,31 +51,40 @@ class IglesiaPlanEstudioController extends Controller
         ->where('iglesia.status_id', '=', 2)
         ->where('p.closed', '=', 1)
         ->where('p.end_date', '<=', now())
+        ->select('p.*','iglesia.*','iglesia.id as id_iglesia','iglesia.name as nombreIglesia')
         ->groupBy('p.iglesia_id')  // Agregar la columna a GROUP BY
         ->get();
 
 
         foreach($iglesias as $iglesia)
         {
-            $validar_jovenes = $iglesia->validar_asistencias_jovenes($iglesia->id);
-            $validar_adultos = $iglesia->validar_asistencias($iglesia->id);
+            $igle =Iglesia::findOrFail($iglesia->id);
+            $validar_jovenes = $iglesia->validar_asistencias_jovenes($iglesia->iglesia_id);
+            $validar_adultos = $iglesia->validar_asistencias($iglesia->iglesia_id);
 
-            if($validar_jovenes == 1 && $validar_adultos == 1)
-            {
+            if($validar_jovenes == 1 && $validar_adultos >= 13){
                 $iglesia->certificacion = 1;
+                $members = $iglesia->participantes($igle->id)->where('status_id', '=', 2);
+                foreach ($members as $obj) {
+                    $member = Member::findOrFail($obj->id);
+                    $member->status_id = 4; //certificado;
+                    $member->update();
+        
+                    //enviar correos a participantes
+        
+                }
+                $igle->status_id = 7; ///iglesia certificada
+                $igle->update();
             }
             else{
                 $iglesia->certificacion = 0;
             }
 
+        //    dd($validar_adultos, $validar_jovenes);
+
         }
 
 
-        //    dd("hombres trabajando");
-
-        // $iglesia = Iglesia::findOrFail(48); //dato quemado
-        // $planes = IglesiaPlanEstudio::where('iglesia_id', '=', $iglesia->id) //->where('end_date','<=', $now->format('Y-m-d'))
-        //     ->get();
 
         return view('administracion.iglesia_plan_estudio.certificacion', compact('iglesias'));
     }
