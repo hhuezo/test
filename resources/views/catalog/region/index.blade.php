@@ -21,9 +21,9 @@
                         <thead class="bg-slate-200 dark:bg-slate-700">
                             <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
 
-                                <td style="text-align: center">id</td>
+                                <td style="text-align: center">Id</td>
                                 <td style="text-align: center">Nombre</td>
-                                <td style="text-align: center">opciones</td>
+                                <td style="text-align: center">Opciones</td>
 
                             </tr>
                         </thead>

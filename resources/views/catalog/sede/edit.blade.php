@@ -8,7 +8,7 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Sede modificar
+                            <div class="card-title text-slate-900 dark:text-white">Sede Modificar
 
                                 <a href="{{ url('catalog/sede') }}">
                                     <button class="btn btn-dark btn-sm float-right">
@@ -41,14 +41,14 @@
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('nombre') }}</label>
+                                                        class="form-label">{{ __('Nombre') }}</label>
 
                                                         <input  resize="true" name="nombre"  id= "nombre" required    value="{{ $sede->nombre }}"   autofocus="true"    class="form-control">
 
                                                 </div>
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">cohortes</label>
+                                                    <label for="largeInput" class="form-label">Cohortes</label>
                                                     <select name="cohorte_id" id="cohorte_id" class="form-control">
                                                         @foreach ($cohorte as $obj)
                                                         @if ($obj->id == $sede->corte_id)

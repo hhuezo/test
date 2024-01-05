@@ -180,11 +180,11 @@
 
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Direccion</label>
-                                                <textarea name="address" required class="form-control" rows="5">{{ old('address') }}</textarea>
+                                                <textarea name="address" id= "address" required class="form-control" rows="5">{{ old('address') }}</textarea>
                                             </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Acerca de mi</label>
-                                                <textarea name="about_me" class="form-control" rows="5">{{ old('about_me') }}</textarea>
+                                                <textarea name="about_me" id="about_me" class="form-control" rows="5">{{ old('about_me') }}</textarea>
                                             </div>
 
 

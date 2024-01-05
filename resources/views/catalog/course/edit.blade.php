@@ -29,15 +29,15 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
 
                                 <div class="input-area relative">
-                                    <label for="largeInput" class="form-label">{{ __('Nombre español') }}</label>
-                                    <input type="text" id="name_es" name="name_es" value="{{ $courses->name_es }}" required
-                                        class="form-control" value="{{ old('name_en') }}">
+                                    <label for="largeInput" class="form-label">Nombre</label>
+                                    <input type="text" id="name" name="name" value="{{ $courses->name }}" required
+                                        class="form-control" value="{{ old('name') }}">
                                 </div>
 
 
                                 <div class="input-area relative">
-                                    <label for="largeInput" class="form-label">{{ __('descripcion es') }}</label>
-                                    <input type="text"  id="description_es" name="description_es" value="{{ $courses->description_es }}"
+                                    <label for="largeInput" class="form-label">{{ __('Descripcion') }}</label>
+                                    <input type="text"  id="description" name="description" value="{{ $courses->description }}"
                                         required class="form-control">
                                 </div>
 

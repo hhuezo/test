@@ -53,7 +53,7 @@ class StudyPlanController extends Controller
 
         $studyPlan = new StudyPlan();
         $studyPlan->description = $request->description;
-        $studyPlan->description_es = $request->description_es;
+        $studyPlan->description_es = $request->description;
         $studyPlan->save();
 
         alert()->success('El registro ha sido agregado correctamente');

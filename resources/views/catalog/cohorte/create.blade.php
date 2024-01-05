@@ -42,7 +42,7 @@
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">Nombre congregacion</label>
+                                                        class="form-label">Nombre </label>
                                                     <input type="text" name="nombre" id="nombre" required class="form-control"
                                                         value="{{ old('nombre') }}" autofocus="true">
                                                 </div>

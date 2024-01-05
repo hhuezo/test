@@ -181,7 +181,7 @@ class IglesiaController extends Controller
 
         $grupo_iglesias =  $iglesia->iglesia_has_grupo;
 
-        
+
         $url =  url('/') . "/registro_participantes/" . $iglesia->id . '/';
 
         foreach ($grupo_iglesias as $obj) {
@@ -225,7 +225,7 @@ class IglesiaController extends Controller
         $organizations->organization_type = $request->organization_type;
         $organizations->status_id = $request->status_id;
         $organizations->sede_id = $request->sede_id;
-      
+
 
         $organizations->update();
 

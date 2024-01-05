@@ -121,7 +121,7 @@
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">{{ __('numero de documento') }}</label>
+                                                    <label for="largeInput" class="form-label">{{ __('Numero de documento') }}</label>
                                                     <input type="text" id="document_number" name="document_number"  data-inputmask="'mask': ['99999999-9']" value="{{ $member->document_number }}" required class="form-control">
                                                 </div>
 

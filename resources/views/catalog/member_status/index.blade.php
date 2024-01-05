@@ -24,10 +24,10 @@
                                     <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                         <th style="text-align: center">Id</th>
                                         <th style="text-align: center">Descripcion</th>
-                                        <th style="text-align: center">Descripcion en español</th>
+
                                         <th style="text-align: center">Fecha</th>
 
-                                        <th style="text-align: center">status</th>
+                                        <th style="text-align: center">Estatus</th>
                                         <th style="text-align: center">opciones</th>
                                     </tr>
                                 </thead>
@@ -37,7 +37,7 @@
                                             <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td align="center">{{ $obj->description}}</td>
-                                                <td align="center">{{ $obj->description_es}}</td>
+
                                                 <td align="center"> {{ date('d/m/Y', strtotime($obj->adding_date)) }}</td>
 
                                                 <td align="center">{{ $obj->status}}</td>

@@ -9,7 +9,7 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Nuevo estado del Participante
+                            <div class="card-title text-slate-900 dark:text-white">Nuevo Estado del Participante
 
                                 <a href="{{ url('catalog/member_status') }}">
                                     <button class="btn btn-dark btn-sm float-right">
@@ -52,31 +52,24 @@
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Descripcion_español') }}</label>
-                                                    <input type="text" name="description_es" id= "description_es" required
-                                                        class="form-control" value="{{ old('description_es') }}">
-                                                </div>
-
-                                                <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">{{ __('Estatus') }}</label>
                                                     <input type="text" id="status" name="status" required class="form-control">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Fecha_creada') }}</label>
+                                                        class="form-label">{{ __('Fecha Creada') }}</label>
                                                     <input type="text" id="date_created" name="date_created" required class="form-control"
                                                         value="{{ old('date_created') }}">
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('course_id') }}</label>
+                                                        class="form-label">{{ __('Curso') }}</label>
                                                     <input type="text" name="course_id" id="course_id" required class="form-control"
                                                         value="{{ old('course_id') }}">
                                                 </div>
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">{{ __('status') }}</label>
+                                                    <label for="largeInput" class="form-label">{{ __('Estatus') }}</label>
                                                     <select name="status" id= "status_id" class="form-control">
                                                         @foreach ($MemberStatus as $obj)
                                                             <option value="{{ $obj->id }}">{{ $obj->description_es }}

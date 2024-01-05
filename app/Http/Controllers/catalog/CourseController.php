@@ -62,8 +62,8 @@ class CourseController extends Controller
         $courses = new Course();
         $courses->name =  $request->name_es;
         $courses->name_es = $request->name_es;
-        $courses->description = $request->description_es;
-        $courses->description_es = $request->description_es;
+        $courses->description = $request->description;
+        $courses->description_es = $request->description;
         $courses->image = $request->image;
 
         $archivo = $request->file('imagen');
@@ -129,8 +129,8 @@ class CourseController extends Controller
         $courses = Course::findOrFail($id);
         $courses->name = $request->name_es;
         $courses->name_es = $request->name_es;
-        $courses->description = $request->description_es;
-        $courses->description_es = $request->description_es;
+        $courses->description = $request->description;
+        $courses->description_es = $request->description;
 
 
         $id_file = uniqid();

@@ -59,7 +59,7 @@ $request->validate([
 
 $MemberStatus = new MemberStatus();
 $MemberStatus->description = $request->description;
-$MemberStatus->description_es = $request->description_es;
+$MemberStatus->description_es = $request->description;
 $MemberStatus->adding_date = $request->adding_date;
 $MemberStatus->modifying_user = $request->modifying_user;
 $MemberStatus->modifying_date = $request->modifying_date;
@@ -90,8 +90,9 @@ return back();
     public function edit($id)
     {
         $MemberStatus= MemberStatus::findOrFail($id);
+        $MemberStatusall= MemberStatus::get();
 
-        return view('catalog.member_status.edit', compact('MemberStatus'));
+        return view('catalog.member_status.edit', compact('MemberStatus','MemberStatusall'));
     }
 
     /**
@@ -118,7 +119,7 @@ $request->validate([
 $MemberStatus = MemberStatus::findOrFail($id);
 $MemberStatus = new MemberStatus();
 $MemberStatus->description = $request->description;
-$MemberStatus->description_es = $request->description_es;
+$MemberStatus->description_es = $request->description;
 $MemberStatus->adding_date = $request->adding_date;
 $MemberStatus->modifying_user = $request->modifying_user;
 $MemberStatus->modifying_date = $request->modifying_date;

@@ -38,9 +38,9 @@
 
             <div class="card-body" style="margin-left: 20px; margin-right: 20px;">
                 <div>&nbsp; </div>
-                <h5 class="card-title">{{ $course->name_es }}</h5>
+                <h5 class="card-title">{{ $course->name }}</h5>
                 <div>&nbsp; </div>
-                <p class="card-text">{{ $course->description_es }}</p>
+                <p class="card-text">{{ $course->description }}</p>
             </div>
 
 

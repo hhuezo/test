@@ -25,7 +25,7 @@
 
             <div class="input-area relative" style="height: 400px;">
               <label for="largeInput" class="form-label">Temas</label>
-              <select name="course_id[]" class="form-control select" required multiple="multiple" style="height: 300px;">
+              <select name="course_id[]" class="form-control select" id="course_id"  required multiple="multiple" style="height: 300px;">
                 @foreach ($cursos as $obj)
                 <option value="{{ $obj->id }}">{{ $obj->name_es }}
                 </option>

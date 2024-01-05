@@ -1,17 +1,17 @@
-
 @extends ('menu')
 @section('contenido')
     @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
 
     <div class="grid grid-cols-12 gap-5 mb-5">
+
         <div class="2xl:col-span-12 lg:col-span-12 col-span-12">
             <div class="card">
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Estatus de Organizaciones Crear
+                            <div class="card-title text-slate-900 dark:text-white">Modificar Reglas
 
-                                <a href="{{ url('catalog/organization_status') }}">
+                                <a href="{{ url('administracion/reglas_generales')}}">
                                     <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
@@ -20,6 +20,7 @@
                             </div>
                         </div>
                     </header>
+
                     <div class="transition-all duration-150 container-fluid" id="page_layout">
                         <div id="content_layout">
                             <div class="space-y-5">
@@ -36,38 +37,37 @@
                                             </div>
                                         @endif
 
-                                        <form method="POST" action="{{ url('catalog/organization_status') }}" class="space-y-4">
-                                            @csrf
+                                            <form method="POST" action="{{ url('administracion.reglas_generales.update', $ReglasGenerales->id) }}">
+                                                @method('PUT')
+                                                @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Nombre') }}</label>
-                                                    <input type="text" name="name" id="name"
-                                                        required class="form-control" value="{{ old('name') }}"
-                                                        autofocus="true">
+                                                        class="form-label">Nombre</label>
+                                                    <input type="text" name="rule_name" id="rule_name" required class="form-control"
+                                                        value="{{$ReglasGenerales->rule_name }}" autofocus="true">
                                                 </div>
 
+                                                    <div class="input-area relative">
+                                                        <label for="largeInput"
+                                                            class="form-label">Abreviatura</label>
+                                                        <input type="text" name="abbrev" id="abbrev" required class="form-control"
+                                                            value="{{$ReglasGenerales->abbrev }}" autofocus="true">
+                                                    </div>
+
+                                                    <div class="input-area relative">
+                                                        <label for="largeInput"
+                                                            class="form-label">Cuantificado</label>
+                                                        <input type="text" name="quantity" id="quantity" required class="form-control"
+                                                            value="{{$ReglasGenerales->quantity }}" autofocus="true">
+                                                    </div>
 
 
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Estatus') }}</label>
-                                                    <input type="text" name="status" id="status"
-                                                        required class="form-control">
-                                                </div>
-
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Fecha') }}</label>
-                                                    <input type="date" name="date_created" id="date_created"
-                                                         required class="form-control"
-                                                        value="{{ old('date_created') }}">
-                                                </div>
-
+                                                &nbsp;
                                             </div>
                                             <div style="text-align: right;">
                                                 <button type="submit"
-                                                    class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
+                                                    class="btn inline-flex justify-center btn-dark">Aceptar</button>
                                             </div>
                                         </form>
 
