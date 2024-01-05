@@ -3,6 +3,7 @@
 use App\Http\Controllers\administracion\ConfiguracionCorreosController;
 use App\Http\Controllers\administracion\DatosIglesiaController;
 use App\Http\Controllers\administracion\IglesiaPlanEstudioController;
+use App\Http\Controllers\administracion\InformacionGeneralController;
 use App\Http\Controllers\administracion\ReglasGeneralesController;
 use App\Http\Controllers\administracion\ReporteController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -109,6 +110,11 @@ Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap'
 Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
 Route::get('/get_dep/{id}', [WelcomeController::class, 'get_dep']);
 Route::get('/get_departamento/{id}', [WelcomeController::class, 'get_departamento']);
+Route::get('/tree_view', [WelcomeController::class, 'tree_view']);
+Route::resource('/informacion_general', InformacionGeneralController::class);
+Route::get('/informacion_general/get_cohortes/{id}', [InformacionGeneralController::class,'get_cohortes']);
+Route::get('/informacion_general/get_sedes/{id}', [InformacionGeneralController::class,'get_sedes']);
+Route::get('/informacion_general/get_iglesias/{id}', [InformacionGeneralController::class,'get_iglesias']);
 
 
 
