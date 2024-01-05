@@ -184,16 +184,7 @@ class IglesiaController extends Controller
         $grupo_iglesias =  $iglesia->iglesia_has_grupo;
 
 
-       /* $url =  url('/') . "/registro_participantes/" . $iglesia->id . '/';
 
-        foreach ($grupo_iglesias as $obj) {
-            $obj->conteo = $iglesia->countMembers($iglesia->id, $obj->id);
-            $obj->codigo_qr = 'qrcodeiglesiagrupo' . $obj->id . '.png';
-            QrCode::format('png')->size(200)->generate($url . '/' . $obj->id, public_path('img/qrcodeiglesiagrupo' . $obj->id . '.png'));
-        }
-
-
-        QrCode::format('png')->size(200)->generate($url . '0', public_path('img/qrcodeiglesia.png'));*/
 
         $grupoArray =  $grupo_iglesias->pluck('id')->toArray();
 

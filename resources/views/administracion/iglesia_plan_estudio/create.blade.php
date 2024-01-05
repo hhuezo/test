@@ -7,13 +7,13 @@
     <!-- Basic Inputs -->
     <div class="card">
         <div class="card-body flex flex-col p-6">
-            <header class="flex items-center border-b border-slate-100 black:border-slate-700">
+            <header class="flex items-center border-b border-slate-100 dark:border-slate-700">
                 <div class="flex-1">
-                    <div class="card-title text-slate-900 black:text-white">Plan de estudio para iglesia
+                    <div class="card-title text-slate-900 dark:text-white">Plan de estudio para iglesia
 
                         <a href="{{ url('administracion/iglesia_plan_estudio') }}">
-                            <button class="btn btn-black btn-sm float-right">
-                                <iconify-icon icon="icon-park-solid:black" style="color: white;" width="18">
+                            <button class="btn btn-dark btn-sm float-right">
+                                <iconify-icon icon="icon-park-solid:dark" style="color: white;" width="18">
                                 </iconify-icon>
                             </button>
                         </a>

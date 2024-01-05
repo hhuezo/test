@@ -46,7 +46,7 @@
                                             </div>
                                             <div class="input-area relative">
                                                 <label for="largeInput" class="form-label">Descripción</label>
-                                                <input type="text" name="description_es" id="description_es" required class="form-control" value="{{ $plan_estudio->description_es }}" autofocus="true">
+                                                <input type="text" name="description" id="description" required class="form-control" value="{{ $plan_estudio->description }}" autofocus="true">
                                             </div>
                                             &nbsp;
                                         </div>
@@ -78,7 +78,7 @@
                         <div class="card-title text-slate-900 dark:text-white">Agregar tema
 
                             <a href="" data-bs-toggle="modal" data-bs-target="#modal-createcourse-{{ $plan_estudio->id }}">
-                                <button class="btn btn-dark btn-sm float-right"> 
+                                <button class="btn btn-dark btn-sm float-right">
                                     Agregar Temas
                                 </button>
                             </a>
@@ -100,7 +100,7 @@
                                             <thead class="bg-slate-200 dark:bg-slate-700">
                                                 <tr class="even:bg-slate-50 dark:even:bg-slate-700">
 
-                                                    
+
                                                     <th style="text-align: left">Tema</th>
                                                     <th style="text-align: left">Descripción</th>
                                                     <th style="text-align: center">Opciones</th>
@@ -109,9 +109,9 @@
                                             </thead>
                                             <tbody class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
                                                 @foreach ($plandetalle as $obj)
-                                                
-                                                <td>{{ $obj->name_es }}</td>
-                                                <td>{{ $obj->description_es }}</td>
+
+                                                <td>{{ $obj->name }}</td>
+                                                <td>{{ $obj->description }}</td>
                                                 <td align="center"> <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delcourse-{{ $obj->id}}" icon="mdi:delete-circle" style="color: #0e0f10;" width="40"></iconify-icon>
 
                                                 </td>

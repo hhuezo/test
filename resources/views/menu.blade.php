@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/SimpleBar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/rt-plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/general_colors.css') }}">
     <!-- END: Theme CSS-->
     <script src="{{ asset('assets/js/settings.js') }}" sync></script>
     <script src="{{ asset('assets/js/iconify-icon.min.js') }}"></script>
@@ -35,6 +34,78 @@
     });
     </script>
 
+    <style>
+    .card-title,
+    .form-label {
+        text-transform: none;
+    }
+
+    /* .btn-dark {
+            background-color: #740816;
+        } */
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+    </style>
 
 </head>
 
@@ -89,7 +160,7 @@
                     <li class="">
                         <a href="#" class="navItem">
                             <span class="flex items-center">
-                                <iconify-icon class="nav-icon" icon="heroicons-outline:user"></iconify-icon>
+                                <iconify-icon class=" nav-icon" icon="heroicons-outline:user"></iconify-icon>
                                 <span>Seguridad</span>
                             </span>
                             <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
@@ -103,24 +174,6 @@
                             </li>
                             <li>
                                 <a href="{{ url('seguridad/permission') }}">Permisos</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="">
-                        <a href="#" class="navItem">
-                            <span class="flex items-center">
-                                <iconify-icon class=" nav-icon"  icon="ic:baseline-settings"></iconify-icon>
-                                <span>Configuración</span>
-                            </span>
-                            <iconify-icon class="icon-arrow" icon="heroicons-outline:chevron-right"></iconify-icon>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li>
-                                <a href="{{ url('administracion/configuracion_correos') }}">Correos SMTP</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('tree_view') }}">Estructura general</a>
                             </li>
                         </ul>
                     </li>
@@ -160,18 +213,29 @@
                             <li>
                                 <a href="{{ url('catalog/sede') }}">Sede</a>
                             </li>
-
                             <li>
-                                <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios </a>
+                                <a href="{{ url('catalog/plan_estudios') }}">Cursos para Plan de Estudios</a>
                             </li>
+                            <li>
+                                <a href="{{ url('administracion/iglesia_plan_estudio') }}">Plan de estudio</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('administracion/reglas_generales') }}">Reglas Generales</a>
+                            </li>
+
+
 
                             <!-- <li>
                                 <a href="{{ url('administracion/reportes') }}">Reportes</a>
                             </li> -->
 
                             <li>
+                                <a href="{{ url('administracion/configuracion_correos') }}">Configuracion Correos</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('catalog/course') }}">Temas</a>
                             </li>
+
                         </ul>
                     </li>
 
@@ -191,8 +255,8 @@
                         <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios</a>
                     </li>
                     <li>
-                        <a href="{{ url('catalog/grupo') }}">Grupo Iglesias</a>
-                    </li>
+                    <a href="{{ url('catalog/grupo') }}">Grupo Iglesias</a>
+                </li>
                     <li>
                         <a href="{{ url('catalog/question') }}">Preguntas</a>
                     </li>
@@ -218,12 +282,6 @@
                         <li>
                             <a href="{{ url('catalog/wizard_church_questions') }}">Preguntas</a>
                         </li>
-
-                        <li>
-                            <a href="{{ url('administracion/iglesia_plan_estudio') }}">Plan de estudio  (iglesias)</a>
-                        </li>
-
-
                         {{-- <li>
                                 <a href="{{ url('catalog/Iglesiauser') }}">Usuario Iglesias</a>
                 </li> --}}

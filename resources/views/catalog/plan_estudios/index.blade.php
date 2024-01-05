@@ -37,7 +37,7 @@
                                 @foreach ($plan_estudio as $obj)
                                 <tr class="even:bg-slate-50 black:even:bg-slate-700">
 
-                                    <td style="vertical-align: top;">{{ $obj->description_es }}</td>
+                                    <td style="vertical-align: top;">{{ $obj->description}}</td>
                                     <td>
                                         @foreach($obj->detalles as $tem)
                                             <li>{{$tem->curso->name}}</li>

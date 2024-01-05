@@ -42,8 +42,8 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Nombre Español') }}</label>
-                                                    <input type="text" id="name_es" name="name_es" required
+                                                        class="form-label">{{ __('Nombre') }}</label>
+                                                    <input type="text" id="name" name="name" required
                                                         class="form-control">
                                                 </div>
                                                 &nbsp;
@@ -51,8 +51,8 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Descripcion Español') }}</label>
-                                                    <input type="text" id="description_es" name="description_es" required
+                                                        class="form-label">{{ __('Descripcion ') }}</label>
+                                                    <input type="text" id="description" name="description" required
                                                         class="form-control">
                                                 </div>
                                                 &nbsp;

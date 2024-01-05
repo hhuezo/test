@@ -9,9 +9,9 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Estatus de organizaciones modificar
+                            <div class="card-title text-slate-900 dark:text-white">Estatus de Organizaciones Modificar
 
-                                <a href="{{ url('catalog/organization_status') }}">
+                                <a href="{{ url('catalog/organization_status/') }}">
                                     <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                         </iconify-icon>
@@ -35,15 +35,16 @@
                                                 </ul>
                                             </div>
                                         @endif
-
-                                        <form method="POST" action="{{ route('register') }}" class="space-y-4">
+                                        <form method="POST" action="{{ route('member_status.update',$OrganizationStatus->id) }}"
+                                            class="space-y-4">
+                                            @method('PUT')
                                             @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Nombre Español') }}</label>
-                                                    <input type="text" name="name_es" id= "name_es" value="{{ $OrganizationStatus->description }}"
-                                                        required class="form-control" value="{{ old('name_es') }}"
+                                                        class="form-label">{{ __('Nombre') }}</label>
+                                                    <input type="text" name="description" id= "description" value="{{ $OrganizationStatus->description }}"
+                                                        required class="form-control" value="{{ old('description') }}"
                                                         autofocus="true">
                                                 </div>
 
@@ -51,40 +52,27 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Nombre Ingles') }}</label>
-                                                    <input type="name_en" name="name_en" id="name_en" value="{{ $OrganizationStatus->description_es }}"
-                                                        required class="form-control" value="{{ old('name_en') }}">
-                                                </div>
-
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
                                                         class="form-label">{{ __('Fecha') }}</label>
-                                                    <input type="text" name="adding_date" id= "adding_date" value="{{ $OrganizationStatus->adding_date }}"                                                        required class="form-control">
+                                                    <input type="text" name="adding_date" id= "adding_date"
+                                                    value="{{ date('d/m/Y', strtotime(  $OrganizationStatus->adding_date )) }}"    required class="form-control">
                                                 </div>
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Modificacion usuario') }}</label>
+                                                        class="form-label">{{ __('Modificacion Usuario') }}</label>
                                                     <input type="text" name="modifying_user" id="modifying_user"
-                                                        value="{{ date('d/m/Y', strtotime( $OrganizationStatus->modifying_user )) }}" required class="form-control"
-                                                        value="{{ old('modifying_user') }}">
+                                                        value="{{ date('d/m/Y', strtotime( $OrganizationStatus->modifying_user )) }}" required class="form-control" >
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Modificar fecha ') }}</label>
-                                                    <input type="text" name="modifying_date" value="{{ $OrganizationStatus->modifying_date }}"
+                                                        class="form-label">{{ __('Modificar Fecha ') }}</label>
+                                                    <input type="text" name="modifying_date" id= "modifying_date"   value="{{ date('d/m/Y', strtotime(  $OrganizationStatus->modifying_date )) }} "
                                                         required class="form-control" value="{{ old('modifying_date') }}">
-                                                </div>
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Estatus') }}</label>
-                                                    <input type="text" name="status" id= "status" value="{{ $OrganizationStatus->status }}"
-                                                        required class="form-control" value="{{ old('status') }}">
                                                 </div>
                                             </div>
                                             <div style="text-align: right;">
                                                 <button type="submit"
-                                                    class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
+                                                    class="btn inline-flex justify-center btn-dark">Aceptar</button>
                                             </div>
                                         </form>
 
