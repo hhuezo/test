@@ -36,7 +36,7 @@
                                                 <td align="center">
 
                                                     <a href="{{ url('seguridad/role') }}/{{ $obj->id }}/edit">
-                                                        <iconify-icon icon="mdi:pencil-circle" style="color:black;" width="40"></iconify-icon>
+                                                        <iconify-icon icon="mdi:pencil-circle" class="success" width="40"></iconify-icon>
                                                     </a>
 
                                                     &nbsp;&nbsp;

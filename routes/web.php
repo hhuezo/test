@@ -14,7 +14,6 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\catalog\ChurchQuestionController;
 use App\Http\Controllers\catalog\CohorteController;
 use App\Http\Controllers\catalog\CourseController as CatalogCourseController;
 use App\Http\Controllers\catalog\OrganizationStatusController;
@@ -108,6 +107,7 @@ Route::get('lang/{lang}', [LanguageController::class, 'swap'])->name('lang.swap'
 Route::get('/get_map/{id}', [WelcomeController::class, 'get_map']);
 Route::get('/get_dep/{id}', [WelcomeController::class, 'get_dep']);
 Route::get('/get_departamento/{id}', [WelcomeController::class, 'get_departamento']);
+Route::get('/tree_view', [WelcomeController::class, 'tree_view']);
 
 
 
@@ -245,7 +245,7 @@ Route::resource('catalog/iglesia', IglesiaController::class);
 
 Route::resource('catalog/wizard_church_questions', WizardQuestionsController::class);
 
-Route::resource('catalog/answerreg', ChurchQuestionController::class);
+
 
 Route::resource('catalog/Iglesiauser', UserController::class);
 

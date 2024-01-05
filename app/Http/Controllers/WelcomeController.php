@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\catalog\GroupPerchuchPlan;
 use App\Models\catalog\Grupo;
+use App\Models\catalog\Region;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
@@ -24,11 +25,7 @@ use Illuminate\Validation\ValidationException;
 
 class WelcomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function __construct()
     {
@@ -104,16 +101,11 @@ class WelcomeController extends Controller
 
 
 
-        // try {
-        //     // Iniciar la transacción
-        //     DB::beginTransaction();
-
         $fechaNacimientoObj = new DateTime($request->birthdate);
         $fechaActual = new DateTime();
         $edad = $fechaNacimientoObj->diff($fechaActual);
         $edad->y;
 
-    //    dd($edad->y, $edad, $request->birthdate, $edad->y <= 0);
 
 
 
@@ -230,9 +222,6 @@ class WelcomeController extends Controller
 
     public function attach_new_member(Request $request)
     {
-
-
-
         $messages = [
             'name.required' => 'El nombre es un valor requerido',
             'last_name.required' => 'El apellido es un valor requerido',
@@ -350,5 +339,12 @@ class WelcomeController extends Controller
             $grupos = Grupo::where('id', '=', 1)->get();
         }
         return $grupos;
+    }
+
+
+    public function tree_view()
+    {
+        $regiones = Region::get();
+         return view('tree_view',compact('regiones'));
     }
 }

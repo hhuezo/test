@@ -7,10 +7,10 @@
 
         <div class="card">
             <header class=" card-header noborder">
-                <h4 class="card-title">Listado de  Estados  de las  Iglesias
+                <h4 class="card-title">Listado de  estados  de las  iglesias
                 </h4>
                 <a href="{{url('catalog/organization_status/create')}}">
-                <button class="btn btn-outline-primary" >Nuevo</button>
+                <button class="btn btn-success" >Nuevo</button>
             </a>
             </header>
             <div class="card-body px-6 pb-6">
@@ -37,13 +37,12 @@
                                                 <td align="center">{{ $obj->description_es }}</td>
                                                 <td align="center">
                                                     <a href="{{url('catalog/organization_status')}}/{{$obj->id}}/edit">
-                                                    <iconify-icon icon="mdi:edit-circle"
-                                                        style="color: black;" width="40"></iconify-icon>
+                                                    <iconify-icon icon="mdi:edit-circle" class="success" width="40"></iconify-icon>
                                                     </a>
                                                     &nbsp;&nbsp;
                                                     <iconify-icon data-bs-toggle="modal"
                                                         data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle"
-                                                        style="color: black;" width="40"></iconify-icon>
+                                                        class="danger" width="40"></iconify-icon>
                                                 </td>
                                             </tr>
                                             @include('catalog/organization_status/modal')

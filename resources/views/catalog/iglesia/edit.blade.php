@@ -1,45 +1,14 @@
 @extends ('menu')
 @section('contenido')
 @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
-<style>
-    .dz-error-message {
-        display: none;
-    }
 
-    .dz-progress {
-        display: none;
-    }
-
-    .dz-success-mark {
-        display: none;
-    }
-
-    .dz-error-mark {
-        display: none;
-    }
-
-    .dropzone {
-        border: 2px dashed #0087F7;
-        border-radius: 5px;
-        background: white;
-        height: 300px;
-    }
-
-    .dropzone .dz-preview.dz-error .dz-error-message {
-        display: none !important;
-    }
-
-    .dz-button {
-        margin-top: -25px;
-    }
-</style>
 
 <div class="page-content">
     <div class="transition-all duration-150 container-fluid" id="page_layout">
         <div id="content_layout">
             <div class="space-y-5 profile-page">
                 <div class="profiel-wrap px-[35px] pb-10 md:pt-[84px] pt-10 rounded-lg bg-white dark:bg-slate-800 lg:flex lg:space-y-0 space-y-6 justify-between items-end relative z-[1]">
-                    <div class="bg-slate-900 dark:bg-slate-700 absolute left-0 top-0 md:h-1/2 h-[150px] w-full z-[-1] rounded-t-lg" style="background-color: #c12631 !important;"></div>
+                    <div class="bg-slate-900 dark:bg-slate-700 absolute left-0 top-0 md:h-1/2 h-[150px] w-full z-[-1] rounded-t-lg" style="background-color: rgba(95, 11, 24, 0.9) !important;"></div>
                     <div class="profile-box flex-none md:text-start text-center">
                         <div class="md:flex items-end md:space-x-6 rtl:space-x-reverse">
                             <div class="flex-none">
@@ -386,7 +355,7 @@
                                                                     <td align="center"><a data-bs-toggle="modal" data-bs-target="#modal-viewqr-{{ $obj->id }}">
                                                                             <img src="{{asset('img/qrcodeiglesiagrupo')}}{{$obj->id}}.png" width="60"></a></td>
                                                                     <td align="center">
-                                                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle" style="color: black;" width="40"></iconify-icon>
+                                                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle" class="danger" width="40"></iconify-icon>
                                                                     </td>
                                                                     @include('catalog.iglesia.modal_del_grupo')
                                                                     @include('datos_iglesia.modal_viewqr')
@@ -414,7 +383,15 @@
                         <div class="card-body flex flex-col p-6">
                             <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                                 <div class="flex-1">
-                                    <div class="card-title text-slate-900 dark:text-white">Preguntas Iniciales</div>
+                                    <div class="card-title text-slate-900 dark:text-white">Preguntas Iniciales
+                                        @if ($wizzarquestion->count() > 0)
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#modal-create-iglesia">
+                                        <button class="btn btn-dark btn-sm float-right">
+                                            Agregar Pregunta
+                                        </button>
+                                    </a>
+                                    @endif
+                                </div>
                                 </div>
                             </header>
                             <div class="card-text h-full">
@@ -427,33 +404,31 @@
 
                                                     &nbsp;&nbsp; @if ($wizzarquestion->count() > 0)
 
-                                                    <a href="" data-bs-toggle="modal" data-bs-target="#modal-create-iglesia">
-                                                        <button class="btn btn-dark btn-sm float-right">
-                                                            Agregar Pregunta
-                                                        </button>
-                                                    </a>
+
                                                     @include('catalog.iglesia.modal_create_question')
                                                     <br>
                                                     @endif
 
                                                     <div class="input-area relative">
-                                                        <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" cellspacing="0" width="100%">
+                                                        <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
                                                             <thead class="bg-slate-200 dark:bg-slate-700">
                                                                 <tr class="td-table">
-                                                                    <th style="text-align: center">Pregunta</th>
-                                                                    <th style="text-align: center">Respuesta Si(Chequeado)/No</th>
-                                                                    <th style="text-align: center">Opciones</th>
+                                                                    <th scope="col" class=" table-th " style="text-align: center">Pregunta</th>
+                                                                    <th scope="col" class=" table-th " style="text-align: center">Respuesta Si(Chequeado)/No</th>
+                                                                    <th scope="col" class=" table-th " style="text-align: center">Opciones</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
-                                                                <tr>
+                                                            <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
+                                                                <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                                                     @foreach ($wizzaranswer as $obj)
+
 
                                                                     @if($obj->pregunta )
                                                                     <td align="center">{{$obj->pregunta->question}}</td>
                                                                     @else
                                                                     <td></td>
                                                                     @endif
+
                                                                     <td align="center">
                                                                         @if ($obj->answer == 1)
 
@@ -470,8 +445,8 @@
                                                                         @endif
                                                                     </td>
                                                                     <td align="center">
-                                                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-{{ $obj->id }}" icon="mdi:edit-circle" style="color: black;" width="40"></iconify-icon> &nbsp;&nbsp;
-                                                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-preg-{{ $obj->question_id }}" icon="mdi:delete-circle" style="color: black;" width="40"></iconify-icon>
+                                                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-{{ $obj->id }}" icon="mdi:edit-circle" class="success" width="40"></iconify-icon> &nbsp;&nbsp;
+                                                                        <iconify-icon data-bs-toggle="modal" data-bs-target="#modal-preg-{{ $obj->question_id }}" icon="mdi:delete-circle" class="danger" width="40"></iconify-icon>
 
                                                                     </td>
                                                                 </tr>
