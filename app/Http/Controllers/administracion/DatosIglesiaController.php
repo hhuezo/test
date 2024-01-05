@@ -87,7 +87,7 @@ class DatosIglesiaController extends Controller
 
         $iglesia = Iglesia::findOrFail($id);
 
-        $participantes = $iglesia->participantes($id)->where('status_id', '=', 2);
+        $participantes = $iglesia->participantes($id)->whereIn('status_id',[2,4]);
         $grupos = $iglesia->iglesia_has_grupo;
 
         return view('datos_iglesia.participantes_contenedor', compact('iglesia', 'participantes', 'grupos'));
