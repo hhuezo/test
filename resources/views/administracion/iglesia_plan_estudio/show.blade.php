@@ -142,7 +142,7 @@
                                                         @foreach ($participantes as $participante)
                                                         <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                                             <td class="table-td">
-                                                                {{ $participante->nombre }}
+                                                               <li style="list-style: none;"> <iconify-icon icon="material-symbols:label-important-sharp" ></iconify-icon> {{ $participante->nombre }}</li> 
                                                             </td>
                                                         </tr>
                                                         @endforeach
@@ -374,7 +374,7 @@
                                                         <!-- Modal body -->
                                                         <div class="p-6 space-y-4">
                                                             <div class="input-area relative">
-                                                                <input type="text" name="sesion" id="sesions">
+                                                                <input type="hidden" name="sesion" id="sesions">
                                                                 <label for="largeInput" class="form-label">Subir archivo</label>
                                                                 <input type="file" name="file" class="form-control">
                                                             </div>

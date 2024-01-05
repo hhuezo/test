@@ -33,7 +33,7 @@
                                         <div class="card-body p-6">
                                             @foreach ($participantes as $participante)
                                                 @if ($participante->group_id == $grupo->id)
-                                                    <div class="draggable-item" data-id="{{ $participante->id }}">
+                                                    <div class="draggable-item" data-id="{{ $participante->id }}" style="cursor:{{$participante->status_id == 4 ? 'no-drop': 'move'}}">
                                                         {{ $participante->nombre }}</div>
                                                 @endif
                                             @endforeach
