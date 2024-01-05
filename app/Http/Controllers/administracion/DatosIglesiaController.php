@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\administracion;
 
 use App\Http\Controllers\Controller;
+use App\Models\administracion\ReglasGenerales;
 use App\Models\catalog\Departamento;
 use App\Models\catalog\Iglesia;
 use App\Models\catalog\Member;
@@ -33,20 +34,23 @@ class DatosIglesiaController extends Controller
 
             $url =  url('/') . "/registro_participantes/" . $iglesia->id . '/';
 
-            foreach ($grupos_iglesia as $obj) {
-                $obj->conteo = $iglesia->countMembers($iglesia->id, $obj->id);
-                $obj->codigo_qr = 'qrcodeiglesiagrupo' . $obj->id . '.png';
-                QrCode::format('png')->size(200)->generate($url . '/' . $obj->id, public_path('img/qrcodeiglesiagrupo' . $obj->id . '.png'));
-            }
+
+            $codigos = ReglasGenerales::get();
+            // foreach ($grupos_iglesia as $obj) {
+            //     $obj->conteo = $iglesia->countMembers($iglesia->id, $obj->id);
+            //     $obj->codigo_qr = 'qrcodeiglesiagrupo' . $obj->id . '.png';
+            //     QrCode::format('png')->size(200)->generate($url . '/' . $obj->id, public_path('img/qrcodeiglesiagrupo' . $obj->id . '.png'));
+            // }
 
 
-            QrCode::format('png')->size(200)->generate($url . '0', public_path('img/qrcodeiglesia.png'));
+
+            // QrCode::format('png')->size(200)->generate($url . '0', public_path('img/qrcodeiglesia.png'));
 
             return view('datos_iglesia.index', compact(
                 'departamentos',
                 'iglesia',
                 'grupos_iglesia',
-                'participantes'
+                'participantes','codigos'
             ));
         } catch (Exception $e) {
             alert()->error('Error Datos No Coinciden');
