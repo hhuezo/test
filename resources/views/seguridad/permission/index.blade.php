@@ -34,13 +34,11 @@
                                                 <td align="center">{{ $obj->name }}</td>
                                                 <td align="center">
                                                     <iconify-icon icon="mdi:pencil-circle"
-                                                        onclick="modal_edit({{ $obj->id }},'{{ $obj->name }}')"
-                                                        style="color:black;" width="40"></iconify-icon>
+                                                        onclick="modal_edit({{ $obj->id }},'{{ $obj->name }}')" class="success" width="40"></iconify-icon>
 
                                                     &nbsp;&nbsp;
                                                     <iconify-icon data-bs-toggle="modal"
-                                                        data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle"
-                                                        style="color: black;" width="40"></iconify-icon>
+                                                        data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle" class="danger" width="40"></iconify-icon>
                                                 </td>
                                             </tr>
                                             @include('seguridad.permission.modal')

@@ -119,6 +119,9 @@
                             <li>
                                 <a href="{{ url('administracion/configuracion_correos') }}">Correos SMTP</a>
                             </li>
+                            <li>
+                                <a href="{{ url('tree_view') }}">Estructura general</a>
+                            </li>
                         </ul>
                     </li>
                     @endcan
@@ -159,7 +162,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ url('administracion/iglesia_plan_estudio') }}">Plan de estudio</a>
+                                <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios </a>
                             </li>
 
                             <!-- <li>
@@ -217,8 +220,10 @@
                         </li>
 
                         <li>
-                            <a href="{{ url('catalog/plan_estudios') }}">Plan de Estudios (iglesias) </a>
+                            <a href="{{ url('administracion/iglesia_plan_estudio') }}">Plan de estudio  (iglesias)</a>
                         </li>
+
+
                         {{-- <li>
                                 <a href="{{ url('catalog/Iglesiauser') }}">Usuario Iglesias</a>
                 </li> --}}
