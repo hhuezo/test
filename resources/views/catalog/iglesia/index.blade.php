@@ -26,6 +26,7 @@
                     <table id="myTable" class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
                         <thead class="bg-slate-200 dark:bg-slate-700">
                             <tr>
+                                <th style="text-align: center">Region</th>
                                 <th style="text-align: center">Sede</th>
                                 <th style="text-align: center">Cohorte</th>
                                 <th style="text-align: center">Iglesia</th>
@@ -41,6 +42,11 @@
                             @if ($iglesia->count() > 0)
                             @foreach ($iglesia as $obj)
                             <tr class="even:bg-slate-50 dark:even:bg-slate-700">
+                                @isset($obj->sede_id)
+                                <td align="center" class="table-td">{{$obj->sedeiglesia->cohorte->region->nombre}}</td>
+                                @else
+                                <td align="center" class="table-td"></td>
+                                @endif
                                 @isset($obj->sede_id)
                                 <td align="center" class="table-td">{{$obj->sedeiglesia->nombre}}</td>
                                 @else
@@ -69,7 +75,7 @@
                                         <iconify-icon icon="material-symbols:location-home" class="info" width="40"></iconify-icon>
                                     </a>
                                     &nbsp;
-                                     <a href="{{ url('administracion/reportes') }}/{{ $obj->id }}/edit" target="_blank">
+                                    <a href="{{ url('administracion/reportes') }}/{{ $obj->id }}/edit" target="_blank">
                                         <iconify-icon icon="pepicons-pop:eye-circle-filled" class="primary" width="37"></iconify-icon>
                                     </a>
                                     @endif
