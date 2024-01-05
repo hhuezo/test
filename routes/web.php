@@ -122,6 +122,7 @@ Route::get('/tree_view', [WelcomeController::class, 'tree_view']);
 
 Route::post('/upload', [WelcomeController::class, 'store_file'])->name('dropzone.store');
 
+Route::get('/genera_qr/{iglesia_id}/{grupo_id}', [IglesiaController::class, 'genera_qr']);
 Route::post('administracion/datos_iglesia/set_estado', [DatosIglesiaController::class, 'set_estado']);
 Route::get('administracion/datos_iglesia/get_participantes/{iglesia}', [DatosIglesiaController::class, 'get_participantes']);
 Route::resource('administracion/datos_iglesia', DatosIglesiaController::class);
