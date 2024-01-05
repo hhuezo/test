@@ -2,6 +2,7 @@
 
 namespace App\Models\catalog;
 
+use App\Models\administracion\IglesiaPlanEstudio;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -50,6 +51,10 @@ class Iglesia extends Model
     // {
     //     return $this->hasMany(Member::class, 'organization_id');
     // }
+
+    public function plan_estudio(){
+        return $this->hasMany(IglesiaPlanEstudio::class, 'iglesia_id');
+    }
 
     public function sedeiglesia()
     {
