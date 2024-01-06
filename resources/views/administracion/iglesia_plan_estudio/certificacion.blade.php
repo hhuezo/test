@@ -49,7 +49,7 @@
                                     </thead>
                                     <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
 
-                                        @foreach ($iglesias as $iglesia)
+                                        @foreach ($iglesias->where('certificacion','=',1) as $iglesia)
                                         <tr class="even:bg-slate-50 dark:even:bg-slate-700">
                                             <td class="table-td">{{$iglesia->nombreIglesia}}</td>
                                             <td class="table-td">{{$iglesia->sede_id == null ? '': $iglesia->sedeiglesia->nombre}}</td>
@@ -61,11 +61,40 @@
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="tabs-profile" role="tabpanel" aria-labelledby="tabs-profile-tab">
-                                <p class="text-sm text-gray-500 dark:text-gray-200">
-                                    This is some placeholder content the
-                                    <strong>Profile</strong>
-                                    tab's associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. consectetur adipisicing elit. Ab ipsa!
-                                </p>
+                            <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
+                                    <div class="flex-1">
+                                        <div class="card-title text-slate-900 dark:text-white">Listado de Iglesias</div>
+                                    </div>
+                                </header>
+                                <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
+                                    <thead class="bg-slate-200 dark:bg-slate-700">
+                                        <tr>
+                                            <th scope="col" class=" table-th ">
+                                                Nombre
+                                            </th>
+                                            <th scope="col" class=" table-th ">
+                                                Sede
+                                            </th>
+                                            <th scope="col" class=" table-th ">
+                                                Cohort
+                                            </th>
+                                            <th scope="col" class=" table-th ">
+                                                Region
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
+
+                                        @foreach ($iglesias->where('certificacion','=',0) as $iglesia)
+                                        <tr class="even:bg-slate-50 dark:even:bg-slate-700">
+                                            <td class="table-td">{{$iglesia->nombreIglesia}}</td>
+                                            <td class="table-td">{{$iglesia->sede_id == null ? '': $iglesia->sedeiglesia->nombre}}</td>
+                                            <td class="table-td">{{$iglesia->sede_id == null ? '': $iglesia->sedeiglesia->cohorte->nombre}}</td>
+                                            <td class="table-td">{{$iglesia->sede_id == null ? '': $iglesia->sedeiglesia->cohorte->region->nombre}}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
 
                         </div>
