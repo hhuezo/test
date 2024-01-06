@@ -124,13 +124,13 @@
 
 
                             <li>
-                                <a href="{{ url('catalog/organization_status') }}">Estado del Iglesia</a>
+                                <a href="{{ url('catalog/organization_status') }}">Estado de iglesias</a>
                             </li>
                             <!-- <li>
                                 <a href="{{ url('catalog/Quiz') }}">Examen</a>
                             </li>-->
                             <li>
-                                <a href="{{ url('catalog/member_status') }}">Estatus del Participantes</a>
+                                <a href="{{ url('catalog/member_status') }}">Estado de participantes</a>
                             </li>
 
                             <li>
