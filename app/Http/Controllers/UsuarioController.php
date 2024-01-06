@@ -35,6 +35,24 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
+
+        $messages = [
+            'name' => 'El nombre es un valor requerido',
+            'password.required' => 'la clave es un valor requerido',
+            'email' => 'El Correo electronico es un valor requerido',
+
+
+        ];
+
+
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255'],
+                    ], $messages);
+
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -70,6 +88,18 @@ class UsuarioController extends Controller
 
     public function update(Request $request, $id)
     {
+        $messages = [
+            'password.required' => 'la clave es un valor requerido',
+                ];
+
+
+
+        $request->validate([
+            'password' => ['required', 'string', 'max:255'],
+
+                    ], $messages);
+
+
         $usuarios = user::findOrFail($id);
         $usuarios->name = $request->name;
         $usuarios->email = $request->email;

@@ -35,40 +35,25 @@
                                                 </ul>
                                             </div>
                                         @endif
-                                        <form method="POST" action="{{ route('member_status.update',$OrganizationStatus->id) }}"
-                                            class="space-y-4">
+
+                                        <form method="POST" action="{{ route('organization_status.update',$OrganizationStatus->id)}}" class="space-y-4">
+
                                             @method('PUT')
                                             @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Nombre') }}</label>
+                                                        class="form-label">Nombre</label>
                                                     <input type="text" name="description" id= "description" value="{{ $OrganizationStatus->description }}"
-                                                        required class="form-control" value="{{ old('description') }}"
-                                                        autofocus="true">
-                                                </div>
-
-
-
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Fecha') }}</label>
-                                                    <input type="text" name="adding_date" id= "adding_date"
-                                                    value="{{ date('d/m/Y', strtotime(  $OrganizationStatus->adding_date )) }}"    required class="form-control">
-                                                </div>
-
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Modificacion Usuario') }}</label>
-                                                    <input type="text" name="modifying_user" id="modifying_user"
-                                                        value="{{ date('d/m/Y', strtotime( $OrganizationStatus->modifying_user )) }}" required class="form-control" >
+                                                        required class="form-control"  autofocus="true">
                                                 </div>
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Modificar Fecha ') }}</label>
-                                                    <input type="text" name="modifying_date" id= "modifying_date"   value="{{ date('d/m/Y', strtotime(  $OrganizationStatus->modifying_date )) }} "
-                                                        required class="form-control" value="{{ old('modifying_date') }}">
+                                                        class="form-label">Letra Identifica Estado</label>
+                                                    <input type="text" name="status" id="status" value="{{ $OrganizationStatus->status }}"
+                                                        required class="form-control">
                                                 </div>
+
                                             </div>
                                             <div style="text-align: right;">
                                                 <button type="submit"

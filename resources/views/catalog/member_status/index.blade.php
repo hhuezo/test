@@ -27,7 +27,7 @@
 
                                         <th style="text-align: center">Fecha</th>
 
-                                        <th style="text-align: center">Estatus</th>
+                                        <th style="text-align: center">Estado</th>
                                         <th style="text-align: center">opciones</th>
                                     </tr>
                                 </thead>
