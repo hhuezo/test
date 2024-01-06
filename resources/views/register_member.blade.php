@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <title>Dashcode - HTML Template</title>
+    <title>Urban</title>
     <link rel="icon" type="image/png" href="assets/images/logo/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
         integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/general_colors.css') }}">
     <!-- START : Theme Config js-->
     <script src="{{ asset('assets/js/settings.js') }}" sync></script>
     <!-- END : Theme Config js-->
@@ -55,8 +56,7 @@
                                                         class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                                                         <div class="flex-1">
                                                             <div class="card-title text-slate-900 dark:text-white">
-                                                                <h4> Registro de nuevos participante
-                                                                </h4>
+                                                                <h4> Registro</h4>
                                                             </div>
                                                         </div>
 
