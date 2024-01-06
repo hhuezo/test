@@ -10,7 +10,7 @@
              <!-- Modal header -->
              <div class="flex items-center justify-between p-5 border-b rounded-t black:border-slate-600 bg-black-500">
                <h3 class="text-base font-medium text-white black:text-white capitalize">
-                Agregar Rol
+                Agregar rol
                </h3>
                <button type="button" class="text-slate-400 bg-transparent hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center
                black:hover:bg-slate-600 black:hover:text-white" data-bs-dismiss="modal">
@@ -24,7 +24,7 @@
              <!-- Modal body -->
              <div class="p-6 space-y-4">
                <h6 class="text-base text-slate-900 dark:text-white leading-6">
-                 Confirme si desea Agregar Rol al usuario
+                 Confirme si desea agregar rol al usuario
                </h6>
 
 

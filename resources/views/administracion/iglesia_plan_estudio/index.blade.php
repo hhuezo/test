@@ -4,7 +4,7 @@
 
 <div class="card">
     <header class=" card-header noborder">
-        <h4 class="card-title">Planes de Estudio para Iglesias
+        <h4 class="card-title">Planes de estudio para iglesias
         </h4>
         <div align="right">
 
@@ -48,11 +48,11 @@
                                 <td>
                                     <div class="flex space-x-3 rtl:space-x-reverse">
                                         <a href="{{ url('administracion/iglesia_plan_estudio') }}/{{ $obj->id }}">
-                                            <iconify-icon icon="pepicons-pop:eye-circle-filled" style="color: #1e293b;" width="37"></iconify-icon>
+                                            <iconify-icon icon="pepicons-pop:eye-circle-filled" class="success" width="37"></iconify-icon>
                                         </a>
 
                                         &nbsp;&nbsp;
-                                        <iconify-icon icon="mdi:delete-circle" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
+                                        <iconify-icon icon="mdi:delete-circle" class="danger" width="40" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
                                     </div>
                                 </td>
                             </tr>

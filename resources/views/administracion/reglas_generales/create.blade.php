@@ -11,7 +11,7 @@
             <div class="card-body flex flex-col p-6">
                 <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                     <div class="flex-1">
-                        <div class="card-title text-slate-900 dark:text-white">Crear Reglas Generales
+                        <div class="card-title text-slate-900 dark:text-white">Crear reglas general
                             <a href="{{ url('administracion/reglas_generales') }}">
                                 <button class="btn btn-dark btn-sm float-right">
                                     <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
@@ -47,16 +47,18 @@
                                         <div class="card h-full">
                                             <div class="grid pt-4 pb-3 px-4">
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">Nombre de Regla</label>
-                                                    <input type="text" id="rule_name" name="rule_name" value="{{ old('rule_name') }}" required class="form-control">
+                                                    <label for="largeInput" class="form-label">Nombre</label>
+                                                    <input type="text" name="rule_name" value="{{ old('rule_name') }}" required class="form-control">
                                                 </div>
+                                                <br>
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Abreviatura</label>
-                                                    <input type="text" id="abbrev" name="abbrev" value="{{ old('abbrev') }}" required class="form-control">
+                                                    <input type="text" name="abbrev" value="{{ old('abbrev') }}" required class="form-control">
                                                 </div>
+                                                <br>
                                                 <div class="input-area relative">
                                                     <label for="largeInput" class="form-label">Cuantificar</label>
-                                                    <input type="text" id="quantity" name="quantity" value="{{ old('quantity') }}" required class="form-control">
+                                                    <input type="text" name="quantity" value="{{ old('quantity') }}" required class="form-control">
                                                 </div>
                                                 <p>
 

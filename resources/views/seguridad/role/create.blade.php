@@ -26,7 +26,7 @@
                     <form method="POST" action="{{ url('seguridad/role') }}">
                         @csrf
                         <div class="input-area relative pl-28">
-                            <label for="largeInput" class="inline-inputLabel">nombre</label>
+                            <label for="largeInput" class="inline-inputLabel">Nombre</label>
                             <input type="text" name="name" id="name"  required class="form-control">
                         </div> &nbsp;
 
