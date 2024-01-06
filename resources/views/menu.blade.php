@@ -100,6 +100,9 @@
                                 <a href="{{ url('tree_view') }}">Estructura general</a>
                             </li>
                             <li>
+                                <a href="{{ url('informacion_general') }}">Informacion general</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('administracion/reglas_generales') }}">Reglas Generales</a>
                             </li>
                         </ul>
@@ -121,13 +124,13 @@
 
 
                             <li>
-                                <a href="{{ url('catalog/organization_status') }}">Estado del Iglesia</a>
+                                <a href="{{ url('catalog/organization_status') }}">Estado de iglesias</a>
                             </li>
                             <!-- <li>
                                 <a href="{{ url('catalog/Quiz') }}">Examen</a>
                             </li>-->
                             <li>
-                                <a href="{{ url('catalog/member_status') }}">Estatus del Participantes</a>
+                                <a href="{{ url('catalog/member_status') }}">Estado de participantes</a>
                             </li>
 
                             <li>

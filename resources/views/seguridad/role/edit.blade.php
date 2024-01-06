@@ -10,10 +10,10 @@
                 <div class="p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 black:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 black:text-white">Modificar Rol</div>
+                            <div class="card-title text-slate-900 black:text-white">Modificar rol</div>
                         </div>
-                        <a href="{{ url('seguridad/role')}}">
-                            <button class="btn btn-black btn-sm float-right">
+                        <a href="{{ url('seguridad/role') }}">
+                            <button class="btn btn-dark btn-sm float-right">
                                 <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
                                 </iconify-icon>
                             </button>
@@ -21,18 +21,24 @@
                     </header>
                     <div class="space-y-4">
 
-                        <form method="POST" action="{{ route('role.update',$role->id) }}"  enctype="multipart/form-data">
-                                @method('PUT')
+                        <form method="POST" action="{{ route('role.update', $role->id) }}" enctype="multipart/form-data">
+                            @method('PUT')
 
                             @csrf
                             <div class="input-area relative pl-28">
                                 <label for="largeInput" class="inline-inputLabel">Nombre</label>
-                                <input type="text" name="name" id="name" value="{{ $role->name }}" class="form-control">
+                                <input type="text" name="name" id="name" value="{{ $role->name }}"
+                                    class="form-control">
                             </div>
-                            <div
-                                class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b black:border-slate-600">
-                                <button style="margin-bottom: 15px"
-                                    class="btn inline-flex justify-center btn-black ml-28 float-right">Aceptar</button>
+
+                            <div class="col-12">
+                                &nbsp;
+                            </div>
+
+                            <div class="input-area relative pl-28">
+                                <div style="text-align: right;">
+                                    <button type="submit" class="btn inline-flex justify-center btn-dark">Aceptar</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -41,7 +47,7 @@
         </div>
     </div>
     <div>&nbsp;</div>
-    <div class="grid xl:grid-cols-2 grid-cols-1 gap-6">
+    <div class="grid xl:grid-cols-1 grid-cols-1 gap-6">
         <div class="card">
             <div class="card-body flex flex-col p-6">
                 <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
@@ -55,7 +61,7 @@
                         <div class="input-area relative pl-28">
                             <label for="largeInput" class="inline-inputLabel">Permiso</label>
                             <input type="hidden" name="role_id" id="role_id" value="{{ $role->id }}">
-                            <select name="permission_id"id= "permission_id"  class="form-control select2">
+                            <select name="permission_id"id="permission_id" class="form-control select2">
                                 @foreach ($permissions as $obj)
                                     <option value="{{ $obj->id }}">{{ $obj->name }}</option>
                                 @endforeach
@@ -63,7 +69,7 @@
                         </div>
                         <div class=" items-center p-6 space-x-2 border-t border-slate-200 rounded-b black:border-slate-600">
                             <button style="margin-bottom: 15px"
-                                class="btn inline-flex justify-center btn-black ml-28 float-right">Agregar</button>
+                                class="btn inline-flex justify-center btn-dark ml-28 float-right">Agregar</button>
                         </div>
                     </form>
                 </div>
@@ -89,14 +95,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php($i=1)
+                                @php($i = 1)
                                 @foreach ($permission_in_role as $obj)
                                     <tr>
-                                        <td class="table-td">{{$i}}</td>
-                                        <td class="table-td">{{$obj->name}}</td>
+                                        <td class="table-td">{{ $i }}</td>
+                                        <td class="table-td">{{ $obj->name }}</td>
                                         <td class="table-td "><iconify-icon data-bs-toggle="modal"
-                                            data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
-                                            style="color: #8f2929;" width="40"></iconify-icon></td>
+                                                data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:trash"
+                                                style="color: #8f2929;" width="40"></iconify-icon></td>
                                     </tr>
                                     @php($i++)
 

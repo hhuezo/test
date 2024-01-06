@@ -120,6 +120,7 @@ class Iglesia extends Model
             ->join('users_has_iglesia as uhi', 'u.id', '=', 'uhi.user_id')
             ->where('uhi.iglesia_id', $iglesiaId)
             ->select('m.id', DB::raw('CONCAT(m.name_member, " ", m.lastname_member) as nombre'), 'member_has_group.group_id', 'g.nombre as grupo', 'm.status_id')
+            ->orderBy('group_id')
             ->get();
     }
 

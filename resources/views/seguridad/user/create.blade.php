@@ -11,7 +11,7 @@
             <div class="card-body flex flex-col p-6">
                 <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                     <div class="flex-1">
-                        <div class="card-title text-slate-900 dark:text-white">Usuario crear
+                        <div class="card-title text-slate-900 dark:text-white">Nuevo usuario
                             <a href="{{ url('seguridad/user') }}">
                                 <button class="btn btn-dark btn-sm float-right">
                                     <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
@@ -28,7 +28,7 @@
 
                         @csrf
                         <div class="input-area relative pl-28">
-                            <label for="largeInput" class="inline-inputLabel">nombre</label>
+                            <label for="largeInput" class="inline-inputLabel">Nombre</label>
                             <input type="text" name="name" id="name" required class="form-control">
                         </div> &nbsp;
                         <div class="input-area relative pl-28">
@@ -37,7 +37,7 @@
                         </div> &nbsp;
 
                         <div class="input-area relative pl-28">
-                            <label for="largeInput" class="inline-inputLabel">clave</label>
+                            <label for="largeInput" class="inline-inputLabel">Contraseña</label>
                             <input type="text" name="password" id="password"   required class="form-control">
                         </div> &nbsp;
 
