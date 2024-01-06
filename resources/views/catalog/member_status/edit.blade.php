@@ -8,7 +8,7 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Estatus del Participante
+                            <div class="card-title text-slate-900 dark:text-white">Estado del Participante
 
                                 <a href="{{ url('catalog/member_status') }}">
                                     <button class="btn btn-dark btn-sm float-right">
@@ -37,42 +37,28 @@
                                         <form method="POST" action="{{ route('member_status.update', $MemberStatus->id) }}"
                                             class="space-y-4">
                                             @method('PUT')
-                                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
+                                            @csrf
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
                                                         class="form-label">{{ __('Descripcion') }}</label>
-                                                    <input type="text" name="name_es" id="name_es" value="{{ $MemberStatus->description }}"
-                                                        required class="form-control" value="{{ old('description') }}"
+                                                    <input type="text" name="name_es" id="name_es"
+                                                        value="{{ $MemberStatus->description }}" required
+                                                        class="form-control" value="{{ old('description') }}"
                                                         autofocus="true">
                                                 </div>
 
 
-
-
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Fecha') }}</label>
-                                                    <input type="text" name="adding_date" id= "adding_date" value= "{{ date('d/m/Y', strtotime($MemberStatus->adding_date)) }}"
-                                                                                       required class="form-control"    value="{{ old('adding_date') }}">
+                                                        class="form-label">{{ __('Letra Identificador') }}</label>
+                                                    <input type="text" id="status_id"
+                                                        value="{{ $MemberStatus->status_id }}" name="status_id" required
+                                                        class="form-control">
                                                 </div>
 
-                                                <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">{{ __('Estatus') }}</label>
-                                                    <select name="status" id= "status_id" class="form-control">
-                                                        @foreach ( $MemberStatusall as $obj)
-                                                        @if ($obj->id== $MemberStatus->id))
-                                                         <option value="{{ $obj->id }}" selected>
-                                                            {{ $obj->description }}
-                                                        </option>
-                                                        @else
-                                                        <option value="{{ $obj->id }}">{{ $obj->description }}
-                                                        </option>
-                                                        @endif
 
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
+                                            </div>
                                             <div style="text-align: right;">
                                                 <button type="submit"
                                                     class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>

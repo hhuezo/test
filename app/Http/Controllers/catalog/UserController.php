@@ -60,16 +60,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'nombre.required' => 'ingresar la pregunta',
+            'name' => 'El nombre es un valor requerido',
+            'password.required' => 'la clave es un valor requerido',
+            'email' => 'El Correo electronico es un valor requerido',
+
+
         ];
 
 
 
         $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255'],
+                    ], $messages);
 
-            'nombre' => 'required',
 
-        ], $messages);
 
         $usuario = new User();
         $usuario->nombre = $request->nombre;
@@ -128,16 +134,16 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $messages = [
-            'nombre.required' => 'ingresar nombre',
-        ];
+            'password.required' => 'la clave es un valor requerido',
+                ];
 
 
 
         $request->validate([
+            'password' => ['required', 'string', 'max:255'],
 
-            'nombre' => 'required',
+                    ], $messages);
 
-        ], $messages);
 
         $usuario =  User::findOrFail($id);
         $usuario->nombre = $request->nombre;

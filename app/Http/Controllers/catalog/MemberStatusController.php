@@ -5,6 +5,7 @@ namespace App\Http\Controllers\catalog;
 use App\Http\Controllers\Controller;
 use App\Models\catalog\MemberStatus;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class MemberStatusController extends Controller
 {
@@ -19,13 +20,10 @@ class MemberStatusController extends Controller
     }
     public function index()
     {
-        $MemberStatus =MemberStatus::get();
+        $MemberStatus = MemberStatus::get();
 
 
         return view('catalog.member_status.index', compact('MemberStatus'));
-
-
-
     }
 
     /**
@@ -49,29 +47,33 @@ class MemberStatusController extends Controller
     public function store(Request $request)
     {
 
-$messages = [
-    'description.required' => 'ingresar nombre',
-];
+        $messages = [
+            'description.required' => 'ingresar nombre',
+            'status.required' => 'ingresar letra identificadora',
+        ];
 
 
 
-$request->validate([
+        $request->validate([
 
-    'description.required' => 'ingresar nombre',
+            'description.required' => 'ingresar nombre',
+            'status.required' => 'ingresar letra identificadora',
 
-], $messages);
+        ], $messages);
 
-$MemberStatus = new MemberStatus();
-$MemberStatus->description = $request->description;
-$MemberStatus->description_es = $request->description;
-$MemberStatus->adding_date = $request->adding_date;
-$MemberStatus->modifying_user = $request->modifying_user;
-$MemberStatus->modifying_date = $request->modifying_date;
-$MemberStatus->status = $request->status;
-$MemberStatus->save();
+        $MemberStatus = new MemberStatus();
+        $MemberStatus->description = $request->description;
+        $MemberStatus->description_es = $request->description;
 
-alert()->success('El registro ha sido agregado correctamente');
-return back();
+        $time = Carbon::now('America/El_Salvador');
+        $MemberStatus->adding_date = $time->toDateTimeString();
+        $MemberStatus->modifying_user = $time->toDateTimeString();
+        $MemberStatus->modifying_date = $time->toDateTimeString();
+        $MemberStatus->status = $request->status_id;
+        $MemberStatus->save();
+
+        alert()->success('El registro ha sido agregado correctamente');
+        return back();
     }
 
     /**
@@ -93,10 +95,10 @@ return back();
      */
     public function edit($id)
     {
-        $MemberStatus= MemberStatus::findOrFail($id);
-        $MemberStatusall= MemberStatus::get();
+        $MemberStatus = MemberStatus::findOrFail($id);
+        $MemberStatusall = MemberStatus::get();
 
-        return view('catalog.member_status.edit', compact('MemberStatus','MemberStatusall'));
+        return view('catalog.member_status.edit', compact('MemberStatus', 'MemberStatusall'));
     }
 
     /**
@@ -109,29 +111,33 @@ return back();
     public function update(Request $request, $id)
     {
 
-$messages = [
-    'description.required' => 'ingresar nombre',
-];
+
+        $messages = [
+            'description.required' => 'ingresar nombre',
+            'status.required' => 'Seleccionar Estado',
+
+        ];
 
 
 
-$request->validate([
+        $request->validate([
 
-    'description.required' => 'ingresar nombre',
+            'description.required' => 'ingresar nombre',
+            'status.required' => 'Seleccionar Estado',
 
-], $messages);
-$MemberStatus = MemberStatus::findOrFail($id);
-$MemberStatus = new MemberStatus();
-$MemberStatus->description = $request->description;
-$MemberStatus->description_es = $request->description;
-$MemberStatus->adding_date = $request->adding_date;
-$MemberStatus->modifying_user = $request->modifying_user;
-$MemberStatus->modifying_date = $request->modifying_date;
-$MemberStatus->status = $request->status;
-$MemberStatus->save();
 
-alert()->success('El registro ha sido modificado correctamente');
-return back();
+        ], $messages);
+        $time = Carbon::now('America/El_Salvador');
+        $MemberStatus = MemberStatus::findOrFail($id);
+        $MemberStatus->description = $request->description;
+        $MemberStatus->description_es = $request->description;
+        $MemberStatus->adding_date = $time->toDateTimeString();
+        $MemberStatus->modifying_user = $time->toDateTimeString();
+        $MemberStatus->modifying_date = $time->toDateTimeString();
+        $MemberStatus->status = $request->status_id;
+        $MemberStatus->update();
+        alert()->success('El registro ha sido modificado correctamente');
+        return back();
     }
 
     /**
@@ -142,7 +148,7 @@ return back();
      */
     public function destroy($id)
     {
-        $MemberStatus= MemberStatus::findOrFail($id);
+        $MemberStatus = MemberStatus::findOrFail($id);
         //dd($question);
         $MemberStatus->delete();
         alert()->info('El registro ha sido eliminado correctamente');

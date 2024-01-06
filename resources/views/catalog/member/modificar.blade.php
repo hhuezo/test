@@ -8,7 +8,7 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white"> Participante Modificar sus datos Personales
+                            <div class="card-title text-slate-900 dark:text-white">  Datos  del Participante
 
                                 <a href="{{ url('catalog/modificar_datos_participante') }}">
                                     <button class="btn btn-dark btn-sm float-right">
@@ -59,19 +59,19 @@
 
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">{{ __('Nombre') }}</label>
+                                                    <label for="largeInput" class="form-label">Nombre</label>
                                                     <input type="text" name="name_member" id="name_member" value="{{ $member->name_member }}" required class="form-control" value="{{ old('name_member') }}" autofocus="true">
                                                 </div>
 
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">{{ __('Apellido') }}</label>
+                                                    <label for="largeInput" class="form-label">Apellido</label>
                                                     <input type="text" id="lastname_member" name="lastname_member" value="{{ $member->lastname_member }}" required class="form-control" value="{{ old('lastname_member') }}">
                                                 </div>
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">fecha nacimiento</label>
+                                                    <label for="largeInput" class="form-label">Fecha Nacimiento</label>
                                                     <input type="date" name="birthdate" id="birthdate" value="{{ $member->birthdate }}" required class="form-control">
                                                 </div>
 
@@ -120,7 +120,7 @@
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">{{ __('numero de documento') }}</label>
+                                                    <label for="largeInput" class="form-label">Numero de Documento</label>
                                                     <input type="text" id="document_number" name="document_number"  data-inputmask="'mask': ['99999999-9']" value="{{ $member->document_number }}" required class="form-control">
                                                 </div>
 
@@ -175,8 +175,8 @@
                                                 </div>
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput" class="form-label">Estatus</label>
-                                                    <select name="status" id="status class="form-control select2">
+                                                    <label for="largeInput" class="form-label">Estado</label>
+                                                    <select name="status" id="status" class="form-control select2">
                                                         @foreach ($member_status as $obj)
                                                         @if ($obj->id == $member->status_id)
                                                         <option value="{{ $obj->id }}" selected>
