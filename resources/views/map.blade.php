@@ -10,14 +10,34 @@
     google.charts.load('current', {
         'packages': ['geochart']
     });
+
+
+
+
     google.charts.setOnLoadCallback(drawRegionsMap);
 
     function drawRegionsMap() {
+
+        var departamentos = {
+            "SV-AH": "Ahuachapán",
+            "SV-SA": "Santa Ana",
+            "SV-SO": "Sonsonate",
+            "SV-CH": "Chalatenango",
+            "SV-LI": "La Libertad",
+            "SV-SS": "San Salvador",
+            "SV-CU": "Cuscatlán",
+            "SV-PA": "La Paz",
+            "SV-SV": "San Vicente",
+            "SV-CA": "Cabañas",
+            "SV-US": "Usulután",
+            "SV-SM": "San Miguel",
+            "SV-MO": "Morazán",
+            "SV-UN": "La Unión"
+        };
+        //console.log(departamentos["{{ $dep }}"]);
         var data = google.visualization.arrayToDataTable([
-            ['Country'],
-            ['{{ $dep }}'], // San salvador
-            //['HN', 0], //honduras
-            // ['SV-SM',2]// Add more countries and worker data as needed
+            ['Country', 'Tooltip'],
+            ['{{ $dep }}', departamentos["{{ $dep }}"]],
         ]);
 
         var geoChart = new google.visualization.GeoChart(document.getElementById('chart2'));
@@ -33,6 +53,12 @@
             },
             chartArea: {
                 fontFamily: 'Roboto'
+            },
+            tooltip: {
+                textStyle: {
+                    color: 'green' // Cambia el color del texto del tooltip
+                },
+                isHtml: true // Si quieres usar HTML en el tooltip
             }
         };
 
