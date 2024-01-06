@@ -52,12 +52,13 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
-
+                            @php($i=1)
                             @foreach ($iglesia->participantes($iglesia->id) as $participante)
                                 <tr>
-                                    <td>{{ $participante->nombre }}</td>
+                                    <td>{{$i}}. {{ $participante->nombre }}</td>
                                     <td>{{ $participante->grupo }}</td>
                                 </tr>
+                                @php($i++)
                             @endforeach
                         </tbody>
                     </table>
