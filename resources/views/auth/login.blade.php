@@ -28,16 +28,23 @@
                         <img src="assets/images/logo/logo-white.svg" alt="" class="mb-10 white_logo">
                     </a>
                 </div>
-                <div class="text-center 2xl:mb-10 mb-5">
-                    <h4 class="font-medium">Iniciar sesión</h4>
-                    
-                </div>
-                <!-- BEGIN: Login Form -->
-                <form class="space-y-4" method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <div class="row mb-3">
-                        <div class="text-center">
-                            <label for="email" class="col-md-4 col-form-label text-md-end"><strong>Tipo de inicio de
+            </div>
+            <div class="lg:w-1/2 w-full flex flex-col items-center justify-center">
+                <div class="auth-box-3">
+
+                    <div class="text-center 2xl:mb-10 mb-5">
+                        <h4 class="font-medium">Iniciar sesión</h4>
+                        {{-- <div class="text-slate-500 dark:text-slate-400 text-base">
+                            Inicie sesión con su cuenta
+                        </div> --}}
+                    </div>
+                    <!-- BEGIN: Login Form -->
+                    <form class="space-y-4" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="row mb-3">
+                            <div class="text-center">
+                                <label for="email" class="col-md-4 col-form-label text-md-end"><strong>Tipo de inicio de
+
                                     sesión</strong></label>
                         </div>
                         <div class="col-md-6">

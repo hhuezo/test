@@ -254,9 +254,9 @@
                     <div class="app-header z-[999] ltr:ml-[248px] rtl:mr-[248px] bg-white dark:bg-slate-800 shadow-sm dark:shadow-slate-700">
                         <div class="flex justify-between items-center h-full">
                             <div class="flex items-center md:space-x-4 space-x-2 xl:space-x-0 rtl:space-x-reverse vertical-box">
-                                <a href="index.html" class="mobile-logo xl:hidden inline-block">
-                                    <img src="{{ asset('assets/images/logo/logo-c.svg') }}" class="black_logo" alt="logo">
-                                    <img src="{{ asset('assets/images/logo/logo-c-white.svg') }}" class="white_logo" alt="logo">
+                                <a href="{{url('/home')}}" class="mobile-logo xl:hidden inline-block">
+                                    <img src="{{ asset('images/logo_urban.png') }}" style="max-width: 40px" alt="logo">
+                                    {{-- <img src="{{ asset('assets/images/logo/logo-c-white.svg') }}" class="white_logo" alt="logo"> --}}
                                 </a>
                                 <button class="smallDeviceMenuController hidden md:inline-block xl:hidden">
                                     <iconify-icon class="leading-none bg-transparent relative text-xl top-[2px] text-slate-900 dark:text-white" icon="heroicons-outline:menu-alt-3"></iconify-icon>
@@ -274,13 +274,13 @@
 
 
                                 <div class="relative md:block hidden">
-                                    <button class="lg:h-[32px] lg:w-[32px] lg:bg-slate-100 lg:dark:bg-slate-900 dark:text-white text-slate-900 cursor-pointer
+                                    {{-- <button class="lg:h-[32px] lg:w-[32px] lg:bg-slate-100 lg:dark:bg-slate-900 dark:text-white text-slate-900 cursor-pointer
                                             rounded-full text-[20px] flex flex-col items-center justify-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <iconify-icon class="animate-tada text-slate-800 dark:text-white text-xl" icon="heroicons-outline:bell"></iconify-icon>
                                         <span class="absolute -right-1 lg:top-0 -top-[6px] h-4 w-4 bg-red-500 text-[8px] font-semibold flex flex-col items-center
                                             justify-center rounded-full text-white z-[99]">
                                             4</span>
-                                    </button>
+                                    </button> --}}
                                     <!-- Notifications Dropdown -->
                                     <div class="dropdown-menu z-10 hidden bg-white shadow w-[335px]
                                                     dark:bg-slate-800 border dark:border-slate-700 !top-[23px] rounded-md overflow-hidden lrt:origin-top-right rtl:origin-top-left">
@@ -393,7 +393,7 @@
                                     <div class="dropdown-menu z-10 hidden bg-white divide-y divide-slate-100 shadow w-44 dark:bg-slate-800 border dark:border-slate-700 !top-[23px] rounded-md
                                             overflow-hidden">
                                         <ul class="py-1 text-sm text-slate-800 dark:text-slate-200">
-                                            <li>
+                                        {{--    <li>
                                                 <a href="{{ url('/home') }}" class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white font-inter text-sm text-slate-600
                                                     dark:text-white font-normal">
                                                     <iconify-icon icon="heroicons-outline:user" class="relative top-[2px] text-lg ltr:mr-1 rtl:ml-1">
@@ -409,7 +409,7 @@
                                                     </iconify-icon>
                                                     <span class="font-Inter">Cursos</span>
                                                 </a>
-                                            </li>
+                                            </li> --}}
 
 
                                             <li>
@@ -496,42 +496,35 @@
             <!-- END: Footer For Desktop and tab -->
             <div class="bg-white bg-no-repeat custom-dropshadow footer-bg dark:bg-slate-700 flex justify-around items-center
     backdrop-filter backdrop-blur-[40px] fixed left-0 bottom-0 w-full z-[9999] bothrefm-0 py-[12px] px-4 md:hidden">
-                <a href="chat.html">
+                <a href="c#">
                     <div>
-                        <span class="relative cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center mb-1 dark:text-white
-          text-slate-900 ">
+                        <span class="relative cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center mb-1 dark:text-white text-slate-900 ">
                             <iconify-icon icon="heroicons-outline:mail"></iconify-icon>
-                            <span class="absolute right-[5px] lg:hrefp-0 -hrefp-2 h-4 w-4 bg-red-500 text-[8px] font-semibold flex flex-col items-center
-            justify-center rounded-full text-white z-[99]">
-                                10
-                            </span>
                         </span>
                         <span class="block text-[11px] text-slate-600 dark:text-slate-300">
                             Messages
                         </span>
                     </div>
                 </a>
-                <a href="profile.html" class="relative bg-white bg-no-repeat backdrop-filter backdrop-blur-[40px] rounded-full footer-bg dark:bg-slate-700
+                <a href="{{url('/home')}}" class="relative bg-white bg-no-repeat backdrop-filter backdrop-blur-[40px] rounded-full footer-bg dark:bg-slate-700
       h-[65px] w-[65px] z-[-1] -mt-[40px] flex justify-center items-center">
                     <div class="h-[50px] w-[50px] rounded-full relative left-[0px] hrefp-[0px] custom-dropshadow">
-                        <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="" class="w-full h-full rounded-full border-2 border-slate-100">
+                        <img src="{{ asset('img/logo.png') }}" alt="" class="w-full h-full rounded-full border-2 border-slate-100">
                     </div>
                 </a>
-                <a href="#">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
                     <div>
-                        <span class=" relative cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center mb-1 dark:text-white
-          text-slate-900">
-                            <iconify-icon icon="heroicons-outline:bell"></iconify-icon>
-                            <span class="absolute right-[17px] lg:hrefp-0 -hrefp-2 h-4 w-4 bg-red-500 text-[8px] font-semibold flex flex-col items-center
-            justify-center rounded-full text-white z-[99]">
-                                2
-                            </span>
+                        <span class=" relative cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center mb-1 dark:text-white  text-slate-900">
+                            <iconify-icon icon="zondicons:close-outline"></iconify-icon>
                         </span>
                         <span class=" block text-[11px] text-slate-600 dark:text-slate-300">
-                            Notifications
+                            Cerrar sesión
                         </span>
                     </div>
                 </a>
+
+
             </div>
         </div>
     </main>
