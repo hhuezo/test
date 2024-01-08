@@ -44,12 +44,12 @@
                                                 <td align="center">
                                                     <a href="{{url('catalog/member_status')}}/{{$obj->id}}/edit">
                                                     <iconify-icon icon="mdi:edit-circle"
-                                                        style="color: #0c0c0c;" width="40"></iconify-icon>
+                                                        class="success" width="40"></iconify-icon>
                                                     </a>
                                                     &nbsp;&nbsp;
                                                     <iconify-icon data-bs-toggle="modal"
                                                         data-bs-target="#modal-delete-{{ $obj->id }}" icon="mdi:delete-circle"
-                                                        style="color: #121213;" width="40"></iconify-icon>
+                                                        class="danger" width="40"></iconify-icon>
                                                 </td>
                                             </tr>
                                             @include('catalog/member_status/modal')
