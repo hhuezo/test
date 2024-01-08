@@ -48,7 +48,7 @@ class IglesiaPlanEstudioController extends Controller
 
        //$iglesias = IglesiaPlanEstudio::join('iglesia','iglesia.id','=','group_per_chuch_plan.iglesia_id')
         $iglesias = Iglesia::join('group_per_chuch_plan as p', 'p.iglesia_id', '=', 'iglesia.id')
-        ->where('iglesia.status_id', '=', 2)
+    //    ->where('iglesia.status_id', '=', 2)->whereOr('iglesia.status_id', '=', 2)
         ->where('p.closed', '=', 1)
         ->where('p.end_date', '<=', now())
         ->select('p.*','iglesia.*','iglesia.id as id_iglesia','iglesia.name as nombreIglesia')
@@ -75,6 +75,7 @@ class IglesiaPlanEstudioController extends Controller
                 }
                 $igle->status_id = 7; ///iglesia certificada
                 $igle->update();
+                $iglesia->certificacion = 1;
             }
             else{
                 $iglesia->certificacion = 0;
@@ -84,7 +85,7 @@ class IglesiaPlanEstudioController extends Controller
 
         }
 
-
+//dd($iglesias);
 
         return view('administracion.iglesia_plan_estudio.certificacion', compact('iglesias'));
     }

@@ -51,18 +51,12 @@
 
                                                 <div class="input-area relative">
                                                     <label for="largeInput"
-                                                        class="form-label">{{ __('Estatus') }}</label>
+                                                        class="form-label">Letra Identifica Estado</label>
                                                     <input type="text" name="status" id="status"
                                                         required class="form-control">
                                                 </div>
 
-                                                <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Fecha') }}</label>
-                                                    <input type="date" name="date_created" id="date_created"
-                                                         required class="form-control"
-                                                        value="{{ old('date_created') }}">
-                                                </div>
+
 
                                             </div>
                                             <div style="text-align: right;">

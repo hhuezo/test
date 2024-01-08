@@ -5,7 +5,7 @@ namespace App\Http\Controllers\catalog;
 use App\Http\Controllers\Controller;
 use App\Models\catalog\OrganizationStatus;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class OrganizationStatusController extends Controller
 {
     /**
@@ -47,8 +47,10 @@ class OrganizationStatusController extends Controller
     {
         //
 
+
         $messages = [
             'description.required' => 'ingresar descripcion del estado',
+            'status.required' => 'ingresar letra del estado',
 
         ];
 
@@ -57,11 +59,15 @@ class OrganizationStatusController extends Controller
         $request->validate([
 
             'description' => 'required',
+            'status' => 'required',
 
 
         ], $messages);
+        $time = Carbon::now('America/El_Salvador');
         $OrganizationStatus = new OrganizationStatus();
         $OrganizationStatus->description = $request->description;
+        $OrganizationStatus->status = $request->status;
+        $OrganizationStatus->adding_date= $time->toDateTimeString();
         $OrganizationStatus->save();
 
         alert()->success('El registro ha sido agregado correctamente');
@@ -102,9 +108,29 @@ class OrganizationStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
+        $messages = [
+            'description.required' => 'ingresar descripcion del estado',
+            'status.required' => 'ingresar letra del estado',
+
+        ];
+
+
+
+        $request->validate([
+
+            'description' => 'required',
+            'status' => 'required',
+
+
+        ], $messages);
+        $time = Carbon::now('America/El_Salvador');
         $OrganizationStatus= OrganizationStatus::findOrFail($id);
         $OrganizationStatus->description = $request->description;
-        $OrganizationStatus->save();
+        $OrganizationStatus->status = $request->status;
+        $OrganizationStatus->adding_date= $time->toDateTimeString();
+        $OrganizationStatus->update();
 
         alert()->success('El registro ha sido Modificado correctamente');
         return back();
