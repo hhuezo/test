@@ -7,7 +7,7 @@
 
         <div class="card">
             <header class=" card-header noborder">
-                <h4 class="card-title">Estado de los Participantes
+                <h4 class="card-title">Estado de los participantes
                 </h4>
                 <a href="{{url('catalog/member_status/create')}}">
                 <button class="btn btn-outline-primary" >Nuevo</button>
@@ -24,9 +24,6 @@
                                     <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                         <th style="text-align: center">Id</th>
                                         <th style="text-align: center">Descripcion</th>
-
-                                        <th style="text-align: center">Fecha</th>
-
                                         <th style="text-align: center">Estado</th>
                                         <th style="text-align: center">opciones</th>
                                     </tr>
@@ -37,9 +34,6 @@
                                             <tr  class="even:bg-slate-50 dark:even:bg-slate-700">
                                                 <td align="center">{{ $obj->id }}</td>
                                                 <td align="center">{{ $obj->description}}</td>
-
-                                                <td align="center"> {{ date('d/m/Y', strtotime($obj->adding_date)) }}</td>
-
                                                 <td align="center">{{ $obj->status}}</td>
                                                 <td align="center">
                                                     <a href="{{url('catalog/member_status')}}/{{$obj->id}}/edit">
