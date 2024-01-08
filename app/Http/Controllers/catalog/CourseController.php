@@ -51,24 +51,22 @@ class CourseController extends Controller
 
 
         $messages = [
-            'name_es.required' => 'ingresar Nombre del curso',
-
+            'name.required' => 'ingresar el nombre del curso',
         ];
-
 
 
         $request->validate([
 
-            'name_es' => 'required',
+            'name' => 'required',
 
 
         ], $messages);
         $courses = new Course();
-        $courses->name =  $request->name_es;
-        $courses->name_es = $request->name_es;
+        $courses->name =  $request->name;
+        $courses->name_es = $request->name;
         $courses->description = $request->description;
         $courses->description_es = $request->description;
-        $courses->image = $request->image;
+       /* $courses->image = $request->image;
 
         $archivo = $request->file('imagen');
         $filename = $archivo->getClientOriginalName();
@@ -76,7 +74,7 @@ class CourseController extends Controller
         $destinationPath = public_path('/images');
         $archivo->move($destinationPath, $path);
         $courses->image = "./images";
-        $courses->image = $courses->image . $filename;
+        $courses->image = $courses->image . $filename;*/
         $courses->save();
         alert()->success('El registro ha sido agregado correctamente');
         return back();
@@ -117,27 +115,29 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
 
-        // //dd($request->file('imagen'));
-        // $messages = [
-        //     'course.name_es.required' => 'ingresar nombre del curso',
-        // ];
 
-        // $request->validate([
+        $messages = [
+            'name.required' => 'ingresar el nombre del curso',
+        ];
 
-        //     'course.name_es' => 'required',
 
-        // ], $messages);
+        $request->validate([
+
+            'name' => 'required',
+
+
+        ], $messages);
 
 
 
         $courses = Course::findOrFail($id);
-        $courses->name = $request->name_es;
-        $courses->name_es = $request->name_es;
+        $courses->name = $request->name;
+        $courses->name_es = $request->name;
         $courses->description = $request->description;
         $courses->description_es = $request->description;
 
 
-        $id_file = uniqid();
+       /* $id_file = uniqid();
 
         $archivo = $request->file('imagen');
         $filename = $id_file . ' ' .  $archivo->getClientOriginalName();
@@ -145,7 +145,7 @@ class CourseController extends Controller
         $destinationPath = public_path('/images');
         $archivo->move($destinationPath, $path);
         $courses->image = "./images";
-        $courses->image = $request->image . $filename;
+        $courses->image = $request->image . $filename;*/
         $courses->update();
         alert()->success('El registro ha sido Modificado correctamente');
         return back();

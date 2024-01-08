@@ -40,21 +40,20 @@
                                             @csrf
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Descripcion') }}</label>
-                                                    <input type="text" name="name_es" id="name_es"
-                                                        value="{{ $MemberStatus->description }}" required
-                                                        class="form-control" value="{{ old('description') }}"
+                                                    <label for="largeInput" class="form-label"> Nombre </label>
+                                                    <input type="text" name="description" id= "description" required
+                                                        class="form-control" value="{{ $MemberStatus->description }}"
                                                         autofocus="true">
                                                 </div>
 
 
                                                 <div class="input-area relative">
-                                                    <label for="largeInput"
-                                                        class="form-label">{{ __('Letra Identificador') }}</label>
-                                                    <input type="text" id="status_id"
-                                                        value="{{ $MemberStatus->status_id }}" name="status_id" required
-                                                        class="form-control">
+                                                    <label for="largeInput" class="form-label"> Estado {{$MemberStatus->status_id }}</label>
+
+                                                    <select name="status_id" class="form-control">
+                                                        <option value="A" {{$MemberStatus->status == 'A' ? 'selected':''}}>Activo</option>
+                                                        <option value="I" {{$MemberStatus->status == 'I' ? 'selected':''}}>Inactivo</option>
+                                                    </select>
                                                 </div>
 
 

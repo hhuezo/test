@@ -43,15 +43,11 @@ class RegionController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'nombre.required' => 'ingresar la pregunta',
+            'nombre.required' => 'El nombre es requerido',
         ];
 
-
-
         $request->validate([
-
             'nombre' => 'required',
-
         ], $messages);
 
         $region = new region();

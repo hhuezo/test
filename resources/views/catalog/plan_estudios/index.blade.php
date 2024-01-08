@@ -7,10 +7,10 @@
 
 <div class="card">
     <header class=" card-header noborder">
-        <h4 class="card-title">Planes de Estudio
+        <h4 class="card-title">Planes de estudio
         </h4>
         <a href="{{url('catalog/plan_estudios/create')}}">
-            <button class="btn btn-dark">Nuevo</button>
+            <button class="btn btn-outline-primary">Nuevo</button>
         </a>
     </header>
     <div class="card-body px-6 pb-6">
@@ -45,10 +45,10 @@
                                     </td>
                                     <td align="center">
                                         <a href="{{url('catalog/plan_estudios')}}/{{$obj->id}}/edit">
-                                            <iconify-icon icon="mdi:pencil-circle" style="color: #1e293b;" width="37"></iconify-icon>
+                                            <iconify-icon icon="mdi:pencil-circle" class="success" width="37"></iconify-icon>
                                         </a>
                                         &nbsp;&nbsp;
-                                        <iconify-icon icon="mdi:delete-circle" style="color: #1e293b;" width="40" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
+                                        <iconify-icon icon="mdi:delete-circle" class="danger" width="40" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $obj->id }}"></iconify-icon>
                                     </td>
                                 </tr>
                                 @include('catalog/plan_estudios/modal')

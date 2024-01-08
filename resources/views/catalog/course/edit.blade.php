@@ -10,7 +10,7 @@
                 <div class="card-body flex flex-col p-6">
                     <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                         <div class="flex-1">
-                            <div class="card-title text-slate-900 dark:text-white">Cursos Editar
+                            <div class="card-title text-slate-900 dark:text-white">Modificar curso
                                 <a href="{{ url('catalog/course') }}">
                                     <button class="btn btn-dark btn-sm float-right">
                                         <iconify-icon icon="icon-park-solid:back" style="color: white;" width="18">
@@ -23,36 +23,47 @@
 
                     <div class="space-y-4">
 
-                        <form method="POST" action="{{ route('course.update', $courses->id) }}"   enctype="multipart/form-data">
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('course.update', $courses->id) }}"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7">
 
                                 <div class="input-area relative">
                                     <label for="largeInput" class="form-label">Nombre</label>
-                                    <input type="text" id="name" name="name" value="{{ $courses->name }}" required
-                                        class="form-control" value="{{ old('name') }}">
+                                    <input type="text" id="name" name="name" value="{{ $courses->name }}"
+                                        required class="form-control" value="{{ old('name') }}">
                                 </div>
 
 
                                 <div class="input-area relative">
                                     <label for="largeInput" class="form-label">{{ __('Descripcion') }}</label>
-                                    <input type="text"  id="description" name="description" value="{{ $courses->description }}"
-                                        required class="form-control">
+                                    <input type="text" id="description" name="description"
+                                        value="{{ $courses->description }}" required class="form-control">
                                 </div>
 
-                                <div class="input-area relative">
+                                {{-- <div class="input-area relative">
 
                                     <label for="largeInput" class="form-label">Imagen </label>
 
                                     <input type="file" name="imagen" id="fileInput" style="display: none;">
                                     <div id="imagen" name="imagen" class="dropzone"> </div>
 
-                                </div>
+                                </div> --}}
 
 
                             </div>
-
+                            <br>
                             <div style="text-align: right;">
                                 <button type="submit"
                                     class="btn inline-flex justify-center btn-dark">{{ __('Aceptar') }}</button>
@@ -64,7 +75,7 @@
             </div>
         </div>
     </div>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
     <script type="text/javascript">
         // Configura Dropzone para el campo de entrada 'avatar'
@@ -135,5 +146,5 @@
                 document.getElementById('fileInput').files = files;
             }
         });
-    </script>
+    </script> --}}
 @endsection

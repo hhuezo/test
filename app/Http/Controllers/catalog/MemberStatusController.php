@@ -9,11 +9,7 @@ use Carbon\Carbon;
 
 class MemberStatusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -26,11 +22,6 @@ class MemberStatusController extends Controller
         return view('catalog.member_status.index', compact('MemberStatus'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $MemberStatus = MemberStatus::get();
@@ -38,28 +29,19 @@ class MemberStatusController extends Controller
         return view('catalog.member_status.create', compact('MemberStatus'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
         $messages = [
-            'description.required' => 'ingresar nombre',
-            'status.required' => 'ingresar letra identificadora',
+            'description.required' => 'El nombre de estado es requerido',
+            'status_id.required' => 'El estado es requerido',
         ];
 
-
-
         $request->validate([
-
-            'description.required' => 'ingresar nombre',
-            'status.required' => 'ingresar letra identificadora',
-
+            'description' => 'required',
+            'status_id' => 'required',
         ], $messages);
+
 
         $MemberStatus = new MemberStatus();
         $MemberStatus->description = $request->description;
@@ -67,7 +49,7 @@ class MemberStatusController extends Controller
 
         $time = Carbon::now('America/El_Salvador');
         $MemberStatus->adding_date = $time->toDateTimeString();
-        $MemberStatus->modifying_user = $time->toDateTimeString();
+        $MemberStatus->modifying_user = auth()->user()->id;
         $MemberStatus->modifying_date = $time->toDateTimeString();
         $MemberStatus->status = $request->status_id;
         $MemberStatus->save();
@@ -76,63 +58,36 @@ class MemberStatusController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $MemberStatus = MemberStatus::findOrFail($id);
-        $MemberStatusall = MemberStatus::get();
-
-        return view('catalog.member_status.edit', compact('MemberStatus', 'MemberStatusall'));
+        return view('catalog.member_status.edit', compact('MemberStatus'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-
-
         $messages = [
-            'description.required' => 'ingresar nombre',
-            'status.required' => 'Seleccionar Estado',
-
+            'description.required' => 'El nombre de estado es requerido',
+            'status_id.required' => 'El estado es requerido',
         ];
 
-
-
         $request->validate([
-
-            'description.required' => 'ingresar nombre',
-            'status.required' => 'Seleccionar Estado',
-
-
+            'description' => 'required',
+            'status_id' => 'required',
         ], $messages);
+
         $time = Carbon::now('America/El_Salvador');
         $MemberStatus = MemberStatus::findOrFail($id);
         $MemberStatus->description = $request->description;
         $MemberStatus->description_es = $request->description;
-        $MemberStatus->adding_date = $time->toDateTimeString();
-        $MemberStatus->modifying_user = $time->toDateTimeString();
+        $MemberStatus->modifying_user = auth()->user()->id;
         $MemberStatus->modifying_date = $time->toDateTimeString();
         $MemberStatus->status = $request->status_id;
         $MemberStatus->update();
@@ -140,12 +95,7 @@ class MemberStatusController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $MemberStatus = MemberStatus::findOrFail($id);
