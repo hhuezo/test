@@ -101,7 +101,7 @@
                     <div class="flex justify-between">
                         <label class="flex items-center cursor-pointer">
                         </label>
-                        <a class="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium" href="{{ route('password.request') }}">Forgot Password? </a>
+                        <a class="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium" href="{{ route('password.request') }}">¿Olvide mi contraseña? </a>
                     </div>
 
                     @if (count($errors) > 0)
