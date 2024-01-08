@@ -23,12 +23,7 @@
             </div>
             <div class="lg:w-1/2 w-full flex flex-col items-center justify-center">
                 <div class="auth-box-3">
-                    <div class="mobile-logo text-center mb-6 lg:hidden block">
-                        <a heref="index.html">
-                            <img src="assets/images/logo/logo.svg" alt="" class="mb-10 dark_logo">
-                            <img src="assets/images/logo/logo-white.svg" alt="" class="mb-10 white_logo">
-                        </a>
-                    </div>
+
                     <div class="text-center 2xl:mb-10 mb-5">
                         <h4 class="font-medium">Iniciar sesión</h4>
                         {{-- <div class="text-slate-500 dark:text-slate-400 text-base">
